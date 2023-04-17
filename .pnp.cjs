@@ -51,7 +51,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["prisma", "npm:4.11.0"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:98e644a8222956e6a994bf2af37022eb5c03e321d3929eddde79700af61668478d9a14b8eeafcf93c00bee88e45dbf1eec4d2506c1d71b9012c6335fd8a58d3b#npm:18.2.0"],\
-            ["sass", "npm:1.59.3"],\
             ["swr", "virtual:98e644a8222956e6a994bf2af37022eb5c03e321d3929eddde79700af61668478d9a14b8eeafcf93c00bee88e45dbf1eec4d2506c1d71b9012c6335fd8a58d3b#npm:2.1.0"],\
             ["tailwindcss", "virtual:98e644a8222956e6a994bf2af37022eb5c03e321d3929eddde79700af61668478d9a14b8eeafcf93c00bee88e45dbf1eec4d2506c1d71b9012c6335fd8a58d3b#npm:3.2.7"],\
             ["three", "npm:0.149.0"],\
@@ -1501,7 +1500,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["prisma", "npm:4.11.0"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:98e644a8222956e6a994bf2af37022eb5c03e321d3929eddde79700af61668478d9a14b8eeafcf93c00bee88e45dbf1eec4d2506c1d71b9012c6335fd8a58d3b#npm:18.2.0"],\
-            ["sass", "npm:1.59.3"],\
             ["swr", "virtual:98e644a8222956e6a994bf2af37022eb5c03e321d3929eddde79700af61668478d9a14b8eeafcf93c00bee88e45dbf1eec4d2506c1d71b9012c6335fd8a58d3b#npm:2.1.0"],\
             ["tailwindcss", "virtual:98e644a8222956e6a994bf2af37022eb5c03e321d3929eddde79700af61668478d9a14b8eeafcf93c00bee88e45dbf1eec4d2506c1d71b9012c6335fd8a58d3b#npm:3.2.7"],\
             ["three", "npm:0.149.0"],\
@@ -3271,15 +3269,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["immutable", [\
-        ["npm:4.3.0", {\
-          "packageLocation": "./.yarn/cache/immutable-npm-4.3.0-6120b6947c-bbd7ea99e2.zip/node_modules/immutable/",\
-          "packageDependencies": [\
-            ["immutable", "npm:4.3.0"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
       ["import-fresh", [\
         ["npm:3.3.0", {\
           "packageLocation": "./.yarn/cache/import-fresh-npm-3.3.0-3e34265ca9-2cacfad06e.zip/node_modules/import-fresh/",\
@@ -4105,14 +4094,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ]],\
       ["next", [\
         ["npm:13.1.6", {\
-          "packageLocation": "./.yarn/cache/next-npm-13.1.6-4d04ae3ad7-584977e382.zip/node_modules/next/",\
+          "packageLocation": "./.yarn/unplugged/next-virtual-0ce5e2f17a/node_modules/next/",\
           "packageDependencies": [\
             ["next", "npm:13.1.6"]\
           ],\
           "linkType": "SOFT"\
         }],\
         ["virtual:98e644a8222956e6a994bf2af37022eb5c03e321d3929eddde79700af61668478d9a14b8eeafcf93c00bee88e45dbf1eec4d2506c1d71b9012c6335fd8a58d3b#npm:13.1.6", {\
-          "packageLocation": "./.yarn/__virtual__/next-virtual-0ce5e2f17a/0/cache/next-npm-13.1.6-4d04ae3ad7-584977e382.zip/node_modules/next/",\
+          "packageLocation": "./.yarn/unplugged/next-virtual-0ce5e2f17a/node_modules/next/",\
           "packageDependencies": [\
             ["next", "virtual:98e644a8222956e6a994bf2af37022eb5c03e321d3929eddde79700af61668478d9a14b8eeafcf93c00bee88e45dbf1eec4d2506c1d71b9012c6335fd8a58d3b#npm:13.1.6"],\
             ["@next/env", "npm:13.1.6"],\
@@ -4141,7 +4130,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["postcss", "npm:8.4.14"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:98e644a8222956e6a994bf2af37022eb5c03e321d3929eddde79700af61668478d9a14b8eeafcf93c00bee88e45dbf1eec4d2506c1d71b9012c6335fd8a58d3b#npm:18.2.0"],\
-            ["sass", "npm:1.59.3"],\
+            ["sass", null],\
             ["styled-jsx", "virtual:0ce5e2f17adf35ecf796fe728d900bdd897e0d372832ed368f13ec51ddd4d7203453780f6e28c8a54fa1347b76a5ee575308db00db7d950c99004b63cbce5cfd#npm:5.1.1"]\
           ],\
           "packagePeers": [\
@@ -5000,18 +4989,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/safer-buffer-npm-2.1.2-8d5c0b705e-cab8f25ae6.zip/node_modules/safer-buffer/",\
           "packageDependencies": [\
             ["safer-buffer", "npm:2.1.2"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["sass", [\
-        ["npm:1.59.3", {\
-          "packageLocation": "./.yarn/cache/sass-npm-1.59.3-abfbd94be0-839b5282cd.zip/node_modules/sass/",\
-          "packageDependencies": [\
-            ["sass", "npm:1.59.3"],\
-            ["chokidar", "npm:3.5.3"],\
-            ["immutable", "npm:4.3.0"],\
-            ["source-map-js", "npm:1.0.2"]\
           ],\
           "linkType": "HARD"\
         }]\
