@@ -1,0 +1,17 @@
+{
+  "imports": {
+    "std/": "https://deno.land/std@0.187.0/"
+  },
+  "tasks": {
+    "dev": "deno run --watch --allow-read --allow-env --allow-net src/main.ts"
+  },
+  "lint": {
+    "include": ["src/"],
+    "exclude": ["src/testdata/"],
+    "rules": {
+      "tags": ["recommended"],
+      "include": ["ban-untagged-todo"],
+      "exclude": ["no-unused-vars"]
+    }
+  }
+}
