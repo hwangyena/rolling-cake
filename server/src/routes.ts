@@ -19,7 +19,7 @@ router.post('/login', async ({ request, response }) => {
 
   const form = {
     grant_type: 'authorization_code',
-    client_id: env['CLIENT_ID'],
+    client_id: env['KAKAO_RES_API_KEY'],
     redirect_uri: 'http://localhost:3000/kakao', // FIXME: real redirect_url
     code,
   };
@@ -41,9 +41,19 @@ router.post('/login', async ({ request, response }) => {
     body,
   })
     .then((response) => response.json())
-    .then((data: Kakao_Token) => {
-      // TODO: make JWT token & Save user info to DB
-      // const jwt = await create({ alg: 'HS512', typ: 'JWT' }, { payload }, key);
+    .then(async (data: KakaoToken) => {
+      await fetch('https://kapi.kakao.com/v2/user/me', {
+        method: 'get',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          Authorization: `Bearer ${data.access_token}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data: KakaoUser) => {
+          console.log('data>>>', data);
+          // TODO: save user data to DB & return JWT token
+        });
     })
     .catch((err) => {
       response.status = err.status;
