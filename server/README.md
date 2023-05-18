@@ -2,7 +2,7 @@
 
 - deno
 
-### deno 환경설정
+### deno run
 
 ```
 deno task dev
