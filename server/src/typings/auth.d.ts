@@ -17,3 +17,14 @@ type KakaoUser = {
     profile: { nickname: string };
   };
 };
+
+type JWTPayload = {
+  sub?: string;
+  iss?: string;
+  exp?: number;
+  iat?: number;
+  aud?: string;
+  nbf?: string;
+  jti?: string;
+  nickname: string;
+};

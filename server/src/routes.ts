@@ -1,5 +1,7 @@
-import { Router } from 'https://deno.land/x/oak/mod.ts';
 import { load } from 'https://deno.land/std@0.187.0/dotenv/mod.ts';
+import { Router } from 'https://deno.land/x/oak/mod.ts';
+import { create } from './deps.ts';
+import { jwtKey } from './lib/data.ts';
 
 const env = await load();
 
@@ -50,9 +52,47 @@ router.post('/login', async ({ request, response }) => {
         },
       })
         .then((res) => res.json())
-        .then((data: KakaoUser) => {
-          console.log('data>>>', data);
-          // TODO: save user data to DB & return JWT token
+        .then(async (data: KakaoUser) => {
+          // TODO: DB connect & create or get user (by user id)
+          console.log('data', data);
+
+          // JWT token
+          const nextDate = new Date();
+          nextDate.setDate(new Date().getDate() + 1);
+
+          const jwt = await create(
+            {
+              alg: 'HS512',
+              typ: 'JWT',
+            },
+            {
+              nickname: data.properties.nickname,
+              iss: 'rolling-cake',
+              sub: 'rolling-cake-token',
+              aud: 'rolling-cake-client',
+              iat: Date.now(),
+              exp: nextDate.getTime(),
+            },
+            jwtKey
+          );
+
+          // TODO: check exist user - not exist ? create
+
+          if (jwt) {
+            response.status = 200;
+            response.body = {
+              //  userId,
+              userName: data.properties.nickname,
+              token: jwt,
+            };
+            return;
+          } else {
+            response.status = 500;
+            response.body = {
+              message: 'internal server error',
+            };
+            return;
+          }
         });
     })
     .catch((err) => {
