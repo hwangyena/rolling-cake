@@ -28,3 +28,9 @@ type JWTPayload = {
   jti?: string;
   nickname: string;
 };
+
+type ApiResponse = {
+  code: number;
+  message: string;
+  content?: unknown;
+};
