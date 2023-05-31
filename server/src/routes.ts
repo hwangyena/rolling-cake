@@ -1,5 +1,7 @@
-import { Router } from 'https://deno.land/x/oak/mod.ts';
 import { load } from 'https://deno.land/std@0.187.0/dotenv/mod.ts';
+import { Router } from 'https://deno.land/x/oak/mod.ts';
+import { create } from './deps.ts';
+import { jwtKey } from './lib/data.ts';
 
 const env = await load();
 
@@ -19,7 +21,7 @@ router.post('/login', async ({ request, response }) => {
 
   const form = {
     grant_type: 'authorization_code',
-    client_id: env['CLIENT_ID'],
+    client_id: env['KAKAO_RES_API_KEY'],
     redirect_uri: 'http://localhost:3000/kakao', // FIXME: real redirect_url
     code,
   };
@@ -41,9 +43,57 @@ router.post('/login', async ({ request, response }) => {
     body,
   })
     .then((response) => response.json())
-    .then((data: Kakao_Token) => {
-      // TODO: make JWT token & Save user info to DB
-      // const jwt = await create({ alg: 'HS512', typ: 'JWT' }, { payload }, key);
+    .then(async (data: KakaoToken) => {
+      await fetch('https://kapi.kakao.com/v2/user/me', {
+        method: 'get',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          Authorization: `Bearer ${data.access_token}`,
+        },
+      })
+        .then((res) => res.json())
+        .then(async (data: KakaoUser) => {
+          // TODO: DB connect & create or get user (by user id)
+          console.log('data', data);
+
+          // JWT token
+          const nextDate = new Date();
+          nextDate.setDate(new Date().getDate() + 1);
+
+          const jwt = await create(
+            {
+              alg: 'HS512',
+              typ: 'JWT',
+            },
+            {
+              nickname: data.properties.nickname,
+              iss: 'rolling-cake',
+              sub: 'rolling-cake-token',
+              aud: 'rolling-cake-client',
+              iat: Date.now(),
+              exp: nextDate.getTime(),
+            },
+            jwtKey
+          );
+
+          // TODO: check exist user - not exist ? create
+
+          if (jwt) {
+            response.status = 200;
+            response.body = {
+              //  userId,
+              userName: data.properties.nickname,
+              token: jwt,
+            };
+            return;
+          } else {
+            response.status = 500;
+            response.body = {
+              message: 'internal server error',
+            };
+            return;
+          }
+        });
     })
     .catch((err) => {
       response.status = err.status;
