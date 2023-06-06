@@ -1,7 +1,5 @@
-import { oakCors } from 'https://deno.land/x/cors/mod.ts';
-import { Application } from 'https://deno.land/x/oak/mod.ts';
-
-import router from './routes.ts';
+import { Application, oakCors } from './deps.ts';
+import router from './router/index.ts';
 
 const app = new Application();
 
