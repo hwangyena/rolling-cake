@@ -1,14 +1,14 @@
-import { load } from 'https://deno.land/std@0.187.0/dotenv/mod.ts';
-import { Router } from 'https://deno.land/x/oak/mod.ts';
-import { create } from './deps.ts';
-import { jwtKey } from './lib/data.ts';
-import USER from './db/user.ts';
+import { load, create, Context } from '../deps.ts';
+import { jwtKey } from '../lib/data.ts';
+import USER from '../db/user.ts';
 
 const env = await load();
 
-const router = new Router();
+const login = async ({ request, response }: Context) => {
+  if (!request) {
+    return;
+  }
 
-router.post('/login', async ({ request, response }) => {
   if (!request.body()) {
     response.status = 400;
     response.body = {
@@ -105,6 +105,6 @@ router.post('/login', async ({ request, response }) => {
     message: res.message,
     content: res.content,
   };
-});
+};
 
-export default router;
+export default login;

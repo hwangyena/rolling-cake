@@ -34,3 +34,8 @@ type ApiResponse = {
   message: string;
   content?: unknown;
 };
+
+type RouterParams = {
+  request: Request;
+  response: Response;
+};
