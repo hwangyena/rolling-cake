@@ -1,12 +1,12 @@
-import DB from "./index.ts";
+import DB from './index.ts';
 
 class User {
   async selectAll() {
-    return await DB.from('User').select()
+    return await DB.from('User').select('*');
   }
 
   async selectById(id: string) {
-    return await DB.from('User').select().eq('id',id)
+    return await DB.from('User').select().eq('id', id);
   }
 
   async create(id: string, name: string) {
@@ -18,6 +18,5 @@ class User {
 //   .from('User')
 //   .update({ name: 'Yena' })
 //   .eq('id', 1);
-
 
 export default new User();

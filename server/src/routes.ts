@@ -2,12 +2,12 @@ import { load } from 'https://deno.land/std@0.187.0/dotenv/mod.ts';
 import { Router } from 'https://deno.land/x/oak/mod.ts';
 import { create } from './deps.ts';
 import { jwtKey } from './lib/data.ts';
+import USER from './db/user.ts';
 
 const env = await load();
 
 const router = new Router();
 
-//TODO: response type
 router.post('/login', async ({ request, response }) => {
   if (!request.body()) {
     response.status = 400;
@@ -35,7 +35,7 @@ router.post('/login', async ({ request, response }) => {
     )
     .join('&');
 
-  await fetch('https://kauth.kakao.com/oauth/token', {
+  const res: ApiResponse = await fetch('https://kauth.kakao.com/oauth/token', {
     method: 'post',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -44,7 +44,7 @@ router.post('/login', async ({ request, response }) => {
   })
     .then((response) => response.json())
     .then(async (data: KakaoToken) => {
-      await fetch('https://kapi.kakao.com/v2/user/me', {
+      return await fetch('https://kapi.kakao.com/v2/user/me', {
         method: 'get',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -53,7 +53,6 @@ router.post('/login', async ({ request, response }) => {
       })
         .then((res) => res.json())
         .then(async (data: KakaoUser) => {
-          // TODO: DB connect & create or get user (by user id)
           console.log('data', data);
 
           // JWT token
@@ -77,35 +76,34 @@ router.post('/login', async ({ request, response }) => {
           );
 
           // TODO: check exist user - not exist ? create
+          const user = await USER.selectById(String(data.id));
+
+          if (user.data && user.data.length === 0) {
+            await USER.create(String(data.id), data.properties.nickname);
+          }
 
           if (jwt) {
-            response.status = 200;
-            response.body = {
-              //  userId,
-              userName: data.properties.nickname,
-              token: jwt,
+            return {
+              code: 200,
+              message: '로그인 성공',
+              content: {
+                userId: data.id,
+                userName: data.properties.nickname,
+                token: jwt,
+              },
             };
-            return;
           } else {
-            response.status = 500;
-            response.body = {
-              message: 'internal server error',
-            };
-            return;
+            return { code: 500, message: 'internal server error' };
           }
         });
     })
-    .catch((err) => {
-      response.status = err.status;
-      response.body = {
-        message: err.statusText,
-      };
-      return;
-    });
+    .catch((err) => ({ code: err.status, message: err.statusText }));
 
-  response.status = 200;
+  response.status = res.code;
   response.body = {
-    message: '로그인 완료',
+    code: res.code,
+    message: res.message,
+    content: res.content,
   };
 });
 
