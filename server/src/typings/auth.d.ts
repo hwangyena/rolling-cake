@@ -27,7 +27,7 @@ type JWTPayload = {
   nbf?: string;
   jti?: string;
   id: number;
-  nickname: string;
+  name: string;
 };
 
 type ApiResponse = {

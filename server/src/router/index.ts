@@ -1,7 +1,7 @@
 import { Router } from '../deps.ts';
 import login from './auth.ts';
-import { getUser } from './user.ts';
 import { getCakeDetail } from './cake.ts';
+import { getUser } from './user.ts';
 
 const router = new Router();
 

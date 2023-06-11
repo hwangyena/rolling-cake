@@ -15,5 +15,5 @@ export const verifyJWT = (request: Request): User | null => {
 
   // TODO: check token expired
 
-  return { id: data.id, nickname: data.nickname };
+  return { id: data.id, name: data.name };
 };

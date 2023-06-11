@@ -41,6 +41,6 @@ type Cake = {
 
 type User = {
   id: number;
-  nickname: string; // FIXME: same with data (to be user)
+  name: string;
   cake?: Cake[];
 };

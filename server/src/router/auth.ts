@@ -53,7 +53,14 @@ const login = async ({ request, response }: Context) => {
       })
         .then((res) => res.json())
         .then(async (data: KakaoUser) => {
-          console.log('data', data);
+          let user = await USER.selectByKakaoId(data.id);
+
+          if (!user.data) {
+            await USER.create(data.id, data.properties.nickname);
+            user = await USER.selectByKakaoId(data.id);
+          }
+
+          console.log('user', user); // TODO: remove this
 
           // JWT token
           const nextDate = new Date();
@@ -65,7 +72,8 @@ const login = async ({ request, response }: Context) => {
               typ: 'JWT',
             },
             {
-              nickname: data.properties.nickname,
+              id: user.data?.id,
+              name: user.data?.name,
               iss: 'rolling-cake',
               sub: 'rolling-cake-token',
               aud: 'rolling-cake-client',
@@ -74,13 +82,6 @@ const login = async ({ request, response }: Context) => {
             },
             jwtKey
           );
-
-          // TODO: check exist user - not exist ? create
-          const user = await USER.selectById(String(data.id));
-
-          if (user.data && user.data.length === 0) {
-            await USER.create(String(data.id), data.properties.nickname);
-          }
 
           if (jwt) {
             return {
