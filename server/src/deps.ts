@@ -11,6 +11,7 @@ export { decode } from 'https://deno.land/x/djwt@v2.8/mod.ts';
 
 // API
 export { Context } from 'https://deno.land/x/oak@v11.1.0/context.ts';
+export { Response } from 'https://deno.land/x/oak@v11.1.0/response.ts';
 export { oakCors } from 'https://deno.land/x/cors/mod.ts';
 export { Application, Router } from 'https://deno.land/x/oak/mod.ts';
 export type { Request } from 'https://deno.land/x/oak/mod.ts';
