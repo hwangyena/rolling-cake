@@ -26,7 +26,7 @@ type JWTPayload = {
   aud?: string;
   nbf?: string;
   jti?: string;
-  id: number;
+  id: string;
   name: string;
 };
 

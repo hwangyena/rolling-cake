@@ -34,13 +34,16 @@ type CakeType =
 
 type Cake = {
   id: number;
+  userId: string;
   letterId: number;
   cakeType: CakeType;
   customCake?: CustomCake;
 };
 
+type CreateCake = Pick<Cake, 'userId' | 'cakeType' | 'customCake'>;
+
 type User = {
-  id: number;
+  id: string;
   name: string;
   cake?: Cake[];
 };

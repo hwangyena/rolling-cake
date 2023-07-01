@@ -18,6 +18,14 @@ class Cake {
       .eq('id', id)
       .single();
   }
+
+  async create(
+    userId: string,
+    cakeType: CakeType,
+    customCake: CustomCake | null
+  ) {
+    return await DB.from('Cake').insert({ userId, cakeType, customCake });
+  }
 }
 
 export default new Cake();
