@@ -9,15 +9,17 @@ const login = async ({ request, response }: Context) => {
     return;
   }
 
-  if (!request.body()) {
+  const data = await request.body().value;
+
+  if (!data) {
     response.status = 400;
     response.body = {
-      message: '토큰이 존재하지 않습니다.',
+      message: '잘못된 요청입니다.',
     };
     return;
   }
 
-  const { code } = (await request.body().value) as { code: string };
+  const { code } = data as { code: string };
 
   const form = {
     grant_type: 'authorization_code',

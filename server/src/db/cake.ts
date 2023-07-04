@@ -1,6 +1,6 @@
 import DB from './index.ts';
 
-class Cake {
+class CakeDB {
   async selectById(id: string) {
     return await DB.from('Cake')
       .select(
@@ -24,8 +24,11 @@ class Cake {
     cakeType: CakeType,
     customCake: CustomCake | null
   ) {
-    return await DB.from('Cake').insert({ userId, cakeType, customCake });
+    return (await DB.from('Cake')
+      .insert({ userId, cakeType, customCake })
+      .select()
+      .single()) as DBRes<Cake>;
   }
 }
 
-export default new Cake();
+export default new CakeDB();
