@@ -1,6 +1,7 @@
 import CAKE from '../db/cake.ts';
-import { Context } from '../deps.ts';
+import LETTER from '../db/letter.ts';
 import error from '../error.ts';
+import { Context } from '../deps.ts';
 import { verifyJWT } from '../lib/utils.ts';
 
 export const getCakeDetail = async ({
@@ -26,7 +27,7 @@ export const getCakeDetail = async ({
     data?.Letter &&
     (data.Letter as { isPrivate: boolean }).isPrivate
   ) {
-    (data.Letter as Letter).content = '';
+    (data.Letter as LetterRes).content = '';
   }
 
   response.status = 200;
@@ -45,16 +46,38 @@ export const createCake = async ({ request, response }: Context) => {
     return;
   }
 
+  // cake
   const userId = data.get('userId');
   const cakeType = data.get('cakeType');
   const customCake = data.get('customCake') ?? null;
 
-  if (!userId || !cakeType) {
+  // letter
+  const name = data.get('name') ?? null;
+  const content = data.get('content') ?? null;
+  const isPrivate = data.get('isPrivate') ?? true;
+
+  if (!userId || !cakeType || !name || !content) {
     error(response);
     return;
   }
 
   const cake = await CAKE.create(userId, cakeType, customCake);
+
+  if (cake.status !== 201) {
+    error(response);
+    return;
+  }
+
+  const letter = await LETTER.create(cake.data.id, {
+    content,
+    isPrivate,
+    name,
+  });
+
+  if (letter.status !== 201) {
+    error(response);
+    return;
+  }
 
   response.status = 200;
   response.body = {

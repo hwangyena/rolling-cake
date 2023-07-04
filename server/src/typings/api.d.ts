@@ -15,13 +15,14 @@ type CustomCake = {
 };
 
 type Letter = {
-  id: number;
-  userId: string;
-  createdAt: string;
   name: string;
   content: string;
   isPrivate: boolean;
 };
+type LetterRes = {
+  cakeId: string;
+  createdAt: string;
+} & Letter;
 
 type CakeType =
   | 'BASIC'
@@ -35,7 +36,6 @@ type CakeType =
 type Cake = {
   id: number;
   userId: string;
-  letterId: number;
   cakeType: CakeType;
   customCake?: CustomCake;
 };
