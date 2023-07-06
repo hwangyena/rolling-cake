@@ -20,10 +20,10 @@ export const getCakeDetail = async ({
   }
 
   const data = res.data;
-  const user = verifyJWT(request);
+  const user = verifyJWT(request) as JWTPayload;
 
   if (
-    !user &&
+    (!user || user.id !== data?.userId) &&
     data?.Letter &&
     (data.Letter as { isPrivate: boolean }).isPrivate
   ) {

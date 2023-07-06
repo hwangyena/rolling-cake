@@ -5,6 +5,7 @@ class CakeDB {
     return await DB.from('Cake')
       .select(
         `
+      userId,
       cakeType,
       customCake,
       Letter (
