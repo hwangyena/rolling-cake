@@ -10,8 +10,9 @@ module.exports = {
           dark: '#0fc89b',
         },
         pink: {
-          light: '#ff8d97',
-          primary: '#ff78f1',
+          100: '#ff78f1',
+          200: '#ff8d97',
+          300: '#f67470',
         },
         gray: {
           100: '#f5f5f5',
@@ -24,6 +25,7 @@ module.exports = {
           800: '#333333',
           900: '#111111',
         },
+        error: '#F93B3B',
       },
       fontFamily: {
         apple: ['-apple-system', 'sans-serif'],
