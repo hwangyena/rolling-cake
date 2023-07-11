@@ -21,6 +21,7 @@
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "curly": "warn",
     "no-console": ["warn", { "allow": ["error"] }],
-    "prettier/prettier": ["off", { "semi": false }]
+    "prettier/prettier": ["off", { "semi": false }],
+    "@typescript-eslint/ban-types": "off"
   }
 }
