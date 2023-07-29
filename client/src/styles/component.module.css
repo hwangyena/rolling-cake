@@ -1,3 +1,4 @@
+/* Button */
 .big-button {
   @apply text-btn bg-pink-200;
   border-radius: 8px;
@@ -61,4 +62,20 @@
 }
 .gray:disabled {
   background: linear-gradient(180deg, #fff 23.55%, #dedede 100%);
+}
+
+/* Circle Button */
+.circle-button {
+  width: 34px;
+  height: 34px;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 1px solid #000;
+  filter: drop-shadow(1px 1px 0px #000);
+  display: grid;
+  place-items: center;
+}
+
+.circle-button:disabled {
+  opacity: 40%;
 }
