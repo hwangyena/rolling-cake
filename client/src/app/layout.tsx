@@ -12,7 +12,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
 
   return (
     <html lang="en">
-      <body className="max-w-[480px] bg-slate-300 h-full my-0 mx-auto py-5">
+      <body className="max-w-[480px] h-full my-0 mx-auto">
         {children}
         {popup && <Popup />}
       </body>
