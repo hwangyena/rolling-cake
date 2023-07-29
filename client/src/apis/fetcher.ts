@@ -22,6 +22,6 @@ export const axiosRequest = async <T>(config: AxiosRequestConfig) => {
 
     return res.data;
   } catch (e) {
-    handleError(e);
+    handleError(e as AxiosError);
   }
 };

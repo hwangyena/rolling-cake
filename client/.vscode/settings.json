@@ -3,8 +3,8 @@
     "**/.yarn": true,
     "**/.pnp.*": true
   },
-  // "eslint.nodePath": ".yarn/sdks",
-  "eslint.options": { "configFile": "./eslintrc" },
+  "eslint.nodePath": ".yarn/sdks",
+  // "eslint.options": { "configFile": "./eslintrc" },
   "typescript.tsdk": ".yarn/sdks/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "prettier.prettierPath": ".yarn/sdks/prettier/index.js"
