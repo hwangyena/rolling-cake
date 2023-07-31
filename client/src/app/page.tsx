@@ -16,7 +16,7 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      <div className="w-full h-[20%] relative ">
+      <div className="w-full h-[20%] relative">
         <Image src="/images/logo.png" fill alt="" className="absolute" />
       </div>
       <div className="w-[90%] h-[50%] bg-slate-300" />
