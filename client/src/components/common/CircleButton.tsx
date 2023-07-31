@@ -11,11 +11,12 @@ const icon = {
 type Props = {
   type: '<' | '>' | 'upload' | 'home';
   disabled?: boolean;
+  onClick?: () => void;
 };
 
-const CircleButton = ({ type, disabled }: Props) => {
+const CircleButton = ({ type, disabled, onClick }: Props) => {
   return (
-    <button className={styles['circle-button']} disabled={disabled}>
+    <button className={styles['circle-button']} disabled={disabled} onClick={onClick}>
       <img src={`/icons/${icon[type]}`} alt="" />
     </button>
   );

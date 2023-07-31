@@ -47,6 +47,12 @@ module.exports = {
         effect_t: ['22px', { lineHeight: '140%' }],
         effect_b: ['14px', { lineHeight: '140%' }],
       },
+      backgroundImage: {
+        'grid-pattern': "url('/images/bg.png')",
+      },
+      gridTemplateColumns: {
+        3: 'repeat(3,1fr)',
+      },
     },
   },
   plugins: [],

@@ -110,3 +110,59 @@
   justify-content: space-between;
   padding-top: 44px;
 }
+
+/* Tag */
+.tag {
+  border-radius: 20px;
+  border: 1px solid #000;
+  background: linear-gradient(180deg, #fff 46.99%, #b7b7b7 100%);
+  display: flex;
+  width: 211px;
+  height: 32px;
+  padding: 9px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  color: var(--gray-1, #333);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+/* Header */
+.header {
+  @apply text-effect_t font-neo;
+  font-weight: 400;
+}
+
+.header::before {
+  @apply absolute left-0 top-0 text-effect_t font-neo;
+  content: attr(data-content);
+  -webkit-text-stroke: 5px #fff;
+  font-weight: 900;
+}
+
+.header::after {
+  @apply absolute left-0 top-0 text-effect_t font-neo;
+  color: black;
+  content: attr(data-content);
+}
+
+.shadow {
+  @apply absolute left-0 top-0 text-effect_t font-neo;
+  color: black;
+  font-weight: 700;
+  text-shadow: 4px 5px 0px #000;
+}
+
+.shadow::before {
+  @apply absolute left-0 top-0 text-effect_t font-neo;
+  content: attr(data-content);
+  text-shadow: 1px 5px 0px #000;
+}
+.shadow::after {
+  @apply absolute left-0 top-0 text-effect_t font-neo;
+  content: attr(data-content);
+  text-shadow: 5px 4px 0px #000;
+}
