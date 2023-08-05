@@ -1,6 +1,7 @@
 'use client';
 
 import Cake from '@/components/cake/Cake';
+import Button from '@/components/common/Button';
 import Header from '@/components/common/Header';
 import Tag from '@/components/common/Tag';
 import { cakeList } from '@/lib/dummy';
@@ -22,17 +23,26 @@ export default function CakePage() {
       </section>
       <section
         className={`w-full h-full px-[25px] pb-[20px] overflow-y-auto bg-white ${styles['green-gradient']}`}>
-        <div className="grid grid-cols-3 gap-3">
-          {cakeList.map((cake, i) => (
-            <button
-              className="w-full flex flex-col items-center"
-              key={i}
-              onClick={() => handleCakeClicked(i)}>
-              <Cake className="w-full h-[130px]" />
-              <span className="text-b3">{cake.name}</span>
-            </button>
-          ))}
-        </div>
+        {[].length === 0 ? (
+          <div className="w-full h-full flex flex-col justify-around items-center">
+            <Cake className="w-[80%] h-[70%]" />
+            <Button type="BIG" className="">
+              케이크 링크 공유하기
+            </Button>
+          </div>
+        ) : (
+          <div className="grid grid-cols-3 gap-3">
+            {cakeList.map((cake, i) => (
+              <button
+                className="w-full flex flex-col items-center"
+                key={i}
+                onClick={() => handleCakeClicked(i)}>
+                <Cake className="w-full h-[130px]" />
+                <span className="text-b3">{cake.name}</span>
+              </button>
+            ))}
+          </div>
+        )}
       </section>
     </>
   );
