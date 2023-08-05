@@ -103,3 +103,12 @@ img {
   border: none;
   max-width: 100%;
 }
+
+/* gradient */
+.green-gradient {
+  background: linear-gradient(180deg, #fff 77.2%, #b5ffd7 100%);
+}
+
+.white-gradient {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fff 25.64%);
+}
