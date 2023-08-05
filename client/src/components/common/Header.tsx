@@ -1,9 +1,9 @@
 import { PropsWithChildren, memo } from 'react';
 import styles from '@/styles/component.module.css';
 
-const Header = ({ children }: PropsWithChildren) => {
+const Header = ({ children, className }: PropsWithChildren<{ className?: string }>) => {
   return (
-    <div className="relative">
+    <div className={`relative ${className}`}>
       <span className={styles.shadow} data-content={children}>
         {children}
       </span>
