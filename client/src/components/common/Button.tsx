@@ -8,17 +8,9 @@ type Props = {
   color?: 'red' | 'green' | 'gray';
   disabled?: boolean;
   onClick?: (e: MouseEvent) => void;
-  className?: string;
 };
 
-const Button = ({
-  children,
-  onClick,
-  disabled,
-  type,
-  color = 'red',
-  className,
-}: PropsWithChildren<Props>) => {
+const Button = ({ children, onClick, disabled, type, color = 'red' }: PropsWithChildren<Props>) => {
   const lock = useRef(false);
 
   const handleClick = (e: MouseEvent) => {
@@ -43,9 +35,7 @@ const Button = ({
   return (
     <button
       className={`${
-        type === 'BIG'
-          ? styles['big-button']
-          : `${styles['small-button']} ${styles[color]} ${className}`
+        type === 'BIG' ? styles['big-button'] : `${styles['small-button']} ${styles[color]}`
       }`}
       onClick={handleClick}
       disabled={disabled}>
