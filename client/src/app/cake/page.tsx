@@ -58,7 +58,9 @@ export default function CakePage() {
           className={`absolute w-full bottom-0 px-[25px] pb-[5vh] py-[40px] ${
             isCakeEmpty ? '' : 'white-gradient'
           }`}>
-          <Button type="BIG">레터링 케이크 만들어주기</Button>
+          <Button type="BIG" onClick={() => router.push('/make')}>
+            레터링 케이크 만들어주기
+          </Button>
         </section>
       )}
     </>
