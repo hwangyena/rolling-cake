@@ -17,7 +17,7 @@ type Props = {
 const CircleButton = ({ type, disabled, onClick }: Props) => {
   return (
     <button className={styles['circle-button']} disabled={disabled} onClick={onClick}>
-      <img src={`/icons/${icon[type]}`} alt="" />
+      <img src={`/icons/${icon[type]}`} alt="" className={type === '>' ? 'rotate-180' : ''} />
     </button>
   );
 };
