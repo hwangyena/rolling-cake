@@ -11,7 +11,7 @@ type Props = {
   nextStep: string;
 };
 
-const Layout = ({ step, title, children, nextStep }: PropsWithChildren<Props>) => {
+const Wrapper = ({ step, title, children, nextStep }: PropsWithChildren<Props>) => {
   const router = useRouter();
 
   return (
@@ -36,4 +36,4 @@ const Layout = ({ step, title, children, nextStep }: PropsWithChildren<Props>) =
   );
 };
 
-export default Layout;
+export default Wrapper;
