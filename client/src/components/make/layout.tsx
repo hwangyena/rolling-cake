@@ -8,9 +8,10 @@ import Header from '../common/Header';
 type Props = {
   step: number;
   title: string;
+  nextStep: string;
 };
 
-const Layout = ({ step, title, children }: PropsWithChildren<Props>) => {
+const Layout = ({ step, title, children, nextStep }: PropsWithChildren<Props>) => {
   const router = useRouter();
 
   return (
@@ -28,7 +29,7 @@ const Layout = ({ step, title, children }: PropsWithChildren<Props>) => {
 
         <footer className="absolute p-3 bottom-3 w-full flex justify-between">
           <CircleButton type="<" onClick={() => router.back()} />
-          <CircleButton type=">" onClick={() => null} />
+          <CircleButton type=">" onClick={() => router.push(`/make?step=${nextStep}`)} />
         </footer>
       </main>
     </>
