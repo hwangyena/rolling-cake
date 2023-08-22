@@ -50,6 +50,7 @@ module.exports = {
       backgroundImage: {
         'grid-pattern': "url('/images/bg.png')",
       },
+      backgroundColor: {},
       gridTemplateColumns: {
         3: 'repeat(3,1fr)',
       },

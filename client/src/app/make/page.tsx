@@ -5,6 +5,7 @@ import StepShape from '@/components/make/StepShape';
 import { MAKE_STEP } from '@/lib/constant';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useEffect, useMemo } from 'react';
+import StepSheet from '@/components/make/StepSheet';
 
 export default function Page() {
   const searchParams = useSearchParams();
@@ -26,6 +27,8 @@ export default function Page() {
     switch (current?.path) {
       case 'shape':
         return <StepShape />;
+      case 'sheet':
+        return <StepSheet />;
     }
   };
 
