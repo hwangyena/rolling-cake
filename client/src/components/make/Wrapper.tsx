@@ -25,7 +25,7 @@ const Wrapper = ({ step, title, children, nextStep }: PropsWithChildren<Props>) 
           <Header>{title}</Header>
         </header>
 
-        {children}
+        <div className="flex-1">{children}</div>
 
         <footer className="p-3 mb-5 w-full flex justify-between">
           <CircleButton type="<" onClick={() => router.back()} />

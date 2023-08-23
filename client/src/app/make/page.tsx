@@ -2,10 +2,10 @@
 
 import Wrapper from '@/components/make/Wrapper';
 import StepShape from '@/components/make/StepShape';
-import { MAKE_STEP } from '@/lib/constant';
+import { MAKE_STEP, SELECT_ITEM } from '@/lib/constant';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useEffect, useMemo } from 'react';
-import StepSheet from '@/components/make/StepSheet';
+import StepCommon from '@/components/make/StepCommon';
 
 export default function Page() {
   const searchParams = useSearchParams();
@@ -28,7 +28,16 @@ export default function Page() {
       case 'shape':
         return <StepShape />;
       case 'sheet':
-        return <StepSheet />;
+      case 'cream_top':
+      case 'cream_side':
+      case 'more':
+      case 'lettering':
+        return (
+          <StepCommon
+            itemSelect={current.select as (keyof typeof SELECT_ITEM)[]}
+            noLabel={current.noLabel}
+          />
+        );
     }
   };
 

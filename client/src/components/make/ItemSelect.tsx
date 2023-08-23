@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 
 import { SELECT_ITEM } from '@/lib/constant';
-import { memo, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import Image from 'next/image';
 
 type Props = {
@@ -12,8 +12,13 @@ type Props = {
   noLabel?: boolean;
 };
 
+// TODO: select event
 const ItemSelect = ({ data, noLabel }: Props) => {
   const [tab, setTab] = useState(data[0]);
+
+  useEffect(() => {
+    return setTab(data[0]);
+  }, [data]);
 
   return (
     <section className="px-[20px] mb-3">
