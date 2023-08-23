@@ -1,13 +1,13 @@
 import Cake from '../cake/Cake';
-import Select from './Select';
+import ItemSelect from './ItemSelect';
 
 const StepSheet = () => {
   return (
-    <article>
-      <section>
-        <Cake className="w-[115px] h-[160px]" />
+    <article className="flex flex-col flex-1">
+      <section className="flex-1 grid place-items-center">
+        <Cake className="w-[70%] h-[80%]" />
       </section>
-      <Select data={['cream', 'color']} />
+      <ItemSelect data={['cream', 'color']} />
     </article>
   );
 };

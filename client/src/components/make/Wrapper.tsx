@@ -17,17 +17,17 @@ const Wrapper = ({ step, title, children, nextStep }: PropsWithChildren<Props>) 
   return (
     <>
       <div className="fixed w-full h-full green-circle-gradient" />
-      <main className="relative w-full h-full">
+      <main className="relative w-full h-full flex flex-col">
         <header className="flex flex-col items-center justify-center pt-[40px] gap-8">
           <mark className="gray-gradient px-[16px] py-[2px] border rounded-[20px] font-neo text-t2">
-            {step}/7
+            {step}/6
           </mark>
           <Header>{title}</Header>
         </header>
 
         {children}
 
-        <footer className="absolute p-3 bottom-3 w-full flex justify-between">
+        <footer className="p-3 mb-5 w-full flex justify-between">
           <CircleButton type="<" onClick={() => router.back()} />
           <CircleButton type=">" onClick={() => router.push(`/make?step=${nextStep}`)} />
         </footer>

@@ -32,6 +32,7 @@ export default function Page() {
     }
   };
 
+  // TODO: show error popup
   if (!current) {
     return <div>error</div>;
   }
