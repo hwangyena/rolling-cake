@@ -125,3 +125,12 @@ img {
   box-shadow: 1px 1px 0px 0px #000;
   color: #ff54ed;
 }
+
+/* swiper */
+.step-box:has(.swiper-slide) {
+  height: 63px;
+}
+.step-box:has(.swiper-slide) .swiper-slide {
+  width: 60px;
+  height: 60px;
+}
