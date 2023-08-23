@@ -1,12 +1,10 @@
-'use client';
-
 import styles from '@/styles/component.module.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import 'swiper/css';
 
 import { SELECT_ITEM } from '@/lib/constant';
-import { useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import Image from 'next/image';
 
 type Props = {
@@ -14,11 +12,16 @@ type Props = {
   noLabel?: boolean;
 };
 
-const Select = ({ data, noLabel }: Props) => {
+// TODO: select event
+const ItemSelect = ({ data, noLabel }: Props) => {
   const [tab, setTab] = useState(data[0]);
 
+  useEffect(() => {
+    return setTab(data[0]);
+  }, [data]);
+
   return (
-    <section className="px-[20px]">
+    <section className="px-[20px] mb-3">
       {noLabel ? null : (
         <div className="flex gap-3 mb-[16px]">
           {data.map((tabItem) => (
@@ -40,7 +43,11 @@ const Select = ({ data, noLabel }: Props) => {
           <SwiperSlide className={`${styles.selectbox} ${tab === 'cream' ? 'p-1' : ''}`} key={item}>
             {tab === 'cream' ? (
               <div className="relative w-full h-full">
-                <Image src={`/images/step/${item}.png`} alt="cream" fill />
+                {item === 'none' ? (
+                  <div className={styles.x} />
+                ) : (
+                  <Image src={`/images/step/${item}.png`} alt="cream" fill />
+                )}
               </div>
             ) : (
               <div className={`w-full h-full`} style={{ background: item }} />
@@ -52,4 +59,4 @@ const Select = ({ data, noLabel }: Props) => {
   );
 };
 
-export default Select;
+export default memo(ItemSelect);
