@@ -6,6 +6,7 @@ import { MAKE_STEP, SELECT_ITEM } from '@/lib/constant';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useEffect, useMemo } from 'react';
 import StepCommon from '@/components/make/StepCommon';
+import StepLettering from '@/components/make/StepLettering';
 
 export default function Page() {
   const searchParams = useSearchParams();
@@ -31,13 +32,14 @@ export default function Page() {
       case 'cream_top':
       case 'cream_side':
       case 'more':
-      case 'lettering':
         return (
           <StepCommon
             itemSelect={current.select as (keyof typeof SELECT_ITEM)[]}
             noLabel={current.noLabel}
           />
         );
+      case 'lettering':
+        return <StepLettering />;
     }
   };
 
