@@ -124,7 +124,7 @@
   align-items: center;
   gap: 10px;
   color: var(--gray-1, #333);
-  font-size: 12px;
+  font-size: 0.725rem;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
