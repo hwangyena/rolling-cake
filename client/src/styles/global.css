@@ -133,6 +133,17 @@ textarea {
   color: #ff54ed;
 }
 
+.green-pink-gradient {
+  background: linear-gradient(
+    0deg,
+    #ffc6cb 0%,
+    #fff 7.93%,
+    #f5fff7 46.47%,
+    #cafde7 76.16%,
+    #6fffc7 100%
+  );
+}
+
 /* swiper */
 .step-box:has(.swiper-slide) {
   height: 63px;

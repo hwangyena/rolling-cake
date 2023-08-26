@@ -64,5 +64,14 @@
   padding-bottom: 10px;
 }
 
-.letter-content {
+/* step - complete */
+.complete {
+  width: 100%;
+  height: 100%;
+  padding: 4vh 3vw;
+  background-image: linear-gradient(180deg, #ffe1e3 0%, #fff 7.41%, #fff 77.2%, #b5ffd7 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }

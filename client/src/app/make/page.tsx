@@ -8,6 +8,7 @@ import { useEffect, useMemo } from 'react';
 import StepCommon from '@/components/make/StepCommon';
 import StepLettering from '@/components/make/StepLettering';
 import StepLetter from '@/components/make/StepLetter';
+import StepComplete from '@/components/make/StepComplete';
 
 export default function Page() {
   const searchParams = useSearchParams();
@@ -46,9 +47,13 @@ export default function Page() {
     }
   };
 
-  // TODO: show error popup
   if (!current) {
-    return <div>error</div>;
+    if (searchParams.get('step') === 'complete') {
+      return <StepComplete />;
+    } else {
+      // TODO: show error
+      return null;
+    }
   }
 
   return (
