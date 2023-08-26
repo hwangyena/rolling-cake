@@ -1,6 +1,9 @@
 export const SELECT_ITEM = {
   cream: { label: '생크림', data: ['none', 'basic', 'screw', 'chocolate', 'crown', 'heart'] },
-  color: { label: '색상', data: ['#fefce1', '#f7cac7', '#cffdcb', '#c6f4f8', '#e9d5fc'] },
+  color: {
+    label: '색상',
+    data: ['#fefce1', '#f7cac7', '#cffdcb', '#c6f4f8', '#e9d5fc', '#6d3710'],
+  },
   // TODO: add item
   item: { label: '아이템', data: [] },
   font: { label: '글씨체', data: [] },
