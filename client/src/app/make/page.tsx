@@ -7,6 +7,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { useEffect, useMemo } from 'react';
 import StepCommon from '@/components/make/StepCommon';
 import StepLettering from '@/components/make/StepLettering';
+import StepLetter from '@/components/make/StepLetter';
 
 export default function Page() {
   const searchParams = useSearchParams();
@@ -40,6 +41,8 @@ export default function Page() {
         );
       case 'lettering':
         return <StepLettering />;
+      case 'letter':
+        return <StepLetter />;
     }
   };
 

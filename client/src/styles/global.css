@@ -106,7 +106,8 @@ img {
   max-width: 100%;
 }
 
-input {
+input,
+textarea {
   outline: none;
 }
 

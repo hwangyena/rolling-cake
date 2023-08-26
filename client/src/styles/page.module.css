@@ -41,8 +41,28 @@
 }
 
 /* step - letter */
+.input-count {
+  color: var(--gray-5, #bbb);
+  text-align: right;
+  font-family: Apple SD Gothic Neo;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
 .letter-name {
   width: 100%;
-  padding-top: 10px;
-  border-bottom: #bbb;
+  border-bottom: 1px solid #bbb;
+}
+.letter-name ~ span {
+  position: absolute;
+  right: 0;
+}
+.letter-name,
+.letter-name ~ span {
+  padding-bottom: 10px;
+}
+
+.letter-content {
 }
