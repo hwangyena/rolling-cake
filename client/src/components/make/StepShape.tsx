@@ -20,8 +20,7 @@ const StepShape = ({
         slidesPerView="auto"
         spaceBetween={20}
         className="swiper-card"
-        slidesOffsetBefore={20}
-        slidesOffsetAfter={20}
+        centeredSlides
         onSlideChange={(slide) => onShapeChanged(slide.activeIndex)}>
         {options.map((v, i) => (
           <SwiperSlide key={i}>
