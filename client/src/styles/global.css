@@ -55,6 +55,7 @@
 * {
   box-sizing: border-box;
 }
+
 html,
 body {
   width: 100%;
@@ -62,6 +63,7 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100%;
+  font-size: 16px;
 }
 
 ul,
@@ -104,6 +106,11 @@ img {
   max-width: 100%;
 }
 
+input,
+textarea {
+  outline: none;
+}
+
 /* gradient */
 .green-gradient {
   background: linear-gradient(180deg, #fff 77.2%, #b5ffd7 100%);
@@ -126,6 +133,17 @@ img {
   color: #ff54ed;
 }
 
+.green-pink-gradient {
+  background: linear-gradient(
+    0deg,
+    #ffc6cb 0%,
+    #fff 7.93%,
+    #f5fff7 46.47%,
+    #cafde7 76.16%,
+    #6fffc7 100%
+  );
+}
+
 /* swiper */
 .step-box:has(.swiper-slide) {
   height: 63px;
@@ -133,4 +151,12 @@ img {
 .step-box:has(.swiper-slide) .swiper-slide {
   width: 60px;
   height: 60px;
+}
+
+/* card - shadow가 포함된 카드모양 */
+.card {
+  border-radius: 12px;
+  border: 2px solid #000;
+  background: #fff;
+  box-shadow: 2px 3px 0px 0px #000;
 }

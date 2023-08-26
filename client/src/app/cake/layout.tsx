@@ -2,7 +2,7 @@
 
 import Navigation from '@/components/common/Navigation';
 import { PropsWithChildren } from 'react';
-import styles from '@/styles/main.module.css';
+import styles from '@/styles/page.module.css';
 
 export default function Layout({ children }: PropsWithChildren) {
   return (

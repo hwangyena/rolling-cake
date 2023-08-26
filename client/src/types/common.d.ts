@@ -5,6 +5,11 @@ type Popup = {
   onCancel?: () => void;
 };
 
+type FocusInput = {
+  maxLength?: number;
+  label?: string;
+};
+
 /* Step page */
 type Step = {
   step: number;

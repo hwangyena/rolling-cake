@@ -1,6 +1,6 @@
 'use client';
 
-import styles from '@/styles/main.module.css';
+import styles from '@/styles/page.module.css';
 
 import Button from '@/components/common/Button';
 import Image from 'next/image';
