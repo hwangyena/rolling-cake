@@ -1,9 +1,15 @@
 import { useState } from 'react';
 import styles from '@/styles/page.module.css';
+import { cn } from '@/lib/utils';
 
 const StepLetter = () => {
   const [name, setName] = useState('');
   const [content, setContent] = useState('');
+  const [lock, setLock] = useState(true);
+
+  const handleToggleLock = () => {
+    setLock((p) => !p);
+  };
 
   return (
     <article className="px-5 pt-5 py-4 flex flex-col h-full">
@@ -28,8 +34,12 @@ const StepLetter = () => {
           />
         </section>
         <section className="flex justify-between">
-          {/* TODO: add lock icon with animation */}
-          <button className="text-gray-600 text-b3">비밀 롤링케이크</button>
+          <button
+            className="flex justify-center items-center gap-2 text-gray-600 text-b3"
+            onClick={handleToggleLock}>
+            비밀 롤링케이크
+            <div className={cn(styles.lock, { [styles.unlock]: !lock })} />
+          </button>
           <span className={`${styles['input-count']} `}>{content.length} / 200</span>
         </section>
       </div>
