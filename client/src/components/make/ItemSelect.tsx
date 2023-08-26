@@ -47,7 +47,6 @@ const ItemSelect = ({ data, noLabel }: Props) => {
       <Swiper
         className="step-box w-full"
         slidesPerView="auto"
-        initialSlide={0}
         spaceBetween={10}
         freeMode
         slidesOffsetBefore={20}

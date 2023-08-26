@@ -28,16 +28,18 @@
   overflow: hidden;
 }
 
-.letter {
-  width: 90%;
-  height: 90%;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 40px 0;
-  position: relative;
+/* step - shape */
+.dimmed::after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  background: #000;
+  opacity: 0.2;
+  filter: drop-shadow(2px 3px 0px #000);
 }
 
 /* step - letter */

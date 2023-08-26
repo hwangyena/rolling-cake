@@ -178,6 +178,42 @@
   background: #fff;
 }
 
+/* Card */
+.card {
+  position: relative;
+  width: 90%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.card > article:first-child {
+  height: 40vh;
+  border: 2px solid #000;
+  border-radius: 20px;
+  background-color: #fff;
+  z-index: 10;
+}
+
+.simple {
+  padding: 19px;
+  width: 100%;
+  height: 100%;
+}
+.simple > article:first-child {
+  width: 100%;
+}
+
+.complex {
+  padding: 40px 0;
+  position: relative;
+}
+
+.complex > article:first-child {
+  width: 83%;
+}
+
 /* x svg */
 .x {
   display: flex;
