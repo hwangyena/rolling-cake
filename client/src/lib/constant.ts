@@ -52,3 +52,13 @@ export const STEP: Record<string, Step> = {
     nextPath: '',
   },
 };
+
+export const CUSTOM_STEP: (keyof typeof STEP)[] = [
+  'sheet',
+  'cream_top',
+  'cream_side',
+  'more',
+  'lettering',
+  'letter',
+];
+export const THEME_STEP: (keyof typeof STEP)[] = ['theme', 'lettering', 'letter'];
