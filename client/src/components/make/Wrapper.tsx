@@ -6,12 +6,13 @@ import CircleButton from '../common/CircleButton';
 import Header from '../common/Header';
 
 type Props = {
-  step?: number;
+  order?: number;
+  orderLength: number;
   title: string;
   nextStep: string;
 };
 
-const Wrapper = ({ step, title, children, nextStep }: PropsWithChildren<Props>) => {
+const Wrapper = ({ order, orderLength, title, children, nextStep }: PropsWithChildren<Props>) => {
   const router = useRouter();
 
   return (
@@ -21,9 +22,9 @@ const Wrapper = ({ step, title, children, nextStep }: PropsWithChildren<Props>) 
         <header className="flex flex-col items-center justify-center pt-[40px] gap-8">
           <mark
             className={`gray-gradient px-[16px] py-[2px] border rounded-[20px] font-neo text-t2 ${
-              step ? '' : 'invisible'
+              order ? '' : 'invisible'
             }`}>
-            {step}/6
+            {order}/{orderLength}
           </mark>
           <Header>{title}</Header>
         </header>

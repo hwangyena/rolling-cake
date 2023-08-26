@@ -7,7 +7,7 @@ import StepLetter from '@/components/make/StepLetter';
 import StepLettering from '@/components/make/StepLettering';
 import StepShape from '@/components/make/StepShape';
 import Wrapper from '@/components/make/Wrapper';
-import { SELECT_ITEM, STEP } from '@/lib/constant';
+import { CUSTOM_STEP, SELECT_ITEM, STEP, THEME_STEP } from '@/lib/constant';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
@@ -15,7 +15,7 @@ export default function Page() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const [step, setStep] = useState<'CUSTOM' | 'THEME'>('CUSTOM');
+  const [step, setStep] = useState(CUSTOM_STEP);
 
   const current = useMemo(() => {
     const params = searchParams.get('step') as keyof typeof STEP;
@@ -26,19 +26,23 @@ export default function Page() {
 
     return {
       value: params,
+      order: step.findIndex((v) => v === params) + 1,
       ...STEP[params],
     };
-  }, [searchParams]);
+  }, [searchParams, step]);
 
   // TODO: in SSR
   useEffect(() => {
-    if (!searchParams.get('step')) {
+    const query = searchParams.get('step');
+
+    if (!query) {
       router.replace('/make?step=shape');
+      return;
     }
-  }, [router, searchParams]);
+  }, [router, searchParams, step]);
 
   const onShapeChanged = useCallback((index: number) => {
-    setStep(index === 0 ? 'CUSTOM' : 'THEME');
+    setStep(index === 0 ? CUSTOM_STEP : THEME_STEP);
   }, []);
 
   if (!current) {
@@ -47,7 +51,10 @@ export default function Page() {
 
   if (current.value === 'shape') {
     return (
-      <Wrapper title={current.title} nextStep={step === 'CUSTOM' ? 'sheet' : 'theme'}>
+      <Wrapper
+        title={current.title}
+        nextStep={step.includes('sheet') ? 'sheet' : 'theme'}
+        orderLength={0}>
         <StepShape
           options={['직접 만들기', '테마를 선택해 만들기']}
           onShapeChanged={onShapeChanged}
@@ -61,7 +68,11 @@ export default function Page() {
   }
 
   return (
-    <Wrapper title={current.title} nextStep={current.nextPath}>
+    <Wrapper
+      title={current.title}
+      nextStep={current.nextPath}
+      order={current.order}
+      orderLength={step.length}>
       {/* Custom Cake */}
       <Step show={['sheet', 'cream_top', 'cream_side', 'more'].includes(current.value)}>
         <StepCommon itemSelect={current.select as (keyof typeof SELECT_ITEM)[]} />
