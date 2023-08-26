@@ -6,7 +6,7 @@ import CircleButton from '../common/CircleButton';
 import Header from '../common/Header';
 
 type Props = {
-  step: number;
+  step?: number;
   title: string;
   nextStep: string;
 };
@@ -19,7 +19,10 @@ const Wrapper = ({ step, title, children, nextStep }: PropsWithChildren<Props>) 
       <div className="fixed w-full h-full green-circle-gradient" />
       <main className="relative w-full h-full flex flex-col">
         <header className="flex flex-col items-center justify-center pt-[40px] gap-8">
-          <mark className="gray-gradient px-[16px] py-[2px] border rounded-[20px] font-neo text-t2">
+          <mark
+            className={`gray-gradient px-[16px] py-[2px] border rounded-[20px] font-neo text-t2 ${
+              step ? '' : 'invisible'
+            }`}>
             {step}/6
           </mark>
           <Header>{title}</Header>

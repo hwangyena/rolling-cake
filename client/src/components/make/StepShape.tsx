@@ -7,9 +7,13 @@ import styles from '@/styles/page.module.css';
 
 import 'swiper/css';
 
-const select = ['직접 만들기', '테마를 선택해 만들기'];
-
-const StepShape = () => {
+const StepShape = ({
+  options,
+  onShapeChanged,
+}: {
+  options: string[];
+  onShapeChanged: (index: number) => void;
+}) => {
   return (
     <article className="h-full pt-5 pb-12">
       <Swiper
@@ -17,8 +21,9 @@ const StepShape = () => {
         spaceBetween={20}
         className="swiper-card"
         slidesOffsetBefore={20}
-        slidesOffsetAfter={20}>
-        {select.map((v, i) => (
+        slidesOffsetAfter={20}
+        onSlideChange={(slide) => onShapeChanged(slide.activeIndex)}>
+        {options.map((v, i) => (
           <SwiperSlide key={i}>
             {({ isActive }) => (
               <Card type="simple" content={v} className={`${isActive ? '' : styles.dimmed}`}>
