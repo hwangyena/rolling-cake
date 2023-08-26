@@ -106,6 +106,10 @@ img {
   max-width: 100%;
 }
 
+input {
+  outline: none;
+}
+
 /* gradient */
 .green-gradient {
   background: linear-gradient(180deg, #fff 77.2%, #b5ffd7 100%);
@@ -135,4 +139,12 @@ img {
 .step-box:has(.swiper-slide) .swiper-slide {
   width: 60px;
   height: 60px;
+}
+
+/* card - shadow가 포함된 카드모양 */
+.card {
+  border-radius: 12px;
+  border: 2px solid #000;
+  background: #fff;
+  box-shadow: 2px 3px 0px 0px #000;
 }

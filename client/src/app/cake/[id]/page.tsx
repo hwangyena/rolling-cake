@@ -3,7 +3,7 @@
 import Cake from '@/components/cake/Cake';
 import Button from '@/components/common/Button';
 import Header from '@/components/common/Header';
-import styles from '@/styles/main.module.css';
+import styles from '@/styles/page.module.css';
 import { useCallback, useState } from 'react';
 
 export default function CakeDetail() {
@@ -20,7 +20,7 @@ export default function CakeDetail() {
         <Header>편지를 확인해보r!</Header>
       </section>
       <section className="w-full h-full grid place-items-center relative">
-        <div className={styles.letter}>
+        <div className={`${styles.letter} card`}>
           <article className="w-[80%] h-[40vh] border-2 border-black rounded-[20px] bg-white z-10">
             {isCake ? (
               <Cake className="w-full h-full" />
