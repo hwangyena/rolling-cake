@@ -111,6 +111,13 @@ textarea {
   outline: none;
 }
 
+mark {
+  background-color: transparent;
+  color: #0fc89b;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 /* gradient */
 .green-gradient {
   background: linear-gradient(180deg, #fff 77.2%, #b5ffd7 100%);
@@ -142,6 +149,11 @@ textarea {
     #cafde7 76.16%,
     #6fffc7 100%
   );
+}
+
+.black-shadow {
+  border: 1px solid #000;
+  box-shadow: 1px 1px 0px 0px #000;
 }
 
 /* swiper */
