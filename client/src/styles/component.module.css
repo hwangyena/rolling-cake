@@ -279,3 +279,23 @@
   justify-content: center;
   gap: 20px;
 }
+
+/* Minus Button - CustomPopup */
+.minus-button {
+  background: #fff;
+  border-radius: 7px;
+  position: relative;
+  height: 80%;
+  aspect-ratio: 1/1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.minus-button::before {
+  content: '';
+  width: 2px;
+  height: 60%;
+  background: #000;
+  transform: rotate(90deg);
+}

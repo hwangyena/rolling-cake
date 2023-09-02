@@ -5,6 +5,15 @@ type Popup = {
   onCancel?: () => void;
 };
 
+type CustomPopup = {
+  title: string;
+  content: string;
+  right: number;
+  bottom: number;
+  width?: string;
+  hasIcon?: boolean;
+};
+
 type FocusInput = {
   maxLength?: number;
   label?: string;
