@@ -1,8 +1,17 @@
+export const COLOR = {
+  yello: '#fefce1',
+  red: '#f7cac7',
+  green: '#cffdcb',
+  blue: '#c6f4f8',
+  purple: '#e9d5fc',
+  brown: '#6d3710',
+};
+
 export const SELECT_ITEM = {
   cream: { label: '생크림', data: ['none', 'basic', 'screw', 'chocolate', 'crown', 'heart'] },
   color: {
     label: '색상',
-    data: ['#fefce1', '#f7cac7', '#cffdcb', '#c6f4f8', '#e9d5fc', '#6d3710'],
+    data: [COLOR.yello, COLOR.red, COLOR.green, COLOR.blue, COLOR.purple, COLOR.brown],
   },
   // TODO: add item
   item: { label: '아이템', data: [] },

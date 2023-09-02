@@ -8,7 +8,7 @@ const StepCommon = ({ itemSelect }: { itemSelect?: (keyof typeof SELECT_ITEM)[] 
       <section className="flex-1 grid place-items-center">
         <Cake className="w-[70%] h-[80%]" />
       </section>
-      <ItemSelect data={itemSelect ?? []} />
+      <ItemSelect data={itemSelect ?? []} onSelect={} />
     </article>
   );
 };

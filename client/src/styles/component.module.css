@@ -178,6 +178,9 @@
   background: #fff;
 }
 
+.active {
+}
+
 /* Card */
 .card {
   position: relative;

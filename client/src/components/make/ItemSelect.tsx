@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/free-mode';
 
-import { SELECT_ITEM } from '@/lib/constant';
+import { COLOR, SELECT_ITEM } from '@/lib/constant';
 import Image from 'next/image';
 import { memo, useEffect, useRef, useState } from 'react';
 import { Swiper as SwiperType } from 'swiper';
@@ -13,10 +13,10 @@ import { FreeMode } from 'swiper/modules';
 type Props = {
   data: (keyof typeof SELECT_ITEM)[];
   noLabel?: boolean;
+  onSelect: (selected: string) => void;
 };
 
-// TODO: select event
-const ItemSelect = ({ data, noLabel }: Props) => {
+const ItemSelect = ({ data, noLabel, onSelect }: Props) => {
   const [tab, setTab] = useState(data[0]);
   const swiperRef = useRef<SwiperType | null>(null);
 
@@ -29,6 +29,17 @@ const ItemSelect = ({ data, noLabel }: Props) => {
       swiperRef.current.slideTo(0);
     }
   }, [tab]);
+
+  const handleSelect = (value: string) => {
+    if (tab === 'color') {
+      const colorValue = Object.keys(COLOR).find(
+        (key) => COLOR[key as keyof typeof COLOR] === value
+      );
+      onSelect(colorValue ?? '');
+    }
+
+    onSelect(value);
+  };
 
   return (
     <section className="mb-3">
@@ -54,7 +65,10 @@ const ItemSelect = ({ data, noLabel }: Props) => {
         modules={[FreeMode]}
         onSwiper={(swiper) => (swiperRef.current = swiper)}>
         {SELECT_ITEM[tab].data.map((item) => (
-          <SwiperSlide className={`${styles.selectbox} ${tab === 'cream' ? 'p-1' : ''}`} key={item}>
+          <SwiperSlide
+            className={`${styles.selectbox} ${tab === 'cream' ? 'p-1' : ''}`}
+            key={item}
+            onClick={() => handleSelect(item)}>
             {tab === 'cream' ? (
               <div className="relative w-full h-full">
                 {item === 'none' ? (

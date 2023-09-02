@@ -1,5 +1,6 @@
 import { atom } from 'jotai';
 
+/** common */
 export const popupAtom = atom<Popup | null>(null);
 export const popupStore = atom<Popup | null, [Popup | null], void>(
   (get) => get(popupAtom),
@@ -15,3 +16,6 @@ export const dispatchFocusInput = atom<FocusInput | null, [FocusInput | null], v
   null,
   (_get, set, action) => set(focusInputAtom, action)
 );
+
+/** page - make */
+export const makeStepAtom = atom(null);
