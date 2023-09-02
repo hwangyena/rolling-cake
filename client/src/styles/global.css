@@ -163,6 +163,9 @@ textarea {
 }
 .swiper-card:has(.swiper-slide) .swiper-slide {
   width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* card - shadow가 포함된 카드모양 */
