@@ -1,8 +1,6 @@
-import { load, create, Context } from '../deps.ts';
+import { create, Context } from '../deps.ts';
 import { jwtKey } from '../lib/data.ts';
 import USER from '../db/user.ts';
-
-const env = await load();
 
 const login = async ({ request, response }: Context) => {
   if (!request) {
@@ -23,8 +21,8 @@ const login = async ({ request, response }: Context) => {
 
   const form = {
     grant_type: 'authorization_code',
-    client_id: env['KAKAO_RES_API_KEY'],
-    redirect_uri: env['FE_URL'] + 'kakao',
+    client_id: Deno.env.get('KAKAO_RES_API_KEY') ?? '',
+    redirect_uri: Deno.env.get('FE_URL') + 'kakao',
     code,
   };
 
