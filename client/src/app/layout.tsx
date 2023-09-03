@@ -14,8 +14,6 @@ export default function RootLayout({ children }: PropsWithChildren) {
   const [customPopup] = useAtom(customPopupStore);
   const [focusInput] = useAtom(focusInputStore);
 
-  console.log('customPopup', customPopup);
-
   return (
     <html lang="en">
       <body className="max-w-[480px] h-full my-0 mx-auto relative">

@@ -2,26 +2,26 @@
 
 import styles from '@/styles/page.module.css';
 
-import Button from '@/components/common/Button';
-import Image from 'next/image';
-import { useCallback, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import LoginButton from '@/components/LoginButton';
-import { useSetAtom } from 'jotai';
-import { customPopupAtom } from '@/lib/store';
+import Button from '@/components/common/Button';
+import { customPopupAtom, userAtom } from '@/lib/store';
+import { useAtom, useSetAtom } from 'jotai';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { useCallback, useEffect } from 'react';
 
 export default function Home() {
   const router = useRouter();
-  const dispatchCustomPopup = useSetAtom(customPopupAtom);
 
-  const isLogin = false; // FIXME: to real data
+  const [user] = useAtom(userAtom);
+  const dispatchCustomPopup = useSetAtom(customPopupAtom);
 
   const onLinkClicked = useCallback(() => {
     router.push('/cake');
   }, [router]);
 
   useEffect(() => {
-    if (!isLogin) {
+    if (!user) {
       dispatchCustomPopup({
         title: 'Alert',
         content: `계속 진행하면 롤링케이스 <mark id='terms'>서비스 이용약관 및 개인정보 처리방침</mark>에 동의한 것으로 간주됩니다.`,
@@ -31,7 +31,7 @@ export default function Home() {
         hasIcon: true,
       });
     }
-  }, [dispatchCustomPopup, isLogin]);
+  }, [dispatchCustomPopup, user]);
 
   return (
     <main className={styles.main}>
@@ -40,7 +40,7 @@ export default function Home() {
       </div>
       <div className="w-[90%] h-[50%] bg-slate-300" />
       <footer className="w-full text-center">
-        {isLogin ? (
+        {user ? (
           <Button type="BIG" onClick={onLinkClicked}>
             내 롤링케이크 보러가기
           </Button>

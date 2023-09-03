@@ -44,6 +44,14 @@ const login = async ({ request, response }: Context) => {
   })
     .then((response) => response.json())
     .then(async (data: KakaoToken) => {
+      if (data.error) {
+        return {
+          code: 500,
+          message: data.error_code ?? '',
+          content: data.error_description ?? '',
+        };
+      }
+
       return await fetch('https://kapi.kakao.com/v2/user/me', {
         method: 'get',
         headers: {
