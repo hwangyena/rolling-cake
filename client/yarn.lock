@@ -1283,7 +1283,7 @@ __metadata:
     react: ^18.2.0
     react-dom: 18.2.0
     swiper: ^10.2.0
-    swr: ^2.2.0
+    swr: ^2.2.2
     tailwindcss: ^3.3.2
     three: ^0.149.0
     typescript: "*"
@@ -1388,7 +1388,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"client-only@npm:0.0.1":
+"client-only@npm:0.0.1, client-only@npm:^0.0.1":
   version: 0.0.1
   resolution: "client-only@npm:0.0.1"
   checksum: 0c16bf660dadb90610553c1d8946a7fdfb81d624adea073b8440b7d795d5b5b08beb3c950c6a2cf16279365a3265158a236876d92bce16423c485c322d7dfaf8
@@ -4742,14 +4742,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"swr@npm:^2.2.0":
-  version: 2.2.0
-  resolution: "swr@npm:2.2.0"
+"swr@npm:^2.2.2":
+  version: 2.2.2
+  resolution: "swr@npm:2.2.2"
   dependencies:
+    client-only: ^0.0.1
     use-sync-external-store: ^1.2.0
   peerDependencies:
     react: ^16.11.0 || ^17.0.0 || ^18.0.0
-  checksum: 1f04795ff9dff54987cbf8a544afc9e42d1350a99e899be8a7cdc4885f561e3ee464f78245ee2ebc8ced262b04023d134f731e276227319dc2d6e1843389ddd8
+  checksum: afb3d4824f7631bc3a045483f4e4beb5ca9bfa82b64690b3d1133cdf0666ad8e4a9a879657fac5b34dbf19ea9a1503cf92c9bde972f3d40cefe434c73bd9627a
   languageName: node
   linkType: hard
 

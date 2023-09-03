@@ -1,5 +1,7 @@
+import { getLocalStorage } from '@/apis/fetcher';
 import { atom } from 'jotai';
 
+/** Common */
 export const popupAtom = atom<Popup | null>(null);
 export const popupStore = atom<Popup | null, [Popup | null], void>(
   (get) => get(popupAtom),
@@ -20,4 +22,11 @@ export const focusInputStore = atom<FocusInput | null, [FocusInput | null], void
 export const dispatchFocusInput = atom<FocusInput | null, [FocusInput | null], void>(
   null,
   (_get, set, action) => set(focusInputAtom, action)
+);
+
+/** Data */
+export const userAtom = atom<User | null>(getLocalStorage<User>('rollingCake/user'));
+export const userStore = atom<User | null, [User | null], void>(
+  (get) => get(userAtom),
+  (_get, set, action) => set(userAtom, action)
 );
