@@ -6,6 +6,9 @@ type KakaoToken = {
   expires_in: number;
   scope: string;
   refresh_token_expires_in: number;
+  error?: string;
+  error_description?: string;
+  error_code?: string;
 };
 
 type KakaoUser = {
