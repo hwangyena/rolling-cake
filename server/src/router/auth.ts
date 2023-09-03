@@ -24,7 +24,7 @@ const login = async ({ request, response }: Context) => {
   const form = {
     grant_type: 'authorization_code',
     client_id: env['KAKAO_RES_API_KEY'],
-    redirect_uri: 'http://localhost:3000/kakao', // FIXME: real redirect_url
+    redirect_uri: env['FE_URL'] + 'kakao',
     code,
   };
 
