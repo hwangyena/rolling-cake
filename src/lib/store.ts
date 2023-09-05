@@ -1,4 +1,4 @@
-import { getLocalStorage } from '@/apis/fetcher';
+import { getLocalStorage } from '@/api/fetcher';
 import { atom } from 'jotai';
 
 /** Common */
