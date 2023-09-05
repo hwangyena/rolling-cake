@@ -1,17 +1,11 @@
-# 롤링케이크
+### vscode에서 typescript version 설정
 
-플래닛 동기들과 함께한 `롤링케이크` 프로젝트 입니다.
+```
+yarn dlx @yarnpkg/sdks vscode
+```
 
-### 사용 기술
+### eslint cache clear
 
-## Client
-
-- Next.js 13v
-- Zustand, React Query
-- Sass, tailwindcss
-
-## Server
-
-- Deno
-- DB: Supabase
-- 배포: deno-deploy
+```
+yarn run eslint --clear-cache
+```
