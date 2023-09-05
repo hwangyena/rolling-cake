@@ -1,13 +1,13 @@
 'use client';
 
-import { Session } from 'next-auth';
+import { User } from '@prisma/client';
 import { signIn } from 'next-auth/react';
 import Image from 'next/image';
-import Button from './common/Button';
-import { useCallback } from 'react';
 import { useRouter } from 'next/navigation';
+import { useCallback } from 'react';
+import Button from './common/Button';
 
-const LoginButton = ({ user }: { user: Session | null }) => {
+const LoginButton = ({ user }: { user: User | null }) => {
   const router = useRouter();
 
   const onLinkClicked = useCallback(() => {

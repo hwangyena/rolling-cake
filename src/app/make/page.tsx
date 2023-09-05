@@ -18,7 +18,7 @@ export default function Page() {
   const [step, setStep] = useState(CUSTOM_STEP);
 
   const current = useMemo(() => {
-    const params = searchParams.get('step') as keyof typeof STEP;
+    const params = searchParams?.get('step') as keyof typeof STEP;
 
     if (!STEP[params]) {
       return null;

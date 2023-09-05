@@ -5,8 +5,3 @@ type Login = {
     token: string;
   };
 };
-
-type User = {
-  userId: number;
-  userName: string;
-};

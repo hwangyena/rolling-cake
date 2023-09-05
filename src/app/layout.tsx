@@ -8,6 +8,7 @@ import Popup from '@/components/common/Popup';
 import { PropsWithChildren } from 'react';
 import '../styles/global.css';
 import CustomPopup from '@/components/common/CustomPopup';
+import ClientOnly from '@/components/ClientOnly';
 
 export default function RootLayout({ children }: PropsWithChildren) {
   const [popup] = useAtom(popupStore);
@@ -19,10 +20,11 @@ export default function RootLayout({ children }: PropsWithChildren) {
       <body className="max-w-[480px] h-full my-0 mx-auto relative">
         {children}
 
-        {popup && <Popup />}
-        {customPopup && <CustomPopup />}
-
-        {focusInput && <FocusInput />}
+        <ClientOnly>
+          {popup && <Popup />}
+          {customPopup && <CustomPopup />}
+          {focusInput && <FocusInput />}
+        </ClientOnly>
       </body>
     </html>
   );
