@@ -12,6 +12,7 @@ type CustomPopup = {
   bottom: number;
   width?: string;
   hasIcon?: boolean;
+  onConfirm: () => void;
 };
 
 type FocusInput = {

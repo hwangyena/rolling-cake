@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { PropsWithChildren } from 'react';
 import CircleButton from '../common/CircleButton';
 import Header from '../common/Header';
+import GradientContainer from '../GradientContainer';
 
 type Props = {
   order?: number;
@@ -16,8 +17,7 @@ const Wrapper = ({ order, orderLength, title, children, nextStep }: PropsWithChi
   const router = useRouter();
 
   return (
-    <>
-      <div className="fixed w-full h-full green-circle-gradient" />
+    <GradientContainer type="green-circle">
       <main className="relative w-full h-full flex flex-col">
         <header className="flex flex-col items-center justify-center pt-[40px] gap-8">
           <mark
@@ -36,7 +36,7 @@ const Wrapper = ({ order, orderLength, title, children, nextStep }: PropsWithChi
           <CircleButton type=">" onClick={() => router.push(`/make?step=${nextStep}`)} />
         </footer>
       </main>
-    </>
+    </GradientContainer>
   );
 };
 
