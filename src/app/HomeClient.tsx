@@ -44,9 +44,6 @@ const HomeClient = ({ login }: { login: boolean }) => {
         <CustomPopup
           title={'Alert'}
           content={`계속 진행하면 롤링케이스 <mark id='terms'>서비스 이용약관 및 개인정보 처리방침</mark>에 동의한 것으로 간주됩니다.`}
-          right={20}
-          bottom={30}
-          width={'80%'}
           hasIcon
           onConfirm={onClosePopup}
         />

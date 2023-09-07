@@ -3,13 +3,19 @@
 import { focusInputAtom } from '@/lib/store';
 import styles from '@/styles/component.module.css';
 import { useAtom } from 'jotai';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from './Button';
 
 const FocusInput = () => {
   const [value, dispatch] = useAtom(focusInputAtom);
 
   const [text, setText] = useState('');
+
+  useEffect(() => {
+    if (value?.defaultValue) {
+      setText(value.defaultValue);
+    }
+  }, [value]);
 
   return (
     <div className={styles['focus-input']}>
@@ -21,7 +27,7 @@ const FocusInput = () => {
             value={text}
             className="text-effect_t font-neo"
             onChange={(e) => {
-              setText(e.target.value.slice(0, 10));
+              setText(e.target.value.slice(0, value?.maxLength));
             }}
           />
           <span className="text-b3">
@@ -32,7 +38,13 @@ const FocusInput = () => {
           <Button type="SMALL" color="gray" onClick={() => dispatch(null)}>
             취소
           </Button>
-          <Button type="SMALL" color="green" onClick={() => dispatch(null)}>
+          <Button
+            type="SMALL"
+            color="green"
+            onClick={() => {
+              value?.onConfirm && value.onConfirm(text);
+              dispatch(null);
+            }}>
             확인
           </Button>
         </section>
