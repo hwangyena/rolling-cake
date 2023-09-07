@@ -33,7 +33,7 @@ export default function Page() {
 
   // TODO: in SSR
   useEffect(() => {
-    const query = searchParams.get('step');
+    const query = searchParams?.get('step');
 
     if (!query) {
       router.replace('/make?step=shape');

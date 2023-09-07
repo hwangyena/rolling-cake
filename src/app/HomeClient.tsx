@@ -1,7 +1,6 @@
-type Props = {};
 
 // TODO: make rolling cake name
-const HomeClient = (props: Props) => {
+const HomeClient = () => {
   return <div>HomeClient</div>;
 };
 

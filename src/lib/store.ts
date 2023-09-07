@@ -24,9 +24,9 @@ export const dispatchFocusInput = atom<FocusInput | null, [FocusInput | null], v
   (_get, set, action) => set(focusInputAtom, action)
 );
 
-/** Data */
-export const userAtom = atom<User | null>(getLocalStorage<User>('rollingCake/user'));
-export const userStore = atom<User | null, [User | null], void>(
+/** FIXME: Data */
+export const userAtom = atom<unknown | null>(getLocalStorage<unknown>('rollingCake/user'));
+export const userStore = atom<unknown | null, [unknown | null], void>(
   (get) => get(userAtom),
   (_get, set, action) => set(userAtom, action)
 );
