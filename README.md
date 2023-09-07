@@ -7,11 +7,26 @@
 ## Client
 
 - Next.js 13v
-- Zustand, React Query
-- Sass, tailwindcss
+- Jotai, SWR
+- postcss, tailwindcss
 
 ## Server
 
-- Deno
-- DB: Supabase
-- 배포: deno-deploy
+
+
+------
+### vscode에서 typescript version 설정
+
+```
+yarn dlx @yarnpkg/sdks vscode
+```
+
+### eslint cache clear
+
+```
+yarn run eslint --clear-cache
+```
+
+### prisma 
+npx prisma generate
+npx prisma db push
