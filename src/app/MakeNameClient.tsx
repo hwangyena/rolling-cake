@@ -2,6 +2,7 @@
 
 import GradientContainer from '@/components/GradientContainer';
 import CustomPopup from '@/components/common/CustomPopup';
+import { updateRollingCakeName } from '@/endpoint/home';
 import { focusInputAtom } from '@/lib/store';
 import { useSetAtom } from 'jotai';
 import { User } from 'next-auth';
@@ -15,7 +16,10 @@ const MakeNameClient = ({ user }: { user: User | null }) => {
       label: '이름을 알려주세요!',
       maxLength: 5,
       defaultValue: user?.name ?? '',
-      onConfirm: (name: string) => {},
+      onConfirm: async (name: string) => {
+        await updateRollingCakeName(name);
+        // TODO: to page
+      },
     });
   }, []);
 
