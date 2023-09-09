@@ -12,9 +12,8 @@
 
 ## Server
 
+---
 
-
-------
 ### vscode에서 typescript version 설정
 
 ```
@@ -27,6 +26,11 @@ yarn dlx @yarnpkg/sdks vscode
 yarn run eslint --clear-cache
 ```
 
-### prisma 
+### prisma
+
 npx prisma generate
 npx prisma db push
+
+### prisma studio
+
+npx prisma studio

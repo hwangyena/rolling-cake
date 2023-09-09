@@ -6,11 +6,8 @@ type Popup = {
 };
 
 type CustomPopup = {
-  title: string;
+  title: 'Alert' | 'Welcome!';
   content: string;
-  right: number;
-  bottom: number;
-  width?: string;
   hasIcon?: boolean;
   onConfirm: () => void;
 };
@@ -18,6 +15,8 @@ type CustomPopup = {
 type FocusInput = {
   maxLength?: number;
   label?: string;
+  defaultValue?: string;
+  onConfirm?: (value: string) => void;
 };
 
 /* Step page */

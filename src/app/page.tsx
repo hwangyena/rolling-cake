@@ -9,7 +9,7 @@ export default async function Home() {
   if (user && !user.rollingCakeName) {
     return (
       <ClientOnly>
-        <MakeNameClient />
+        <MakeNameClient user={user} />
       </ClientOnly>
     );
   }
