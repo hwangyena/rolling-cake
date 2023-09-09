@@ -2,7 +2,7 @@
 
 import GradientContainer from '@/components/GradientContainer';
 import CustomPopup from '@/components/common/CustomPopup';
-import { updateRollingCakeName } from '@/endpoint/home';
+import { updateRollingCakeName } from '@/endpoint/user';
 import { focusInputAtom } from '@/lib/store';
 import { useSetAtom } from 'jotai';
 import { User } from 'next-auth';
