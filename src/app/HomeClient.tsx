@@ -4,20 +4,20 @@ import LoginButton from '@/components/LoginButton';
 import Button from '@/components/common/Button';
 import CustomPopup from '@/components/common/CustomPopup';
 import styles from '@/styles/page.module.css';
-import { User } from 'next-auth';
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useCallback, useState } from 'react';
+import type { User } from '@prisma/client';
 
 const HomeClient = ({ user }: { user?: User | null }) => {
   const router = useRouter();
 
-  const [show, setShow] = useState(() => (!!user ? false : true));
+  const [show, setShow] = useState(() => (user ? false : true));
 
   const onLinkClicked = useCallback(() => {
     router.push(`/cake/${user?.id}`);
-  }, [router]);
+  }, [router, user]);
 
   const onClosePopup = useCallback(() => {
     setShow(false);

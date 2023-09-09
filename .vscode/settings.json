@@ -2,6 +2,5 @@
   "search.exclude": {
     "**/.yarn": true,
     "**/.pnp.*": true
-  },
-  "eslint.options": { "configFile": "./eslintrc" }
+  }
 }
