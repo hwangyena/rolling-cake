@@ -8,15 +8,16 @@ import styles from '@/styles/page.module.css';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useCallback, useState } from 'react';
+import type { User } from '@prisma/client';
 
-const HomeClient = ({ login }: { login: boolean }) => {
+const HomeClient = ({ user }: { user?: User | null }) => {
   const router = useRouter();
 
-  const [show, setShow] = useState(() => (login ? false : true));
+  const [show, setShow] = useState(() => (user ? false : true));
 
   const onLinkClicked = useCallback(() => {
-    router.push('/cake');
-  }, [router]);
+    router.push(`/cake/${user?.id}`);
+  }, [router, user]);
 
   const onClosePopup = useCallback(() => {
     setShow(false);
@@ -29,7 +30,7 @@ const HomeClient = ({ login }: { login: boolean }) => {
       </div>
       <div className="w-[90%] h-[50%] bg-slate-300" />
       <footer className="w-full text-center">
-        {login ? (
+        {user ? (
           <Button type="BIG" onClick={onLinkClicked}>
             내 롤링케이크 보러가기
           </Button>

@@ -16,7 +16,7 @@ export default async function Home() {
 
   return (
     <ClientOnly>
-      <HomeClient login={!!user} />
+      <HomeClient user={user} />
     </ClientOnly>
   );
 }

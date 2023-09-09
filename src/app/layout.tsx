@@ -8,6 +8,8 @@ import Popup from '@/components/common/Popup';
 import { PropsWithChildren } from 'react';
 import '../styles/global.css';
 import ClientOnly from '@/components/ClientOnly';
+import { SWRConfig } from 'swr';
+import { fetcher } from '@/lib/fetcher';
 
 export default function RootLayout({ children }: PropsWithChildren) {
   const [popup] = useAtom(popupStore);
@@ -16,12 +18,14 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body className="max-w-[480px] h-full my-0 mx-auto relative">
-        {children}
+        <SWRConfig value={{ fetcher }}>
+          {children}
 
-        <ClientOnly>
-          {popup && <Popup />}
-          {focusInput && <FocusInput />}
-        </ClientOnly>
+          <ClientOnly>
+            {popup && <Popup />}
+            {focusInput && <FocusInput />}
+          </ClientOnly>
+        </SWRConfig>
       </body>
     </html>
   );

@@ -68,9 +68,9 @@ model Cake {
   cakeType        CakeType
   customCake      Json?
   themeCake       ThemeCake?
+  letter          Letter?
 
   user            User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  letter          Letter?
 }
 
 model Letter {

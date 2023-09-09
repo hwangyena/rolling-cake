@@ -2,26 +2,30 @@
 
 import GradientContainer from '@/components/GradientContainer';
 import CustomPopup from '@/components/common/CustomPopup';
-import { updateRollingCakeName } from '@/endpoint/home';
+import { updateRollingCakeName } from '@/endpoint/user';
 import { focusInputAtom } from '@/lib/store';
 import { useSetAtom } from 'jotai';
-import { User } from 'next-auth';
 import { useCallback } from 'react';
+import type { User } from '@prisma/client';
 
 const MakeNameClient = ({ user }: { user: User | null }) => {
   const dispatch = useSetAtom(focusInputAtom);
 
   const onConfirmPopup = useCallback(() => {
+    if (!user) {
+      return;
+    }
+
     dispatch({
       label: '이름을 알려주세요!',
       maxLength: 5,
-      defaultValue: user?.name ?? '',
+      defaultValue: user.name ?? '',
       onConfirm: async (name: string) => {
         await updateRollingCakeName(name);
         // TODO: to page
       },
     });
-  }, []);
+  }, [dispatch, user]);
 
   return (
     <GradientContainer type="green-circle">
