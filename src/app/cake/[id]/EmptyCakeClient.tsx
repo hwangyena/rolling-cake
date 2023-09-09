@@ -14,7 +14,8 @@ export default function EmptyCakeClient({ user, isOwn }: { user: User; isOwn: bo
 
   const onButtonClicked = useCallback(() => {
     if (isOwn) {
-      // TODO: 링크 공유하기 창
+      navigator.clipboard.writeText(window.location.href);
+      return;
     } else {
       router.push('/make?step=shape');
     }
@@ -24,6 +25,7 @@ export default function EmptyCakeClient({ user, isOwn }: { user: User; isOwn: bo
     <>
       <section className="flex flex-col items-center gap-3 mb-[20px]">
         <Header>{`${user.rollingCakeName}의 롤링케이크`}</Header>
+        {/* // FIXME: if not isOwn */}
         <Tag>링크를 공유하고 케이크를 모아보세요!</Tag>
       </section>
       <section

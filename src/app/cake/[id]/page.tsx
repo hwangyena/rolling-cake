@@ -3,20 +3,21 @@ import getCurrentUser from '@/actions/getCurrentUser';
 import ClientOnly from '@/components/ClientOnly';
 import EmptyCakeClient from './EmptyCakeClient';
 import HaveCakeClient from './HaveCakeClient';
+import getUser from '@/actions/getUser';
 
 export default async function CakePage({ params }: { params: { id: string } }) {
-  const cakes = await getCakes(params.id);
-  const user = await getCurrentUser();
+  const cakes = (await getCakes(params.id)) ?? [];
+  const user = await getUser(params.id);
+  const loginUser = await getCurrentUser();
 
-  // TODO: show error | error page
-  if (!cakes || !user) {
+  if (!user) {
     return <>error</>;
   }
 
-  if (cakes.length === 0) {
+  if (cakes?.length === 0) {
     return (
       <ClientOnly>
-        <EmptyCakeClient user={user} isOwn={user.id === params.id} />
+        <EmptyCakeClient user={user} isOwn={loginUser?.id === params.id} />
       </ClientOnly>
     );
   }
