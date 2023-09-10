@@ -10,11 +10,15 @@ type Props = {
   order?: number;
   orderLength: number;
   title: string;
-  nextStep: string;
+  nextStep: string | null;
 };
 
 const Wrapper = ({ order, orderLength, title, children, nextStep }: PropsWithChildren<Props>) => {
   const router = useRouter();
+
+  if (!nextStep) {
+    return <>{children}</>;
+  }
 
   return (
     <GradientContainer type="green-circle">

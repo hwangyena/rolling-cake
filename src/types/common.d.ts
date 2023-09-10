@@ -19,9 +19,9 @@ type FocusInput = {
   onConfirm?: (value: string) => Promise<void>;
 };
 
-/* Step page */
+/* Make page */
 type Step = {
   title: string;
-  nextPath: string;
+  nextPath: string | null;
   select?: (keyof typeof SELECT_ITEM)[];
 };

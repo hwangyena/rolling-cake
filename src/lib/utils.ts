@@ -52,3 +52,14 @@ export const cn = (...names: unknown[]): string => {
 
   return built.trim();
 };
+
+export const md = (value: [string, string | Record<string, unknown>][]) => {
+  const m = new Map();
+
+  value.forEach((v) => {
+    const [key, value] = v;
+    m.set(key, value);
+  });
+
+  return m;
+};
