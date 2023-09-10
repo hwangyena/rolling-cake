@@ -178,6 +178,61 @@
   background: #fff;
 }
 
+.step-box-selected::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 50%;
+
+  animation: bg 0.3s ease;
+}
+
+@keyframes bg {
+  0% {
+    opacity: 0;
+  }
+}
+
+.check::before {
+  content: '';
+  width: 0px;
+  height: 2px;
+  border-radius: 2px;
+  background: #fff;
+  position: absolute;
+  transform: rotate(45deg);
+  top: 28px;
+  left: 22px;
+  transition: width 50ms ease 50ms;
+  transform-origin: 0% 0%;
+}
+.check::after {
+  content: '';
+  width: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: #fff;
+  position: absolute;
+  transform: rotate(305deg);
+  top: 36px;
+  left: 27px;
+  transition: width 50ms ease;
+  transform-origin: 0% 0%;
+}
+
+.step-box-selected .check::before {
+  width: 10px;
+  transition: width 100ms ease;
+}
+.step-box-selected .check::after {
+  width: 17px;
+  transition: width 150ms ease 100ms;
+}
+
 /* Card */
 .card {
   position: relative;
