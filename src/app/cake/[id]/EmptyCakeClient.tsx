@@ -4,7 +4,6 @@ import Cake from '@/components/cake/Cake';
 import Button from '@/components/common/Button';
 import Header from '@/components/common/Header';
 import Tag from '@/components/common/Tag';
-import { cn } from '@/lib/utils';
 import { User } from '@prisma/client';
 import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
@@ -34,10 +33,7 @@ export default function EmptyCakeClient({ user, isOwn }: { user: User; isOwn: bo
           <Cake className="w-[80%] h-[70%]" />
         </div>
       </section>
-      <section
-        className={cn('absolute w-full bottom-0 px-[25px] pb-[5vh] py-[40px]', {
-          'white-gradient': !isOwn,
-        })}>
+      <section className={'absolute w-full bottom-0 px-[25px] pb-[5vh] py-[40px]'}>
         <Button type="BIG" onClick={onButtonClicked}>
           {isOwn ? '케이크 링크 공유하기' : '롤링케이크 만들어주기'}
         </Button>

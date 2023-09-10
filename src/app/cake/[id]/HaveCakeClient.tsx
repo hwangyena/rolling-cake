@@ -1,22 +1,29 @@
 'use client';
 
 import Cake from '@/components/cake/Cake';
+import Button from '@/components/common/Button';
 import Header from '@/components/common/Header';
 import Tag from '@/components/common/Tag';
 import type { Cake as CakeType, User } from '@prisma/client';
 import { useRouter } from 'next/router';
+import { useCallback } from 'react';
 
 type Props = {
   user: User;
   cakes: CakeType[];
+  isOwn: boolean;
 };
 
-export default function HaveCakeClient({ cakes, user }: Props) {
+export default function HaveCakeClient({ cakes, user, isOwn }: Props) {
   const router = useRouter();
 
   const handleCakeClicked = (cakeId: string) => {
     router.push(`/letter/${cakeId}`);
   };
+
+  const onButtonClicked = useCallback(() => {
+    router.push('/make?step=shape');
+  }, [router]);
 
   return (
     <>
@@ -38,6 +45,14 @@ export default function HaveCakeClient({ cakes, user }: Props) {
           ))}
         </div>
       </section>
+      {/* TODO: 만들고 들어온경우에도 hidden */}
+      {!isOwn && (
+        <section className={'absolute w-full bottom-0 px-[25px] pb-[5vh] py-[40px] white-gradient'}>
+          <Button type="BIG" onClick={onButtonClicked}>
+            롤링케이크 만들어주기
+          </Button>
+        </section>
+      )}
     </>
   );
 }

@@ -1,9 +1,9 @@
 import getCakes from '@/actions/getCakes';
 import getCurrentUser from '@/actions/getCurrentUser';
+import getUser from '@/actions/getUser';
 import ClientOnly from '@/components/ClientOnly';
 import EmptyCakeClient from './EmptyCakeClient';
 import HaveCakeClient from './HaveCakeClient';
-import getUser from '@/actions/getUser';
 
 export default async function CakePage({ params }: { params: { id: string } }) {
   const cakes = (await getCakes(params.id)) ?? [];
@@ -24,7 +24,7 @@ export default async function CakePage({ params }: { params: { id: string } }) {
 
   return (
     <ClientOnly>
-      <HaveCakeClient user={user} cakes={cakes} />
+      <HaveCakeClient user={user} cakes={cakes} isOwn={loginUser?.id === params.id} />
     </ClientOnly>
   );
 }
