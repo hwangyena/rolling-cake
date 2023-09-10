@@ -49,7 +49,7 @@ export const STEP: Record<string, Step> = {
   },
   complete: {
     title: '',
-    nextPath: '',
+    nextPath: null,
   },
 };
 
