@@ -21,10 +21,14 @@ const CheckButton = ({ type, selected, item }: Props) => {
     return <Item style={{ background: item }} selected={selected} />;
   }
 
-  if (type === 'cream') {
-    <Item {...{ selected }}>
-      <Image src={`/images/step/${item}.png`} alt="cream" fill />
-    </Item>;
+  if (type === 'cream' || type === 'item' || type === 'font') {
+    return (
+      <Item {...{ selected }} style={{ padding: '4px' }}>
+        <div className="relative w-full h-full">
+          <Image src={`/images/${type}/${item}.png`} alt="cream" fill />
+        </div>
+      </Item>
+    );
   }
 
   return <Item style={{ background: item }} selected={selected} />;
@@ -36,10 +40,12 @@ const Item = ({
   style,
 }: PropsWithChildren<{ selected: boolean; style?: CSSProperties }>) => {
   return (
-    <div
-      className={`relative w-full h-full ${selected ? styles['step-box-selected'] : ''}`}
-      style={style}>
-      {children}
+    <div className={`relative w-full h-full `}>
+      <div
+        className={`relative w-full h-full ${selected ? styles['step-box-selected'] : ''}`}
+        style={style}>
+        {children}
+      </div>
       <span className={styles.check} />
     </div>
   );

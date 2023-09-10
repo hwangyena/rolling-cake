@@ -25,7 +25,7 @@ const Wrapper = ({ order, orderLength, title, children, nextStep }: PropsWithChi
       <main className="relative w-full h-full flex flex-col">
         <header className="flex flex-col items-center justify-center pt-[40px] gap-8">
           <mark
-            className={`gray-gradient px-[16px] py-[2px] border rounded-[20px] font-neo text-t2 ${
+            className={`gray-gradient px-[16px] py-[2px] border rounded-[20px] font-neo text-t2 no-underline ${
               order ? '' : 'invisible'
             }`}>
             {order}/{orderLength}

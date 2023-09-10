@@ -4,9 +4,21 @@ export const SELECT_ITEM = {
     label: '색상',
     data: ['#fefce1', '#f7cac7', '#cffdcb', '#c6f4f8', '#e9d5fc', '#6d3710'],
   },
-  // TODO: add item
-  item: { label: '아이템', data: [] },
-  font: { label: '글씨체', data: [] },
+  item: {
+    label: '아이템',
+    data: [
+      'cherry',
+      'sunflower',
+      'bear',
+      'cookie',
+      'gingerbread',
+      'heart',
+      'candle',
+      'screw-candle',
+      'topper',
+    ],
+  },
+  font: { label: '글씨체', data: ['kor1', 'kor2', 'kor3', 'eng1', 'eng2', 'eng3'] },
 };
 
 export const STEP: Record<string, Step> = {

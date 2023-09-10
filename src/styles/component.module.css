@@ -178,7 +178,7 @@
   background: #fff;
 }
 
-.step-box-selected::before {
+.step-box-selected::after {
   content: '';
   position: absolute;
   left: 0;
@@ -224,11 +224,11 @@
   transform-origin: 0% 0%;
 }
 
-.step-box-selected .check::before {
+.step-box-selected ~ .check::before {
   width: 10px;
   transition: width 100ms ease;
 }
-.step-box-selected .check::after {
+.step-box-selected ~ .check::after {
   width: 17px;
   transition: width 150ms ease 100ms;
 }
