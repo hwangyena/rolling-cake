@@ -59,7 +59,7 @@ export const useStep = () => {
   const step = useMemo(() => searchParams?.get('step') as keyof typeof STEP, [searchParams]);
 
   const onUpdate = useCallback(
-    (data: Record<string, string>) => {
+    (data: Record<string, string | boolean>) => {
       if (step === 'more') {
         const prev = (store.get('more') as Record<'item', string[]>).item;
         const cur = (data as Record<'item', string>).item;

@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
-import { STEP_CUSTOM_INIT, STEP_INIT_STORE } from './constant';
+import { STEP_CUSTOM_INIT } from './constant';
 
 /** Common */
 export const popupAtom = atom<Popup | null>(null);

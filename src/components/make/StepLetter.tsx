@@ -1,11 +1,39 @@
-import { useState } from 'react';
-import styles from '@/styles/page.module.css';
+import { useEvent } from '@/hooks/common';
+import { useStep } from '@/hooks/make';
 import { cn } from '@/lib/utils';
+import styles from '@/styles/page.module.css';
+import { useEffect, useState } from 'react';
 
 const StepLetter = () => {
+  const { store, onUpdate } = useStep();
+
   const [name, setName] = useState('');
   const [content, setContent] = useState('');
   const [lock, setLock] = useState(true);
+
+  useEvent('make:next-step', () => {
+    onUpdate({
+      name,
+      content,
+      private: lock,
+    });
+  });
+
+  useEffect(() => {
+    const {
+      name,
+      content,
+      private: lock,
+    } = store.get('letter') as {
+      name: string;
+      content: string;
+      private: boolean;
+    };
+
+    setName(name);
+    setContent(content);
+    setLock(lock);
+  }, [store]);
 
   const handleToggleLock = () => {
     setLock((p) => !p);

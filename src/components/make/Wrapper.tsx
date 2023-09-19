@@ -1,10 +1,11 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, useCallback } from 'react';
 import CircleButton from '../common/CircleButton';
 import Header from '../common/Header';
 import GradientContainer from '../GradientContainer';
+import { useEvent } from '@/hooks/common';
 
 type Props = {
   order?: number;
@@ -15,6 +16,13 @@ type Props = {
 
 const Wrapper = ({ order, orderLength, title, children, nextStep }: PropsWithChildren<Props>) => {
   const router = useRouter();
+
+  const { trigger } = useEvent('make:next-step');
+
+  const onNextClicked = useCallback(() => {
+    router.push(`/make?step=${nextStep}`);
+    trigger();
+  }, [nextStep, router, trigger]);
 
   if (!nextStep) {
     return <>{children}</>;
@@ -37,7 +45,7 @@ const Wrapper = ({ order, orderLength, title, children, nextStep }: PropsWithChi
 
         <footer className="p-3 mb-5 w-full flex justify-between">
           <CircleButton type="<" onClick={() => router.back()} />
-          <CircleButton type=">" onClick={() => router.push(`/make?step=${nextStep}`)} />
+          <CircleButton type=">" onClick={onNextClicked} />
         </footer>
       </main>
     </GradientContainer>

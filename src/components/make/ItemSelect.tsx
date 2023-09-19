@@ -18,8 +18,6 @@ type Props = {
 const ItemSelect = ({ data, noLabel }: Props) => {
   const { store, onUpdate, step } = useStep();
 
-  console.log('store', store);
-
   const [tab, setTab] = useState(data[0]);
   const [selected, setSelected] = useState<number[]>([]);
 
