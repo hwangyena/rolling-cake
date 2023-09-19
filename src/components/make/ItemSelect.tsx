@@ -8,6 +8,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import CheckButton from '../common/CheckButton';
+import { useStep } from '@/hooks/make';
 
 type Props = {
   data: (keyof typeof SELECT_ITEM)[];
@@ -15,8 +16,12 @@ type Props = {
 };
 
 const ItemSelect = ({ data, noLabel }: Props) => {
+  const { store, onUpdate, step } = useStep();
+
+  console.log('store', store);
+
   const [tab, setTab] = useState(data[0]);
-  const [selected, setSelected] = useState(0); // TODO: item 같은건 선택 안되어야함
+  const [selected, setSelected] = useState<number[]>([]);
 
   const swiperRef = useRef<SwiperType | null>(null);
 
@@ -27,12 +32,34 @@ const ItemSelect = ({ data, noLabel }: Props) => {
   useEffect(() => {
     if (swiperRef.current) {
       swiperRef.current.slideTo(0);
-      setSelected(0);
     }
   }, [tab]);
 
+  useEffect(() => {
+    const selectedValue = (store.get(step) as Record<string, unknown>)[tab];
+    const selectedIndex = SELECT_ITEM[tab].data.findIndex((v) => v === selectedValue);
+
+    if (selectedIndex !== -1) {
+      setSelected([selectedIndex]);
+      return;
+    }
+
+    if (tab === 'item') {
+      if (selectedValue && (selectedValue as string[]).length > 0) {
+        const itemIndex = [];
+
+        for (const item of selectedValue as string[]) {
+          itemIndex.push(SELECT_ITEM.item.data.findIndex((v) => v === item));
+        }
+        setSelected(itemIndex);
+      } else {
+        setSelected([]);
+      }
+    }
+  }, [step, store, tab]);
+
   const handleItemClicked = (selected: { value: string; index: number }) => {
-    setSelected(selected.index);
+    onUpdate({ [tab]: selected.value });
   };
 
   return (
@@ -63,7 +90,7 @@ const ItemSelect = ({ data, noLabel }: Props) => {
             className={styles.selectbox}
             key={item}
             onClick={() => handleItemClicked({ value: item, index })}>
-            <CheckButton item={item} selected={selected === index} type={tab} />
+            <CheckButton item={item} selected={selected.includes(index)} type={tab} />
           </SwiperSlide>
         ))}
       </Swiper>

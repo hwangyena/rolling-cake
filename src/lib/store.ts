@@ -1,4 +1,5 @@
 import { atom } from 'jotai';
+import { STEP_CUSTOM_INIT, STEP_INIT_STORE } from './constant';
 
 /** Common */
 export const popupAtom = atom<Popup | null>(null);
@@ -18,7 +19,10 @@ export const dispatchFocusInput = atom<FocusInput | null, [FocusInput | null], v
 );
 
 /** Step */
-export const stepAtom = atom<Map<string, string | Record<string, unknown>>>(new Map());
+export const stepAtom = atom<Map<string, string | Record<string, unknown>>>(
+  new Map(Object.entries(STEP_CUSTOM_INIT))
+);
+
 export const stepStore = atom<
   Map<string, string | Record<string, unknown>>,
   [Map<string, string | Record<string, unknown>>],

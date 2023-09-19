@@ -1,3 +1,11 @@
+export const isObject = (value: unknown) => {
+  if (typeof value === 'object' && !Array.isArray(value) && value !== null) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 export const cn = (...names: unknown[]): string => {
   const flattenDeep = (array: unknown[], result: unknown[] = []): unknown[] => {
     if (array == null) {
@@ -53,11 +61,21 @@ export const cn = (...names: unknown[]): string => {
   return built.trim();
 };
 
-export const md = (value: [string, string | Record<string, unknown>][]) => {
-  const m = new Map();
+export const md = (
+  prev: Map<string, string | Record<string, unknown>>,
+  value: [string, string | Record<string, unknown>][]
+) => {
+  const m = new Map(prev);
 
   value.forEach((v) => {
     const [key, value] = v;
+
+    const prev = m.get(key);
+    if (prev && isObject(prev) && isObject(value)) {
+      m.set(key, { ...(prev as Record<string, unknown>), ...(value as Record<string, unknown>) });
+      return;
+    }
+
     m.set(key, value);
   });
 
