@@ -2,18 +2,27 @@ import { CUSTOM_STEP, STEP, STEP_CUSTOM_INIT, STEP_THEME_INIT, THEME_STEP } from
 import { stepAtom } from '@/lib/store';
 import { md } from '@/lib/utils';
 import { useAtom } from 'jotai';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 export const useEntireStep = () => {
   const searchParams = useSearchParams();
-  const [, dispatch] = useAtom(stepAtom);
+  const router = useRouter();
 
+  const [, dispatch] = useAtom(stepAtom);
   const [step, setStep] = useState(CUSTOM_STEP);
 
   useEffect(() => {
     dispatch(new Map(Object.entries(STEP_CUSTOM_INIT)));
   }, [dispatch]);
+
+  useEffect(() => {
+    const params = searchParams?.get('step') as keyof typeof STEP;
+
+    if (!params) {
+      router.replace('/make?step=shape');
+    }
+  }, [router, searchParams]);
 
   const current = useMemo(() => {
     const params = searchParams?.get('step') as keyof typeof STEP;
@@ -66,10 +75,9 @@ export const useStep = () => {
         const newItem = prev.includes(cur) ? prev.filter((v) => v !== cur) : [...prev, cur];
 
         dispatch(md(store, [[step, { item: newItem }]]));
-        return;
+      } else {
+        dispatch(md(store, [[step, data]]));
       }
-
-      dispatch(md(store, [[step, data]]));
     },
     [dispatch, step, store]
   );

@@ -19,6 +19,7 @@ export const dispatchFocusInput = atom<FocusInput | null, [FocusInput | null], v
 );
 
 /** Step */
+// TODO: type more detail
 export const stepAtom = atom<Map<string, string | Record<string, unknown>>>(
   new Map(Object.entries(STEP_CUSTOM_INIT))
 );

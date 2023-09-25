@@ -81,3 +81,15 @@ export const md = (
 
   return m;
 };
+
+export const mapToObject = <T>(map: Map<string, unknown>): T => {
+  const value = Array.from(map.entries());
+  const obj: T = {} as T;
+
+  for (const item of value) {
+    const [key, value] = item;
+    obj[key as keyof T] = value as T[keyof T];
+  }
+
+  return obj;
+};
