@@ -31,13 +31,6 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
-// model Session {
-//   id              String  @id @default(auto()) @map("_id") @db.ObjectId
-//   sessionToken String   @unique
-//   userId       String @db.ObjectId
-//   expires      DateTime
-//   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-// }
 model User {
   id              String  @id @default(auto()) @map("_id") @db.ObjectId
   email           String?  @unique
@@ -50,7 +43,6 @@ model User {
   rollingCakeName String?
 
   accounts        Account[]
-  // sessions        Session[]
   cake            Cake[]
 }
 
@@ -60,21 +52,14 @@ model Cake {
   cakeType        CakeType
   customCake      Json?
   themeCake       ThemeCake?
-  letter          Letter?
+  createdAt       DateTime @default(now())
+  name            String
+  content         String
+  isPrivate       Boolean
 
   user            User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model Letter {
-  id              String @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt       DateTime @default(now())
-  isPrivate       Boolean
-  name            String
-  content         String
-
-  cakeId          String @db.ObjectId @unique
-  cake            Cake @relation(fields: [cakeId], references: [id])
-}
 
 enum CakeType {
   CUSTOM

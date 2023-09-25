@@ -75,19 +75,19 @@ export const CUSTOM_STEP: (keyof typeof STEP)[] = [
 ];
 export const THEME_STEP: (keyof typeof STEP)[] = ['theme', 'lettering', 'letter'];
 
-export const STEP_CUSTOM_INIT = {
+export const STEP_CUSTOM_INIT: CustomCakeStep = {
   shape: 'custom',
   sheet: { color: '#fefce1' },
   cream_top: { color: '#fefce1', cream: 'none' },
   cream_side: { color: '#fefce1', cream: 'none' },
   more: { item: [] },
   lettering: { color: '#fefce1', font: 'kor1' },
-  letter: { name: '', content: '', private: true },
+  letter: { name: '', content: '', isPrivate: true },
 };
 
-export const STEP_THEME_INIT = {
+export const STEP_THEME_INIT: ThemeCakeStep = {
   shape: 'theme',
-  theme: 'soju',
+  theme: 'SOJU',
   lettering: { color: '#fefce1', font: 'kor1' },
-  letter: { name: '', content: '', private: true },
+  letter: { name: '', content: '', isPrivate: true },
 };
