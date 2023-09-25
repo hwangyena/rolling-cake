@@ -38,12 +38,12 @@ export const STEP: Record<string, Step> = {
   cream_top: {
     title: '생크림을 올려봐!',
     nextPath: 'cream_side',
-    select: ['color', 'cream'],
+    select: ['cream', 'color'],
   },
   cream_side: {
     title: '옆면 생크림도 채워줘!',
     nextPath: 'more',
-    select: ['color', 'cream'],
+    select: ['cream', 'color'],
   },
   more: {
     title: '케이크를 더 꾸며볼까?',
@@ -74,3 +74,20 @@ export const CUSTOM_STEP: (keyof typeof STEP)[] = [
   'letter',
 ];
 export const THEME_STEP: (keyof typeof STEP)[] = ['theme', 'lettering', 'letter'];
+
+export const STEP_CUSTOM_INIT = {
+  shape: 'custom',
+  sheet: { color: '#fefce1' },
+  cream_top: { color: '#fefce1', cream: 'none' },
+  cream_side: { color: '#fefce1', cream: 'none' },
+  more: { item: [] },
+  lettering: { color: '#fefce1', font: 'kor1' },
+  letter: { name: '', content: '', private: true },
+};
+
+export const STEP_THEME_INIT = {
+  shape: 'theme',
+  theme: 'soju',
+  lettering: { color: '#fefce1', font: 'kor1' },
+  letter: { name: '', content: '', private: true },
+};
