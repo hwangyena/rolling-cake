@@ -3,20 +3,35 @@ import { PropsWithChildren, memo } from 'react';
 const GradientContainer = ({
   type,
   children,
+  className = '',
 }: PropsWithChildren<{
-  type: 'green-circle' | 'grid' | 'grid-with-gradient';
+  type: 'green-circle' | 'pink-green' | 'grid' | 'grid-with-gradient';
+  className?: string;
 }>) => {
   if (type === 'green-circle') {
-    return <div className="fixed w-full h-full green-circle-gradient">{children}</div>;
+    return (
+      <div className={`fixed w-full h-full green-circle-gradient ${className}`}>{children}</div>
+    );
+  }
+
+  if (type === 'pink-green') {
+    return (
+      <div className={`pink-green-gradient w-full h-full flex flex-col ${className}`}>
+        {children}
+      </div>
+    );
   }
 
   if (type === 'grid') {
-    return <div className="bg-grid-pattern w-full h-full bg-contain">{children}</div>;
+    return (
+      <div className={`bg-grid-pattern w-full h-full bg-contain ${className}`}>{children}</div>
+    );
   }
 
   if (type === 'grid-with-gradient') {
     return (
-      <div className="green-pink-gradient-with-grid w-full h-full bg-contain flex flex-col">
+      <div
+        className={`pink-green-gradient-with-grid w-full h-full bg-contain flex flex-col ${className}`}>
         {children}
       </div>
     );

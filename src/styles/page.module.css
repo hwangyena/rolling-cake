@@ -1,6 +1,7 @@
 .main {
   width: 100%;
   height: 100%;
+  /* FIXME: global에서 사용하는것과 동일!! */
   background: linear-gradient(
     0deg,
     #ffc6cb 0%,
@@ -52,18 +53,6 @@
 .letter-name,
 .letter-name ~ span {
   padding-bottom: 10px;
-}
-
-/* step - complete */
-.complete {
-  width: 100%;
-  height: 100%;
-  padding: 4vh 3vw;
-  background-image: linear-gradient(180deg, #ffe1e3 0%, #fff 7.41%, #fff 77.2%, #b5ffd7 100%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
 }
 
 /* lock icon */
