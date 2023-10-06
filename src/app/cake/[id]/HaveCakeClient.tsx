@@ -5,7 +5,7 @@ import Button from '@/components/common/Button';
 import Header from '@/components/common/Header';
 import Tag from '@/components/common/Tag';
 import type { Cake as CakeType, User } from '@prisma/client';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
 
 type Props = {
