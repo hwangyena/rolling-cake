@@ -30,10 +30,3 @@ npx prisma db push
 ```
 npx prisma studio
 ```
-
-### 프로젝트 실행
-
-```
-yarn install
-yarn dev
-```

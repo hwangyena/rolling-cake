@@ -57,7 +57,7 @@ const CustomPopup = ({ content, title, hasIcon, onConfirm }: CustomPopup) => {
 const Wrapper = ({ children, type }: PropsWithChildren<{ type: CustomPopup['title'] }>) => {
   if (type === 'Alert') {
     return (
-      <div className="card p-[4px] rounded-lg fixed right-[20px] bottom-[20px] w-[80%]">
+      <div className="card p-[4px] rounded-lg absolute right-[20px] bottom-[20px] w-[80%]">
         {children}
       </div>
     );
