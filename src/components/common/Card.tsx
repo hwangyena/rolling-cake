@@ -18,7 +18,7 @@ const Card = ({ children, button, type, content, className }: PropsWithChildren<
       className={`card ${styles.card} ${
         type === 'simple' ? styles.simple : styles.complex
       } ${className}`}>
-      <article>{children}</article>
+      <article className="min-h-[60%] grid place-items-center">{children}</article>
       <article className="flex flex-col items-center gap-2 z-10">
         <h3 className={`text-t1 text-gray-700 font-bold ${button ? '' : 'mb-4'}`}>{content}</h3>
         {button && (
