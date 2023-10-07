@@ -28,7 +28,7 @@ const Navigation = ({ show }: Props) => {
   // TODO: onUploadClicked
 
   return (
-    <nav className="pt-[7%] px-[5%] absolute left-0 top-0 w-full flex justify-between">
+    <nav className="pt-[7%] px-[5%] mb-5 left-0 top-0 w-full flex justify-between z-50">
       {hasBack && <CircleButton type="<" onClick={onBackClicked} />}
       <div className="flex justify-center items-center gap-3">
         {hasUpload && <CircleButton type="upload" />}

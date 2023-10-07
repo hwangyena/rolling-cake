@@ -26,21 +26,20 @@ export default function HaveCakeClient({ cakes, user, isOwn }: Props) {
   }, [router]);
 
   return (
-    <>
-      <section className="flex flex-col items-center gap-3 mb-[20px]">
+    <div className="relative flex-1 overflow-hidden flex flex-col gap-8">
+      <section className="flex flex-col items-center gap-3">
         <Header>{`${user.rollingCakeName}의 롤링케이크`}</Header>
         <Tag>{`${cakes.length}개의 케이크와 편지 도착!`}</Tag>
       </section>
-      <section
-        className={`w-full h-full px-[25px] pb-[20px] overflow-y-auto bg-white green-gradient`}>
-        <div className={`grid grid-cols-3 gap-3 pb-[100px]`}>
+      <section className={`flex-1 px-[25px] py-[20px] overflow-y-auto green-gradient`}>
+        <div className={`grid grid-cols-3 gap-5`}>
           {cakes.map((cake, i) => (
             <button
               className="w-full flex flex-col items-center"
               key={i}
               onClick={() => handleCakeClicked(cake.id)}>
-              <Cake className="w-full h-[130px]" />
-              {/* <span className="text-b3">{cake.letter}</span> */}
+              <Cake className="w-[80%] aspect-[2/3]" />
+              <span className="text-b3">{cake.name}</span>
             </button>
           ))}
         </div>
@@ -53,6 +52,6 @@ export default function HaveCakeClient({ cakes, user, isOwn }: Props) {
           </Button>
         </section>
       )}
-    </>
+    </div>
   );
 }
