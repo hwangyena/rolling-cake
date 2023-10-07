@@ -3,11 +3,10 @@
 import Cake from '@/components/cake/Cake';
 import Card from '@/components/common/Card';
 import Header from '@/components/common/Header';
+import { Cake as CakeType } from '@prisma/client';
 import { useCallback, useState } from 'react';
 
-type Props = {};
-
-export default function LetterClient(props: Props) {
+export default function LetterClient({ content, name }: CakeType) {
   const [isCake, setIsCake] = useState(true);
 
   const onToggleCake = useCallback(() => {
@@ -23,7 +22,7 @@ export default function LetterClient(props: Props) {
       <section className="flex-1 grid place-items-center relative">
         <Card
           type="complex"
-          content="Dear. 예나"
+          content={`Dear. ${name}`}
           button={{
             label: isCake ? '편지 읽어보기' : '케이크 보기',
             onButtonClicked: onToggleCake,
@@ -32,13 +31,7 @@ export default function LetterClient(props: Props) {
             <Cake className="w-[80%] aspect-square" />
           ) : (
             <p className="p-3 font-neo text-effect_b overflow-auto h-full text-center break-keep">
-              벌써 예나언니의 생일이 다가왔네 그 말은 즉슨 우리가 한 살 더 먹었다는 것..? 너무
-              소름이다!! 생일 기념 나한테 맛있는 거 사주면ㅎㅎ 좋겠다~~~ㅎㅎㅎ 농담이구 생일 정말로
-              축하해 내가 만든 케이크는 어때? 좀 귀여운 것 같아 재밌네 이거 기분 좋은 하루 정말로
-              축하해 내가 만든 케이크는 어때? 좀 귀여운 것 같아 재밌네 이거 기분 좋은 하루 정말로
-              축하해 내가 만든 케이크는 어때? 좀 귀여운 것 같아 재밌네 이거 기분 좋은 하루 정말로
-              축하해 내가 만든 케이크는 어때? 좀 귀여운 것 같아 재밌네 이거 기분 좋은 하루 보냈으면
-              좋겠다🌸🥳
+              {content}
             </p>
           )}
         </Card>
