@@ -1,9 +1,8 @@
 'use client';
 
 import { createCake } from '@/endpoint/make';
-import { useErrorPopup } from '@/hooks/common';
 import { useStep } from '@/hooks/make';
-import { getLocalStorage } from '@/lib/store';
+import { getLocalStorage, setLocalStorage } from '@/lib/store';
 import { mapToObject } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
 import { useCallback, useMemo } from 'react';
@@ -13,6 +12,7 @@ import Cake from '../cake/Cake';
 import Button from '../common/Button';
 import Header from '../common/Header';
 import Navigation from '../common/Navigation';
+import { useErrorPopup } from '@/hooks/common';
 
 const StepComplete = () => {
   const router = useRouter();
@@ -46,6 +46,7 @@ const StepComplete = () => {
   }, [store, targetUser, showError, trigger]);
 
   const onListClicked = useCallback(() => {
+    setLocalStorage('rolling-cake:isMake', { [targetUser]: true });
     router.push(`/cake/${targetUser}`);
   }, [router, targetUser]);
 
