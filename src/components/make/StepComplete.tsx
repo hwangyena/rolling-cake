@@ -27,7 +27,7 @@ const StepComplete = () => {
     const { shape, letter, ...cake } = mapToObject<CakeStep>(store);
     const type = shape.toUpperCase() as 'CUSTOM' | 'THEME';
 
-    if (!type || !letter || !cake || !targetUser) {
+    if (!type || !letter.name || !letter.content || !cake || !targetUser) {
       showError();
       return;
     }
