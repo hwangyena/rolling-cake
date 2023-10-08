@@ -1,8 +1,10 @@
 type Popup = {
   title: string;
-  content: string;
+  content?: string;
   onConfirm?: () => void;
   onCancel?: () => void;
+  hideCancel?: boolean;
+  bottomNode?: ReactNode;
 };
 
 type CustomPopup = {
