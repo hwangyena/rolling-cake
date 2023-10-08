@@ -5,9 +5,10 @@ import Button from '@/components/common/Button';
 import Header from '@/components/common/Header';
 import Tag from '@/components/common/Tag';
 import { useSaveUserId } from '@/hooks/cake';
+import { getLocalStorage } from '@/lib/store';
 import type { Cake as CakeType, User } from '@prisma/client';
 import { useRouter } from 'next/navigation';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 
 type Props = {
   user: User;
@@ -19,6 +20,11 @@ export default function HaveCakeClient({ cakes, user, isOwn }: Props) {
   const router = useRouter();
 
   useSaveUserId();
+
+  const isMakeCake = useMemo(() => {
+    const make = getLocalStorage<Record<string, boolean>>('rolling-cake:isMake');
+    return !!make[user.id];
+  }, [user.id]);
 
   const handleCakeClicked = (cakeId: string) => {
     router.push(`/letter/${cakeId}`);
@@ -47,8 +53,7 @@ export default function HaveCakeClient({ cakes, user, isOwn }: Props) {
           ))}
         </div>
       </section>
-      {/* TODO: 만들고 들어온경우에도 hidden */}
-      {!isOwn && (
+      {!isOwn && !isMakeCake && (
         <section className={'absolute w-full bottom-0 px-[25px] pb-[5vh] py-[40px] white-gradient'}>
           <Button type="BIG" onClick={onButtonClicked}>
             롤링케이크 만들어주기
