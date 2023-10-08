@@ -34,3 +34,14 @@ export const stepStore = atom<
 );
 
 export const stepValidAtom = atom(false);
+
+/** Client Storage */
+type LocalKey = 'rolling-cake:userId' | 'rolling-cake:isMake';
+
+export const setLocalStorage = (key: LocalKey, value: Record<string, unknown> | string) => {
+  localStorage.setItem(key, JSON.stringify(value));
+};
+
+export const getLocalStorage = <T>(key: LocalKey): T => {
+  return JSON.parse(localStorage.getItem(key) ?? '{}') as T;
+};

@@ -4,6 +4,7 @@ import Cake from '@/components/cake/Cake';
 import Button from '@/components/common/Button';
 import Header from '@/components/common/Header';
 import Tag from '@/components/common/Tag';
+import { useSaveUserId } from '@/hooks/cake';
 import type { Cake as CakeType, User } from '@prisma/client';
 import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
@@ -16,6 +17,8 @@ type Props = {
 
 export default function HaveCakeClient({ cakes, user, isOwn }: Props) {
   const router = useRouter();
+
+  useSaveUserId();
 
   const handleCakeClicked = (cakeId: string) => {
     router.push(`/letter/${cakeId}`);

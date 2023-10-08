@@ -1,27 +1,34 @@
 'use client';
 
+import { createCake } from '@/endpoint/make';
+import { useErrorPopup } from '@/hooks/common';
 import { useStep } from '@/hooks/make';
-import styles from '@/styles/page.module.css';
-import { useCallback } from 'react';
+import { getLocalStorage } from '@/lib/store';
+import { mapToObject } from '@/lib/utils';
+import { useRouter } from 'next/navigation';
+import { useCallback, useMemo } from 'react';
 import useSWRMutation from 'swr/mutation';
+import GradientContainer from '../GradientContainer';
 import Cake from '../cake/Cake';
 import Button from '../common/Button';
 import Header from '../common/Header';
 import Navigation from '../common/Navigation';
-import { createCake } from '@/endpoint/make';
-import { mapToObject } from '@/lib/utils';
-import GradientContainer from '../GradientContainer';
 
 const StepComplete = () => {
-  const { trigger, data } = useSWRMutation('/api/make', createCake);
+  const router = useRouter();
+
   const { store } = useStep();
+  const { trigger, data } = useSWRMutation('/api/make', createCake);
+  const { showError } = useErrorPopup(() => router.replace('/make?step=shape'));
+
+  const targetUser = useMemo(() => getLocalStorage<string>('rolling-cake:userId'), []);
 
   const onCreate = useCallback(async () => {
     const { shape, letter, ...cake } = mapToObject<CakeStep>(store);
     const type = shape.toUpperCase() as 'CUSTOM' | 'THEME';
 
-    //TODO: show error;
-    if (!type || !letter || !cake) {
+    if (!type || !letter || !cake || !targetUser) {
+      showError();
       return;
     }
 
@@ -30,28 +37,47 @@ const StepComplete = () => {
         type,
         cake,
         letter,
-        userId: '64f74662409a41153c449c58', // TODO: real user id
+        userId: targetUser,
       });
     } catch (e) {
       console.error('[ERROR]', e);
+      showError();
     }
-  }, [store, trigger]);
+  }, [store, targetUser, showError, trigger]);
 
-  // TODO: after send cake
-  if (data) {
-    <main className={styles.complete}>메인으로 돌아가기~</main>;
-  }
+  const onListClicked = useCallback(() => {
+    router.push(`/cake/${targetUser}`);
+  }, [router, targetUser]);
+
+  const onLoginClicked = useCallback(() => {
+    router.push('/');
+  }, [router]);
+
+  // TODO: 로딩 아이콘
 
   return (
     <GradientContainer type="pink-green" className="justify-center items-center">
-      <Navigation show={['<']} />
-      <Header>롤링케이크 완성!</Header>
+      <Navigation show={['<']} className={data ? 'invisible' : ''} />
+      <Header>{data ? '케이크를 선물했어요!' : '롤링케이크 완성!'}</Header>
       <Cake className="flex-1 w-[80%] aspect-square m-[20%]" />
       <section className="p-5 w-full flex flex-col items-center gap-3">
-        <Button type="BIG" onClick={onCreate}>
-          내 케이크 선물하기
-        </Button>
-        <span className="text-gray-800 text-cap">선물한 케이크는 수정이 불가해요.</span>
+        {data ? (
+          <>
+            <Button type="BIG" onClick={onListClicked}>
+              케이크 진열대로 이동하기
+            </Button>
+            <Button type="BIG" color="white" onClick={onLoginClicked}>
+              나도 케이크 링크 만들러가기
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button type="BIG" onClick={onCreate}>
+              내 케이크 선물하기
+            </Button>
+            <span className="text-gray-800 text-cap">선물한 케이크는 수정이 불가해요.</span>
+          </>
+        )}
       </section>
     </GradientContainer>
   );

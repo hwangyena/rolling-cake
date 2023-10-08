@@ -5,12 +5,12 @@ import styles from '@/styles/component.module.css';
 
 type Props = {
   type: 'BIG' | 'SMALL';
-  color?: 'red' | 'green' | 'gray';
+  color?: 'red' | 'green' | 'gray' | 'white';
   disabled?: boolean;
   onClick?: (e: MouseEvent) => void;
 };
 
-const Button = ({ children, onClick, disabled, type, color = 'red' }: PropsWithChildren<Props>) => {
+const Button = ({ children, onClick, disabled, type, color }: PropsWithChildren<Props>) => {
   const lock = useRef(false);
 
   const handleClick = (e: MouseEvent) => {
@@ -34,8 +34,8 @@ const Button = ({ children, onClick, disabled, type, color = 'red' }: PropsWithC
 
   return (
     <button
-      className={`${
-        type === 'BIG' ? styles['big-button'] : `${styles['small-button']} ${styles[color]}`
+      className={`${type === 'BIG' ? styles['big-button'] : styles['small-button']} ${
+        color ? styles[color] : ''
       }`}
       onClick={handleClick}
       disabled={disabled}>

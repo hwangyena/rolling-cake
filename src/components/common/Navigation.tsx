@@ -6,9 +6,10 @@ import { useCallback } from 'react';
 
 type Props = {
   show?: ('<' | 'upload' | 'home')[];
+  className?: string;
 };
 
-const Navigation = ({ show }: Props) => {
+const Navigation = ({ show, className }: Props) => {
   const router = useRouter();
 
   const [hasBack, hasUpload, hasHome] = [
@@ -28,7 +29,8 @@ const Navigation = ({ show }: Props) => {
   // TODO: onUploadClicked
 
   return (
-    <nav className="pt-[7%] px-[5%] mb-5 left-0 top-0 w-full flex justify-between z-50">
+    <nav
+      className={`pt-[7%] px-[5%] mb-5 left-0 top-0 w-full flex justify-between z-50 ${className}`}>
       {hasBack && <CircleButton type="<" onClick={onBackClicked} />}
       <div className="flex justify-center items-center gap-3">
         {hasUpload && <CircleButton type="upload" />}

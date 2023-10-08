@@ -13,5 +13,5 @@ export async function createCake(
     };
   }
 ) {
-  await axios.post(url, arg);
+  return await axios.post(url, arg);
 }

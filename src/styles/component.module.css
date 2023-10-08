@@ -37,6 +37,11 @@
   border: 1px solid #000;
 }
 
+.white {
+  background: #fff;
+  color: #444;
+}
+
 .red {
   background: linear-gradient(180deg, #fff5f5 23.44%, #ff8d97 100%);
 }
