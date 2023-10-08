@@ -6,6 +6,7 @@ import { PropsWithChildren, useCallback } from 'react';
 import GradientContainer from '../GradientContainer';
 import CircleButton from '../common/CircleButton';
 import Header from '../common/Header';
+import { useBlock } from '@/hooks/make';
 
 type Props = {
   order?: number;
@@ -17,6 +18,7 @@ type Props = {
 const Wrapper = ({ order, orderLength, title, children, nextStep }: PropsWithChildren<Props>) => {
   const router = useRouter();
 
+  const { onBackClicked } = useBlock();
   const { trigger } = useEvent('make:next-step');
 
   const onNextClicked = useCallback(() => {
@@ -44,7 +46,7 @@ const Wrapper = ({ order, orderLength, title, children, nextStep }: PropsWithChi
         <div className="flex-1">{children}</div>
 
         <footer className="p-3 mb-5 w-full flex justify-between">
-          <CircleButton type="<" onClick={() => router.back()} />
+          <CircleButton type="<" onClick={onBackClicked} />
           <CircleButton type=">" onClick={onNextClicked} />
         </footer>
       </main>

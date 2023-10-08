@@ -1,7 +1,7 @@
 import { CUSTOM_STEP, STEP, STEP_CUSTOM_INIT, STEP_THEME_INIT, THEME_STEP } from '@/lib/constant';
-import { stepAtom } from '@/lib/store';
+import { popupAtom, stepAtom } from '@/lib/store';
 import { md } from '@/lib/utils';
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
@@ -83,4 +83,30 @@ export const useStep = () => {
   );
 
   return { store, onUpdate, step };
+};
+
+export const useBlock = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const dispatch = useSetAtom(popupAtom);
+  const isShape = useMemo(() => searchParams?.get('step') === 'shape', [searchParams]);
+
+  const onBackClicked = useCallback(() => {
+    if (isShape) {
+      dispatch({
+        title: '케이크 만들기를 그만하시겠어요?',
+        content: '페이지에서 나가면 그동안의 작업은 저장되지 않아요. 정말 그만하시겠어요?',
+        onConfirm() {
+          router.back();
+          dispatch(null);
+        },
+      });
+      return;
+    }
+
+    router.back();
+  }, [dispatch, isShape, router]);
+
+  return { onBackClicked };
 };
