@@ -32,3 +32,5 @@ export const stepStore = atom<
   (get) => get(stepAtom),
   (_get, set, action) => set(stepAtom, action)
 );
+
+export const stepValidAtom = atom(false);
