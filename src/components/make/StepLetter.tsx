@@ -12,13 +12,13 @@ const StepLetter = () => {
 
   const [name, setName] = useState('');
   const [content, setContent] = useState('');
-  const [lock, setLock] = useState(true);
+  const [lock, setLock] = useState(false);
 
   useEvent('make:next-step', () => {
     onUpdate({
       name,
       content,
-      private: lock,
+      isPrivate: lock,
     });
   });
 
@@ -26,11 +26,11 @@ const StepLetter = () => {
     const {
       name,
       content,
-      private: lock,
+      isPrivate: lock,
     } = store.get('letter') as {
       name: string;
       content: string;
-      private: boolean;
+      isPrivate: boolean;
     };
 
     // FIXME: 저장 안됨 확인 필요

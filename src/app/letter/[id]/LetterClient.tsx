@@ -14,16 +14,19 @@ type Props = CakeType & {
   currentUser: User | null;
 };
 
-export default function LetterClient({ content, name, user, currentUser }: Props) {
+export default function LetterClient({ content, name, user, currentUser, isPrivate }: Props) {
   const dispatch = useSetAtom(popupAtom);
   const router = useRouter();
 
   const [isCake, setIsCake] = useState(true);
 
-  const isCakeOwner = useMemo(() => user.name === currentUser?.name, [user, currentUser]);
+  const isCakeOwner = useMemo(
+    () => user.name === currentUser?.name,
+    [user.name, currentUser?.name]
+  );
 
   const onToggleCake = useCallback(() => {
-    if (!isCakeOwner) {
+    if (isPrivate && !isCakeOwner) {
       dispatch({
         title: `비밀 케이크는\n받은 사람만 볼 수 있어요`,
         hideCancel: true,
@@ -40,7 +43,7 @@ export default function LetterClient({ content, name, user, currentUser }: Props
     }
 
     setIsCake((p) => !p);
-  }, [dispatch, isCakeOwner]);
+  }, [dispatch, isCakeOwner, isPrivate, router]);
 
   return (
     <main className="flex flex-col flex-1">
