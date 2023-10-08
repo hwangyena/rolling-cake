@@ -7,6 +7,8 @@ import GradientContainer from '../GradientContainer';
 import CircleButton from '../common/CircleButton';
 import Header from '../common/Header';
 import { useBlock } from '@/hooks/make';
+import { useAtom } from 'jotai';
+import { stepValidAtom } from '@/lib/store';
 
 type Props = {
   order?: number;
@@ -18,6 +20,7 @@ type Props = {
 const Wrapper = ({ order, orderLength, title, children, nextStep }: PropsWithChildren<Props>) => {
   const router = useRouter();
 
+  const [disabled] = useAtom(stepValidAtom);
   const { onBackClicked } = useBlock();
   const { trigger } = useEvent('make:next-step');
 
@@ -47,7 +50,7 @@ const Wrapper = ({ order, orderLength, title, children, nextStep }: PropsWithChi
 
         <footer className="p-3 mb-5 w-full flex justify-between">
           <CircleButton type="<" onClick={onBackClicked} />
-          <CircleButton type=">" onClick={onNextClicked} />
+          <CircleButton type=">" onClick={onNextClicked} disabled={disabled} />
         </footer>
       </main>
     </GradientContainer>

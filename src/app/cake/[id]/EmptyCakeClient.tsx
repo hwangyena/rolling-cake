@@ -4,12 +4,15 @@ import Cake from '@/components/cake/Cake';
 import Button from '@/components/common/Button';
 import Header from '@/components/common/Header';
 import Tag from '@/components/common/Tag';
+import { useSaveUserId } from '@/hooks/cake';
 import { User } from '@prisma/client';
 import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
 
 export default function EmptyCakeClient({ user, isOwn }: { user: User; isOwn: boolean }) {
   const router = useRouter();
+
+  useSaveUserId();
 
   const onButtonClicked = useCallback(() => {
     if (isOwn) {
@@ -24,8 +27,11 @@ export default function EmptyCakeClient({ user, isOwn }: { user: User; isOwn: bo
     <>
       <section className="flex flex-col items-center gap-3 mb-[20px]">
         <Header>{`${user.rollingCakeName}의 롤링케이크`}</Header>
-        {/* // FIXME: if not isOwn */}
-        <Tag>링크를 공유하고 케이크를 모아보세요!</Tag>
+        <Tag>
+          {isOwn
+            ? '링크를 공유하고 케이크를 모아보세요!'
+            : '정성가득한 편지와 케이크를 선물하세요!'}
+        </Tag>
       </section>
       <section
         className={`w-full h-full px-[25px] pb-[20px] overflow-y-auto bg-white green-gradient flex-1 bottom-0`}>

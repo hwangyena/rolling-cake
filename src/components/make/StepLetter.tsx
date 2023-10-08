@@ -1,11 +1,14 @@
 import { useEvent } from '@/hooks/common';
 import { useStep } from '@/hooks/make';
+import { stepValidAtom } from '@/lib/store';
 import { cn } from '@/lib/utils';
 import styles from '@/styles/page.module.css';
+import { useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 
 const StepLetter = () => {
   const { store, onUpdate } = useStep();
+  const dispatchValid = useSetAtom(stepValidAtom);
 
   const [name, setName] = useState('');
   const [content, setContent] = useState('');
@@ -30,10 +33,24 @@ const StepLetter = () => {
       private: boolean;
     };
 
+    // FIXME: 저장 안됨 확인 필요
     setName(name);
     setContent(content);
     setLock(lock);
-  }, [store]);
+
+    return () => {
+      dispatchValid(false);
+    };
+  }, [dispatchValid, store]);
+
+  useEffect(() => {
+    if (!name || !content) {
+      dispatchValid(true);
+      return;
+    }
+
+    dispatchValid(false);
+  }, [content, dispatchValid, name]);
 
   const handleToggleLock = () => {
     setLock((p) => !p);

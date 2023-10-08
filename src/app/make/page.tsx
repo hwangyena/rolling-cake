@@ -9,11 +9,14 @@ import StepShape from '@/components/make/StepShape';
 import Wrapper from '@/components/make/Wrapper';
 import { useEntireStep } from '@/hooks/make';
 import { SELECT_ITEM } from '@/lib/constant';
+import { getLocalStorage } from '@/lib/store';
+import { useMemo } from 'react';
 
 export default function Page() {
   const { current, onEntireStepChanged, step } = useEntireStep();
+  const targetUserId = useMemo(() => getLocalStorage<string>('rolling-cake:userId'), []);
 
-  if (!current) {
+  if (!current || !targetUserId) {
     // TODO: error page
     return null;
   }
