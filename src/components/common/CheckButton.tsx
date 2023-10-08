@@ -25,7 +25,7 @@ const CheckButton = ({ type, selected, item }: Props) => {
     return (
       <Item {...{ selected }} style={{ padding: '4px' }}>
         <div className="relative w-full h-full">
-          <Image src={`/images/${type}/${item}.png`} alt="cream" fill />
+          <Image src={`/images/${type}/${item}.png`} alt="cream" fill sizes="100%,100%" />
         </div>
       </Item>
     );

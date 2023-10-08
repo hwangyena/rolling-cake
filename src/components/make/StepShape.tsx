@@ -33,7 +33,7 @@ const StepShape = ({
           <SwiperSlide key={i}>
             {({ isActive }) => (
               <Card type="simple" content={v} className={`${isActive ? '' : styles.dimmed}`}>
-                <Cake className="w-full h-[90%]" />
+                <Cake className="w-full h-[90%]" priority />
               </Card>
             )}
           </SwiperSlide>

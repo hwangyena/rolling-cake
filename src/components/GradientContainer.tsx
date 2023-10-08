@@ -9,9 +9,7 @@ const GradientContainer = ({
   className?: string;
 }>) => {
   if (type === 'green-circle') {
-    return (
-      <div className={`fixed w-full h-full green-circle-gradient ${className}`}>{children}</div>
-    );
+    return <div className={`w-full h-full green-circle-gradient ${className}`}>{children}</div>;
   }
 
   if (type === 'pink-green') {
