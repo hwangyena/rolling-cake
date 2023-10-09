@@ -93,3 +93,9 @@ export const mapToObject = <T>(map: Map<string, unknown>): T => {
 
   return obj;
 };
+
+export const getBaseUrl = () => {
+  return process.env.NODE_ENV === 'development'
+    ? `http://localhost:${process.env.PORT ?? 3000}/api`
+    : 'https://rolling-cake.vercel.app/api';
+};
