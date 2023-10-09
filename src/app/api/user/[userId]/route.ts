@@ -1,3 +1,4 @@
+import prisma from '@/lib/prismadb';
 import { NextResponse } from 'next/server';
 
 type Params = {
@@ -11,7 +12,7 @@ export async function GET(request: Request, { params }: { params: Params }) {
     throw new Error('[API Error] Invalid userId');
   }
 
-  const user = await prisma?.user.findUnique({
+  const user = await prisma.user.findUnique({
     where: {
       id: userId,
     },

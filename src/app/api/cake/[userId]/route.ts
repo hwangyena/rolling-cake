@@ -1,3 +1,4 @@
+import prisma from '@/lib/prismadb';
 import { NextResponse } from 'next/server';
 
 export async function GET(request: Request, { params }: { params: { userId?: string } }) {
@@ -7,7 +8,7 @@ export async function GET(request: Request, { params }: { params: { userId?: str
     throw new Error('[API Error] Invalid userId');
   }
 
-  const cakes = await prisma?.cake.findMany({
+  const cakes = await prisma.cake.findMany({
     where: { userId },
   });
 

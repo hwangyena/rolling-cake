@@ -1,4 +1,5 @@
 import getCurrentUser from '@/actions/getCurrentUser';
+import prisma from '@/lib/prismadb';
 import { Session } from 'next-auth';
 import { getSession } from 'next-auth/react';
 import { NextResponse } from 'next/server';
@@ -10,7 +11,7 @@ export async function GET() {
     return null;
   }
 
-  const user = await prisma?.user.findUnique({
+  const user = await prisma.user.findUnique({
     where: {
       id: session.user.id as string,
     },
@@ -37,7 +38,7 @@ export async function PUT(request: Request) {
     NextResponse.error();
   }
 
-  const user = await prisma?.user.update({
+  const user = await prisma.user.update({
     data: { rollingCakeName: name },
     where: { id: currentUser.id },
   });

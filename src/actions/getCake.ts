@@ -1,6 +1,8 @@
+import prisma from '@/lib/prismadb';
+
 export default async function getCake(cakeId: string) {
   try {
-    const cake = await prisma?.cake.findUnique({
+    const cake = await prisma.cake.findUnique({
       where: { id: cakeId },
     });
 
