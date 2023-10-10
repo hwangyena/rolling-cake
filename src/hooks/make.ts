@@ -48,12 +48,14 @@ export const useEntireStep = () => {
   }, [searchParams, step]);
 
   const onEntireStepChanged = useCallback(
-    (index: number) => {
-      const entireStep = index === 0 ? CUSTOM_STEP : THEME_STEP;
-      const step = index === 0 ? STEP_CUSTOM_INIT : STEP_THEME_INIT;
+    (value: 'CUSTOM' | 'THEME') => {
+      const entireStep = value === 'CUSTOM' ? CUSTOM_STEP : THEME_STEP;
+      const step = value === 'CUSTOM' ? STEP_CUSTOM_INIT : STEP_THEME_INIT;
 
       setStep(entireStep);
-      dispatch(md(new Map(Object.entries(step)), [['shape', index === 0 ? 'custom' : 'theme']]));
+      dispatch(
+        md(new Map(Object.entries(step)), [['shape', value === 'CUSTOM' ? 'custom' : 'theme']])
+      );
     },
     [dispatch]
   );
@@ -68,7 +70,7 @@ export const useStep = () => {
   const step = useMemo(() => searchParams?.get('step') as keyof typeof STEP, [searchParams]);
 
   const onUpdate = useCallback(
-    (data: Record<string, string | boolean>) => {
+    (data: Record<string, string | boolean> | string) => {
       if (step === 'more') {
         const prev = (store.get('more') as Record<'item', string[]>).item;
         const cur = (data as Record<'item', string>).item;

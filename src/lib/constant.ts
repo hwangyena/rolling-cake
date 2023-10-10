@@ -75,6 +75,20 @@ export const CUSTOM_STEP: (keyof typeof STEP)[] = [
 ];
 export const THEME_STEP: (keyof typeof STEP)[] = ['theme', 'lettering', 'letter'];
 
+export const CAKE_SHAPE: Filter[] = [
+  { label: '직접 만들기', value: 'CUSTOM' },
+  { label: '테마를 선택해 만들기', value: 'THEME' },
+];
+
+export const CAKE_THEME: Filter[] = [
+  { label: '소주 케이크', value: 'SOJU' },
+  { label: '해리포터 케이크', value: 'HARRYPOTTER' },
+  { label: '돈 케이크', value: 'MONEY' },
+  { label: '동물 케이크', value: 'ANIMAL' },
+  { label: '공주 케이크', value: 'PRINCESS' },
+  { label: '식물 케이크', value: 'PLANT' },
+];
+
 export const STEP_CUSTOM_INIT: CustomCakeStep = {
   shape: 'custom',
   sheet: { color: '#fefce1' },
