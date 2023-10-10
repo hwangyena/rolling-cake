@@ -21,6 +21,11 @@ type FocusInput = {
   onConfirm?: (value: string) => Promise<void>;
 };
 
+type Filter = {
+  label: string;
+  value: string;
+};
+
 /* Make page */
 type Step = {
   title: string;

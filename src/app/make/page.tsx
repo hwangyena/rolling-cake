@@ -7,13 +7,15 @@ import StepComplete from '@/components/make/StepComplete';
 import StepLetter from '@/components/make/StepLetter';
 import StepShape from '@/components/make/StepShape';
 import Wrapper from '@/components/make/Wrapper';
-import { useEntireStep } from '@/hooks/make';
-import { SELECT_ITEM } from '@/lib/constant';
+import { useEntireStep, useStep } from '@/hooks/make';
+import { CAKE_SHAPE, CAKE_THEME, SELECT_ITEM } from '@/lib/constant';
 import { getLocalStorage } from '@/lib/store';
 import { useMemo } from 'react';
 
 export default function Page() {
   const { current, onEntireStepChanged, step } = useEntireStep();
+  const { store, onUpdate } = useStep();
+
   const targetUserId = useMemo(() => getLocalStorage<string>('rolling-cake:userId'), []);
 
   if (!current || !targetUserId) {
@@ -31,9 +33,9 @@ export default function Page() {
         {/* First Step */}
         <Step show={current.value === 'shape'}>
           <StepShape
-            step="shape"
-            options={['직접 만들기', '테마를 선택해 만들기']}
-            onShapeChanged={onEntireStepChanged}
+            initialSlide={store.get('shape') === 'theme' ? 1 : 0}
+            options={CAKE_SHAPE}
+            onShapeChanged={(value) => onEntireStepChanged(value as 'CUSTOM' | 'THEME')}
           />
         </Step>
 
@@ -46,9 +48,9 @@ export default function Page() {
         {/* THEME Cake */}
         <Step show={current.value === 'theme'}>
           <StepShape
-            step="theme"
-            options={['소주 케이크', '해리포터 케이크', '공주 케이크']}
-            onShapeChanged={() => null}
+            initialSlide={CAKE_THEME.findIndex((v) => v.value === store.get('theme'))}
+            options={CAKE_THEME}
+            onShapeChanged={(value) => onUpdate(value)}
           />
         </Step>
 
