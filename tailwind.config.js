@@ -49,6 +49,7 @@ module.exports = {
       },
       backgroundImage: {
         'grid-pattern': "url('/images/bg.png')",
+        404: "url('/images/404.png')",
       },
       backgroundColor: {},
       gridTemplateColumns: {

@@ -160,6 +160,10 @@ mark {
     linear-gradient(180deg, #ffe1e3 0%, #fff 7.41%, #fff 77.2%, #b5ffd7 100%);
 }
 
+.green-line {
+  background: linear-gradient(180deg, #bbffda 0%, #fff 25%, #fff 95.83%, #bdffdc 100%);
+}
+
 .black-shadow {
   border: 1px solid #000;
   box-shadow: 1px 1px 0px 0px #000;
