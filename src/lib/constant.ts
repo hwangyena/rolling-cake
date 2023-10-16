@@ -95,13 +95,13 @@ export const STEP_CUSTOM_INIT: CustomCakeStep = {
   cream_top: { color: '#fefce1', cream: 'none' },
   cream_side: { color: '#fefce1', cream: 'none' },
   more: { item: [] },
-  lettering: { color: '#fefce1', font: 'kor1' },
+  lettering: { color: '#fefce1', font: 'kor1', value: '' },
   letter: { name: '', content: '', isPrivate: true },
 };
 
 export const STEP_THEME_INIT: ThemeCakeStep = {
   shape: 'theme',
   theme: 'SOJU',
-  lettering: { color: '#fefce1', font: 'kor1' },
+  lettering: { color: '#fefce1', font: 'kor1', value: '' },
   letter: { name: '', content: '', isPrivate: true },
 };

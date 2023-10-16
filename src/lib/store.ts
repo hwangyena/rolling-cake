@@ -13,10 +13,6 @@ export const focusInputStore = atom<FocusInput | null, [FocusInput | null], void
   (get) => get(focusInputAtom),
   (_get, set, action) => set(focusInputAtom, action)
 );
-export const dispatchFocusInput = atom<FocusInput | null, [FocusInput | null], void>(
-  null,
-  (_get, set, action) => set(focusInputAtom, action)
-);
 
 /** Step */
 // TODO: type more detail

@@ -50,7 +50,7 @@ const FocusInput = () => {
         </section>
       </div>
 
-      <div className="absolute left-0 top-0 bottom-0 right-0 bg-black opacity-[0.8]" />
+      <div className="absolute left-0 top-0 bottom-0 right-0 bg-black opacity-[0.8] z-20" />
     </div>
   );
 };
