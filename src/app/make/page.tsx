@@ -5,6 +5,7 @@ import Step from '@/components/common/Step';
 import StepCommon from '@/components/make/StepCommon';
 import StepComplete from '@/components/make/StepComplete';
 import StepLetter from '@/components/make/StepLetter';
+import StepLettering from '@/components/make/StepLettering';
 import StepShape from '@/components/make/StepShape';
 import Wrapper from '@/components/make/Wrapper';
 import { useEntireStep, useStep } from '@/hooks/make';
@@ -40,9 +41,12 @@ export default function Page() {
         </Step>
 
         {/* Custom Cake */}
-        <Step
-          show={['sheet', 'cream_top', 'cream_side', 'more', 'lettering'].includes(current.value)}>
+        <Step show={['sheet', 'cream_top', 'cream_side', 'more'].includes(current.value)}>
           <StepCommon itemSelect={current.select as (keyof typeof SELECT_ITEM)[]} />
+        </Step>
+
+        <Step show={current.value === 'lettering'}>
+          <StepLettering itemSelect={current.select as (keyof typeof SELECT_ITEM)[]} />
         </Step>
 
         {/* THEME Cake */}

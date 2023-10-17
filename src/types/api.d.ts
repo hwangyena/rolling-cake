@@ -22,20 +22,21 @@ type CakeItem =
 
 type CakeFont = 'kor1' | 'kor2' | 'kor3' | 'eng1' | 'eng2' | 'eng3';
 
+type Lettering = { color: Color; font: CakeFont; value: string };
+type Letter = { name: string; content: string; isPrivate: true };
+
 type CustomCake = {
   sheet: { color: Color };
   cream_top: { cream: CakeCream; color: Color };
   cream_side: { cream: CakeCream; color: Color };
   more: { item: CakeItem[] };
-  lettering: { color: Color; font: CakeFont };
+  lettering: Lettering;
 };
 
 type ThemeCake = {
   theme: 'SOJU' | 'HARRYPOTER' | 'MONEY' | 'PRINCESS' | 'ANiMAL' | 'PLANT';
-  lettering: { color: Color; font: CakeFont };
+  lettering: Lettering;
 };
-
-type Letter = { name: string; content: string; isPrivate: true };
 
 type CustomCakeStep = { shape: 'custom'; letter: Letter } & CustomCake;
 type ThemeCakeStep = { shape: 'theme'; letter: Letter } & ThemeCake;
