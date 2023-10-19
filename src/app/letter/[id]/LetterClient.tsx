@@ -54,7 +54,7 @@ export default function LetterClient({ content, name, user, currentUser, isPriva
         <Header>편지를 확인해보r!</Header>
       </section>
       <section className="flex-1 grid place-items-center py-[10%] px-[8%]">
-        <div className={cn(styles.flip, { 'rotate-y-180': isCake })}>
+        <div className={cn(styles.flip, { 'rotate-y-180': !isCake })}>
           <LetterCard
             label="편지 읽어보기"
             name={user.name}
