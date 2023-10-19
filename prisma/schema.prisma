@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+
+model Account {
+  id              String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId             String @db.ObjectId
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?  @db.String
+  refresh_token_expires_in Int? 
+  access_token       String?  @db.String
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?  @db.String
+  session_state      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model User {
+  id              String  @id @default(auto()) @map("_id") @db.ObjectId
+  name            String?
+  emailVerified   DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime? @updatedAt
+  rollingCakeName String?
+
+  accounts        Account[]
+  cake            Cake[]
+}
+
+model Cake {
+  id              String @id @default(auto()) @map("_id") @db.ObjectId
+  userId          String @db.ObjectId
+  cakeType        CakeType
+  customCake      Json?
+  themeCake       Json?
+  createdAt       DateTime @default(now())
+  name            String
+  content         String
+  isPrivate       Boolean
+
+  user            User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+
+enum CakeType {
+  CUSTOM
+  THEME
+}

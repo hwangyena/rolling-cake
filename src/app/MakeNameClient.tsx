@@ -1,0 +1,41 @@
+'use client';
+
+import GradientContainer from '@/components/GradientContainer';
+import CustomPopup from '@/components/common/CustomPopup';
+import { updateRollingCakeName } from '@/endpoint/user';
+import { focusInputAtom } from '@/lib/store';
+import { useSetAtom } from 'jotai';
+import { useCallback } from 'react';
+import type { User } from '@prisma/client';
+
+const MakeNameClient = ({ user }: { user: User | null }) => {
+  const dispatch = useSetAtom(focusInputAtom);
+
+  const onConfirmPopup = useCallback(() => {
+    if (!user) {
+      return;
+    }
+
+    dispatch({
+      label: '이름을 알려주세요!',
+      maxLength: 5,
+      defaultValue: user.name ?? '',
+      onConfirm: async (name: string) => {
+        await updateRollingCakeName(name);
+        // TODO: to page
+      },
+    });
+  }, [dispatch, user]);
+
+  return (
+    <GradientContainer type="green-circle">
+      <CustomPopup
+        title={'Welcome!'}
+        content={`환영해요! 친구들에게 축하 받을 수 있도록<br/>롤링케이크 이름을 지어볼까요?`}
+        onConfirm={onConfirmPopup}
+      />
+    </GradientContainer>
+  );
+};
+
+export default MakeNameClient;
