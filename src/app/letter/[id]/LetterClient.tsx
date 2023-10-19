@@ -7,7 +7,9 @@ import { popupAtom } from '@/lib/store';
 import { Cake as CakeType, User } from '@prisma/client';
 import { useSetAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
-import { useCallback, useMemo, useState } from 'react';
+import { PropsWithChildren, useCallback, useMemo, useState } from 'react';
+import styles from '@/styles/component.module.css';
+import { cn } from '@/lib/utils';
 
 type Props = CakeType & {
   user: User;
@@ -51,23 +53,52 @@ export default function LetterClient({ content, name, user, currentUser, isPriva
         <Header>{`${name}표 롤링케이크와`}</Header>
         <Header>편지를 확인해보r!</Header>
       </section>
-      <section className="flex-1 grid place-items-center relative">
-        <Card
-          type="complex"
-          content={`Dear. ${user.name}`}
-          button={{
-            label: isCake ? '편지 읽어보기' : '케이크 보기',
-            onButtonClicked: onToggleCake,
-          }}>
-          {isCake ? (
+      <section className="flex-1 grid place-items-center py-[10%] px-[8%]">
+        <div className={cn(styles.flip, { 'rotate-y-180': isCake })}>
+          <LetterCard
+            label="편지 읽어보기"
+            name={user.name}
+            onToggleCake={onToggleCake}
+            className={styles.front}>
             <Cake className="w-[80%] aspect-square" />
-          ) : (
+          </LetterCard>
+          <LetterCard
+            label="케이크 보기"
+            name={user.name}
+            onToggleCake={onToggleCake}
+            className={styles.back}>
             <p className="p-3 font-neo text-effect_b overflow-auto h-full text-center break-keep">
               {content}
             </p>
-          )}
-        </Card>
+          </LetterCard>
+        </div>
       </section>
     </main>
   );
 }
+
+const LetterCard = ({
+  children,
+  label,
+  name,
+  onToggleCake,
+  className,
+}: PropsWithChildren<{
+  name: string | null;
+  label: string;
+  onToggleCake: () => void;
+  className?: string;
+}>) => {
+  return (
+    <Card
+      type="complex"
+      content={`Dear. ${name}`}
+      className={className}
+      button={{
+        label,
+        onButtonClicked: onToggleCake,
+      }}>
+      {children}
+    </Card>
+  );
+};

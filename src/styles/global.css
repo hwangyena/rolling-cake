@@ -200,3 +200,7 @@ mark {
   background: #fff;
   box-shadow: 2px 3px 0px 0px #000;
 }
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
