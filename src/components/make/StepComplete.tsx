@@ -1,6 +1,7 @@
 'use client';
 
 import { createCake } from '@/endpoint/make';
+import { useErrorPopup } from '@/hooks/common';
 import { useStep } from '@/hooks/make';
 import { getLocalStorage, setLocalStorage } from '@/lib/store';
 import { mapToObject } from '@/lib/utils';
@@ -12,13 +13,13 @@ import Cake from '../cake/Cake';
 import Button from '../common/Button';
 import Header from '../common/Header';
 import Navigation from '../common/Navigation';
-import { useErrorPopup } from '@/hooks/common';
+import Loading from '../common/Loading';
 
 const StepComplete = () => {
   const router = useRouter();
 
   const { store } = useStep();
-  const { trigger, data } = useSWRMutation('/api/make', createCake);
+  const { trigger, data, isMutating } = useSWRMutation('/api/make', createCake);
   const { showError } = useErrorPopup(() => router.replace('/make?step=shape'));
 
   const targetUser = useMemo(() => getLocalStorage<string>('rolling-cake:userId'), []);
@@ -54,8 +55,6 @@ const StepComplete = () => {
     router.push('/');
   }, [router]);
 
-  // TODO: 로딩 아이콘
-
   return (
     <GradientContainer type="pink-green" className="justify-center items-center">
       <Navigation show={['<']} className={data ? 'invisible' : ''} />
@@ -80,6 +79,8 @@ const StepComplete = () => {
           </>
         )}
       </section>
+
+      {isMutating && <Loading />}
     </GradientContainer>
   );
 };
