@@ -48,7 +48,7 @@ model Cake {
   userId          String @db.ObjectId
   cakeType        CakeType
   customCake      Json?
-  themeCake       ThemeCake?
+  themeCake       Json?
   createdAt       DateTime @default(now())
   name            String
   content         String
@@ -61,13 +61,4 @@ model Cake {
 enum CakeType {
   CUSTOM
   THEME
-}
-
-enum ThemeCake {
-  SOJU
-  HARRYPOTER
-  MONEY
-  PRINCESS
-  ANiMAL
-  PLANT
 }
