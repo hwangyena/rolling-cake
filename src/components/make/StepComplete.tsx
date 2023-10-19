@@ -12,8 +12,8 @@ import GradientContainer from '../GradientContainer';
 import Cake from '../cake/Cake';
 import Button from '../common/Button';
 import Header from '../common/Header';
-import Navigation from '../common/Navigation';
 import Loading from '../common/Loading';
+import Navigation from '../common/Navigation';
 
 const StepComplete = () => {
   const router = useRouter();
@@ -49,6 +49,7 @@ const StepComplete = () => {
   const onListClicked = useCallback(() => {
     setLocalStorage('rolling-cake:isMake', { [targetUser]: true });
     router.push(`/cake/${targetUser}`);
+    router.refresh();
   }, [router, targetUser]);
 
   const onLoginClicked = useCallback(() => {

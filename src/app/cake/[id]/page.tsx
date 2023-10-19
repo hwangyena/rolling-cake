@@ -1,9 +1,9 @@
 import getCurrentUser from '@/actions/getCurrentUser';
 import getUser from '@/actions/getUser';
 import ClientOnly from '@/components/ClientOnly';
+import { getBaseUrl } from '@/lib/utils';
 import EmptyCakeClient from './EmptyCakeClient';
 import HaveCakeClient from './HaveCakeClient';
-import { getBaseUrl } from '@/lib/utils';
 
 export default async function CakePage({ params }: { params: { id: string } }) {
   const cakes = await fetch(`${getBaseUrl()}/cake/${params.id}`, {
@@ -14,6 +14,7 @@ export default async function CakePage({ params }: { params: { id: string } }) {
   const user = await getUser(params.id);
   const loginUser = await getCurrentUser();
 
+  // TODO: 에러 발생시 error 페이지로 redirect
   if (!user) {
     return <>error</>;
   }

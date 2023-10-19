@@ -100,7 +100,7 @@ export const useBlock = () => {
         title: '케이크 만들기를 그만하시겠어요?',
         content: '페이지에서 나가면 그동안의 작업은 저장되지 않아요. 정말 그만하시겠어요?',
         onConfirm() {
-          router.back();
+          router.back(); // FIXME: redirect to cake page
           dispatch(null);
         },
       });
