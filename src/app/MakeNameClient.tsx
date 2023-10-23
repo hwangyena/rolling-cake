@@ -7,6 +7,7 @@ import { focusInputAtom } from '@/lib/store';
 import { useSetAtom } from 'jotai';
 import { useCallback } from 'react';
 import type { User } from '@prisma/client';
+import Cake from '@/components/cake/Cake';
 
 const MakeNameClient = ({ user }: { user: User | null }) => {
   const dispatch = useSetAtom(focusInputAtom);
@@ -28,7 +29,10 @@ const MakeNameClient = ({ user }: { user: User | null }) => {
   }, [dispatch, user]);
 
   return (
-    <GradientContainer type="green-circle">
+    <GradientContainer type="green-circle" className="flex flex-col items-center justify-between">
+      <div className="flex-1 p-[10%] w-full h-full grid place-items-center">
+        <Cake className="w-[100%] aspect-square" />
+      </div>
       <CustomPopup
         title={'Welcome!'}
         content={`환영해요! 친구들에게 축하 받을 수 있도록<br/>롤링케이크 이름을 지어볼까요?`}
