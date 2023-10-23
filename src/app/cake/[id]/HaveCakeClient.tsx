@@ -6,6 +6,7 @@ import Header from '@/components/common/Header';
 import Tag from '@/components/common/Tag';
 import { useSaveUserId } from '@/hooks/cake';
 import { getLocalStorage } from '@/lib/store';
+import { cn } from '@/lib/utils';
 import type { Cake as CakeType, User } from '@prisma/client';
 import { useRouter } from 'next/navigation';
 import { useCallback, useMemo } from 'react';
@@ -23,8 +24,8 @@ export default function HaveCakeClient({ cakes, user, isOwn }: Props) {
 
   const isMakeCake = useMemo(() => {
     const make = getLocalStorage<Record<string, boolean>>('rolling-cake:isMake');
-    return !!make[user.id];
-  }, [user.id]);
+    return !make[user.id] && !isOwn;
+  }, [isOwn, user.id]);
 
   const handleCakeClicked = (cakeId: string) => {
     router.push(`/letter/${cakeId}`);
@@ -41,7 +42,7 @@ export default function HaveCakeClient({ cakes, user, isOwn }: Props) {
         <Tag>{`${cakes.length}개의 케이크와 편지 도착!`}</Tag>
       </section>
       <section className={`flex-1 px-[25px] py-[20px] overflow-y-auto green-gradient`}>
-        <div className={`grid grid-cols-3 gap-5`}>
+        <div className={cn('grid grid-cols-3 gap-5', { 'mb-[110px]': isMakeCake })}>
           {cakes.map((cake, i) => (
             <button
               className="w-full flex flex-col items-center"
@@ -53,8 +54,9 @@ export default function HaveCakeClient({ cakes, user, isOwn }: Props) {
           ))}
         </div>
       </section>
-      {!isOwn && !isMakeCake && (
-        <section className={'absolute w-full bottom-0 px-[25px] pb-[5vh] py-[40px] white-gradient'}>
+      {isMakeCake && (
+        <section
+          className={'absolute w-full bottom-0 px-[25px] pb-[20px] pt-[45px] white-gradient'}>
           <Button type="BIG" onClick={onButtonClicked}>
             롤링케이크 만들어주기
           </Button>
