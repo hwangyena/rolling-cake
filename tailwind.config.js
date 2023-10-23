@@ -55,6 +55,20 @@ module.exports = {
       gridTemplateColumns: {
         3: 'repeat(3,1fr)',
       },
+      keyframes: {
+        'slide-up': {
+          '0%': { transform: 'translateY(100px)' },
+          '100%': { transform: 'translateY(0px)' },
+        },
+        'slide-down': {
+          '0%': { transform: 'translateY(0px)' },
+          '100%': { transform: 'translateY(100px)' },
+        },
+      },
+      animation: {
+        'slide-up': 'slide-up 1s ease-in-out',
+        'slide-down': 'slide-down 1s ease-in-out',
+      },
     },
   },
   plugins: [],

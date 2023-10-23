@@ -21,6 +21,10 @@ type FocusInput = {
   onConfirm?: (value: string) => Promise<void>;
 };
 
+type Snackbar = {
+  text: string;
+};
+
 type Filter = {
   label: string;
   value: string;

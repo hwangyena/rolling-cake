@@ -14,6 +14,8 @@ export const focusInputStore = atom<FocusInput | null, [FocusInput | null], void
   (_get, set, action) => set(focusInputAtom, action)
 );
 
+export const snackBarAtom = atom<Snackbar | null>(null);
+
 /** Step */
 // TODO: type more detail
 export const stepAtom = atom<Map<string, string | Record<string, unknown>>>(
