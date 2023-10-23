@@ -15,3 +15,7 @@ export async function createCake(
 ) {
   return await axios.post(url, arg);
 }
+
+export async function updateRollingCakeName(name: string) {
+  return await axios.put('/api/user', { name });
+}

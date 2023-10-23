@@ -7,9 +7,7 @@ import ClientOnly from '@/components/ClientOnly';
 import FocusInput from '@/components/common/FocusInput';
 import Popup from '@/components/common/Popup';
 import Snackbar from '@/components/common/Snackbar';
-import { fetcher } from '@/lib/fetcher';
 import { PropsWithChildren } from 'react';
-import { SWRConfig } from 'swr';
 import '../styles/global.css';
 
 export default function RootLayout({ children }: PropsWithChildren) {
@@ -20,15 +18,13 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body className="max-w-[480px] h-full my-0 mx-auto relative">
-        <SWRConfig value={{ fetcher }}>
-          {children}
+        {children}
 
-          <ClientOnly>
-            {popup && <Popup />}
-            {focusInput && <FocusInput />}
-            {snackBar && <Snackbar />}
-          </ClientOnly>
-        </SWRConfig>
+        <ClientOnly>
+          {popup && <Popup />}
+          {focusInput && <FocusInput />}
+          {snackBar && <Snackbar />}
+        </ClientOnly>
       </body>
     </html>
   );

@@ -1,7 +1,7 @@
 'use client';
 
 import Button from '@/components/common/Button';
-import { axiosRequest } from '@/lib/fetcher';
+import axios from 'axios';
 import { useState } from 'react';
 
 export default function Page() {
@@ -12,7 +12,7 @@ export default function Page() {
       return;
     }
 
-    const req = await axiosRequest({ url: `/api/cake?userId=${userId}`, method: 'delete' });
+    const req = await axios.delete(`/api/cake?userId=${userId}`);
 
     return req;
   };
