@@ -139,14 +139,17 @@
 /* Header */
 .header {
   @apply text-effect_t font-neo;
+  font-size: 1.38rem;
   font-weight: 400;
+  white-space: nowrap;
 }
 
 .header::before {
   @apply absolute left-0 top-0 text-effect_t font-neo;
+  font-size: 1.38rem;
   content: attr(data-content);
-  -webkit-text-stroke: 5px #fff;
-  font-weight: 900;
+  line-height: 140%;
+  -webkit-text-stroke: 6px white;
 }
 
 .header::after {
@@ -156,21 +159,13 @@
 }
 
 .shadow {
-  @apply absolute left-0 top-0 text-effect_t font-neo;
+  @apply absolute top-0 left-0 text-effect_t font-neo;
+  left: 0.18rem;
+  top: 0.17rem;
   color: black;
-  font-weight: 700;
-  text-shadow: 4px 5px 0px #000;
-}
-
-.shadow::before {
-  @apply absolute left-0 top-0 text-effect_t font-neo;
-  content: attr(data-content);
-  text-shadow: 1px 5px 0px #000;
-}
-.shadow::after {
-  @apply absolute left-0 top-0 text-effect_t font-neo;
-  content: attr(data-content);
-  text-shadow: 5px 4px 0px #000;
+  font-size: 1.38rem;
+  -webkit-text-stroke: 5px #000;
+  white-space: nowrap;
 }
 
 /* Step Select */

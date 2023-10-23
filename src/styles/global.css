@@ -8,50 +8,6 @@
   src: url('/fonts/neodgm.woff') format('woff');
 }
 
-@layer utilities {
-  .h1 {
-    @apply text-h1 text-gray-800 font-apple font-bold;
-  }
-  .h2 {
-    @apply text-h2 text-gray-800 font-apple font-bold;
-  }
-  .h3 {
-    @apply text-h3 text-gray-800 font-apple font-bold;
-  }
-  .h4 {
-    @apply text-h4 text-gray-800 font-apple font-bold;
-  }
-  .t1 {
-    @apply text-t1 text-gray-800 font-apple font-bold;
-  }
-  .t2 {
-    @apply text-t2 text-gray-800 font-apple font-semibold;
-  }
-  .body-1 {
-    @apply text-b1 text-gray-800 font-apple font-medium;
-  }
-  .body-2 {
-    @apply text-b2 text-gray-800 font-apple font-medium;
-  }
-  .body-3 {
-    @apply text-b3 text-gray-800 font-apple font-medium;
-  }
-  .btn {
-    @apply text-btn text-gray-800 font-apple font-medium;
-  }
-  .cap {
-    @apply text-cap text-gray-800 font-apple font-normal;
-  }
-  .effect-t {
-    @apply text-effect_t font-neo font-normal;
-    color: rgba(0, 0, 0, 0.87);
-    text-shadow: 2px 3px 0px 0px #000;
-  }
-  .effect-b {
-    @apply text-effect_b text-gray-800 font-neo font-normal;
-  }
-}
-
 * {
   box-sizing: border-box;
 }
@@ -64,6 +20,14 @@ body {
   padding: 0;
   min-height: 100%;
   font-size: 16px;
+}
+
+/* mobile */
+@media only screen and (min-width: 768px) {
+  html,
+  body {
+    font-size: 20px;
+  }
 }
 
 ul,
