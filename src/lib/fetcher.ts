@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosRequestConfig } from 'axios';
+import axios, { AxiosError } from 'axios';
 
 const handleError = (e: AxiosError) => {
   console.error(e);
@@ -6,19 +6,10 @@ const handleError = (e: AxiosError) => {
   return e;
 };
 
+// TODO: remove
 export const fetcher = async (url: string) => {
   try {
     const res = await axios.get(url);
-
-    return res.data;
-  } catch (e) {
-    handleError(e as AxiosError);
-  }
-};
-
-export const axiosRequest = async <T>(config: AxiosRequestConfig) => {
-  try {
-    const res = await axios<T>(config);
 
     return res.data;
   } catch (e) {
