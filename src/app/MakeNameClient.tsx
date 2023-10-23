@@ -28,6 +28,7 @@ const MakeNameClient = ({ user }: { user: User | null }) => {
 
         if (res) {
           router.push(`/cake/${res.data.id}`);
+          router.refresh();
         }
       },
     });

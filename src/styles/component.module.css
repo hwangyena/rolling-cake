@@ -18,6 +18,10 @@
   @apply bg-pink-300;
 }
 
+.big-button:hover .white {
+  @apply bg-gray-200;
+}
+
 .big-button:disabled {
   @apply bg-gray-500;
   opacity: 0.6;
@@ -123,7 +127,6 @@
   border: 1px solid #000;
   background: linear-gradient(180deg, #fff 46.99%, #b7b7b7 100%);
   display: flex;
-  width: 211px;
   height: 32px;
   padding: 9px 16px;
   justify-content: center;

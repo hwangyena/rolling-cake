@@ -57,11 +57,13 @@ const StepComplete = () => {
   }, [router]);
 
   return (
-    <GradientContainer type="pink-green" className="justify-center items-center">
+    <GradientContainer type="pink-green" className="justify-center items-center overflow-hidden">
       <Navigation show={['<']} className={data ? 'invisible' : ''} />
       <Header>{data ? '케이크를 선물했어요!' : '롤링케이크 완성!'}</Header>
-      <Cake className="flex-1 w-[80%] aspect-square m-[20%]" />
-      <section className="p-5 w-full flex flex-col items-center gap-3">
+      <div className="flex-1 w-[80%] p-[10%]">
+        <Cake className="w-full h-full" />
+      </div>
+      <section className="px-5 w-full flex flex-col items-center gap-3 mb-3">
         {data ? (
           <>
             <Button type="BIG" onClick={onListClicked}>
