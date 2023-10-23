@@ -65,7 +65,7 @@ const Wrapper = ({ children, type }: PropsWithChildren<{ type: CustomPopup['titl
 
   if (type === 'Welcome!') {
     return (
-      <div className="relative w-full h-full flex justify-center items-end pb-7 px-3">
+      <div className="relative w-full flex justify-center items-end pb-7 px-3">
         <div className="card p-[4px] rounded-lg text-center h-fit w-full">{children}</div>
       </div>
     );
