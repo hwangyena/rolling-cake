@@ -52,7 +52,7 @@
 }
 .letter-name,
 .letter-name ~ span {
-  padding-bottom: 10px;
+  padding-bottom: 1.25rem;
 }
 
 /* lock icon */
