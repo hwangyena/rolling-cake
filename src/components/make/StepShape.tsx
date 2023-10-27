@@ -30,7 +30,7 @@ const StepShape = ({
         {options.map((v) => (
           <SwiperSlide key={v.value}>
             {({ isActive }) => (
-              <Card type="simple" content={v.label} className={`${isActive ? '' : styles.dimmed}`}>
+              <Card content={v.label} className={`${isActive ? '' : styles.dimmed}`}>
                 <Cake className="w-full h-[90%]" priority />
               </Card>
             )}

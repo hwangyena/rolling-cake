@@ -91,7 +91,7 @@ const LetterCard = ({
 }>) => {
   return (
     <Card
-      type="complex"
+      hasDesign
       content={`Dear. ${name}`}
       className={className}
       button={{
