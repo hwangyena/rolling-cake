@@ -58,7 +58,7 @@ const StepLetter = () => {
 
   return (
     <article className="px-5 pt-5 py-4 flex flex-col h-full">
-      <div className="card h-full py-5 px-3 flex flex-col">
+      <div className="card h-full py-5 px-5 flex flex-col">
         <section className="relative flex items-center">
           <input
             type="text"
@@ -69,7 +69,7 @@ const StepLetter = () => {
           />
           <span className={styles['input-count']}>{name.length} / 5</span>
         </section>
-        <section className="mt-7 relative h-[80%]">
+        <section className="mt-5 relative h-[80%]">
           <textarea
             className={`${styles['letter-content']} text-b2 text-gray-700 resize-none w-full h-full`}
             maxLength={200}
