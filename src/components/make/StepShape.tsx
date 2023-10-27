@@ -17,7 +17,7 @@ const StepShape = ({
   onShapeChanged: (value: string, index?: number) => void;
 }) => {
   return (
-    <article className="h-full pt-5 pb-12">
+    <article className="h-full pb-12 pt-5">
       <Swiper
         initialSlide={initialSlide}
         slidesPerView="auto"
@@ -31,7 +31,7 @@ const StepShape = ({
           <SwiperSlide key={v.value}>
             {({ isActive }) => (
               <Card content={v.label} className={`${isActive ? '' : styles.dimmed}`}>
-                <Cake className="w-full h-[90%]" priority />
+                <Cake className="h-[90%] w-full" priority />
               </Card>
             )}
           </SwiperSlide>

@@ -4,9 +4,9 @@ import ItemSelect from './ItemSelect';
 
 const StepCommon = ({ itemSelect }: { itemSelect?: (keyof typeof SELECT_ITEM)[] }) => {
   return (
-    <article className="flex flex-col h-full">
-      <section className="flex-1 grid place-items-center">
-        <Cake className="w-[70%] h-[80%]" priority />
+    <article className="flex h-full flex-col">
+      <section className="grid flex-1 place-items-center">
+        <Cake className="h-[80%] w-[70%]" priority />
       </section>
       <ItemSelect data={itemSelect ?? []} />
     </article>

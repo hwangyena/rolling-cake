@@ -57,8 +57,8 @@ const StepLetter = () => {
   };
 
   return (
-    <article className="px-5 pt-5 py-4 flex flex-col h-full">
-      <div className="card h-full py-5 px-5 flex flex-col">
+    <article className="flex h-full flex-col px-5 py-4 pt-5">
+      <div className="card flex h-full flex-col px-5 py-5">
         <section className="relative flex items-center">
           <input
             type="text"
@@ -69,9 +69,9 @@ const StepLetter = () => {
           />
           <span className={styles['input-count']}>{name.length} / 5</span>
         </section>
-        <section className="mt-5 relative h-[80%]">
+        <section className="relative mt-5 h-[80%]">
           <textarea
-            className={`${styles['letter-content']} text-b2 text-gray-700 resize-none w-full h-full`}
+            className={`${styles['letter-content']} h-full w-full resize-none text-b2 text-gray-700`}
             maxLength={200}
             placeholder="편지 내용을 작성해볼까?"
             value={content}
@@ -80,7 +80,7 @@ const StepLetter = () => {
         </section>
         <section className="flex justify-between">
           <button
-            className="flex justify-center items-center gap-2 text-gray-600 text-b3"
+            className="flex items-center justify-center gap-2 text-b3 text-gray-600"
             onClick={handleToggleLock}>
             비밀 롤링케이크
             <div className={cn(styles.lock, { [styles.unlock]: !lock })} />

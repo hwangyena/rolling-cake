@@ -63,7 +63,7 @@ const ItemSelect = ({ data, noLabel }: Props) => {
   return (
     <section className="mb-3">
       {noLabel ? null : (
-        <div className="flex gap-3 mb-[16px] px-[20px]">
+        <div className="mb-[16px] flex gap-3 px-[20px]">
           {data.map((tabItem) => (
             <span
               key={tabItem}

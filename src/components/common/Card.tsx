@@ -17,16 +17,20 @@ const Card = ({ children, button, hasDesign, content, className }: PropsWithChil
   return (
     <ShadowCard
       className={cn(
-        'w-[90%] h-[90%] relative flex flex-col items-center justify-around',
+        'relative flex h-[90%] w-[90%] flex-col items-center justify-around',
         className,
-        hasDesign ? 'relative pt-[10%] pd-[5%]' : 'w-full h-full p-3'
+        hasDesign ? 'pd-[5%] relative pt-[10%]' : 'h-full w-full p-3',
       )}>
       <article
-        className={cn(hasDesign ? 'w-[80%]':'w-full' , 'min-h-[60%] grid place-items-center h-[40vh] border-black border-2 bg-white rounded-xl z-10')}>
+        className={cn(
+          hasDesign ? 'w-[80%]' : 'w-full',
+          'z-10 grid h-[40vh] min-h-[60%] place-items-center rounded-xl border-2 border-black bg-white',
+        )}>
         {children}
       </article>
-      <article className="flex flex-col items-center gap-2 z-10">
-        <h3 className={`text-t1 text-gray-700 font-bold ${button ? '' : 'mb-4'}`}>{content}</h3>
+
+      <article className="z-10 flex flex-col items-center gap-2">
+        <h3 className={`text-t1 font-bold text-gray-700 ${button ? '' : 'mb-4'}`}>{content}</h3>
         {button && (
           <Button type="SMALL" color="red" onClick={button.onButtonClicked}>
             {button.label}
@@ -40,18 +44,18 @@ const Card = ({ children, button, hasDesign, content, className }: PropsWithChil
 
 const CardDesign = () => {
   return (
-    <article className="absolute top-0 left-0 w-full h-full z-0">
-      <img src="/images/sparkle1.png" alt="" className="w-12 h-12 absolute bottom-[27%] left-3" />
-      <img src="/images/sparkle2.png" alt="" className="w-12 h-12 absolute bottom-[28%] right-1" />
+    <article className="absolute left-0 top-0 z-0 h-full w-full">
+      <img src="/images/sparkle1.png" alt="" className="absolute bottom-[27%] left-3 h-12 w-12" />
+      <img src="/images/sparkle2.png" alt="" className="absolute bottom-[28%] right-1 h-12 w-12" />
       <img
         src="/images/sparkle3.png"
         alt=""
-        className="w-20 h-20 absolute bottom-[-5px] right-[-10px]"
+        className="absolute bottom-[-5px] right-[-10px] h-20 w-20"
       />
-      <img src="/images/sparkle4.png" alt="" className="w-20 h-16 absolute top-[-5px] right-2" />
-      <div className="bg-black w-1 h-1 rounded-full absolute top-5 left-[30%]" />
-      <div className="bg-black w-[8px] h-[8px] rounded-full absolute bottom-[16%] left-[8%]" />
-      <div className="bg-black w-[17px] h-[17px] rounded-full absolute bottom-[12%] left-[11%]" />
+      <img src="/images/sparkle4.png" alt="" className="absolute right-2 top-[-5px] h-16 w-20" />
+      <div className="absolute left-[30%] top-5 h-1 w-1 rounded-full bg-black" />
+      <div className="absolute bottom-[16%] left-[8%] h-[8px] w-[8px] rounded-full bg-black" />
+      <div className="absolute bottom-[12%] left-[11%] h-[17px] w-[17px] rounded-full bg-black" />
     </article>
   );
 };

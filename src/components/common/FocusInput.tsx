@@ -25,7 +25,7 @@ const FocusInput = () => {
           <input
             type="text"
             value={text}
-            className="text-effect_t font-neo"
+            className="font-neo text-effect_t"
             onChange={(e) => {
               setText(e.target.value.slice(0, value?.maxLength));
             }}
@@ -50,7 +50,7 @@ const FocusInput = () => {
         </section>
       </div>
 
-      <div className="absolute left-0 top-0 bottom-0 right-0 bg-black opacity-[0.8] z-20" />
+      <div className="absolute bottom-0 left-0 right-0 top-0 z-20 bg-black opacity-[0.8]" />
     </div>
   );
 };

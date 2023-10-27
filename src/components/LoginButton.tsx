@@ -6,7 +6,7 @@ import Image from 'next/image';
 const LoginButton = () => {
   return (
     <button
-      className="w-full h-[55px] rounded-lg relative bg-slate-300"
+      className="relative h-[55px] w-full rounded-lg bg-slate-300"
       onClick={() =>
         signIn('kakao', {
           callbackUrl: '/',

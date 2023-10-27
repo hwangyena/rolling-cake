@@ -29,10 +29,10 @@ const Popup = () => {
     <div className={styles.popup}>
       <div className={styles['popup-content']}>
         <section className="mb-8">
-          <h4 className="text-h4 text-gray-800 font-bold whitespace-pre">{title}</h4>
+          <h4 className="whitespace-pre text-h4 font-bold text-gray-800">{title}</h4>
           {content && (
             <p
-              className="text-b1 pt-[20px] text-gray-800"
+              className="pt-[20px] text-b1 text-gray-800"
               dangerouslySetInnerHTML={{ __html: content }}
             />
           )}
@@ -49,7 +49,7 @@ const Popup = () => {
         </section>
         {bottomNode}
       </div>
-      <div className="absolute left-0 top-0 bottom-0 right-0 bg-black opacity-[0.7] z-50" />
+      <div className="absolute bottom-0 left-0 right-0 top-0 z-50 bg-black opacity-[0.7]" />
     </div>
   );
 };
