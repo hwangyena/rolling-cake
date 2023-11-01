@@ -4,6 +4,7 @@ import Cake from '@/components/cake/Cake';
 import Button from '@/components/common/Button';
 import Header from '@/components/common/Header';
 import Tag from '@/components/common/Tag';
+import Lock from '@/components/style/Lock';
 import { useSaveUserId } from '@/hooks/cake';
 import { getLocalStorage } from '@/lib/store';
 import { cn } from '@/lib/utils';
@@ -49,7 +50,10 @@ export default function HaveCakeClient({ cakes, user, isOwn }: Props) {
               key={i}
               onClick={() => handleCakeClicked(cake.id)}>
               <Cake className="aspect-[2/3] w-[80%]" />
-              <span className="text-b3">{cake.name}</span>
+              <div className="mt-1 flex gap-1">
+                {cake.isPrivate && <Lock />}
+                <span className="text-b3">{cake.name}</span>
+              </div>
             </button>
           ))}
         </div>
