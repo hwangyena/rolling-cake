@@ -1,6 +1,6 @@
 /* Button */
 .big-button {
-  @apply text-btn bg-pink-200;
+  @apply bg-pink-200 text-btn;
   border-radius: 8px;
   border: 2px solid #000;
   color: #fff;
@@ -12,6 +12,7 @@
   align-items: center;
   gap: 16px;
   flex-shrink: 0;
+  font-weight: 700;
 }
 
 .big-button:hover {
@@ -73,22 +74,6 @@
   background: linear-gradient(180deg, #fff 23.55%, #dedede 100%);
 }
 
-/* Circle Button */
-.circle-button {
-  width: 34px;
-  height: 34px;
-  background-color: #fff;
-  border-radius: 50%;
-  border: 1px solid #000;
-  filter: drop-shadow(1px 1px 0px #000);
-  display: grid;
-  place-items: center;
-}
-
-.circle-button:disabled {
-  opacity: 40%;
-}
-
 /* Popup */
 .popup {
   width: 100%;
@@ -141,14 +126,14 @@
 
 /* Header */
 .header {
-  @apply text-effect_t font-neo;
+  @apply font-neo text-effect_t;
   font-size: 1.38rem;
   font-weight: 400;
   white-space: nowrap;
 }
 
 .header::before {
-  @apply absolute left-0 top-0 text-effect_t font-neo;
+  @apply absolute left-0 top-0 font-neo text-effect_t;
   font-size: 1.38rem;
   content: attr(data-content);
   line-height: 140%;
@@ -156,13 +141,13 @@
 }
 
 .header::after {
-  @apply absolute left-0 top-0 text-effect_t font-neo;
+  @apply absolute left-0 top-0 font-neo text-effect_t;
   color: black;
   content: attr(data-content);
 }
 
 .shadow {
-  @apply absolute top-0 left-0 text-effect_t font-neo;
+  @apply absolute left-0 top-0 font-neo text-effect_t;
   left: 0.18rem;
   top: 0.17rem;
   color: black;
