@@ -31,7 +31,7 @@ export default function EmptyCakeClient({ user, isOwn }: { user: User; isOwn: bo
 
   return (
     <>
-      <section className="flex flex-col items-center gap-3 mb-[20px]">
+      <section className="mb-[20px] flex flex-col items-center gap-3">
         <Header>{`${user.rollingCakeName}의 롤링케이크`}</Header>
         <Tag>
           {isOwn
@@ -40,12 +40,12 @@ export default function EmptyCakeClient({ user, isOwn }: { user: User; isOwn: bo
         </Tag>
       </section>
       <section
-        className={`w-full h-full px-[25px] pb-[20px] overflow-y-auto bg-white green-gradient flex-1 bottom-0`}>
-        <div className="w-full h-full flex flex-col items-center pt-[10%] relative">
-          <Cake className="w-[80%] h-[70%]" />
+        className={`green-gradient bottom-0 h-full w-full flex-1 overflow-y-auto bg-white px-[25px] pb-[20px]`}>
+        <div className="relative flex h-full w-full flex-col items-center pt-[10%]">
+          <Cake className="h-[70%] w-[80%]" />
         </div>
       </section>
-      <section className={'absolute w-full bottom-0 px-[25px] pb-[5vh] py-[40px]'}>
+      <section className={'absolute bottom-0 w-full px-[25px] py-[40px] pb-[5vh]'}>
         <Button type="BIG" onClick={onButtonClicked}>
           {isOwn ? '케이크 링크 공유하기' : '롤링케이크 만들어주기'}
         </Button>

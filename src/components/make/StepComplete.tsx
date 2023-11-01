@@ -57,13 +57,13 @@ const StepComplete = () => {
   }, [router]);
 
   return (
-    <GradientContainer type="pink-green" className="justify-center items-center overflow-hidden">
+    <GradientContainer type="pink-green" className="items-center justify-center overflow-hidden">
       <Navigation show={['<']} className={data ? 'invisible' : ''} />
       <Header>{data ? '케이크를 선물했어요!' : '롤링케이크 완성!'}</Header>
-      <div className="flex-1 w-[80%] p-[10%]">
-        <Cake className="w-full h-full" />
+      <div className="w-[80%] flex-1 p-[10%]">
+        <Cake className="h-full w-full" />
       </div>
-      <section className="px-5 w-full flex flex-col items-center gap-3 mb-3">
+      <section className="mb-3 flex w-full flex-col items-center gap-3 px-5">
         {data ? (
           <>
             <Button type="BIG" onClick={onListClicked}>
@@ -78,7 +78,7 @@ const StepComplete = () => {
             <Button type="BIG" onClick={onCreate}>
               내 케이크 선물하기
             </Button>
-            <span className="text-gray-800 text-cap">선물한 케이크는 수정이 불가해요.</span>
+            <span className="text-cap text-gray-800">선물한 케이크는 수정이 불가해요.</span>
           </>
         )}
       </section>

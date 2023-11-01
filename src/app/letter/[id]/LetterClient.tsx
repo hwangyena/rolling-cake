@@ -24,7 +24,7 @@ export default function LetterClient({ content, name, user, currentUser, isPriva
 
   const isCakeOwner = useMemo(
     () => user.name === currentUser?.name,
-    [user.name, currentUser?.name]
+    [user.name, currentUser?.name],
   );
 
   const onToggleCake = useCallback(() => {
@@ -38,7 +38,7 @@ export default function LetterClient({ content, name, user, currentUser, isPriva
               router.push('/');
               dispatch(null);
             }}
-            className="text-b3 text-gray-800 underline mt-5">{`롤링케이크 주인이라면? 로그인 하고 읽기>`}</p>
+            className="mt-5 text-b3 text-gray-800 underline">{`롤링케이크 주인이라면? 로그인 하고 읽기>`}</p>
         ),
       });
       return;
@@ -48,26 +48,26 @@ export default function LetterClient({ content, name, user, currentUser, isPriva
   }, [dispatch, isCakeOwner, isPrivate, router]);
 
   return (
-    <main className="flex flex-col flex-1">
+    <main className="flex flex-1 flex-col">
       <section className="flex flex-col items-center">
         <Header>{`${name}표 롤링케이크와`}</Header>
         <Header>편지를 확인해보r!</Header>
       </section>
-      <section className="flex-1 grid place-items-center py-[10%] px-[8%]">
+      <section className="grid flex-1 place-items-center px-[8%] py-[10%]">
         <div className={cn(styles.flip, { 'rotate-y-180': !isCake })}>
           <LetterCard
             label="편지 읽어보기"
             name={user.name}
             onToggleCake={onToggleCake}
             className={styles.front}>
-            <Cake className="w-[80%] aspect-square" />
+            <Cake className="aspect-square w-[80%]" />
           </LetterCard>
           <LetterCard
             label="케이크 보기"
             name={user.name}
             onToggleCake={onToggleCake}
             className={styles.back}>
-            <p className="p-3 font-neo text-effect_b overflow-auto h-full text-center break-keep">
+            <p className="h-full overflow-auto break-keep p-3 text-center font-neo text-effect_b">
               {content}
             </p>
           </LetterCard>
@@ -91,7 +91,7 @@ const LetterCard = ({
 }>) => {
   return (
     <Card
-      type="complex"
+      hasDesign
       content={`Dear. ${name}`}
       className={className}
       button={{

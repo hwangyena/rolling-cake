@@ -23,7 +23,7 @@ export default function Page() {
       <label className="w-full">
         userId
         <input
-          className="border border-black w-full bg-slate-200"
+          className="w-full border border-black bg-slate-200"
           type="text"
           value={userId}
           onChange={(e) => setUserId(e.target.value)}

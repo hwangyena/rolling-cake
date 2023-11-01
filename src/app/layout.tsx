@@ -17,7 +17,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
 
   return (
     <html lang="en">
-      <body className="max-w-[480px] h-full my-0 mx-auto relative">
+      <body className="relative mx-auto my-0 h-full max-w-[480px]">
         {children}
 
         <ClientOnly>

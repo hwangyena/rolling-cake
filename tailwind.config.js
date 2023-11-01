@@ -51,7 +51,12 @@ module.exports = {
         'grid-pattern': "url('/images/bg.png')",
         404: "url('/images/404.png')",
       },
-      backgroundColor: {},
+      boxShadow: {
+        card: '2px 3px 0px 0px #000',
+      },
+      dropShadow: {
+        black: '2px 3px 0px #000',
+      },
       gridTemplateColumns: {
         3: 'repeat(3,1fr)',
       },

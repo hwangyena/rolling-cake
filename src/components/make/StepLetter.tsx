@@ -1,10 +1,11 @@
 import { useEvent } from '@/hooks/common';
 import { useStep } from '@/hooks/make';
 import { stepValidAtom } from '@/lib/store';
-import { cn } from '@/lib/utils';
-import styles from '@/styles/page.module.css';
 import { useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
+
+import Lock from '../style/Lock';
+import ShadowCard from '../style/ShadowCard';
 
 const StepLetter = () => {
   const { store, onUpdate } = useStep();
@@ -33,7 +34,6 @@ const StepLetter = () => {
       isPrivate: boolean;
     };
 
-    // FIXME: 저장 안됨 확인 필요
     setName(name);
     setContent(content);
     setLock(lock);
@@ -57,21 +57,23 @@ const StepLetter = () => {
   };
 
   return (
-    <article className="px-5 pt-5 py-4 flex flex-col h-full">
-      <div className="card h-full py-5 px-5 flex flex-col">
+    <article className="flex h-full flex-col px-5 py-4 pt-5">
+      <ShadowCard className="flex h-full flex-col px-5 py-5">
         <section className="relative flex items-center">
           <input
             type="text"
             placeholder="당신의 이름을 알려주세요"
             value={name}
             onChange={(e) => setName(e.target.value.slice(0, 5))}
-            className={`${styles['letter-name']} text-b1 text-gray-700`}
+            className={`w-full rounded-none border-b border-gray-500 pb-5 text-b1 text-gray-700`}
           />
-          <span className={styles['input-count']}>{name.length} / 5</span>
+          <span className={'absolute right-0 pb-5 text-cap font-bold text-gray-500'}>
+            {name.length} / 5
+          </span>
         </section>
-        <section className="mt-5 relative h-[80%]">
+        <section className="relative mt-5 h-[80%]">
           <textarea
-            className={`${styles['letter-content']} text-b2 text-gray-700 resize-none w-full h-full`}
+            className={'h-full w-full resize-none text-b2 text-gray-700'}
             maxLength={200}
             placeholder="편지 내용을 작성해볼까?"
             value={content}
@@ -80,14 +82,14 @@ const StepLetter = () => {
         </section>
         <section className="flex justify-between">
           <button
-            className="flex justify-center items-center gap-2 text-gray-600 text-b3"
+            className="flex items-center justify-center gap-2 text-b3 text-gray-600"
             onClick={handleToggleLock}>
             비밀 롤링케이크
-            <div className={cn(styles.lock, { [styles.unlock]: !lock })} />
+            <Lock unlock={!lock} />
           </button>
-          <span className={`${styles['input-count']} `}>{content.length} / 200</span>
+          <span className="text-cap font-bold text-gray-500">{content.length} / 200</span>
         </section>
-      </div>
+      </ShadowCard>
     </article>
   );
 };

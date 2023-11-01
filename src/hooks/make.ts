@@ -54,10 +54,10 @@ export const useEntireStep = () => {
 
       setStep(entireStep);
       dispatch(
-        md(new Map(Object.entries(step)), [['shape', value === 'CUSTOM' ? 'custom' : 'theme']])
+        md(new Map(Object.entries(step)), [['shape', value === 'CUSTOM' ? 'custom' : 'theme']]),
       );
     },
-    [dispatch]
+    [dispatch],
   );
 
   return { step, current, onEntireStepChanged };
@@ -81,7 +81,7 @@ export const useStep = () => {
         dispatch(md(store, [[step, data]]));
       }
     },
-    [dispatch, step, store]
+    [dispatch, step, store],
   );
 
   return { store, onUpdate, step };

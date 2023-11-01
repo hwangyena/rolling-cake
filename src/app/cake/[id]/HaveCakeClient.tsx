@@ -36,19 +36,19 @@ export default function HaveCakeClient({ cakes, user, isOwn }: Props) {
   }, [router]);
 
   return (
-    <div className="relative flex-1 overflow-hidden flex flex-col gap-8">
+    <div className="relative flex flex-1 flex-col gap-8 overflow-hidden">
       <section className="flex flex-col items-center gap-3">
         <Header>{`${user.rollingCakeName}의 롤링케이크`}</Header>
         <Tag>{`${cakes.length}개의 케이크와 편지 도착!`}</Tag>
       </section>
-      <section className={`flex-1 px-[25px] py-[20px] overflow-y-auto green-gradient`}>
+      <section className={`green-gradient flex-1 overflow-y-auto px-[25px] py-[20px]`}>
         <div className={cn('grid grid-cols-3 gap-5', { 'mb-[110px]': isMakeCake })}>
           {cakes.map((cake, i) => (
             <button
-              className="w-full flex flex-col items-center"
+              className="flex w-full flex-col items-center"
               key={i}
               onClick={() => handleCakeClicked(cake.id)}>
-              <Cake className="w-[80%] aspect-[2/3]" />
+              <Cake className="aspect-[2/3] w-[80%]" />
               <span className="text-b3">{cake.name}</span>
             </button>
           ))}
@@ -56,7 +56,7 @@ export default function HaveCakeClient({ cakes, user, isOwn }: Props) {
       </section>
       {isMakeCake && (
         <section
-          className={'absolute w-full bottom-0 px-[25px] pb-[20px] pt-[45px] white-gradient'}>
+          className={'white-gradient absolute bottom-0 w-full px-[25px] pb-[20px] pt-[45px]'}>
           <Button type="BIG" onClick={onButtonClicked}>
             롤링케이크 만들어주기
           </Button>

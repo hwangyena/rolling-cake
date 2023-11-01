@@ -31,13 +31,11 @@ const Snackbar = () => {
   return (
     <div
       className={cn(
-        'fixed left-0 bottom-5 grid place-items-center z-50 w-full',
-        {
-          'animate-slide-up': !hide,
-        },
-        { 'animate-slide-down': hide }
+        'fixed bottom-5 left-0 z-50 grid w-full place-items-center',
+        { 'animate-slide-up': !hide },
+        { 'animate-slide-down': hide },
       )}>
-      <div className=" bg-[#323232] opacity-80 p-3 rounded-xl w-[80%] text-white text-b3 text-center">
+      <div className="w-[80%] rounded-xl bg-[#323232] p-3 text-center text-b3 text-white opacity-80">
         {value.text}
       </div>
     </div>
