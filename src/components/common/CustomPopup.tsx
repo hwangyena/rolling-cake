@@ -21,16 +21,6 @@ const CustomPopup = ({ content, title, hasIcon, onConfirm }: CustomPopup) => {
     return () => termsElement.removeEventListener('click', handleTermsClicked);
   }, []);
 
-  useEffect(() => {
-    const handleClickEvent = (e: MouseEvent) => {
-      e.preventDefault();
-      e.stopPropagation();
-    };
-
-    document.addEventListener('click', handleClickEvent);
-    return () => document.removeEventListener('click', handleClickEvent);
-  });
-
   return (
     <Wrapper type={title}>
       <article className="items-top flex h-[24px] w-full justify-between rounded-t-lg bg-pink-200 px-[6px] pt-[2px] font-neo text-effect_b">

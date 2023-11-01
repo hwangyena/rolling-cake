@@ -5,6 +5,7 @@ import { getBaseUrl } from '@/lib/utils';
 import EmptyCakeClient from './EmptyCakeClient';
 import HaveCakeClient from './HaveCakeClient';
 import { notFound } from 'next/navigation';
+import Navigation from '@/components/common/Navigation';
 
 export default async function CakePage({ params }: { params: { id: string } }) {
   const cakes = await fetch(`${getBaseUrl()}/cake/${params.id}`, {
@@ -22,6 +23,7 @@ export default async function CakePage({ params }: { params: { id: string } }) {
   if (cakes?.length === 0) {
     return (
       <ClientOnly>
+        <Navigation show={loginUser?.id === params.id ? ['home', '<', 'upload'] : ['home', '<']} />
         <EmptyCakeClient user={user} isOwn={loginUser?.id === params.id} />
       </ClientOnly>
     );
@@ -29,6 +31,7 @@ export default async function CakePage({ params }: { params: { id: string } }) {
 
   return (
     <ClientOnly>
+      <Navigation show={loginUser?.id === params.id ? ['home', '<', 'upload'] : ['home', '<']} />
       <HaveCakeClient user={user} cakes={cakes} isOwn={loginUser?.id === params.id} />
     </ClientOnly>
   );

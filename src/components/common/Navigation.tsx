@@ -1,10 +1,10 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import CircleButton from './CircleButton';
-import { useCallback } from 'react';
-import { useSetAtom } from 'jotai';
 import { snackBarAtom } from '@/lib/store';
+import { useSetAtom } from 'jotai';
+import { useRouter } from 'next/navigation';
+import { useCallback } from 'react';
+import CircleButton from './CircleButton';
 
 type Props = {
   show?: ('<' | 'upload' | 'home')[];
@@ -13,7 +13,6 @@ type Props = {
 
 const Navigation = ({ show, className }: Props) => {
   const router = useRouter();
-
   const dispatch = useSetAtom(snackBarAtom);
 
   const [hasBack, hasUpload, hasHome] = [
@@ -31,10 +30,17 @@ const Navigation = ({ show, className }: Props) => {
   }, [router]);
 
   const onUploadClicked = useCallback(() => {
-    dispatch({
-      text: '링크를 복사했어요! SNS에 붙여넣어 공유해봐요',
-    });
-    navigator.clipboard.writeText(window.location.href);
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(window.location.href);
+      dispatch({
+        text: '링크를 복사했어요! SNS에 붙여넣어 공유해봐요',
+      });
+    } else {
+      // This is only work at dev
+      dispatch({
+        text: '일시적인 에러가 발생했어요.',
+      });
+    }
   }, [dispatch]);
 
   return (

@@ -31,7 +31,7 @@ const Snackbar = () => {
   return (
     <div
       className={cn(
-        'fixed bottom-5 left-0 z-50 grid w-full place-items-center',
+        'absolute bottom-5 left-0 z-50 grid w-full place-items-center',
         { 'animate-slide-up': !hide },
         { 'animate-slide-down': hide },
       )}>
