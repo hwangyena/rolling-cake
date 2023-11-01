@@ -5,7 +5,7 @@ const GradientContainer = ({
   children,
   className = '',
 }: PropsWithChildren<{
-  type: 'green-circle' | 'pink-green' | 'grid' | 'grid-with-gradient';
+  type: 'green-circle' | 'pink-green' | 'green-pink' | 'grid' | 'grid-with-gradient';
   className?: string;
 }>) => {
   if (type === 'green-circle') {
@@ -18,6 +18,10 @@ const GradientContainer = ({
         {children}
       </div>
     );
+  }
+
+  if (type === 'green-pink') {
+    return <div className={`green-pink-gradient h-full w-full ${className}`}>{children}</div>;
   }
 
   if (type === 'grid') {

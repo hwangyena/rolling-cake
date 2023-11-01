@@ -3,12 +3,12 @@
 import LoginButton from '@/components/LoginButton';
 import Button from '@/components/common/Button';
 import CustomPopup from '@/components/common/CustomPopup';
-import styles from '@/styles/page.module.css';
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useCallback, useState } from 'react';
 import type { User } from '@prisma/client';
+import GradientContainer from '@/components/GradientContainer';
 
 const HomeClient = ({ user }: { user?: User | null }) => {
   const router = useRouter();
@@ -24,7 +24,7 @@ const HomeClient = ({ user }: { user?: User | null }) => {
   }, []);
 
   return (
-    <main className={styles.main}>
+    <GradientContainer type="green-pink" className="flex flex-col items-center justify-evenly px-5">
       <div className="relative h-[20%] w-full">
         <Image src="/images/logo.png" fill alt="" className="absolute" />
       </div>
@@ -49,7 +49,7 @@ const HomeClient = ({ user }: { user?: User | null }) => {
           onConfirm={onClosePopup}
         />
       )}
-    </main>
+    </GradientContainer>
   );
 };
 

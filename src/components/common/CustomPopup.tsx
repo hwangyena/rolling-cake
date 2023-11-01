@@ -2,6 +2,7 @@ import styles from '@/styles/component.module.css';
 
 import Image from 'next/image';
 import { PropsWithChildren, memo, useEffect } from 'react';
+import ShadowCard from '../style/ShadowCard';
 
 const CustomPopup = ({ content, title, hasIcon, onConfirm }: CustomPopup) => {
   // open terms page
@@ -57,16 +58,16 @@ const CustomPopup = ({ content, title, hasIcon, onConfirm }: CustomPopup) => {
 const Wrapper = ({ children, type }: PropsWithChildren<{ type: CustomPopup['title'] }>) => {
   if (type === 'Alert') {
     return (
-      <div className="card absolute bottom-[20px] right-[20px] w-[80%] rounded-lg p-[4px]">
+      <ShadowCard className="absolute bottom-[20px] right-[20px] w-[80%] rounded-lg p-[4px]">
         {children}
-      </div>
+      </ShadowCard>
     );
   }
 
   if (type === 'Welcome!') {
     return (
       <div className="relative flex w-full items-end justify-center px-3 pb-7">
-        <div className="card h-fit w-full rounded-lg p-[4px] text-center">{children}</div>
+        <ShadowCard className="h-fit w-full rounded-lg p-[4px] text-center">{children}</ShadowCard>
       </div>
     );
   }

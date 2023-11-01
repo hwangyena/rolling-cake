@@ -1,10 +1,10 @@
 'use client';
 
-import styles from '@/styles/page.module.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Cake from '../cake/Cake';
 import Card from '../common/Card';
 
+import { cn } from '@/lib/utils';
 import 'swiper/css';
 
 const StepShape = ({
@@ -30,7 +30,12 @@ const StepShape = ({
         {options.map((v) => (
           <SwiperSlide key={v.value}>
             {({ isActive }) => (
-              <Card content={v.label} className={`${isActive ? '' : styles.dimmed}`}>
+              <Card
+                content={v.label}
+                className={cn({
+                  "after: after:drop-shadow-black after:absolute after:left-0 after:top-0 after:z-[100] after:h-full after:w-full after:bg-black after:opacity-20 after:content-['']":
+                    !isActive,
+                })}>
                 <Cake className="h-[90%] w-full" priority />
               </Card>
             )}
