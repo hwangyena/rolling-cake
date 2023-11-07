@@ -1,10 +1,11 @@
+import { useStep } from '@/hooks/make';
 import { SELECT_ITEM } from '@/lib/constant';
 import { focusInputAtom } from '@/lib/store';
 import { useSetAtom } from 'jotai';
 import { useCallback } from 'react';
-import Cake from '../cake/Cake';
+import Canvas from '../3d/Canvas';
+import TextComponent from '../3d/Text';
 import ItemSelect from './ItemSelect';
-import { useStep } from '@/hooks/make';
 
 const StepLettering = ({ itemSelect }: { itemSelect?: (keyof typeof SELECT_ITEM)[] }) => {
   const dispatch = useSetAtom(focusInputAtom);
@@ -23,8 +24,10 @@ const StepLettering = ({ itemSelect }: { itemSelect?: (keyof typeof SELECT_ITEM)
 
   return (
     <article className="flex h-full flex-col">
-      <section className="grid flex-1 place-items-center">
-        <Cake className="h-[80%] w-[70%]" priority onClick={onCakeClicked} />
+      <section className="grid flex-1 place-items-center" onClick={onCakeClicked}>
+        <Canvas>
+          <TextComponent {...(store.get('lettering') as Lettering)} />
+        </Canvas>
       </section>
       <ItemSelect data={itemSelect ?? []} />
     </article>
