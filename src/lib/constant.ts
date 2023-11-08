@@ -2,7 +2,7 @@ export const SELECT_ITEM = {
   cream: { label: '생크림', data: ['none', 'basic', 'screw', 'chocolate', 'crown', 'heart'] },
   color: {
     label: '색상',
-    data: ['#fefce1', '#f7cac7', '#cffdcb', '#c6f4f8', '#e9d5fc', '#6d3710'],
+    data: ['ivory', 'red', 'green', 'blue', 'purple', 'brown'],
   },
   item: {
     label: '아이템',
@@ -91,17 +91,17 @@ export const CAKE_THEME: Filter[] = [
 
 export const STEP_CUSTOM_INIT: CustomCakeStep = {
   shape: 'custom',
-  sheet: { color: '#fefce1' },
-  cream_top: { color: '#fefce1', cream: 'none' },
-  cream_side: { color: '#fefce1', cream: 'none' },
+  sheet: { color: 'ivory' },
+  cream_top: { color: 'ivory', cream: 'none' },
+  cream_side: { color: 'ivory', cream: 'none' },
   more: { item: [] },
-  lettering: { color: '#fefce1', font: 'kor1', value: '' },
+  lettering: { color: 'ivory', font: 'kor1', value: '' },
   letter: { name: '', content: '', isPrivate: true },
 };
 
 export const STEP_THEME_INIT: ThemeCakeStep = {
   shape: 'theme',
   theme: 'SOJU',
-  lettering: { color: '#fefce1', font: 'kor1', value: '' },
+  lettering: { color: 'ivory', font: 'kor1', value: '' },
   letter: { name: '', content: '', isPrivate: true },
 };
