@@ -85,7 +85,7 @@ const MakeCanvas = () => {
   }, [step?.value]);
 
   return (
-    <group position={[0, -0.2, 0]} rotation-z={0.13}>
+    <>
       <CameraControls ref={cameraControlsRef} {...controls} />
       <directionalLight
         castShadow
@@ -99,7 +99,7 @@ const MakeCanvas = () => {
       <Center>
         <CakeModel cakeColor={(store.get('sheet') as CustomCake['sheet']).color as Color} />
       </Center>
-    </group>
+    </>
   );
 };
 
