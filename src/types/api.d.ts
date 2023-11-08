@@ -6,7 +6,7 @@ type Login = {
   };
 };
 
-type Color = '#fefce1' | '#f7cac7' | '#cffdcb' | '#c6f4f8' | '#e9d5fc' | '#6d3710';
+type Color = 'ivory' | 'red' | 'green' | 'blue' | 'purple' | 'brown';
 type CakeCream = 'none' | 'basic' | 'screw' | 'chocolate' | 'crown' | 'heart';
 
 type CakeItem =
