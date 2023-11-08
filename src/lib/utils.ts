@@ -63,7 +63,7 @@ export const cn = (...names: unknown[]): string => {
 
 export const md = (
   prev: Map<string, string | Record<string, unknown>>,
-  value: [string, string | Record<string, unknown>][]
+  value: [string, string | Record<string, unknown>][],
 ) => {
   const m = new Map(prev);
 
@@ -98,4 +98,26 @@ export const getBaseUrl = () => {
   return process.env.NODE_ENV === 'development'
     ? `http://localhost:${process.env.PORT ?? 3000}/api`
     : 'https://rolling-cake.vercel.app/api';
+};
+
+export const getCakeBg = (color: Color, vivid = true) => {
+  const vividColor: Record<Color, string> = {
+    ivory: '#f9f5bd',
+    red: '#ff8c99',
+    green: '#75f580',
+    blue: '#5adeff',
+    purple: '#cb95fc',
+    brown: '#7e5233',
+  };
+
+  const pastel: Record<Color, string> = {
+    ivory: '#fefce1',
+    red: '#f7cac7',
+    green: '#cffdcb',
+    blue: '#c6f4f8',
+    purple: '#e9d5fc',
+    brown: '#6d3710',
+  };
+
+  return vivid ? vividColor[color] : pastel[color];
 };

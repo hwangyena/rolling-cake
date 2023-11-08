@@ -1,17 +1,16 @@
 import * as THREE from 'three';
 import { useGLTF } from '@react-three/drei';
 import { useEffect, useState } from 'react';
+import { getCakeBg } from '@/lib/utils';
 
-const CakeModel = ({ cakeColor }: { cakeColor: string }) => {
-  const { nodes, materials } = useGLTF('/models/cake.glb') as GLTFRes;
+const CakeModel = ({ cakeColor }: { cakeColor: Color }) => {
+  const { nodes } = useGLTF('/models/cake.glb') as GLTFRes;
 
   const [material, setMaterial] = useState<THREE.MeshStandardMaterial>();
 
   useEffect(() => {
     const color = new THREE.MeshStandardMaterial({
-      color: '#ff8c99',
-      // color: parseInt('0x' + cakeColor.replace(/#/, '')),
-      normalScale: new THREE.Vector2(1, -1),
+      color: getCakeBg(cakeColor),
       roughness: 0.5,
       side: 2,
     });
@@ -20,7 +19,7 @@ const CakeModel = ({ cakeColor }: { cakeColor: string }) => {
   }, [cakeColor]);
 
   return (
-    <group position={[3, -8, 10]} rotation-z={0.13}>
+    <group position={[3, -13, 10]} rotation-z={0.13}>
       <mesh
         geometry={nodes.cake.geometry}
         material={material}
@@ -32,7 +31,11 @@ const CakeModel = ({ cakeColor }: { cakeColor: string }) => {
         castShadow
         receiveShadow
         geometry={nodes.stand.geometry}
-        material={materials.wire_229166215}
+        material={
+          new THREE.MeshStandardMaterial({
+            color: '#c7c7c7',
+          })
+        }
         position={[-2.292, 6.058, -30.713]}
         rotation={[1.589, -0.134, 0.482]}
         scale={0.269}

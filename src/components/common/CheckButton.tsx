@@ -1,3 +1,4 @@
+import { getCakeBg } from '@/lib/utils';
 import styles from '@/styles/component.module.css';
 import Image from 'next/image';
 import { CSSProperties, PropsWithChildren, memo } from 'react';
@@ -18,7 +19,7 @@ const CheckButton = ({ type, selected, item }: Props) => {
   }
 
   if (type === 'color') {
-    return <Item style={{ background: item }} selected={selected} />;
+    return <Item style={{ background: getCakeBg(item as Color, false) }} selected={selected} />;
   }
 
   if (type === 'cream' || type === 'item' || type === 'font') {
