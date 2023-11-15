@@ -1,12 +1,13 @@
-import * as THREE from 'three';
-import { useGLTF } from '@react-three/drei';
-import { useEffect, useState } from 'react';
 import { getCakeBg } from '@/lib/utils';
+import { useGLTF } from '@react-three/drei';
+import { useEffect, useRef, useState } from 'react';
+import * as THREE from 'three';
 
 const CakeModel = ({ cakeColor }: { cakeColor: Color }) => {
   const { nodes } = useGLTF('/models/cake.glb') as GLTFRes;
 
   const [material, setMaterial] = useState<THREE.MeshStandardMaterial>();
+  const cakeRef = useRef<THREE.Mesh>(null);
 
   useEffect(() => {
     const color = new THREE.MeshStandardMaterial({
@@ -15,12 +16,15 @@ const CakeModel = ({ cakeColor }: { cakeColor: Color }) => {
       side: 2,
     });
 
+    // cakeRef.current.po
     setMaterial(color);
   }, [cakeColor]);
 
   return (
-    <group position={[3, -13, 10]} rotation-z={0.13}>
+    <>
+      {/* <group position={[3, -13, 10]} rotation-z={0.13}> */}
       <mesh
+        ref={cakeRef}
         geometry={nodes.cake.geometry}
         material={material}
         position={[-2.319, 5.8, -30.746]}
@@ -40,7 +44,8 @@ const CakeModel = ({ cakeColor }: { cakeColor: Color }) => {
         rotation={[1.589, -0.134, 0.482]}
         scale={0.269}
       />
-    </group>
+    </>
+    // </group>
   );
 };
 
