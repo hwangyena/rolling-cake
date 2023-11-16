@@ -1,31 +1,30 @@
 'use client';
 
 import { useErrorPopup } from '@/hooks/common';
-import { useStep } from '@/hooks/make';
 import { getLocalStorage, setLocalStorage } from '@/lib/store';
-import { mapToObject } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
 import { useCallback, useMemo } from 'react';
 import useSWRMutation from 'swr/mutation';
-import GradientContainer from '../GradientContainer';
-import Cake from '../cake/Cake';
-import Button from '../common/Button';
-import Header from '../common/Header';
-import Loading from '../common/Loading';
-import Navigation from '../common/Navigation';
 import { createCake } from '@/lib/endpoint';
+import Header from '@/components/common/Header';
+import GradientContainer from '@/components/GradientContainer';
+import Cake from '@/components/cake/Cake';
+import Button from '@/components/common/Button';
+import Loading from '@/components/common/Loading';
+import { useStepStore } from '@/hooks/make';
+import Navigation from '@/components/common/Navigation';
 
-const StepComplete = () => {
+export default function Page() {
   const router = useRouter();
 
-  const { store } = useStep();
+  const { store } = useStepStore();
   const { trigger, data, isMutating } = useSWRMutation('/api/make', createCake);
   const { showError } = useErrorPopup(() => router.replace('/make?step=shape'));
 
   const targetUser = useMemo(() => getLocalStorage<string>('rolling-cake:userId'), []);
 
   const onCreate = useCallback(async () => {
-    const { shape, letter, ...cake } = mapToObject<CakeStep>(store);
+    const { shape, letter, ...cake } = store;
     const type = shape.toUpperCase() as 'CUSTOM' | 'THEME';
 
     if (!type || !letter.name || !letter.content || !cake || !targetUser) {
@@ -34,7 +33,7 @@ const StepComplete = () => {
     }
 
     try {
-      await trigger<CakeStep>({
+      await trigger({
         type,
         cake,
         letter,
@@ -86,6 +85,4 @@ const StepComplete = () => {
       {isMutating && <Loading />}
     </GradientContainer>
   );
-};
-
-export default StepComplete;
+}

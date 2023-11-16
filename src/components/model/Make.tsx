@@ -1,4 +1,4 @@
-import { useEntireStep, useStep } from '@/hooks/make';
+import { useStepStore } from '@/hooks/make';
 import { CameraControls, Center } from '@react-three/drei';
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
@@ -8,10 +8,10 @@ import TopCream from './TopCream';
 const { DEG2RAD } = THREE.MathUtils;
 
 const MakeCanvas = () => {
-  const { current: step } = useEntireStep();
+  const { store, step } = useStepStore<CustomCake>();
 
   // const { camera } = useThree();
-  const { store } = useStep();
+  // const { store } = useStep();
 
   const cameraControlsRef = useRef<CameraControls | null>(null);
 
@@ -64,11 +64,11 @@ const MakeCanvas = () => {
   // });
 
   useEffect(() => {
-    if (!step?.value || !cameraControlsRef.current) {
+    if (!step || !cameraControlsRef.current) {
       return;
     }
 
-    switch (step.value) {
+    switch (step) {
       case 'cream_top':
         cameraControlsRef.current?.rotate(0, -120 * DEG2RAD, true);
         break;
@@ -81,7 +81,7 @@ const MakeCanvas = () => {
       default:
         cameraControlsRef.current?.reset(true);
     }
-  }, [step?.value]);
+  }, [step]);
 
   return (
     <>
@@ -99,11 +99,10 @@ const MakeCanvas = () => {
       <ambientLight intensity={1.5} />
 
       <Center>
-        <CakeModel cakeColor={(store.get('sheet') as CustomCake['sheet']).color as Color} />
+        <CakeModel cakeColor={store.sheet.color} />
       </Center>
 
       <TopCream />
-      {/* <TopCream color={store.get('cream_top').color} color={'ivory'} /> */}
     </>
   );
 };

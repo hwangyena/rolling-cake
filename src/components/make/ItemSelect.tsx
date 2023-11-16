@@ -5,18 +5,19 @@ import { Swiper as SwiperType } from 'swiper';
 import { FreeMode } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import { useStepStore } from '@/hooks/make';
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import CheckButton from '../common/CheckButton';
-import { useStep } from '@/hooks/make';
+import { isObject } from '@/lib/utils';
 
 type Props = {
-  data: (keyof typeof SELECT_ITEM)[];
+  data: Item[];
   noLabel?: boolean;
 };
 
 const ItemSelect = ({ data, noLabel }: Props) => {
-  const { store, onUpdate, step } = useStep();
+  const { step, store, onStoreUpdate } = useStepStore();
 
   const [tab, setTab] = useState(data[0]);
   const [selected, setSelected] = useState<number[]>([]);
@@ -34,30 +35,34 @@ const ItemSelect = ({ data, noLabel }: Props) => {
   }, [tab]);
 
   useEffect(() => {
-    const selectedValue = (store.get(step) as Record<string, unknown>)[tab];
-    const selectedIndex = SELECT_ITEM[tab].data.findIndex((v) => v === selectedValue);
+    const storedValue = store[step];
 
-    if (selectedIndex !== -1) {
-      setSelected([selectedIndex]);
+    if (!isObject(storedValue)) {
       return;
     }
 
-    if (tab === 'item') {
-      if (selectedValue && (selectedValue as string[]).length > 0) {
-        const itemIndex = [];
+    // FIXME: best practice ???
+    const selectedValue = (storedValue as unknown as Record<Item, unknown>)[tab];
+    const selectedIndex = SELECT_ITEM[tab].data.findIndex((v) => v === selectedValue);
 
-        for (const item of selectedValue as string[]) {
-          itemIndex.push(SELECT_ITEM.item.data.findIndex((v) => v === item));
-        }
-        setSelected(itemIndex);
-      } else {
-        setSelected([]);
+    if (tab === 'item') {
+      if (!selectedValue || (selectedValue as string[]).length === 0) {
+        return;
       }
+
+      const itemIndex = [];
+      for (const item of selectedValue as string[]) {
+        itemIndex.push(SELECT_ITEM.item.data.findIndex((v) => v === item));
+      }
+      setSelected(itemIndex);
+      return;
     }
+
+    setSelected([selectedIndex]);
   }, [step, store, tab]);
 
-  const handleItemClicked = (selected: { value: string; index: number }) => {
-    onUpdate({ [tab]: selected.value });
+  const handleItemClicked = (value: string) => {
+    onStoreUpdate({ [tab]: value });
   };
 
   return (
@@ -85,9 +90,9 @@ const ItemSelect = ({ data, noLabel }: Props) => {
         onSwiper={(swiper) => (swiperRef.current = swiper)}>
         {SELECT_ITEM[tab].data.map((item, index) => (
           <SwiperSlide
-            className={styles.selectbox}
             key={item}
-            onClick={() => handleItemClicked({ value: item, index })}>
+            className={styles.selectbox}
+            onClick={() => handleItemClicked(item)}>
             <CheckButton item={item} selected={selected.includes(index)} type={tab} />
           </SwiperSlide>
         ))}

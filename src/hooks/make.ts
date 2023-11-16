@@ -1,90 +1,84 @@
-import { CUSTOM_STEP, STEP, STEP_CUSTOM_INIT, STEP_THEME_INIT, THEME_STEP } from '@/lib/constant';
-import { popupAtom, stepAtom } from '@/lib/store';
-import { md } from '@/lib/utils';
+import { CUSTOM_STEP, CUSTOM_STEP_STORE, THEME_STEP, THEME_STEP_STORE } from '@/lib/constant';
+import { makeAtom, popupAtom } from '@/lib/store';
+import { isObject } from '@/lib/utils';
 import { useAtom, useSetAtom } from 'jotai';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useCallback, useEffect, useMemo } from 'react';
 
 export const useEntireStep = () => {
-  const searchParams = useSearchParams();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
 
-  const [, dispatch] = useAtom(stepAtom);
-  const [step, setStep] = useState(CUSTOM_STEP);
-
-  useEffect(() => {
-    dispatch(new Map(Object.entries(STEP_CUSTOM_INIT)));
-  }, [dispatch]);
+  const [store, dispatch] = useAtom(makeAtom);
 
   useEffect(() => {
-    const params = searchParams?.get('step') as keyof typeof STEP;
+    const params = searchParams?.get('step');
+
+    if (pathname === '/make/complete') {
+      return;
+    }
 
     if (!params) {
       router.replace('/make?step=shape');
     }
-  }, [router, searchParams]);
+  }, [pathname, router, searchParams]);
 
-  const current = useMemo(() => {
-    const params = searchParams?.get('step') as keyof typeof STEP;
+  const isTheme = useMemo(() => Object.hasOwn(store, 'theme'), [store]);
+  const entireStepLength = useMemo((): number => Object.keys(store).length - 1, [store]);
 
-    if (!STEP[params]) {
+  const step = useMemo(() => {
+    const params = searchParams ? searchParams.get('step') : null;
+
+    return params as CakeStepKey;
+  }, [searchParams]);
+
+  const info = useMemo((): (StepDisplay & { order: number }) | null => {
+    if (!step) {
       return null;
     }
 
-    if (params === 'shape') {
-      return {
-        ...STEP[params],
-        value: 'shape',
-        order: 0,
-        nextPath: step.includes('sheet') ? 'sheet' : 'theme',
-      };
-    }
+    const stepForScreen = isTheme ? THEME_STEP : CUSTOM_STEP;
+    const order = Object.keys(store).findIndex((v) => v === step);
 
-    return {
-      ...STEP[params],
-      value: params,
-      order: step.findIndex((v) => v === params) + 1,
-    };
-  }, [searchParams, step]);
+    return { ...stepForScreen[step as keyof typeof store], order };
+  }, [isTheme, step, store]);
 
   const onEntireStepChanged = useCallback(
     (value: 'CUSTOM' | 'THEME') => {
-      const entireStep = value === 'CUSTOM' ? CUSTOM_STEP : THEME_STEP;
-      const step = value === 'CUSTOM' ? STEP_CUSTOM_INIT : STEP_THEME_INIT;
+      const isCustom = value === 'CUSTOM';
 
-      setStep(entireStep);
-      dispatch(
-        md(new Map(Object.entries(step)), [['shape', value === 'CUSTOM' ? 'custom' : 'theme']]),
-      );
+      dispatch(isCustom ? CUSTOM_STEP_STORE : THEME_STEP_STORE);
     },
     [dispatch],
   );
 
-  return { step, current, onEntireStepChanged };
+  return { info, step, isTheme, entireStepLength, onEntireStepChanged };
 };
 
-export const useStep = () => {
-  const [store, dispatch] = useAtom(stepAtom);
-  const searchParams = useSearchParams();
+export const useStepStore = <T extends CakeStep>() => {
+  const { step } = useEntireStep();
 
-  const step = useMemo(() => searchParams?.get('step') as keyof typeof STEP, [searchParams]);
+  const [store, dispatch] = useAtom(makeAtom);
 
-  const onUpdate = useCallback(
-    (data: Record<string, string | boolean> | string) => {
-      if (step === 'more') {
-        const prev = (store.get('more') as Record<'item', string[]>).item;
-        const cur = (data as Record<'item', string>).item;
-        const newItem = prev.includes(cur) ? prev.filter((v) => v !== cur) : [...prev, cur];
+  const onStoreUpdate = useCallback(
+    (value: Record<string, unknown> | string) => {
+      const prevValue = store[step as keyof typeof store];
+      let newItem = isObject(prevValue) && isObject(value) ? { ...prevValue, ...value } : value;
 
-        dispatch(md(store, [[step, { item: newItem }]]));
-      } else {
-        dispatch(md(store, [[step, data]]));
+      if ((step as CakeStepKey) === 'more') {
+        const prev = (store as CustomCake).more.item;
+        const cur = (value as { item: CakeItem }).item;
+
+        newItem = { item: prev.includes(cur) ? prev.filter((v) => v !== cur) : [...prev, cur] };
       }
+
+      dispatch((prev) => ({ ...prev, [step]: newItem }));
     },
     [dispatch, step, store],
   );
 
-  return { store, onUpdate, step };
+  return { store: store as T, step: step as keyof T, onStoreUpdate };
 };
 
 export const useBlock = () => {

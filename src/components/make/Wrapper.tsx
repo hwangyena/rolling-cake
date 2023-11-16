@@ -10,14 +10,12 @@ import { useBlock } from '@/hooks/make';
 import { useAtom } from 'jotai';
 import { stepValidAtom } from '@/lib/store';
 
-type Props = {
+type Props = StepDisplay & {
   order?: number;
   orderLength: number;
-  title: string;
-  nextStep: string | null;
 };
 
-const Wrapper = ({ order, orderLength, title, children, nextStep }: PropsWithChildren<Props>) => {
+const Wrapper = ({ order, orderLength, title, children, next }: PropsWithChildren<Props>) => {
   const router = useRouter();
 
   const [disabled] = useAtom(stepValidAtom);
@@ -25,11 +23,16 @@ const Wrapper = ({ order, orderLength, title, children, nextStep }: PropsWithChi
   const { trigger } = useEvent('make:next-step');
 
   const onNextClicked = useCallback(() => {
-    router.push(`/make?step=${nextStep}`);
-    trigger();
-  }, [nextStep, router, trigger]);
+    if (next === 'complete') {
+      router.push(`/make/complete`);
+      return;
+    }
 
-  if (!nextStep) {
+    router.push(`/make?step=${next}`);
+    trigger();
+  }, [next, router, trigger]);
+
+  if (!next) {
     return <>{children}</>;
   }
 

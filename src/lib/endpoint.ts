@@ -7,11 +7,11 @@ export async function createCake(
   }: {
     arg: {
       type: 'CUSTOM' | 'THEME';
-      cake: CustomCake | ThemeCake;
+      cake: ExcludeLetter;
       userId: string;
       letter: Letter;
     };
-  }
+  },
 ) {
   return await axios.post(url, arg);
 }
