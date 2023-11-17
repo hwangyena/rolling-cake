@@ -21,8 +21,7 @@ const CakeModel = ({ cakeColor }: { cakeColor: Color }) => {
   }, [cakeColor]);
 
   return (
-    <>
-      {/* <group position={[3, -13, 10]} rotation-z={0.13}> */}
+    <group rotation-z={0.13} position={[0, -0.2, 0]}>
       <mesh
         ref={cakeRef}
         geometry={nodes.cake.geometry}
@@ -44,8 +43,7 @@ const CakeModel = ({ cakeColor }: { cakeColor: Color }) => {
         rotation={[1.589, -0.134, 0.482]}
         scale={0.269}
       />
-    </>
-    // </group>
+    </group>
   );
 };
 

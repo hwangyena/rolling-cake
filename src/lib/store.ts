@@ -1,17 +1,17 @@
 import { atom } from 'jotai';
-import { STEP_CUSTOM_INIT } from './constant';
+import { CUSTOM_STEP_STORE } from './constant';
 
 /** Common */
 export const popupAtom = atom<Popup | null>(null);
 export const popupStore = atom<Popup | null, [Popup | null], void>(
   (get) => get(popupAtom),
-  (_get, set, action) => set(popupAtom, action)
+  (_get, set, action) => set(popupAtom, action),
 );
 
 export const focusInputAtom = atom<FocusInput | null>(null);
 export const focusInputStore = atom<FocusInput | null, [FocusInput | null], void>(
   (get) => get(focusInputAtom),
-  (_get, set, action) => set(focusInputAtom, action)
+  (_get, set, action) => set(focusInputAtom, action),
 );
 
 export const snackBarAtom = atom<Snackbar | null>(null);
@@ -19,7 +19,7 @@ export const snackBarAtom = atom<Snackbar | null>(null);
 /** Step */
 // TODO: type more detail
 export const stepAtom = atom<Map<string, string | Record<string, unknown>>>(
-  new Map(Object.entries(STEP_CUSTOM_INIT))
+  new Map(Object.entries(CUSTOM_STEP_STORE)),
 );
 
 export const stepStore = atom<
@@ -28,10 +28,13 @@ export const stepStore = atom<
   void
 >(
   (get) => get(stepAtom),
-  (_get, set, action) => set(stepAtom, action)
+  (_get, set, action) => set(stepAtom, action),
 );
 
 export const stepValidAtom = atom(false);
+
+// export const makeAtom = atom<MakeAtomType<ThemeCakeStep>>(STEP_CUSTOM_INIT);
+export const makeAtom = atom<CakeStep>(CUSTOM_STEP_STORE);
 
 /** Client Storage */
 type LocalKey = 'rolling-cake:userId' | 'rolling-cake:isMake';

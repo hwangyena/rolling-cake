@@ -29,10 +29,3 @@ type Filter = {
   label: string;
   value: string;
 };
-
-/* Make page */
-type Step = {
-  title: string;
-  nextPath: string | null;
-  select?: (keyof typeof SELECT_ITEM)[];
-};

@@ -1,14 +1,14 @@
 import { useEvent } from '@/hooks/common';
-import { useStep } from '@/hooks/make';
 import { stepValidAtom } from '@/lib/store';
 import { useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 
 import Lock from '../style/Lock';
 import ShadowCard from '../style/ShadowCard';
+import { useStepStore } from '@/hooks/make';
 
 const StepLetter = () => {
-  const { store, onUpdate } = useStep();
+  const { store, onStoreUpdate } = useStepStore();
   const dispatchValid = useSetAtom(stepValidAtom);
 
   const [name, setName] = useState('');
@@ -16,7 +16,7 @@ const StepLetter = () => {
   const [lock, setLock] = useState(true);
 
   useEvent('make:next-step', () => {
-    onUpdate({
+    onStoreUpdate({
       name,
       content,
       isPrivate: lock,
@@ -24,15 +24,7 @@ const StepLetter = () => {
   });
 
   useEffect(() => {
-    const {
-      name,
-      content,
-      isPrivate: lock,
-    } = store.get('letter') as {
-      name: string;
-      content: string;
-      isPrivate: boolean;
-    };
+    const { name, content, isPrivate: lock } = store.letter;
 
     setName(name);
     setContent(content);

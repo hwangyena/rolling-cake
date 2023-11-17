@@ -1,4 +1,4 @@
-export const isObject = (value: unknown) => {
+export const isObject = (value: unknown): value is Record<string, unknown> => {
   if (typeof value === 'object' && !Array.isArray(value) && value !== null) {
     return true;
   } else {
@@ -59,39 +59,6 @@ export const cn = (...names: unknown[]): string => {
   }, '');
 
   return built.trim();
-};
-
-export const md = (
-  prev: Map<string, string | Record<string, unknown>>,
-  value: [string, string | Record<string, unknown>][],
-) => {
-  const m = new Map(prev);
-
-  value.forEach((v) => {
-    const [key, value] = v;
-
-    const prev = m.get(key);
-    if (prev && isObject(prev) && isObject(value)) {
-      m.set(key, { ...(prev as Record<string, unknown>), ...(value as Record<string, unknown>) });
-      return;
-    }
-
-    m.set(key, value);
-  });
-
-  return m;
-};
-
-export const mapToObject = <T>(map: Map<string, unknown>): T => {
-  const value = Array.from(map.entries());
-  const obj: T = {} as T;
-
-  for (const item of value) {
-    const [key, value] = item;
-    obj[key as keyof T] = value as T[keyof T];
-  }
-
-  return obj;
 };
 
 export const getBaseUrl = () => {
