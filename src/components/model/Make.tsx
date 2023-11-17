@@ -102,7 +102,7 @@ const MakeCanvas = () => {
         <CakeModel cakeColor={store.sheet.color} />
       </Center>
 
-      <TopCream />
+      {store.cream_top.cream !== 'none' && <TopCream {...store.cream_top} />}
     </>
   );
 };
