@@ -1,6 +1,5 @@
 'use client';
 
-import { useEvent } from '@/hooks/common';
 import { useRouter } from 'next/navigation';
 import { PropsWithChildren, useCallback } from 'react';
 import GradientContainer from '../GradientContainer';
@@ -20,7 +19,6 @@ const Wrapper = ({ order, orderLength, title, children, next }: PropsWithChildre
 
   const [disabled] = useAtom(stepValidAtom);
   const { onBackClicked } = useBlock();
-  const { trigger } = useEvent('make:next-step');
 
   const onNextClicked = useCallback(() => {
     if (next === 'complete') {
@@ -29,8 +27,7 @@ const Wrapper = ({ order, orderLength, title, children, next }: PropsWithChildre
     }
 
     router.push(`/make?step=${next}`);
-    trigger();
-  }, [next, router, trigger]);
+  }, [next, router]);
 
   if (!next) {
     return <>{children}</>;
@@ -41,7 +38,7 @@ const Wrapper = ({ order, orderLength, title, children, next }: PropsWithChildre
       <main className="relative flex h-full w-full flex-col">
         <header className="flex flex-col items-center justify-center gap-8 pt-[40px]">
           <mark
-            className={`gray-gradient rounded-[20px] border px-[16px] py-[2px] font-neo text-t2 no-underline ${
+            className={`gray-gradient cursor-auto rounded-[20px] border px-[16px] py-[2px] font-neo text-t2 no-underline ${
               order ? '' : 'invisible'
             }`}>
             {order}/{orderLength}

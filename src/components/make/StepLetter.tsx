@@ -1,4 +1,4 @@
-import { useEvent } from '@/hooks/common';
+import { useDebounce } from '@/hooks/common';
 import { stepValidAtom } from '@/lib/store';
 import { useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
@@ -15,25 +15,35 @@ const StepLetter = () => {
   const [content, setContent] = useState('');
   const [lock, setLock] = useState(true);
 
-  useEvent('make:next-step', () => {
-    onStoreUpdate({
-      name,
-      content,
-      isPrivate: lock,
-    });
-  });
+  const debounceName = useDebounce(name);
+  const debounceContent = useDebounce(content);
 
   useEffect(() => {
-    const { name, content, isPrivate: lock } = store.letter;
+    if (store.letter.name !== debounceName) {
+      onStoreUpdate({ name: debounceName });
+    }
+  }, [debounceName, onStoreUpdate, store.letter.name]);
+  useEffect(() => {
+    if (store.letter.content !== debounceContent) {
+      onStoreUpdate({ content: debounceContent });
+    }
+  }, [debounceContent, onStoreUpdate, store.letter.content]);
 
-    setName(name);
-    setContent(content);
-    setLock(lock);
+  useEffect(() => {
+    if (name.length > 0 || content.length > 0) {
+      return;
+    }
+
+    const { name: storeName, content: storeContent, isPrivate: storeLock } = store.letter;
+
+    setName(storeName);
+    setContent(storeContent);
+    setLock(storeLock);
 
     return () => {
       dispatchValid(false);
     };
-  }, [dispatchValid, store]);
+  }, [content, dispatchValid, name, store]);
 
   useEffect(() => {
     if (!name || !content) {
@@ -46,6 +56,7 @@ const StepLetter = () => {
 
   const handleToggleLock = () => {
     setLock((p) => !p);
+    onStoreUpdate({ isPrivate: !lock });
   };
 
   return (

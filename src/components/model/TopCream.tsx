@@ -1,21 +1,10 @@
-import { useGLTF } from '@react-three/drei';
-import { MeshProps } from '@react-three/fiber';
-import { useMemo } from 'react';
+import { memo, useMemo } from 'react';
+import Cream from './Cream';
 
-// const TopCream = ({ color, cream }: { color: Color; cream: CakeCream }) => {
-const TopCream = () => {
-  const { nodes, materials } = useGLTF('/models/cream-basic.glb') as GLTFRes;
-
-  const creamProps: MeshProps = useMemo(
-    () => ({
-      castShadow: true,
-      receiveShadow: true,
-      geometry: nodes.cream.geometry,
-      material: materials['Material.005'],
-      rotation: [-1.602, -0.03, 0.68],
-      scale: [-236.37, -235.475, -329.143],
-    }),
-    [materials, nodes.cream.geometry],
+const TopCream = (props: { cream: CakeCream; color: Color }) => {
+  const yPosition = useMemo(
+    () => (['heart', 'chocolate'].includes(props.cream) ? 30.8 : 26.191),
+    [props.cream],
   );
 
   // const cream1 = useControls('position1', {
@@ -50,53 +39,54 @@ const TopCream = () => {
   //   x: { value: -24, min: -30, max: 30, step: 0.1 },
   //   z: { value: -1.9, min: -30, max: 30, step: 0.1 },
   // });
+  // const { yPosition } = useControls('position7', {
+  //   yPosition: { value: 30.8, min: -30, max: 50, step: 0.1 },
+  // });
 
   return (
     <group position={[0, 0.6, 0]} scale={0.063}>
-      <mesh
-        {...creamProps}
-        position={[2.9, 26.191, -24]}
+      <Cream
+        {...props}
+        position={[2.9, yPosition, -24]}
         // position={[cream1.x, 26.191, cream1.z]}
       />
-      <mesh
-        {...creamProps}
-        position={[19.6, 26.191, -15]}
+      <Cream
+        {...props}
+        position={[19.6, yPosition, -15]}
         // position={[cream2.x, 26.191, cream2.z]}
       />
-      <mesh
-        {...creamProps}
-        position={[26.4, 26.191, 0.2]}
+      <Cream
+        {...props}
+        position={[26.4, yPosition, 0.2]}
         // position={[cream3.x, 26.191, cream3.z]}
       />
-      <mesh
-        {...creamProps}
-        position={[18.7, 26.191, 16.2]}
+      <Cream
+        {...props}
+        position={[18.7, yPosition, 16.2]}
         // position={[cream4.x, 26.191, cream4.z]}
       />
-      <mesh
-        {...creamProps}
-        position={[0.1, 26.191, 24.5]}
+      <Cream
+        {...props}
+        position={[0.1, yPosition, 24.5]}
         // position={[cream5.x, 26.191, cream5.z]}
       />
-      <mesh
-        {...creamProps}
-        position={[-15, 26.191, -17]}
+      <Cream
+        {...props}
+        position={[-15, yPosition, -17]}
         // position={[cream6.x, 26.191, cream6.z]}
       />
-      <mesh
-        {...creamProps}
-        position={[-18, 26.191, 16.2]}
+      <Cream
+        {...props}
+        position={[-18, yPosition, 16.2]}
         // position={[cream7.x, 26.191, cream7.z]}
       />
-      <mesh
-        {...creamProps}
-        position={[-24, 26.191, -1.9]}
+      <Cream
+        {...props}
+        position={[-24, yPosition, -1.9]}
         // position={[cream8.x, 26.191, cream8.z]}
       />
     </group>
   );
 };
 
-useGLTF.preload('/models/cream-basic.glb');
-
-export default TopCream;
+export default memo(TopCream);

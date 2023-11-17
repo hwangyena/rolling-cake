@@ -17,23 +17,8 @@ export const focusInputStore = atom<FocusInput | null, [FocusInput | null], void
 export const snackBarAtom = atom<Snackbar | null>(null);
 
 /** Step */
-// TODO: type more detail
-export const stepAtom = atom<Map<string, string | Record<string, unknown>>>(
-  new Map(Object.entries(CUSTOM_STEP_STORE)),
-);
-
-export const stepStore = atom<
-  Map<string, string | Record<string, unknown>>,
-  [Map<string, string | Record<string, unknown>>],
-  void
->(
-  (get) => get(stepAtom),
-  (_get, set, action) => set(stepAtom, action),
-);
-
 export const stepValidAtom = atom(false);
 
-// export const makeAtom = atom<MakeAtomType<ThemeCakeStep>>(STEP_CUSTOM_INIT);
 export const makeAtom = atom<CakeStep>(CUSTOM_STEP_STORE);
 
 /** Client Storage */
