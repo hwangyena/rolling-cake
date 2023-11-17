@@ -41,7 +41,7 @@ const Wrapper = ({ order, orderLength, title, children, next }: PropsWithChildre
       <main className="relative flex h-full w-full flex-col">
         <header className="flex flex-col items-center justify-center gap-8 pt-[40px]">
           <mark
-            className={`gray-gradient rounded-[20px] border px-[16px] py-[2px] font-neo text-t2 no-underline ${
+            className={`gray-gradient cursor-auto rounded-[20px] border px-[16px] py-[2px] font-neo text-t2 no-underline ${
               order ? '' : 'invisible'
             }`}>
             {order}/{orderLength}

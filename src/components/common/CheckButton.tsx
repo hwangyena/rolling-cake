@@ -41,7 +41,7 @@ const Item = ({
   style,
 }: PropsWithChildren<{ selected: boolean; style?: CSSProperties }>) => {
   return (
-    <div className={`relative h-full w-full `}>
+    <div className="relative h-full w-full cursor-pointer">
       <div
         className={`relative h-full w-full ${selected ? styles['step-box-selected'] : ''}`}
         style={style}>

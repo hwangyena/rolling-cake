@@ -72,7 +72,9 @@ const ItemSelect = ({ data, noLabel }: Props) => {
           {data.map((tabItem) => (
             <span
               key={tabItem}
-              className={`text-t1 font-bold ${tabItem === tab ? 'text-gray-700' : 'text-gray-500'}`}
+              className={`cursor-pointer text-t1 font-bold ${
+                tabItem === tab ? 'text-gray-700' : 'text-gray-500'
+              }`}
               onClick={() => setTab(tabItem)}>
               {SELECT_ITEM[tabItem].label}
             </span>
