@@ -1,8 +1,8 @@
 import { popupAtom } from '@/lib/store';
 import { useSetAtom } from 'jotai';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
-type EventType = 'make:next-step';
+type EventType = '';
 
 const target = new EventTarget();
 
@@ -35,4 +35,29 @@ export const useErrorPopup = (callback?: () => void) => {
   };
 
   return { showError };
+};
+
+export const useDebounce = <T>(value: T, delay = 1000) => {
+  const [debounced, setDebounced] = useState(value);
+
+  const timer = useRef<NodeJS.Timeout>();
+
+  useEffect(() => {
+    if (timer.current) {
+      clearTimeout(timer.current);
+    }
+
+    timer.current = setTimeout(() => {
+      setDebounced((p) => {
+        if (p === value) {
+          return p;
+        }
+
+        return value;
+      });
+      timer.current = undefined;
+    }, delay);
+  }, [delay, value]);
+
+  return debounced;
 };

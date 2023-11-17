@@ -1,6 +1,5 @@
 'use client';
 
-import { useEvent } from '@/hooks/common';
 import { useRouter } from 'next/navigation';
 import { PropsWithChildren, useCallback } from 'react';
 import GradientContainer from '../GradientContainer';
@@ -20,7 +19,6 @@ const Wrapper = ({ order, orderLength, title, children, next }: PropsWithChildre
 
   const [disabled] = useAtom(stepValidAtom);
   const { onBackClicked } = useBlock();
-  const { trigger } = useEvent('make:next-step');
 
   const onNextClicked = useCallback(() => {
     if (next === 'complete') {
@@ -29,8 +27,7 @@ const Wrapper = ({ order, orderLength, title, children, next }: PropsWithChildre
     }
 
     router.push(`/make?step=${next}`);
-    trigger();
-  }, [next, router, trigger]);
+  }, [next, router]);
 
   if (!next) {
     return <>{children}</>;
