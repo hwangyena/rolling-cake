@@ -1,7 +1,7 @@
-import * as THREE from 'three';
 import { getCakeBg } from '@/lib/utils';
 import { useGLTF } from '@react-three/drei';
 import { useEffect, useRef, useState } from 'react';
+import * as THREE from 'three';
 
 const CakeModel = ({ cakeColor }: { cakeColor: Color }) => {
   const { nodes } = useGLTF('/models/cake.glb') as GLTFRes;
@@ -20,7 +20,7 @@ const CakeModel = ({ cakeColor }: { cakeColor: Color }) => {
   }, [cakeColor]);
 
   return (
-    <group rotation-z={0.13} position={[0, -0.2, 0]}>
+    <group rotation-z={0.13} rotation-x={-0.02} position={[0, 0.2, -0.5]}>
       <mesh
         ref={cakeRef}
         geometry={nodes.cake.geometry}

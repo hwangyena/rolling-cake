@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import CakeModel from './Cake';
 import TopCream from './TopCream';
+import SideCream from './SideCream';
 
 const { DEG2RAD } = THREE.MathUtils;
 
@@ -103,6 +104,7 @@ const MakeCanvas = () => {
       </Center>
 
       {store.cream_top.cream !== 'none' && <TopCream {...store.cream_top} />}
+      {store.cream_side.cream !== 'none' && <SideCream {...store.cream_side} />}
     </>
   );
 };
