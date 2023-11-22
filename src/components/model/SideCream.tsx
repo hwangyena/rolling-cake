@@ -1,7 +1,8 @@
 import { memo } from 'react';
 import Cream from './Cream';
+import { useControls } from 'leva';
 
-// const positionProps = { min: -70, max: 70, step: 0.1 };
+const positionProps = { min: -150, max: 150, step: 0.1 };
 const sidePosition = [
   [-26, 38.1],
   [-17, 43.3],
@@ -49,13 +50,15 @@ const SideCream = (props: { cream: CakeCream; color: Color }) => {
   //   yPosition: { value: -1.4, min: -10, max: 10, step: 0.1 },
   // });
 
-  // const cream1 = useControls('position1', {
-  //   x: { value: 44.2, ...positionProps },
-  //   z: { value: -19.0, ...positionProps },
-  // });
+  const cream1 = useControls('position1', {
+    x: { value: 44.2, ...positionProps },
+    z: { value: -19.0, ...positionProps },
+  });
 
   return (
-    <group position={[0, 0.6, 0]} scale={0.05}>
+    // TODO: scale 조절 / heart 옆면에 붙이기
+    <group position={[0, 0.6, 0]} scale={0.04}>
+      {/* <group position={[0, 0.6, 0]} scale={0.05}> */}
       {sidePosition.map(([x, z], i) => (
         <Cream
           key={i}
@@ -64,7 +67,7 @@ const SideCream = (props: { cream: CakeCream; color: Color }) => {
           // position={[cream1.x, yPosition, cream1.z]}
         />
       ))}
-      {/* <Cream {...props} position={[cream1.x, yPosition, cream1.z]} /> */}
+      <Cream {...props} position={[cream1.x, yPosition.basic, cream1.z]} />
     </group>
   );
 };

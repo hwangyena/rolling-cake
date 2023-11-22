@@ -5,6 +5,12 @@ import * as THREE from 'three';
 import CakeModel from './Cake';
 import TopCream from './TopCream';
 import SideCream from './SideCream';
+import GingerBreadModel from './items/GingerBread';
+import CookieModel from './items/Cookie';
+import CandleModel from './items/Candle';
+import CherryModel from './items/Cherry';
+import HeartModel from './items/Heart';
+import ScrewCandleModel from './items/ScrewCandle';
 
 const { DEG2RAD } = THREE.MathUtils;
 
@@ -103,8 +109,16 @@ const MakeCanvas = () => {
         <CakeModel cakeColor={store.sheet.color} />
       </Center>
 
-      {store.cream_top.cream !== 'none' && <TopCream {...store.cream_top} />}
+      {/* {store.cream_top.cream !== 'none' && <TopCream {...store.cream_top} />} */}
+      <TopCream color="ivory" cream="basic" />
       {store.cream_side.cream !== 'none' && <SideCream {...store.cream_side} />}
+
+      <GingerBreadModel />
+      {/* <CookieModel /> */}
+      <CandleModel />
+      <CherryModel />
+      <HeartModel />
+      <ScrewCandleModel />
     </>
   );
 };
