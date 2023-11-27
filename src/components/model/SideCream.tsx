@@ -36,11 +36,11 @@ const sidePosition = [
 ];
 
 const yPosition: Record<CakeCream, number> = {
-  basic: 0.9,
-  screw: -1.4,
-  chocolate: 4.5,
-  crown: 1.2,
-  heart: 3.0,
+  basic: 5.9,
+  screw: 3.4,
+  chocolate: 9.5,
+  crown: 6.2,
+  heart: 8.0,
   none: 0,
 };
 
