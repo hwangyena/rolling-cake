@@ -88,3 +88,17 @@ export const getCakeBg = (color: Color, vivid = true) => {
 
   return vivid ? vividColor[color] : pastel[color];
 };
+
+export const getCirclePosition = (count = 30) => {
+  const coordinates = [];
+  const r = 59;
+
+  for (let i = 0; i < count; i++) {
+    const angle = (2 * Math.PI * i) / count;
+    const [x, y] = [r * Math.cos(angle), r * Math.sin(angle)];
+
+    coordinates.push([x, y]);
+  }
+
+  return coordinates;
+};
