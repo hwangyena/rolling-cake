@@ -12,14 +12,16 @@ type CakeFont = 'kor1' | 'kor2' | 'kor3' | 'eng1' | 'eng2' | 'eng3';
 type CakeTheme = 'SOJU' | 'HARRYPOTER' | 'MONEY' | 'PRINCESS' | 'ANiMAL' | 'PLANT';
 type CakeItem =
   | 'cherry'
-  | 'sunflower'
-  | 'bear'
+  | 'cherry-tree'
   | 'cookie'
   | 'gingerbread'
+  | 'green-candle'
+  | 'green-topper'
   | 'heart'
-  | 'candle'
-  | 'screw-candle'
-  | 'topper';
+  | 'red-candle'
+  | 'red-topper'
+  | 'sunflower'
+  | 'teddy-bear';
 
 type Lettering = { color: Color; font: CakeFont; value: string };
 type Letter = { name: string; content: string; isPrivate: true };
