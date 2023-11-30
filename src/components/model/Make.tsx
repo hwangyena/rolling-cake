@@ -6,6 +6,7 @@ import CakeModel from './Cake';
 import SideCream from './SideCream';
 import TopCream from './TopCream';
 import Item from './items/Item';
+import LetteringModel from './Lettering';
 
 const { DEG2RAD } = THREE.MathUtils;
 
@@ -49,6 +50,8 @@ const MakeCanvas = () => {
       {store.more.item.map((item) => (
         <Item key={item} item={item} />
       ))}
+      {/* {store.lettering.value && <LetteringModel {...store.lettering} />} */}
+      <LetteringModel {...store.lettering} />
     </>
   );
 };
