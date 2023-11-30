@@ -71,9 +71,9 @@ export const getCakeBg = (color: Color, vivid = true) => {
   const vividColor: Record<Color, string> = {
     ivory: '#f9f5bd',
     red: '#ff8c99',
-    green: '#75f580',
+    green: '#28622d',
     blue: '#5adeff',
-    purple: '#cb95fc',
+    purple: '#7d6cd5',
     brown: '#7e5233',
   };
 
@@ -89,9 +89,9 @@ export const getCakeBg = (color: Color, vivid = true) => {
   return vivid ? vividColor[color] : pastel[color];
 };
 
-export const getCirclePosition = (count = 30) => {
+export const getCirclePosition = (r: number, count = 30) => {
   const coordinates = [];
-  const r = 59;
+  // const r = 62;
 
   for (let i = 0; i < count; i++) {
     const angle = (2 * Math.PI * i) / count;
