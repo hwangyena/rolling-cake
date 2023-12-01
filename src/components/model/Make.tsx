@@ -22,14 +22,11 @@ const MakeCanvas = () => {
 
     switch (step) {
       case 'cream_top':
-      case 'letter':
-        cameraControlsRef.current?.rotate(0, -120 * DEG2RAD, true);
+      case 'lettering':
+        cameraControlsRef.current.rotateTo(0, -120 * DEG2RAD, true);
         break;
       case 'more':
-        cameraControlsRef.current?.rotate(0, -20 * DEG2RAD, true);
-        break;
-      case 'lettering':
-        cameraControlsRef.current?.rotate(0, -100 * DEG2RAD, true);
+        cameraControlsRef.current.rotateTo(0, 20 * DEG2RAD, true);
         break;
       default:
         cameraControlsRef.current?.reset(true);
