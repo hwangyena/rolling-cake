@@ -3,14 +3,15 @@ import { CameraControls, Center, Environment } from '@react-three/drei';
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import CakeModel from './Cake';
+import LetteringModel from './Lettering';
 import SideCream from './SideCream';
 import TopCream from './TopCream';
 import Item from './items/Item';
-import LetteringModel from './Lettering';
+import { useControls } from 'leva';
 
 const { DEG2RAD } = THREE.MathUtils;
 
-const MakeCanvas = () => {
+const MakeCanvas = ({ isComplete }: { isComplete?: boolean }) => {
   const { store, step } = useStepStore<CustomCake>();
 
   const cameraControlsRef = useRef<CameraControls | null>(null);
@@ -33,22 +34,40 @@ const MakeCanvas = () => {
     }
   }, [step]);
 
+  useEffect(() => {
+    if (!isComplete) {
+      return;
+    }
+
+    const timer = setInterval(() => {
+      cameraControlsRef.current?.rotate(0.05 * DEG2RAD, 0, false);
+    }, 0);
+
+    return () => clearInterval(timer);
+  });
+  const { y } = useControls({
+    y: { value: -1.25, step: 0.1, min: -5, max: 5 },
+  });
+
   return (
     <>
       <CameraControls ref={cameraControlsRef} />
       <Environment preset="dawn" />
 
-      <Center>
-        <CakeModel cakeColor={store.sheet.color} />
-      </Center>
+      <group scale={isComplete ? 1.3 : 1}>
+        <Center>
+          <CakeModel cakeColor={store.sheet.color} isComplete={isComplete} />
+        </Center>
 
-      {store.cream_top.cream !== 'none' && <TopCream {...store.cream_top} />}
-      {store.cream_side.cream !== 'none' && <SideCream {...store.cream_side} />}
-      {store.more.item.map((item) => (
-        <Item key={item} item={item} />
-      ))}
-      {/* {store.lettering.value && <LetteringModel {...store.lettering} />} */}
-      <LetteringModel {...store.lettering} />
+        <group position={[0, isComplete ? y : 0, 0]}>
+          {store.cream_top.cream !== 'none' && <TopCream {...store.cream_top} />}
+          {store.cream_side.cream !== 'none' && <SideCream {...store.cream_side} />}
+          {store.more.item.map((item) => (
+            <Item key={item} item={item} />
+          ))}
+          {store.lettering.value && <LetteringModel {...store.lettering} />}
+        </group>
+      </group>
     </>
   );
 };

@@ -1,5 +1,7 @@
 'use client';
 
+import * as THREE from 'three';
+
 import { useErrorPopup } from '@/hooks/common';
 import { getLocalStorage, setLocalStorage } from '@/lib/store';
 import { useRouter } from 'next/navigation';
@@ -8,11 +10,12 @@ import useSWRMutation from 'swr/mutation';
 import { createCake } from '@/lib/endpoint';
 import Header from '@/components/common/Header';
 import GradientContainer from '@/components/GradientContainer';
-import Cake from '@/components/cake/Cake';
 import Button from '@/components/common/Button';
 import Loading from '@/components/common/Loading';
 import { useStepStore } from '@/hooks/make';
 import Navigation from '@/components/common/Navigation';
+import MakeCanvas from '@/components/model/Make';
+import { Canvas } from '@react-three/fiber';
 
 export default function Page() {
   const router = useRouter();
@@ -59,8 +62,17 @@ export default function Page() {
     <GradientContainer type="pink-green" className="items-center justify-center overflow-hidden">
       <Navigation show={['<']} className={data ? 'invisible' : ''} />
       <Header>{data ? '케이크를 선물했어요!' : '롤링케이크 완성!'}</Header>
-      <div className="w-[80%] flex-1 p-[10%]">
-        <Cake className="h-full w-full" />
+      <div className="w-full flex-1">
+        <Canvas
+          shadows
+          camera={{
+            fov: 55,
+            near: 0.1,
+            far: 100,
+            position: new THREE.Vector3(0, 3, 9),
+          }}>
+          <MakeCanvas isComplete />
+        </Canvas>
       </div>
       <section className="mb-3 flex w-full flex-col items-center gap-3 px-5">
         {data ? (
@@ -81,7 +93,6 @@ export default function Page() {
           </>
         )}
       </section>
-
       {isMutating && <Loading />}
     </GradientContainer>
   );
