@@ -5,7 +5,6 @@ import * as THREE from 'three';
 import CakeModel from './Cake';
 import SideCream from './SideCream';
 import TopCream from './TopCream';
-import { SunflowerModel } from './items';
 import Item from './items/Item';
 
 const { DEG2RAD } = THREE.MathUtils;
@@ -50,7 +49,6 @@ const MakeCanvas = () => {
       {store.more.item.map((item) => (
         <Item key={item} item={item} />
       ))}
-      <SunflowerModel />
     </>
   );
 };

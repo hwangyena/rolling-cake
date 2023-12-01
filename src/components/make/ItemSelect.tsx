@@ -1,15 +1,16 @@
-import { SELECT_ITEM } from '@/lib/constant';
-import styles from '@/styles/component.module.css';
 import { memo, useEffect, useRef, useState } from 'react';
 import { Swiper as SwiperType } from 'swiper';
 import { FreeMode } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import { SELECT_ITEM } from '@/lib/constant';
+import { isObject } from '@/lib/utils';
+import styles from '@/styles/component.module.css';
 import { useStepStore } from '@/hooks/make';
+import CheckButton from '../common/CheckButton';
+
 import 'swiper/css';
 import 'swiper/css/free-mode';
-import CheckButton from '../common/CheckButton';
-import { isObject } from '@/lib/utils';
 
 type Props = {
   data: Item[];
