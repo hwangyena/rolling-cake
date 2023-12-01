@@ -7,7 +7,6 @@ import LetteringModel from './Lettering';
 import SideCream from './SideCream';
 import TopCream from './TopCream';
 import Item from './items/Item';
-import { useControls } from 'leva';
 
 const { DEG2RAD } = THREE.MathUtils;
 
@@ -45,9 +44,6 @@ const MakeCanvas = ({ isComplete }: { isComplete?: boolean }) => {
 
     return () => clearInterval(timer);
   });
-  const { y } = useControls({
-    y: { value: -1.25, step: 0.1, min: -5, max: 5 },
-  });
 
   return (
     <>
@@ -59,7 +55,7 @@ const MakeCanvas = ({ isComplete }: { isComplete?: boolean }) => {
           <CakeModel cakeColor={store.sheet.color} isComplete={isComplete} />
         </Center>
 
-        <group position={[0, isComplete ? y : 0, 0]}>
+        <group position={[0, isComplete ? -1.25 : 0, 0]}>
           {store.cream_top.cream !== 'none' && <TopCream {...store.cream_top} />}
           {store.cream_side.cream !== 'none' && <SideCream {...store.cream_side} />}
           {store.more.item.map((item) => (
