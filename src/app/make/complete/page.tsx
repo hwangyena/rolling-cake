@@ -15,7 +15,7 @@ import Button from '@/components/common/Button';
 import Loading from '@/components/common/Loading';
 import { useStepStore } from '@/hooks/make';
 import Navigation from '@/components/common/Navigation';
-import MakeCanvas from '@/components/model/Make';
+import CustomCake from '@/components/model/CustomCake';
 import Confetti from '@/components/style/Confetti';
 
 export default function Page() {
@@ -73,7 +73,8 @@ export default function Page() {
             position: new THREE.Vector3(0, 3, 9),
           }}
           style={{ zIndex: 10 }}>
-          <MakeCanvas isComplete />
+          {/* FIXME: after theme cake */}
+          <CustomCake isRotate cake={store as CustomCake} />
         </Canvas>
       </div>
       <section className="mb-3 flex w-full flex-col items-center gap-3 px-5">

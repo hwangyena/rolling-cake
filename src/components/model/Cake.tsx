@@ -3,7 +3,7 @@ import { useGLTF } from '@react-three/drei';
 import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 
-const CakeModel = ({ cakeColor, isComplete }: { cakeColor: Color; isComplete?: boolean }) => {
+const CakeModel = ({ cakeColor, hasStand }: { cakeColor: Color; hasStand?: boolean }) => {
   const { nodes } = useGLTF('/models/cake.glb') as GLTFRes;
 
   const [material, setMaterial] = useState<THREE.MeshStandardMaterial>();
@@ -28,7 +28,7 @@ const CakeModel = ({ cakeColor, isComplete }: { cakeColor: Color; isComplete?: b
         position={[0, 2.598, 0]}
         scale={[1.977, 0.733, 2.003]}
       />
-      {!isComplete && (
+      {!hasStand && (
         <mesh
           geometry={nodes.stand.geometry}
           material={

@@ -1,6 +1,5 @@
-import { useStepStore } from '@/hooks/make';
 import { CameraControls, Center, Environment } from '@react-three/drei';
-import { useEffect, useRef } from 'react';
+import { memo, useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import CakeModel from './Cake';
 import LetteringModel from './Lettering';
@@ -10,9 +9,15 @@ import Item from './items/Item';
 
 const { DEG2RAD } = THREE.MathUtils;
 
-const MakeCanvas = ({ isComplete }: { isComplete?: boolean }) => {
-  const { store, step } = useStepStore<CustomCake>();
-
+const CustomCake = ({
+  cake,
+  step,
+  isRotate,
+}: {
+  cake: CustomCake;
+  step?: keyof CustomCake;
+  isRotate?: boolean;
+}) => {
   const cameraControlsRef = useRef<CameraControls | null>(null);
 
   useEffect(() => {
@@ -34,7 +39,7 @@ const MakeCanvas = ({ isComplete }: { isComplete?: boolean }) => {
   }, [step]);
 
   useEffect(() => {
-    if (!isComplete) {
+    if (!isRotate) {
       return;
     }
 
@@ -50,22 +55,22 @@ const MakeCanvas = ({ isComplete }: { isComplete?: boolean }) => {
       <CameraControls ref={cameraControlsRef} />
       <Environment preset="dawn" />
 
-      <group scale={isComplete ? 1.3 : 1}>
+      <group scale={isRotate ? 1.3 : 1}>
         <Center>
-          <CakeModel cakeColor={store.sheet.color} isComplete={isComplete} />
+          <CakeModel cakeColor={cake.sheet.color} hasStand={isRotate} />
         </Center>
 
-        <group position={[0, isComplete ? -1.25 : 0, 0]}>
-          {store.cream_top.cream !== 'none' && <TopCream {...store.cream_top} />}
-          {store.cream_side.cream !== 'none' && <SideCream {...store.cream_side} />}
-          {store.more.item.map((item) => (
+        <group position={[0, isRotate ? -1.25 : 0, 0]}>
+          {cake.cream_top.cream !== 'none' && <TopCream {...cake.cream_top} />}
+          {cake.cream_side.cream !== 'none' && <SideCream {...cake.cream_side} />}
+          {cake.more.item.map((item) => (
             <Item key={item} item={item} />
           ))}
-          {store.lettering.value && <LetteringModel {...store.lettering} />}
+          {cake.lettering.value && <LetteringModel {...cake.lettering} />}
         </group>
       </group>
     </>
   );
 };
 
-export default MakeCanvas;
+export default memo(CustomCake);
