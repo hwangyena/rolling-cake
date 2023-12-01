@@ -10,8 +10,6 @@ export default async function CakeDetail({ params }: { params: { id: string } })
   const user = await getUser(cake ? cake.userId : '');
   const currentUser = await getCurrentUser();
 
-  console.log('cake', cake);
-
   if (!cake || !user) {
     return notFound();
   }

@@ -1,6 +1,7 @@
+import * as THREE from 'three';
+import { useFrame } from '@react-three/fiber';
 import { CameraControls, Center, Environment } from '@react-three/drei';
 import { memo, useEffect, useRef } from 'react';
-import * as THREE from 'three';
 import CakeModel from './Cake';
 import LetteringModel from './Lettering';
 import SideCream from './SideCream';
@@ -19,6 +20,7 @@ const CustomCake = ({
   isRotate?: boolean;
 }) => {
   const cameraControlsRef = useRef<CameraControls | null>(null);
+  const cakeRef = useRef<THREE.Group>(null);
 
   useEffect(() => {
     if (!step || !cameraControlsRef.current) {
@@ -38,16 +40,10 @@ const CustomCake = ({
     }
   }, [step]);
 
-  useEffect(() => {
-    if (!isRotate) {
-      return;
+  useFrame(() => {
+    if (cakeRef.current && isRotate) {
+      cakeRef.current.rotation.y += 0.005;
     }
-
-    const timer = setInterval(() => {
-      cameraControlsRef.current?.rotate(0.05 * DEG2RAD, 0, false);
-    }, 0);
-
-    return () => clearInterval(timer);
   });
 
   return (
@@ -55,7 +51,7 @@ const CustomCake = ({
       <CameraControls ref={cameraControlsRef} />
       <Environment preset="dawn" />
 
-      <group scale={isRotate ? 1.3 : 1}>
+      <group scale={isRotate ? 1.3 : 1} ref={cakeRef}>
         <Center>
           <CakeModel cakeColor={cake.sheet.color} hasStand={isRotate} />
         </Center>
