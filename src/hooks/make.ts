@@ -3,7 +3,7 @@ import { makeAtom, popupAtom } from '@/lib/store';
 import { isObject } from '@/lib/utils';
 import { useAtom, useSetAtom } from 'jotai';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useCallback, useEffect, useMemo } from 'react';
+import { startTransition, useCallback, useEffect, useMemo } from 'react';
 
 export const useEntireStep = () => {
   const router = useRouter();
@@ -73,7 +73,7 @@ export const useStepStore = <T extends CakeStep>() => {
         newItem = { item: prev.includes(cur) ? prev.filter((v) => v !== cur) : [...prev, cur] };
       }
 
-      dispatch((prev) => ({ ...prev, [step]: newItem }));
+      startTransition(() => dispatch((prev) => ({ ...prev, [step]: newItem })));
     },
     [dispatch, step, store],
   );

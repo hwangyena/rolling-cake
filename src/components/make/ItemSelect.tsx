@@ -47,7 +47,7 @@ const ItemSelect = ({ data, noLabel }: Props) => {
     const selectedIndex = SELECT_ITEM[tab].data.findIndex((v) => v === selectedValue);
 
     if (tab === 'item') {
-      if (!selectedValue || (selectedValue as string[]).length === 0) {
+      if (!selectedValue) {
         return;
       }
 

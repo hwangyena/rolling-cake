@@ -4,7 +4,6 @@ import ClientOnly from '@/components/ClientOnly';
 import Step from '@/components/common/Step';
 import StepCommon from '@/components/make/StepCommon';
 import StepLetter from '@/components/make/StepLetter';
-import StepLettering from '@/components/make/StepLettering';
 import StepShape from '@/components/make/StepShape';
 import StepTheme from '@/components/make/StepTheme';
 import Wrapper from '@/components/make/Wrapper';
@@ -12,6 +11,7 @@ import { useEntireStep } from '@/hooks/make';
 import { getLocalStorage } from '@/lib/store';
 import { useMemo } from 'react';
 
+// 위치 빨간초 앞부분
 export default function Page() {
   const { info, step, entireStepLength } = useEntireStep();
 
@@ -38,12 +38,9 @@ export default function Page() {
         <Step show={step === 'letter'}>
           <StepLetter />
         </Step>
-        <Step show={step === 'lettering'}>
-          <StepLettering itemSelect={info.select} />
-        </Step>
 
         {/* Custom Cake */}
-        <Step show={['sheet', 'cream_top', 'cream_side', 'more'].includes(step)}>
+        <Step show={['sheet', 'cream_top', 'cream_side', 'more', 'lettering'].includes(step)}>
           <StepCommon itemSelect={info.select} />
         </Step>
       </Wrapper>
