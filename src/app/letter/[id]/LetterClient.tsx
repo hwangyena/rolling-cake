@@ -1,22 +1,31 @@
 'use client';
 
-import Cake from '@/components/cake/Cake';
-import Card from '@/components/common/Card';
-import Header from '@/components/common/Header';
-import { popupAtom } from '@/lib/store';
+import * as THREE from 'three';
+import { Canvas } from '@react-three/fiber';
 import { Cake as CakeType, User } from '@prisma/client';
 import { useSetAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
 import { PropsWithChildren, useCallback, useMemo, useState } from 'react';
-import styles from '@/styles/component.module.css';
+import { popupAtom } from '@/lib/store';
 import { cn } from '@/lib/utils';
+import Card from '@/components/common/Card';
+import Header from '@/components/common/Header';
+import CustomCake from '@/components/model/CustomCake';
+import styles from '@/styles/component.module.css';
 
 type Props = CakeType & {
   user: User;
   currentUser: User | null;
 };
 
-export default function LetterClient({ content, name, user, currentUser, isPrivate }: Props) {
+export default function LetterClient({
+  content,
+  name,
+  user,
+  currentUser,
+  isPrivate,
+  customCake,
+}: Props) {
   const dispatch = useSetAtom(popupAtom);
   const router = useRouter();
 
@@ -60,7 +69,18 @@ export default function LetterClient({ content, name, user, currentUser, isPriva
             name={user.name}
             onToggleCake={onToggleCake}
             className={styles.front}>
-            <Cake className="aspect-square w-[80%]" />
+            <Canvas
+              shadows
+              camera={{
+                fov: 48,
+                near: 0.1,
+                far: 100,
+                position: new THREE.Vector3(0, 3, 8.5),
+              }}
+              style={{ zIndex: 10 }}>
+              {/* FIXME: after theme cake */}
+              {customCake && <CustomCake isRotate cake={customCake as CustomCake} />}
+            </Canvas>
           </LetterCard>
           <LetterCard
             label="케이크 보기"
