@@ -47,6 +47,7 @@ model Cake {
   id              String @id @default(auto()) @map("_id") @db.ObjectId
   userId          String @db.ObjectId
   cakeType        CakeType
+  cakeImageUrl    String?
   customCake      Json?
   themeCake       Json?
   createdAt       DateTime @default(now())

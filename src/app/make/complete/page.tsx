@@ -22,7 +22,7 @@ export default function Page() {
   const router = useRouter();
 
   const { store } = useStepStore();
-  const { trigger, data, error, isMutating } = useSWRMutation('/api/make', createCake);
+  const { trigger, data, isMutating } = useSWRMutation('/api/make', createCake);
   const { showError } = useErrorPopup(() => router.replace('/make?step=shape'));
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -34,10 +34,10 @@ export default function Page() {
 
     const base64 = canvasRef.current?.toDataURL('image/png') ?? '';
 
-    // if (!type || !letter.name || !letter.content || !cake || !targetUser) {
-    //   showError();
-    //   return;
-    // }
+    if (!type || !letter.name || !letter.content || !cake || !targetUser) {
+      showError();
+      return;
+    }
 
     await trigger({
       type,
@@ -46,7 +46,7 @@ export default function Page() {
       letter,
       userId: targetUser,
     });
-  }, [store, targetUser, trigger]);
+  }, [showError, store, targetUser, trigger]);
 
   const onListClicked = useCallback(() => {
     setLocalStorage('rolling-cake:isMake', { [targetUser]: true });
@@ -75,7 +75,7 @@ export default function Page() {
           }}
           style={{ zIndex: 10 }}>
           {/* FIXME: after theme cake */}
-          <CustomCake isRotate cake={store as CustomCake} />
+          <CustomCake isRotate={!!data} hasStand={false} cake={store as CustomCake} />
         </Canvas>
       </div>
       <section className="mb-3 flex w-full flex-col items-center gap-3 px-5">
@@ -98,7 +98,7 @@ export default function Page() {
         )}
       </section>
 
-      {!data && <Confetti />}
+      {data && <Confetti />}
       {isMutating && <Loading />}
     </GradientContainer>
   );

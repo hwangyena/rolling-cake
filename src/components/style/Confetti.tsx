@@ -36,9 +36,11 @@ const Confetti = () => {
       instance.current(getAnimationSettings(0.8, 1));
     };
 
-    animation();
     const timer = setInterval(animation, 2000);
-    return () => clearInterval(timer);
+
+    return () => {
+      clearInterval(timer);
+    };
   }, []);
 
   return (

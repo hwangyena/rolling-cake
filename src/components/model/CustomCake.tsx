@@ -14,10 +14,12 @@ const CustomCake = ({
   cake,
   step,
   isRotate,
+  hasStand = true,
 }: {
   cake: CustomCake;
   step?: keyof CustomCake;
   isRotate?: boolean;
+  hasStand?: boolean;
 }) => {
   const cameraControlsRef = useRef<CameraControls | null>(null);
   const cakeRef = useRef<THREE.Group>(null);
@@ -51,12 +53,12 @@ const CustomCake = ({
       <CameraControls ref={cameraControlsRef} />
       <Environment preset="dawn" />
 
-      <group scale={isRotate ? 1.3 : 1} ref={cakeRef}>
+      <group scale={hasStand ? 1 : 1.3} ref={cakeRef}>
         <Center>
-          <CakeModel cakeColor={cake.sheet.color} hasStand={isRotate} />
+          <CakeModel cakeColor={cake.sheet.color} hasStand={hasStand} />
         </Center>
 
-        <group position={[0, isRotate ? -1.25 : 0, 0]}>
+        <group position={[0, hasStand ? 0 : -1.25, 0]}>
           {cake.cream_top.cream !== 'none' && <TopCream {...cake.cream_top} />}
           {cake.cream_side.cream !== 'none' && <SideCream {...cake.cream_side} />}
           {cake.more.item.map((item) => (
