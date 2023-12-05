@@ -1,53 +1,52 @@
 'use client';
 
-import * as THREE from 'three';
 import { Canvas } from '@react-three/fiber';
+import * as THREE from 'three';
 
-import { useRouter } from 'next/navigation';
-import { useCallback, useMemo } from 'react';
-import useSWRMutation from 'swr/mutation';
-import { useErrorPopup } from '@/hooks/common';
-import { getLocalStorage, setLocalStorage } from '@/lib/store';
-import { createCake } from '@/lib/endpoint';
-import Header from '@/components/common/Header';
 import GradientContainer from '@/components/GradientContainer';
 import Button from '@/components/common/Button';
+import Header from '@/components/common/Header';
 import Loading from '@/components/common/Loading';
-import { useStepStore } from '@/hooks/make';
 import Navigation from '@/components/common/Navigation';
 import CustomCake from '@/components/model/CustomCake';
 import Confetti from '@/components/style/Confetti';
+import { useErrorPopup } from '@/hooks/common';
+import { useStepStore } from '@/hooks/make';
+import { createCake } from '@/lib/endpoint';
+import { getLocalStorage, setLocalStorage } from '@/lib/store';
+import { useRouter } from 'next/navigation';
+import { useCallback, useMemo, useRef } from 'react';
+import useSWRMutation from 'swr/mutation';
 
 export default function Page() {
   const router = useRouter();
 
   const { store } = useStepStore();
-  const { trigger, data, isMutating } = useSWRMutation('/api/make', createCake);
+  const { trigger, data, error, isMutating } = useSWRMutation('/api/make', createCake);
   const { showError } = useErrorPopup(() => router.replace('/make?step=shape'));
 
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const targetUser = useMemo(() => getLocalStorage<string>('rolling-cake:userId'), []);
 
   const onCreate = useCallback(async () => {
     const { shape, letter, ...cake } = store;
     const type = shape.toUpperCase() as 'CUSTOM' | 'THEME';
 
-    if (!type || !letter.name || !letter.content || !cake || !targetUser) {
-      showError();
-      return;
-    }
+    const base64 = canvasRef.current?.toDataURL('image/png') ?? '';
 
-    try {
-      await trigger({
-        type,
-        cake,
-        letter,
-        userId: targetUser,
-      });
-    } catch (e) {
-      console.error('[ERROR]', e);
-      showError();
-    }
-  }, [store, targetUser, showError, trigger]);
+    // if (!type || !letter.name || !letter.content || !cake || !targetUser) {
+    //   showError();
+    //   return;
+    // }
+
+    await trigger({
+      type,
+      cake,
+      cakeImageBase64: base64,
+      letter,
+      userId: targetUser,
+    });
+  }, [store, targetUser, trigger]);
 
   const onListClicked = useCallback(() => {
     setLocalStorage('rolling-cake:isMake', { [targetUser]: true });
@@ -66,6 +65,8 @@ export default function Page() {
       <div className="w-full flex-1">
         <Canvas
           shadows
+          gl={{ preserveDrawingBuffer: true }}
+          ref={canvasRef}
           camera={{
             fov: 55,
             near: 0.1,

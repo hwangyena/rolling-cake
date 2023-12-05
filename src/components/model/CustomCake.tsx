@@ -1,7 +1,7 @@
-import * as THREE from 'three';
-import { useFrame } from '@react-three/fiber';
 import { CameraControls, Center, Environment } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
 import { memo, useEffect, useRef } from 'react';
+import * as THREE from 'three';
 import CakeModel from './Cake';
 import LetteringModel from './Lettering';
 import SideCream from './SideCream';
