@@ -37,7 +37,7 @@ const StepCommon = ({ itemSelect }: { itemSelect?: (keyof typeof SELECT_ITEM)[] 
             far: 100,
             position: new THREE.Vector3(0, 3, 9),
           }}>
-          <CustomCake cake={store} step={step} />
+          <CustomCake hasStand cake={store} step={step} />
         </Canvas>
       </section>
       <ItemSelect data={itemSelect ?? []} />

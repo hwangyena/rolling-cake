@@ -1,4 +1,3 @@
-import { useStepStore } from '@/hooks/make';
 import { useGLTF } from '@react-three/drei';
 import { useMemo } from 'react';
 
@@ -13,14 +12,10 @@ const cherryPosition = [
   [-1.4, 0],
 ];
 
-const CherryModel = () => {
+const CherryModel = ({ hasTopCream }: { hasTopCream: boolean }) => {
   const { nodes, materials } = useGLTF('/models/items/cherry.glb') as GLTFRes;
-  const { store } = useStepStore<CustomCake>();
 
-  const yPosition = useMemo(
-    () => (store.cream_top.cream === 'none' ? 1.9 : 2.2),
-    [store.cream_top.cream],
-  );
+  const yPosition = useMemo(() => (hasTopCream ? 2.2 : 1.9), [hasTopCream]);
 
   return (
     <>

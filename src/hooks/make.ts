@@ -15,7 +15,7 @@ export const useEntireStep = () => {
   useEffect(() => {
     const params = searchParams?.get('step');
 
-    if (pathname === '/make/complete') {
+    if (pathname === '/make/complete' || !pathname?.includes('make')) {
       return;
     }
 
