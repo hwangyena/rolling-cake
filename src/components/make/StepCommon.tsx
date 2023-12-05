@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 
 import { SELECT_ITEM } from '@/lib/constant';
-import MakeCanvas from '../model/Make';
+import CustomCake from '../model/CustomCake';
 import ItemSelect from './ItemSelect';
 import { Canvas } from '@react-three/fiber';
 import { useCallback } from 'react';
@@ -12,7 +12,7 @@ import { useStepStore } from '@/hooks/make';
 const StepCommon = ({ itemSelect }: { itemSelect?: (keyof typeof SELECT_ITEM)[] }) => {
   const dispatch = useSetAtom(focusInputAtom);
 
-  const { step, store, onStoreUpdate } = useStepStore();
+  const { step, store, onStoreUpdate } = useStepStore<CustomCake>();
 
   const onCakeClicked = useCallback(() => {
     dispatch({
@@ -37,7 +37,7 @@ const StepCommon = ({ itemSelect }: { itemSelect?: (keyof typeof SELECT_ITEM)[] 
             far: 100,
             position: new THREE.Vector3(0, 3, 9),
           }}>
-          <MakeCanvas />
+          <CustomCake cake={store} step={step} />
         </Canvas>
       </section>
       <ItemSelect data={itemSelect ?? []} />

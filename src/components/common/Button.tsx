@@ -1,16 +1,17 @@
 'use client';
 
-import { MouseEvent, PropsWithChildren, memo, useRef } from 'react';
+import { CSSProperties, MouseEvent, PropsWithChildren, memo, useRef } from 'react';
 import styles from '@/styles/component.module.css';
 
 type Props = {
   type: 'BIG' | 'SMALL';
   color?: 'red' | 'green' | 'gray' | 'white';
   disabled?: boolean;
+  style?: CSSProperties;
   onClick?: (e: MouseEvent) => void;
 };
 
-const Button = ({ children, onClick, disabled, type, color }: PropsWithChildren<Props>) => {
+const Button = ({ children, onClick, disabled, type, color, style }: PropsWithChildren<Props>) => {
   const lock = useRef(false);
 
   const handleClick = (e: MouseEvent) => {
@@ -37,6 +38,7 @@ const Button = ({ children, onClick, disabled, type, color }: PropsWithChildren<
       className={`${type === 'BIG' ? styles['big-button'] : styles['small-button']} ${
         color ? styles[color] : ''
       }`}
+      style={style}
       onClick={handleClick}
       disabled={disabled}>
       {children}
