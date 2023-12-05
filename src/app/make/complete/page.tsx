@@ -2,7 +2,6 @@
 
 import { Canvas } from '@react-three/fiber';
 import * as THREE from 'three';
-
 import GradientContainer from '@/components/GradientContainer';
 import Button from '@/components/common/Button';
 import Header from '@/components/common/Header';
@@ -21,7 +20,7 @@ import useSWRMutation from 'swr/mutation';
 export default function Page() {
   const router = useRouter();
 
-  const { store } = useStepStore();
+  const { store, onResetMakeAtom } = useStepStore();
   const { trigger, data, isMutating } = useSWRMutation('/api/make', createCake);
   const { showError } = useErrorPopup(() => router.replace('/make?step=shape'));
 
@@ -39,24 +38,31 @@ export default function Page() {
       return;
     }
 
-    await trigger({
+    const res = await trigger({
       type,
       cake,
       cakeImageBase64: base64,
       letter,
       userId: targetUser,
     });
+
+    if (res.status !== 200) {
+      showError();
+    }
   }, [showError, store, targetUser, trigger]);
 
   const onListClicked = useCallback(() => {
     setLocalStorage('rolling-cake:isMake', { [targetUser]: true });
+    onResetMakeAtom();
+
     router.push(`/cake/${targetUser}`);
     router.refresh();
-  }, [router, targetUser]);
+  }, [router, targetUser, onResetMakeAtom]);
 
   const onLoginClicked = useCallback(() => {
+    onResetMakeAtom();
     router.push('/');
-  }, [router]);
+  }, [onResetMakeAtom, router]);
 
   return (
     <GradientContainer type="pink-green" className="items-center justify-center overflow-hidden">

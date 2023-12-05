@@ -23,6 +23,7 @@ const StepLetter = () => {
       onStoreUpdate({ name: debounceName });
     }
   }, [debounceName, onStoreUpdate, store.letter.name]);
+
   useEffect(() => {
     if (store.letter.content !== debounceContent) {
       onStoreUpdate({ content: debounceContent });
