@@ -54,3 +54,12 @@ type StepDisplay = {
   next: (CakeStepKey | 'complete') | null;
   select?: Item[];
 };
+
+/** api */
+type CreateCakeReq = {
+  type: 'CUSTOM' | 'THEME';
+  cake: ExcludeLetter;
+  cakeImageBase64: string;
+  userId: string;
+  letter: Letter;
+};

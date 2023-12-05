@@ -28,7 +28,7 @@ const CakeModel = ({ cakeColor, hasStand }: { cakeColor: Color; hasStand?: boole
         position={[0, 2.598, 0]}
         scale={[1.977, 0.733, 2.003]}
       />
-      {!hasStand && (
+      {hasStand && (
         <mesh
           geometry={nodes.stand.geometry}
           material={

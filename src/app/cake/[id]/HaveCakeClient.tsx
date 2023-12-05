@@ -9,6 +9,7 @@ import { useSaveUserId } from '@/hooks/cake';
 import { getLocalStorage } from '@/lib/store';
 import { cn } from '@/lib/utils';
 import type { Cake as CakeType, User } from '@prisma/client';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useCallback, useMemo } from 'react';
 
@@ -49,7 +50,13 @@ export default function HaveCakeClient({ cakes, user, isOwn }: Props) {
               className="flex w-full flex-col items-center"
               key={i}
               onClick={() => handleCakeClicked(cake.id)}>
-              <Cake className="aspect-[2/3] w-[80%]" />
+              {cake.cakeImageUrl ? (
+                <div className="relative aspect-[2/3] w-[80%]">
+                  <Image src={cake.cakeImageUrl} alt="" fill />
+                </div>
+              ) : (
+                <Cake className="aspect-[2/3] w-[80%]" /> // TODO: theme cake
+              )}
               <div className="mt-1 flex gap-1">
                 {cake.isPrivate && <Lock />}
                 <span className="text-b3">{cake.name}</span>
