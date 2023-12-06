@@ -1,36 +1,20 @@
 import * as THREE from 'three';
 
+import { useStepStore } from '@/hooks/make';
 import { SELECT_ITEM } from '@/lib/constant';
+import { Canvas } from '@react-three/fiber';
 import CustomCake from '../model/CustomCake';
 import ItemSelect from './ItemSelect';
-import { Canvas } from '@react-three/fiber';
-import { useCallback } from 'react';
-import { useSetAtom } from 'jotai';
-import { focusInputAtom } from '@/lib/store';
-import { useStepStore } from '@/hooks/make';
+import LetteringArea from './LetteringArea';
 
 const StepCommon = ({ itemSelect }: { itemSelect?: (keyof typeof SELECT_ITEM)[] }) => {
-  const dispatch = useSetAtom(focusInputAtom);
-
-  const { step, store, onStoreUpdate } = useStepStore<CustomCake>();
-
-  const onCakeClicked = useCallback(() => {
-    dispatch({
-      label: '레터링 문구를 작성해줘!',
-      maxLength: 10,
-      defaultValue: store.lettering.value,
-      onConfirm: async (value: string) => {
-        onStoreUpdate({ value });
-      },
-    });
-  }, [dispatch, onStoreUpdate, store.lettering]);
+  const { step, store } = useStepStore<CustomCake>();
 
   return (
     <article className="flex h-full flex-col">
-      <section className="grid flex-1 place-items-center">
+      <section className="relative grid flex-1 place-items-center">
         <Canvas
           shadows
-          onClick={() => step === 'lettering' && onCakeClicked()}
           camera={{
             fov: window.innerWidth > 480 ? 50 : 45,
             near: 0.1,
@@ -39,6 +23,8 @@ const StepCommon = ({ itemSelect }: { itemSelect?: (keyof typeof SELECT_ITEM)[] 
           }}>
           <CustomCake hasStand cake={store} step={step} />
         </Canvas>
+
+        {step === 'lettering' && <LetteringArea />}
       </section>
       <ItemSelect data={itemSelect ?? []} />
     </article>

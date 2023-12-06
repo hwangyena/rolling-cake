@@ -15,7 +15,7 @@ export const useEntireStep = () => {
   useEffect(() => {
     const params = searchParams?.get('step');
 
-    if (pathname === '/make/complete' || !pathname?.includes('make')) {
+    if (pathname === '/make/complete') {
       return;
     }
 
@@ -24,20 +24,11 @@ export const useEntireStep = () => {
     }
   }, [pathname, router, searchParams]);
 
-  const isTheme = useMemo(() => Object.hasOwn(store, 'theme'), [store]);
-  const entireStepLength = useMemo((): number => Object.keys(store).length - 1, [store]);
+  const step = useMemo(() => searchParams?.get('step') as CakeStepKey, [searchParams]);
+  const isTheme = useMemo(() => (store ? Object.hasOwn(store, 'theme') : false), [store]);
+  const entireStepLength = useMemo(() => (store ? Object.keys(store).length - 1 : 0), [store]);
 
-  const step = useMemo(() => {
-    const params = searchParams ? searchParams.get('step') : null;
-
-    return params as CakeStepKey;
-  }, [searchParams]);
-
-  const info = useMemo((): (StepDisplay & { order: number }) | null => {
-    if (!step) {
-      return null;
-    }
-
+  const wrapperInfo = useMemo((): (StepDisplay & { order: number }) | null => {
     const stepForScreen = isTheme ? THEME_STEP : CUSTOM_STEP;
     const order = Object.keys(store).findIndex((v) => v === step);
 
@@ -53,7 +44,7 @@ export const useEntireStep = () => {
     [dispatch],
   );
 
-  return { info, step, isTheme, entireStepLength, onEntireStepChanged };
+  return { wrapperInfo, step, isTheme, entireStepLength, onEntireStepChanged };
 };
 
 export const useStepStore = <T extends CakeStep>() => {
@@ -61,8 +52,16 @@ export const useStepStore = <T extends CakeStep>() => {
 
   const [store, dispatch] = useAtom(makeAtom);
 
+  const onResetMakeAtom = useCallback(() => {
+    dispatch(CUSTOM_STEP_STORE);
+  }, [dispatch]);
+
   const onStoreUpdate = useCallback(
     (value: Record<string, unknown> | string) => {
+      if (!store) {
+        return;
+      }
+
       const prevValue = store[step as keyof typeof store];
       let newItem = isObject(prevValue) && isObject(value) ? { ...prevValue, ...value } : value;
 
@@ -78,7 +77,7 @@ export const useStepStore = <T extends CakeStep>() => {
     [dispatch, step, store],
   );
 
-  return { store: store as T, step: step as keyof T, onStoreUpdate };
+  return { store: store as T, step: step as keyof T, onResetMakeAtom, onStoreUpdate };
 };
 
 export const useBlock = () => {
@@ -86,6 +85,8 @@ export const useBlock = () => {
   const searchParams = useSearchParams();
 
   const dispatch = useSetAtom(popupAtom);
+  const dispatchMakeAtom = useSetAtom(makeAtom);
+
   const isShape = useMemo(() => searchParams?.get('step') === 'shape', [searchParams]);
 
   const onBackClicked = useCallback(() => {
@@ -94,7 +95,8 @@ export const useBlock = () => {
         title: '케이크 만들기를 그만하시겠어요?',
         content: '페이지에서 나가면 그동안의 작업은 저장되지 않아요. 정말 그만하시겠어요?',
         onConfirm() {
-          router.back(); // FIXME: redirect to cake page
+          router.back();
+          dispatchMakeAtom(CUSTOM_STEP_STORE);
           dispatch(null);
         },
       });
@@ -102,7 +104,7 @@ export const useBlock = () => {
     }
 
     router.back();
-  }, [dispatch, isShape, router]);
+  }, [dispatch, dispatchMakeAtom, isShape, router]);
 
   return { onBackClicked };
 };

@@ -70,10 +70,20 @@ module.exports = {
           '0%': { transform: 'translateY(0px)' },
           '100%': { transform: 'translateY(100px)' },
         },
+        'cursor-bounce': {
+          '0%, 100%': {
+            transform: 'translateY(0)',
+            animationTimingFunction: 'cubic-bezier(0.8, 0, 0.3, 1)',
+          },
+          '50%': {
+            transform: 'translateY(20%)',
+          },
+        },
       },
       animation: {
         'slide-up': 'slide-up 1s ease-in-out',
         'slide-down': 'slide-down 1s ease-in-out',
+        'cursor-bounce': 'cursor-bounce 1s ease-out infinite',
       },
     },
   },

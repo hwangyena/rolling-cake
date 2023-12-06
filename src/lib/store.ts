@@ -1,4 +1,5 @@
 import { atom } from 'jotai';
+import { atomWithStorage, createJSONStorage } from 'jotai/utils';
 import { CUSTOM_STEP_STORE } from './constant';
 
 /** Common */
@@ -19,7 +20,8 @@ export const snackBarAtom = atom<Snackbar | null>(null);
 /** Step */
 export const stepValidAtom = atom(false);
 
-export const makeAtom = atom<CakeStep>(CUSTOM_STEP_STORE);
+const storage = createJSONStorage<CakeStep>(() => sessionStorage);
+export const makeAtom = atomWithStorage<CakeStep>('rolling-cake:make', CUSTOM_STEP_STORE, storage);
 
 /** Client Storage */
 type LocalKey = 'rolling-cake:userId' | 'rolling-cake:isMake';

@@ -1,6 +1,5 @@
 'use client';
 
-import ClientOnly from '@/components/ClientOnly';
 import Step from '@/components/common/Step';
 import StepCommon from '@/components/make/StepCommon';
 import StepLetter from '@/components/make/StepLetter';
@@ -11,39 +10,36 @@ import { useEntireStep } from '@/hooks/make';
 import { getLocalStorage } from '@/lib/store';
 import { useMemo } from 'react';
 
-// 위치 빨간초 앞부분
 export default function Page() {
-  const { info, step, entireStepLength } = useEntireStep();
+  const { wrapperInfo, step, entireStepLength } = useEntireStep();
 
   const targetUserId = useMemo(() => getLocalStorage<string>('rolling-cake:userId'), []);
 
-  if (!info || !targetUserId) {
+  if (!wrapperInfo || !targetUserId) {
     // TODO: error page
     return null;
   }
 
   return (
-    <ClientOnly>
-      <Wrapper
-        title={info.title}
-        next={info.next}
-        order={info.order}
-        orderLength={entireStepLength}>
-        <Step show={step === 'shape'}>
-          <StepShape />
-        </Step>
-        <Step show={step === 'theme'}>
-          <StepTheme />
-        </Step>
-        <Step show={step === 'letter'}>
-          <StepLetter />
-        </Step>
+    <Wrapper
+      title={wrapperInfo.title}
+      next={wrapperInfo.next}
+      order={wrapperInfo.order}
+      orderLength={entireStepLength}>
+      <Step show={step === 'shape'}>
+        <StepShape />
+      </Step>
+      <Step show={step === 'theme'}>
+        <StepTheme />
+      </Step>
+      <Step show={step === 'letter'}>
+        <StepLetter />
+      </Step>
 
-        {/* Custom Cake */}
-        <Step show={['sheet', 'cream_top', 'cream_side', 'more', 'lettering'].includes(step)}>
-          <StepCommon itemSelect={info.select} />
-        </Step>
-      </Wrapper>
-    </ClientOnly>
+      {/* Custom Cake */}
+      <Step show={['sheet', 'cream_top', 'cream_side', 'more', 'lettering'].includes(step)}>
+        <StepCommon itemSelect={wrapperInfo.select} />
+      </Step>
+    </Wrapper>
   );
 }
