@@ -14,7 +14,7 @@ const CustomCake = ({
   cake,
   step,
   isRotate,
-  hasStand = true,
+  hasStand,
 }: {
   cake: CustomCake;
   step?: keyof CustomCake;
@@ -62,7 +62,7 @@ const CustomCake = ({
           {cake.cream_top.cream !== 'none' && <TopCream {...cake.cream_top} />}
           {cake.cream_side.cream !== 'none' && <SideCream {...cake.cream_side} />}
           {cake.more.item.map((item) => (
-            <Item key={item} item={item} />
+            <Item key={item} item={item} hasTopCream={cake.cream_top.cream !== 'none'} />
           ))}
           {cake.lettering.value && <LetteringModel {...cake.lettering} />}
         </group>

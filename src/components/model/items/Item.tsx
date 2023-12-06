@@ -12,12 +12,12 @@ import {
   TeddyBearModel,
 } from './index';
 
-const Item = ({ item }: { item: CakeItem }) => {
+const Item = ({ item, hasTopCream }: { item: CakeItem; hasTopCream: boolean }) => {
   switch (item) {
     case 'teddy-bear':
       return <TeddyBearModel />;
     case 'cherry':
-      return <CherryModel />;
+      return <CherryModel hasTopCream={hasTopCream} />;
     case 'cherry-tree':
       return <CherryTreeModel />;
     case 'cookie':

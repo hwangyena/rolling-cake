@@ -75,7 +75,7 @@ export default function Page() {
           }}
           style={{ zIndex: 10 }}>
           {/* FIXME: after theme cake */}
-          <CustomCake isRotate={!!data} hasStand={false} cake={store as CustomCake} />
+          <CustomCake isRotate={!!data} cake={store as CustomCake} />
         </Canvas>
       </div>
       <section className="mb-3 flex w-full flex-col items-center gap-3 px-5">
