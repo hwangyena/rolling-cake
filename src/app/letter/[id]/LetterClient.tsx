@@ -72,7 +72,7 @@ export default function LetterClient({
             <Canvas
               shadows
               camera={{
-                fov: 48,
+                fov: 40,
                 near: 0.1,
                 far: 100,
                 position: new THREE.Vector3(0, 3, 8.5),

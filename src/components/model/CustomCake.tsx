@@ -1,12 +1,13 @@
 import { CameraControls, Center, Environment } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
-import { memo, useEffect, useRef } from 'react';
+import { Suspense, memo, useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import CakeModel from './Cake';
 import LetteringModel from './Lettering';
 import SideCream from './SideCream';
 import TopCream from './TopCream';
 import Item from './items/Item';
+import ModelLoading from '../common/ModelLoading';
 
 const { DEG2RAD } = THREE.MathUtils;
 
@@ -49,7 +50,7 @@ const CustomCake = ({
   });
 
   return (
-    <>
+    <Suspense fallback={<ModelLoading />}>
       <CameraControls ref={cameraControlsRef} />
       <Environment preset="dawn" />
 
@@ -67,7 +68,7 @@ const CustomCake = ({
           {cake.lettering.value && <LetteringModel {...cake.lettering} />}
         </group>
       </group>
-    </>
+    </Suspense>
   );
 };
 
