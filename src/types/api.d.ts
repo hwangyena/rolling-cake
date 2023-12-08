@@ -8,7 +8,7 @@ type Login = {
 
 type Color = 'ivory' | 'red' | 'green' | 'blue' | 'purple' | 'brown';
 type CakeCream = 'none' | 'basic' | 'screw' | 'chocolate' | 'crown' | 'heart';
-type CakeFont = 'kor1' | 'kor2' | 'kor3' | 'eng1' | 'eng2' | 'eng3';
+type CakeFont = 'font1' | 'font2' | 'font3' | 'font4' | 'font5';
 type CakeTheme = 'soju' | 'harrypotter' | 'princess';
 type CakeItem =
   | 'cherry'

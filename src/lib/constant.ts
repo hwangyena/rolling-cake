@@ -20,7 +20,7 @@ export const SELECT_ITEM: Record<Item, { label: string; data: string[] }> = {
       'red-topper',
     ],
   },
-  font: { label: '글씨체', data: ['kor1', 'kor2', 'kor3', 'eng1', 'eng2', 'eng3'] },
+  font: { label: '글씨체', data: ['font1', 'font2', 'font3', 'font4', 'font5'] },
 };
 
 export const CAKE_SHAPE: Filter[] = [
@@ -98,13 +98,13 @@ export const CUSTOM_STEP_STORE: CustomCake = {
   cream_top: { color: 'ivory', cream: 'none' },
   cream_side: { color: 'ivory', cream: 'none' },
   more: { item: [] },
-  lettering: { color: 'ivory', font: 'kor1', value: '' },
+  lettering: { color: 'ivory', font: 'font1', value: '' },
   letter: { name: '', content: '', isPrivate: true },
 };
 
 export const THEME_STEP_STORE: ThemeCake = {
   shape: 'theme',
   theme: 'SOJU',
-  lettering: { color: 'ivory', font: 'kor1', value: '' },
+  lettering: { color: 'ivory', font: 'font1', value: '' },
   letter: { name: '', content: '', isPrivate: true },
 };
