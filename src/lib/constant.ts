@@ -29,12 +29,9 @@ export const CAKE_SHAPE: Filter[] = [
 ];
 
 export const CAKE_THEME: Filter[] = [
-  { label: '소주 케이크', value: 'SOJU' },
-  { label: '해리포터 케이크', value: 'HARRYPOTTER' },
-  { label: '돈 케이크', value: 'MONEY' },
-  { label: '동물 케이크', value: 'ANIMAL' },
-  { label: '공주 케이크', value: 'PRINCESS' },
-  { label: '식물 케이크', value: 'PLANT' },
+  { label: '해리포터 케이크', value: 'harrypotter' },
+  { label: '소주병 케이크', value: 'soju' },
+  { label: '왕관 케이크', value: 'princess' },
 ];
 
 // step에서 보여줘야하는 정보
