@@ -104,7 +104,7 @@ export const CUSTOM_STEP_STORE: CustomCake = {
 
 export const THEME_STEP_STORE: ThemeCake = {
   shape: 'theme',
-  theme: 'SOJU',
+  theme: 'harrypotter',
   lettering: { color: 'ivory', font: 'font1', value: '' },
   letter: { name: '', content: '', isPrivate: true },
 };

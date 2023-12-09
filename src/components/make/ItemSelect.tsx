@@ -96,7 +96,12 @@ const ItemSelect = ({ data, noLabel }: Props) => {
             key={item}
             className={styles.selectbox}
             onClick={() => handleItemClicked(item)}>
-            <CheckButton item={item} selected={selected.includes(index)} type={tab} />
+            <CheckButton
+              item={item}
+              selected={selected.includes(index)}
+              type={tab}
+              disabled={index !== 0}
+            />
           </SwiperSlide>
         ))}
       </Swiper>

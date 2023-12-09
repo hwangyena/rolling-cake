@@ -24,7 +24,7 @@ const StepCommon = ({ itemSelect }: { itemSelect?: (keyof typeof SELECT_ITEM)[] 
             position: new THREE.Vector3(0, 3, 9),
           }}>
           {isTheme ? (
-            <ThemeCake theme={(store as ThemeCake).theme} step={step} />
+            <ThemeCake cake={store as ThemeCake} step={step} />
           ) : (
             <CustomCake hasStand cake={store as CustomCake} step={step} />
           )}

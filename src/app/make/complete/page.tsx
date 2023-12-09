@@ -82,7 +82,7 @@ export default function Page() {
           }}
           style={{ zIndex: 10 }}>
           {store.shape === 'custom' && <CustomCake isRotate={!!data} cake={store as CustomCake} />}
-          {store.shape === 'theme' && <ThemeCake isRotate={!!data} theme={store.theme} />}
+          {store.shape === 'theme' && <ThemeCake isRotate={!!data} cake={store as ThemeCake} />}
         </Canvas>
       </div>
       <section className="mb-3 flex w-full flex-col items-center gap-3 px-5">

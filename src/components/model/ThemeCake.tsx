@@ -3,21 +3,22 @@ import * as THREE from 'three';
 import { CameraControls, Environment, useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { useEffect, useRef } from 'react';
+import LetteringModel from './Lettering';
 
 const { DEG2RAD } = THREE.MathUtils;
 
 type Props = {
-  theme: CakeTheme;
+  cake: ThemeCake;
   step?: keyof ThemeCake;
   isRotate?: boolean;
 };
 
-const ThemeCake = ({ theme, step, isRotate }: Props) => {
+const ThemeCake = ({ cake, step, isRotate }: Props) => {
   const cameraControlsRef = useRef<CameraControls | null>(null);
   const cakeRef = useRef<THREE.Group>(null);
 
   const renderTheme = () => {
-    switch (theme) {
+    switch (cake.theme) {
       case 'harrypotter':
         return <HarryPotter isRotate={isRotate} />;
       case 'princess':
@@ -47,6 +48,19 @@ const ThemeCake = ({ theme, step, isRotate }: Props) => {
       <group ref={cakeRef} scale={0.75}>
         {renderTheme()}
       </group>
+
+      <LetteringModel
+        theme={cake.theme}
+        color="green"
+        font={
+          cake.theme === 'harrypotter'
+            ? 'font5'
+            : cake.theme === 'soju'
+            ? 'font4'
+            : cake.lettering.font
+        }
+        value={cake.lettering.value.toUpperCase()}
+      />
     </>
   );
 };
