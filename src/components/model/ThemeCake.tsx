@@ -2,7 +2,7 @@ import * as THREE from 'three';
 
 import { CameraControls, Environment, useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 const { DEG2RAD } = THREE.MathUtils;
 
@@ -27,15 +27,24 @@ const ThemeCake = ({ theme, step, isRotate }: Props) => {
     }
   };
 
+  useEffect(() => {
+    if (step === 'lettering') {
+      cameraControlsRef.current?.truck(0, 1.4, false);
+      return;
+    } else {
+      cameraControlsRef.current?.truck(0, 0, false);
+    }
+  }, [step]);
+
   return (
     <>
       <CameraControls
         ref={cameraControlsRef}
-        polarAngle={step === 'lettering' ? 40 * DEG2RAD : undefined}
+        polarAngle={step === 'lettering' ? -60 * DEG2RAD : 40 * DEG2RAD}
       />
       <Environment preset="warehouse" />
 
-      <group ref={cakeRef} scale={0.9}>
+      <group ref={cakeRef} scale={0.75}>
         {renderTheme()}
       </group>
     </>
@@ -53,12 +62,7 @@ const HarryPotter = ({ isRotate }: { isRotate?: boolean }) => {
   });
 
   return (
-    <group
-      ref={cakeRef}
-      scale={16.12}
-      rotation-x={0.7}
-      rotation-y={-0.2}
-      position={isRotate ? [0, 2.0, 0] : [0, 2.1, 0.3]}>
+    <group ref={cakeRef} position={[0, 1.6, -0.4]} scale={17.8} rotation-y={-0.2}>
       <mesh
         castShadow
         receiveShadow
@@ -81,46 +85,6 @@ const HarryPotter = ({ isRotate }: { isRotate?: boolean }) => {
   );
 };
 
-const Princess = ({ showTop, isRotate }: { showTop: boolean; isRotate?: boolean }) => {
-  const { nodes, materials } = useGLTF(`/models/theme/princess.glb`) as GLTFRes;
-  const cakeRef = useRef<THREE.Group>(null);
-
-  useFrame(() => {
-    if (cakeRef.current && isRotate) {
-      cakeRef.current.rotation.y += 0.005;
-    }
-  });
-
-  return (
-    <group
-      ref={cakeRef}
-      scale={0.8}
-      position={showTop ? [0, 1, 0.5] : [0, 0, 0.5]}
-      rotation-x={12.7}
-      rotation-y={-Math.PI / 2}>
-      <group scale={[-3.579, -0.492, -3.579]}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube002.geometry}
-          material={materials['Material.004']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube002_1.geometry}
-          material={materials['Material.005']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube002_2.geometry}
-          material={materials['Material.008']}
-        />
-      </group>
-    </group>
-  );
-};
 const Soju = ({ isRotate }: { isRotate?: boolean }) => {
   const { nodes, materials } = useGLTF(`/models/theme/soju.glb`) as GLTFRes;
 
@@ -131,13 +95,10 @@ const Soju = ({ isRotate }: { isRotate?: boolean }) => {
       cakeRef.current.rotation.y += 0.005;
     }
   });
+
   return (
-    <group
-      ref={cakeRef}
-      scale={isRotate ? 1 : 1.05}
-      rotation-x={isRotate ? -2.7 : -2.5}
-      rotation-z={-Math.PI}>
-      <group scale={[-3.092, -0.425, -3.092]} position={isRotate ? [0, 0, 0] : [0, 0, 0.7]}>
+    <group ref={cakeRef} rotation={[0, Math.PI, 0]}>
+      <group scale={[-3.092, -0.425, -3.092]}>
         <mesh
           castShadow
           receiveShadow
@@ -185,6 +146,46 @@ const Soju = ({ isRotate }: { isRotate?: boolean }) => {
           receiveShadow
           geometry={nodes.Cube004_7.geometry}
           material={materials['Material.013']}
+        />
+      </group>
+    </group>
+  );
+};
+
+const Princess = ({ showTop, isRotate }: { showTop: boolean; isRotate?: boolean }) => {
+  const { nodes, materials } = useGLTF(`/models/theme/princess.glb`) as GLTFRes;
+  const cakeRef = useRef<THREE.Group>(null);
+
+  useFrame(() => {
+    if (cakeRef.current && isRotate) {
+      cakeRef.current.rotation.y += 0.005;
+    }
+  });
+
+  return (
+    <group
+      ref={cakeRef}
+      scale={0.9}
+      position={showTop ? [0, -0.3, 0] : undefined}
+      rotation={showTop ? [0, -Math.PI / 2, 0] : [-0.4, Math.PI / 2, 0]}>
+      <group scale={[-3.579, -0.492, -3.579]}>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Cube002.geometry}
+          material={materials['Material.004']}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Cube002_1.geometry}
+          material={materials['Material.005']}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Cube002_2.geometry}
+          material={materials['Material.008']}
         />
       </group>
     </group>
