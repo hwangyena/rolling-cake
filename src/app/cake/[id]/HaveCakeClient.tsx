@@ -26,7 +26,7 @@ export default function HaveCakeClient({ cakes, user, isOwn }: Props) {
 
   const isMakeCake = useMemo(() => {
     const make = getLocalStorage<Record<string, boolean>>('rolling-cake:isMake');
-    return !make[user.id] && !isOwn;
+    return make ? !make[user.id] && !isOwn : false;
   }, [isOwn, user.id]);
 
   const handleCakeClicked = (cakeId: string) => {

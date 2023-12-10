@@ -1,22 +1,22 @@
 'use client';
 
-import { Canvas } from '@react-three/fiber';
-import * as THREE from 'three';
 import GradientContainer from '@/components/GradientContainer';
 import Button from '@/components/common/Button';
 import Header from '@/components/common/Header';
 import Loading from '@/components/common/Loading';
 import Navigation from '@/components/common/Navigation';
 import CustomCake from '@/components/model/CustomCake';
+import ThemeCake from '@/components/model/ThemeCake';
 import Confetti from '@/components/style/Confetti';
 import { useErrorPopup } from '@/hooks/common';
 import { useStepStore } from '@/hooks/make';
 import { createCake } from '@/lib/endpoint';
 import { getLocalStorage, setLocalStorage } from '@/lib/store';
+import { Canvas } from '@react-three/fiber';
 import { useRouter } from 'next/navigation';
 import { useCallback, useMemo, useRef } from 'react';
 import useSWRMutation from 'swr/mutation';
-import ThemeCake from '@/components/model/ThemeCake';
+import * as THREE from 'three';
 
 export default function Page() {
   const router = useRouter();
@@ -53,6 +53,10 @@ export default function Page() {
   }, [showError, store, targetUser, trigger]);
 
   const onListClicked = useCallback(() => {
+    if (!targetUser) {
+      return;
+    }
+
     setLocalStorage('rolling-cake:isMake', { [targetUser]: true });
     onResetMakeAtom();
 
