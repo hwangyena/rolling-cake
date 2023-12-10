@@ -66,7 +66,7 @@ export default function LetterClient({
         <div className={cn(styles.flip, { 'rotate-y-180': !isCake })}>
           <LetterCard
             label="편지 읽어보기"
-            name={user.name}
+            name={user.rollingCakeName}
             onToggleCake={onToggleCake}
             className={styles.front}>
             <Canvas
@@ -84,7 +84,7 @@ export default function LetterClient({
           </LetterCard>
           <LetterCard
             label="케이크 보기"
-            name={user.name}
+            name={user.rollingCakeName}
             onToggleCake={onToggleCake}
             className={styles.back}>
             <p className="h-full overflow-auto break-keep p-3 text-center font-neo text-effect_b">
