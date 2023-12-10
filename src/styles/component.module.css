@@ -180,6 +180,17 @@
   animation: bg 0.3s ease;
 }
 
+.step-box-disabled::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #fffdfd;
+  opacity: 87%;
+}
+
 @keyframes bg {
   0% {
     opacity: 0;

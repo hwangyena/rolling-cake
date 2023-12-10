@@ -88,11 +88,11 @@ export const getCakeBg = (color: Color, vivid = true, theme?: CakeTheme) => {
 
   const themeColor: Record<CakeTheme, string> = {
     harrypotter: '#1f9b4f',
-    princess: '',
+    princess: '#ff91dc',
     soju: '#2e2e34',
   };
 
-  if (theme && theme !== 'princess') {
+  if (theme) {
     return themeColor[theme];
   }
 
@@ -125,4 +125,26 @@ export const DataURIToBlob = (dataURI: string) => {
   }
 
   return new Blob([ia], { type: mimeString });
+};
+
+export const isDisabledFont = (store: CakeStep, tab: Item, item: string): boolean => {
+  const isThemeCake = (store: CakeStep): store is ThemeCake => !!(store as ThemeCake).theme;
+
+  const harrypotterFont = 'font5';
+  const sojuFont = 'font4';
+
+  if (!isThemeCake(store)) {
+    return false;
+  }
+
+  if (tab === 'font') {
+    switch (store.theme) {
+      case 'harrypotter':
+        return item !== harrypotterFont;
+      case 'soju':
+        return item !== sojuFont;
+    }
+  }
+
+  return false;
 };

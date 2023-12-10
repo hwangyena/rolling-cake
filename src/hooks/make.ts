@@ -64,6 +64,7 @@ export const useStepStore = <T extends CakeStep>() => {
 
       const prevValue = store[step as keyof typeof store];
       let newItem = isObject(prevValue) && isObject(value) ? { ...prevValue, ...value } : value;
+      let themeFontItem = {};
 
       if ((step as CakeStepKey) === 'more') {
         const prev = (store as CustomCake).more.item;
@@ -72,7 +73,20 @@ export const useStepStore = <T extends CakeStep>() => {
         newItem = { item: prev.includes(cur) ? prev.filter((v) => v !== cur) : [...prev, cur] };
       }
 
-      startTransition(() => dispatch((prev) => ({ ...prev, [step]: newItem })));
+      // set default font for theme
+      if (step === 'theme') {
+        switch (newItem) {
+          case 'harrypotter':
+            themeFontItem = { lettering: { color: 'ivory', font: 'font5', value: '' } };
+            break;
+          case 'princess':
+            themeFontItem = { lettering: { color: 'ivory', font: 'font1', value: '' } };
+            break;
+          case 'soju':
+            themeFontItem = { lettering: { color: 'ivory', font: 'font4', value: '' } };
+        }
+      }
+      startTransition(() => dispatch((prev) => ({ ...prev, ...themeFontItem, [step]: newItem })));
     },
     [dispatch, step, store],
   );

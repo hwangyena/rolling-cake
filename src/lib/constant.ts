@@ -83,7 +83,7 @@ export const THEME_STEP: Record<keyof ThemeCake, StepDisplay> = {
   lettering: {
     title: '레터링 문구를 작성해줘!',
     next: 'letter',
-    select: ['font', 'color'],
+    select: ['font'],
   },
   letter: {
     title: '숨겨왔던 너의 마음을 적어ㅂr',
@@ -105,6 +105,6 @@ export const CUSTOM_STEP_STORE: CustomCake = {
 export const THEME_STEP_STORE: ThemeCake = {
   shape: 'theme',
   theme: 'harrypotter',
-  lettering: { color: 'ivory', font: 'font1', value: '' },
+  lettering: { color: 'ivory', font: 'font5', value: '' },
   letter: { name: '', content: '', isPrivate: true },
 };
