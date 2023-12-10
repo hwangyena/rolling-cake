@@ -18,6 +18,7 @@ type FocusInput = {
   maxLength?: number;
   label?: string;
   defaultValue?: string;
+  autoSize?: boolean;
   onConfirm?: (value: string) => Promise<void>;
 };
 

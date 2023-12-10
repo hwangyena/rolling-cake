@@ -14,6 +14,7 @@ const LetteringArea = () => {
       label: '레터링 문구를 작성해줘!',
       maxLength: 10,
       defaultValue: store.lettering.value,
+      autoSize: true,
       onConfirm: async (value: string) => {
         onStoreUpdate({ value });
       },
@@ -32,7 +33,7 @@ const LetteringArea = () => {
         alt="cursor"
         width={30}
         height={30}
-        className="animate-cursor-bounce absolute bottom-[-30px]"
+        className="absolute bottom-[-30px] animate-cursor-bounce"
       />
     </div>
   );
