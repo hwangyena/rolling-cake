@@ -67,7 +67,7 @@ export const getBaseUrl = () => {
     : 'https://rolling-cake.vercel.app/api';
 };
 
-export const getCakeBg = (color: Color, vivid = true) => {
+export const getCakeBg = (color: Color, vivid = true, theme?: CakeTheme) => {
   const vividColor: Record<Color, string> = {
     ivory: '#f9f5bd',
     red: '#ff8c99',
@@ -77,7 +77,7 @@ export const getCakeBg = (color: Color, vivid = true) => {
     brown: '#7e5233',
   };
 
-  const pastel: Record<Color, string> = {
+  const pastelColor: Record<Color, string> = {
     ivory: '#fefce1',
     red: '#f7cac7',
     green: '#cffdcb',
@@ -86,7 +86,17 @@ export const getCakeBg = (color: Color, vivid = true) => {
     brown: '#6d3710',
   };
 
-  return vivid ? vividColor[color] : pastel[color];
+  const themeColor: Record<CakeTheme, string> = {
+    harrypotter: '#1f9b4f',
+    princess: '#ff91dc',
+    soju: '#2e2e34',
+  };
+
+  if (theme) {
+    return themeColor[theme];
+  }
+
+  return vivid ? vividColor[color] : pastelColor[color];
 };
 
 export const getCirclePosition = (r: number, count = 30) => {
@@ -115,4 +125,26 @@ export const DataURIToBlob = (dataURI: string) => {
   }
 
   return new Blob([ia], { type: mimeString });
+};
+
+export const isDisabledFont = (store: CakeStep, tab: Item, item: string): boolean => {
+  const isThemeCake = (store: CakeStep): store is ThemeCake => !!(store as ThemeCake).theme;
+
+  const harrypotterFont = 'font5';
+  const sojuFont = 'font4';
+
+  if (!isThemeCake(store)) {
+    return false;
+  }
+
+  if (tab === 'font') {
+    switch (store.theme) {
+      case 'harrypotter':
+        return item !== harrypotterFont;
+      case 'soju':
+        return item !== sojuFont;
+    }
+  }
+
+  return false;
 };

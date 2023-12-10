@@ -16,6 +16,7 @@ import { getLocalStorage, setLocalStorage } from '@/lib/store';
 import { useRouter } from 'next/navigation';
 import { useCallback, useMemo, useRef } from 'react';
 import useSWRMutation from 'swr/mutation';
+import ThemeCake from '@/components/model/ThemeCake';
 
 export default function Page() {
   const router = useRouter();
@@ -80,8 +81,8 @@ export default function Page() {
             position: new THREE.Vector3(0, 3, 9),
           }}
           style={{ zIndex: 10 }}>
-          {/* FIXME: after theme cake */}
-          <CustomCake isRotate={!!data} cake={store as CustomCake} />
+          {store.shape === 'custom' && <CustomCake isRotate={!!data} cake={store as CustomCake} />}
+          {store.shape === 'theme' && <ThemeCake isRotate={!!data} cake={store as ThemeCake} />}
         </Canvas>
       </div>
       <section className="mb-3 flex w-full flex-col items-center gap-3 px-5">

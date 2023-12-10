@@ -4,7 +4,7 @@ import { FreeMode } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { SELECT_ITEM } from '@/lib/constant';
-import { isObject } from '@/lib/utils';
+import { isDisabledFont, isObject } from '@/lib/utils';
 import styles from '@/styles/component.module.css';
 import { useStepStore } from '@/hooks/make';
 import CheckButton from '../common/CheckButton';
@@ -95,8 +95,13 @@ const ItemSelect = ({ data, noLabel }: Props) => {
           <SwiperSlide
             key={item}
             className={styles.selectbox}
-            onClick={() => handleItemClicked(item)}>
-            <CheckButton item={item} selected={selected.includes(index)} type={tab} />
+            onClick={() => !isDisabledFont(store, tab, item) && handleItemClicked(item)}>
+            <CheckButton
+              item={item}
+              selected={selected.includes(index)}
+              type={tab}
+              disabled={isDisabledFont(store, tab, item)}
+            />
           </SwiperSlide>
         ))}
       </Swiper>
