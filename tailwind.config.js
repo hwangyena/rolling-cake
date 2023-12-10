@@ -25,7 +25,8 @@ module.exports = {
           800: '#333333',
           900: '#111111',
         },
-        error: '#F93B3B',
+        error: '#f93b3b',
+        yellow: '#fae64d',
       },
       fontFamily: {
         apple: ['-apple-system', 'sans-serif'],

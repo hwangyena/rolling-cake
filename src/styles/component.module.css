@@ -19,10 +19,6 @@
   @apply bg-pink-300;
 }
 
-.big-button:hover .white {
-  @apply bg-gray-200;
-}
-
 .big-button:disabled {
   @apply bg-gray-500;
   opacity: 0.6;
@@ -45,6 +41,10 @@
 .white {
   background: #fff;
   color: #444;
+}
+
+.white:hover {
+  @apply bg-gray-200;
 }
 
 .red {
