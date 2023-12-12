@@ -1,4 +1,4 @@
-export const isObject = (value: unknown) => {
+export const isObject = (value: unknown): value is Record<string, unknown> => {
   if (typeof value === 'object' && !Array.isArray(value) && value !== null) {
     return true;
   } else {
@@ -61,41 +61,90 @@ export const cn = (...names: unknown[]): string => {
   return built.trim();
 };
 
-export const md = (
-  prev: Map<string, string | Record<string, unknown>>,
-  value: [string, string | Record<string, unknown>][]
-) => {
-  const m = new Map(prev);
-
-  value.forEach((v) => {
-    const [key, value] = v;
-
-    const prev = m.get(key);
-    if (prev && isObject(prev) && isObject(value)) {
-      m.set(key, { ...(prev as Record<string, unknown>), ...(value as Record<string, unknown>) });
-      return;
-    }
-
-    m.set(key, value);
-  });
-
-  return m;
-};
-
-export const mapToObject = <T>(map: Map<string, unknown>): T => {
-  const value = Array.from(map.entries());
-  const obj: T = {} as T;
-
-  for (const item of value) {
-    const [key, value] = item;
-    obj[key as keyof T] = value as T[keyof T];
-  }
-
-  return obj;
-};
-
 export const getBaseUrl = () => {
   return process.env.NODE_ENV === 'development'
     ? `http://localhost:${process.env.PORT ?? 3000}/api`
     : 'https://rolling-cake.vercel.app/api';
+};
+
+export const getCakeBg = (color: Color, vivid = true, theme?: CakeTheme) => {
+  const vividColor: Record<Color, string> = {
+    ivory: '#f9f5bd',
+    red: '#ff8c99',
+    green: '#28622d',
+    blue: '#5adeff',
+    purple: '#7d6cd5',
+    brown: '#7e5233',
+  };
+
+  const pastelColor: Record<Color, string> = {
+    ivory: '#fefce1',
+    red: '#f7cac7',
+    green: '#cffdcb',
+    blue: '#c6f4f8',
+    purple: '#e9d5fc',
+    brown: '#6d3710',
+  };
+
+  const themeColor: Record<CakeTheme, string> = {
+    harrypotter: '#1f9b4f',
+    princess: '#ff91dc',
+    soju: '#2e2e34',
+  };
+
+  if (theme) {
+    return themeColor[theme];
+  }
+
+  return vivid ? vividColor[color] : pastelColor[color];
+};
+
+export const getCirclePosition = (r: number, count = 30) => {
+  const coordinates = [];
+  // const r = 62;
+
+  for (let i = 0; i < count; i++) {
+    const angle = (2 * Math.PI * i) / count;
+    const [x, y] = [r * Math.cos(angle), r * Math.sin(angle)];
+
+    coordinates.push([x, y]);
+  }
+
+  return coordinates;
+};
+
+export const DataURIToBlob = (dataURI: string) => {
+  const splitDataURI = dataURI.split(',');
+  const byteString =
+    splitDataURI[0].indexOf('base64') >= 0 ? atob(splitDataURI[1]) : decodeURI(splitDataURI[1]);
+  const mimeString = splitDataURI[0].split(':')[1].split(';')[0];
+
+  const ia = new Uint8Array(byteString.length);
+  for (let i = 0; i < byteString.length; i++) {
+    ia[i] = byteString.charCodeAt(i);
+  }
+
+  return new Blob([ia], { type: mimeString });
+};
+
+export const isDisabledFont = (store: CakeStep, tab: Item, item: string): boolean => {
+  const isThemeCake = (store: CakeStep): store is ThemeCake => !!(store as ThemeCake).theme;
+
+  const harrypotterFont = 'font5';
+  const sojuFont = 'font4';
+
+  if (!isThemeCake(store)) {
+    return false;
+  }
+
+  if (tab === 'font') {
+    switch (store.theme) {
+      case 'harrypotter':
+        return item !== harrypotterFont;
+      case 'soju':
+        return item !== sojuFont;
+    }
+  }
+
+  return false;
 };

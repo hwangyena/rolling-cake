@@ -6,8 +6,15 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
-  experimental: {
-    appDir: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: process.env.AWS_S3_URL,
+        port: '',
+        pathname: '/**',
+      },
+    ],
   },
 };
 

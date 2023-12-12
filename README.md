@@ -30,3 +30,18 @@ npx prisma db push
 ```
 npx prisma studio
 ```
+
+### .env
+
+```
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_REGION=
+AWS_BUCKET_NAME=
+
+DATABASE_URL=
+NEXTAUTH_SECRET=
+
+KAKAO_CLIENT_ID=
+KAKAO_CLIENT_SECRET=
+```

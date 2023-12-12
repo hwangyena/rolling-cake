@@ -1,90 +1,97 @@
-import { CUSTOM_STEP, STEP, STEP_CUSTOM_INIT, STEP_THEME_INIT, THEME_STEP } from '@/lib/constant';
-import { popupAtom, stepAtom } from '@/lib/store';
-import { md } from '@/lib/utils';
+import { CUSTOM_STEP, CUSTOM_STEP_STORE, THEME_STEP, THEME_STEP_STORE } from '@/lib/constant';
+import { makeAtom, popupAtom } from '@/lib/store';
+import { isObject } from '@/lib/utils';
 import { useAtom, useSetAtom } from 'jotai';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { startTransition, useCallback, useEffect, useMemo } from 'react';
 
 export const useEntireStep = () => {
-  const searchParams = useSearchParams();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
 
-  const [, dispatch] = useAtom(stepAtom);
-  const [step, setStep] = useState(CUSTOM_STEP);
-
-  useEffect(() => {
-    dispatch(new Map(Object.entries(STEP_CUSTOM_INIT)));
-  }, [dispatch]);
+  const [store, dispatch] = useAtom(makeAtom);
 
   useEffect(() => {
-    const params = searchParams?.get('step') as keyof typeof STEP;
+    const params = searchParams?.get('step');
+
+    if (pathname === '/make/complete') {
+      return;
+    }
 
     if (!params) {
       router.replace('/make?step=shape');
     }
-  }, [router, searchParams]);
+  }, [pathname, router, searchParams]);
 
-  const current = useMemo(() => {
-    const params = searchParams?.get('step') as keyof typeof STEP;
+  const step = useMemo(() => searchParams?.get('step') as CakeStepKey, [searchParams]);
+  const isTheme = useMemo(() => (store ? Object.hasOwn(store, 'theme') : false), [store]);
+  const entireStepLength = useMemo(() => (store ? Object.keys(store).length - 1 : 0), [store]);
 
-    if (!STEP[params]) {
-      return null;
-    }
+  const wrapperInfo = useMemo((): (StepDisplay & { order: number }) | null => {
+    const stepForScreen = isTheme ? THEME_STEP : CUSTOM_STEP;
+    const order = Object.keys(store).findIndex((v) => v === step);
 
-    if (params === 'shape') {
-      return {
-        ...STEP[params],
-        value: 'shape',
-        order: 0,
-        nextPath: step.includes('sheet') ? 'sheet' : 'theme',
-      };
-    }
-
-    return {
-      ...STEP[params],
-      value: params,
-      order: step.findIndex((v) => v === params) + 1,
-    };
-  }, [searchParams, step]);
+    return { ...stepForScreen[step as keyof typeof store], order };
+  }, [isTheme, step, store]);
 
   const onEntireStepChanged = useCallback(
     (value: 'CUSTOM' | 'THEME') => {
-      const entireStep = value === 'CUSTOM' ? CUSTOM_STEP : THEME_STEP;
-      const step = value === 'CUSTOM' ? STEP_CUSTOM_INIT : STEP_THEME_INIT;
+      const isCustom = value === 'CUSTOM';
 
-      setStep(entireStep);
-      dispatch(
-        md(new Map(Object.entries(step)), [['shape', value === 'CUSTOM' ? 'custom' : 'theme']])
-      );
+      dispatch(isCustom ? CUSTOM_STEP_STORE : THEME_STEP_STORE);
     },
-    [dispatch]
+    [dispatch],
   );
 
-  return { step, current, onEntireStepChanged };
+  return { wrapperInfo, step, isTheme, entireStepLength, onEntireStepChanged };
 };
 
-export const useStep = () => {
-  const [store, dispatch] = useAtom(stepAtom);
-  const searchParams = useSearchParams();
+export const useStepStore = <T extends CakeStep>() => {
+  const { step } = useEntireStep();
 
-  const step = useMemo(() => searchParams?.get('step') as keyof typeof STEP, [searchParams]);
+  const [store, dispatch] = useAtom(makeAtom);
 
-  const onUpdate = useCallback(
-    (data: Record<string, string | boolean> | string) => {
-      if (step === 'more') {
-        const prev = (store.get('more') as Record<'item', string[]>).item;
-        const cur = (data as Record<'item', string>).item;
-        const newItem = prev.includes(cur) ? prev.filter((v) => v !== cur) : [...prev, cur];
+  const onResetMakeAtom = useCallback(() => {
+    dispatch(CUSTOM_STEP_STORE);
+  }, [dispatch]);
 
-        dispatch(md(store, [[step, { item: newItem }]]));
-      } else {
-        dispatch(md(store, [[step, data]]));
+  const onStoreUpdate = useCallback(
+    (value: Record<string, unknown> | string) => {
+      if (!store) {
+        return;
       }
+
+      const prevValue = store[step as keyof typeof store];
+      let newItem = isObject(prevValue) && isObject(value) ? { ...prevValue, ...value } : value;
+      let themeFontItem = {};
+
+      if ((step as CakeStepKey) === 'more') {
+        const prev = (store as CustomCake).more.item;
+        const cur = (value as { item: CakeItem }).item;
+
+        newItem = { item: prev.includes(cur) ? prev.filter((v) => v !== cur) : [...prev, cur] };
+      }
+
+      // set default font for theme
+      if (step === 'theme') {
+        switch (newItem) {
+          case 'harrypotter':
+            themeFontItem = { lettering: { color: 'ivory', font: 'font5', value: '' } };
+            break;
+          case 'princess':
+            themeFontItem = { lettering: { color: 'ivory', font: 'font1', value: '' } };
+            break;
+          case 'soju':
+            themeFontItem = { lettering: { color: 'ivory', font: 'font4', value: '' } };
+        }
+      }
+      startTransition(() => dispatch((prev) => ({ ...prev, ...themeFontItem, [step]: newItem })));
     },
-    [dispatch, step, store]
+    [dispatch, step, store],
   );
 
-  return { store, onUpdate, step };
+  return { store: store as T, step: step as keyof T, onResetMakeAtom, onStoreUpdate };
 };
 
 export const useBlock = () => {
@@ -92,6 +99,8 @@ export const useBlock = () => {
   const searchParams = useSearchParams();
 
   const dispatch = useSetAtom(popupAtom);
+  const dispatchMakeAtom = useSetAtom(makeAtom);
+
   const isShape = useMemo(() => searchParams?.get('step') === 'shape', [searchParams]);
 
   const onBackClicked = useCallback(() => {
@@ -100,7 +109,8 @@ export const useBlock = () => {
         title: '케이크 만들기를 그만하시겠어요?',
         content: '페이지에서 나가면 그동안의 작업은 저장되지 않아요. 정말 그만하시겠어요?',
         onConfirm() {
-          router.back(); // FIXME: redirect to cake page
+          router.back();
+          dispatchMakeAtom(CUSTOM_STEP_STORE);
           dispatch(null);
         },
       });
@@ -108,7 +118,7 @@ export const useBlock = () => {
     }
 
     router.back();
-  }, [dispatch, isShape, router]);
+  }, [dispatch, dispatchMakeAtom, isShape, router]);
 
   return { onBackClicked };
 };

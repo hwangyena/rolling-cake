@@ -1,4 +1,3 @@
-import styles from '@/styles/component.module.css';
 import { memo } from 'react';
 
 const icon = {
@@ -16,7 +15,10 @@ type Props = {
 
 const CircleButton = ({ type, disabled, onClick }: Props) => {
   return (
-    <button className={styles['circle-button']} disabled={disabled} onClick={onClick}>
+    <button
+      className="drop-shadow-black_light grid h-[34px] w-[34px] place-items-center rounded-full border border-black bg-white hover:bg-gray-200 disabled:opacity-40"
+      disabled={disabled}
+      onClick={onClick}>
       <img src={`/icons/${icon[type]}`} alt="" className={type === '>' ? 'rotate-180' : ''} />
     </button>
   );

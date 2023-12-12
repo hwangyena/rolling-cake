@@ -36,8 +36,8 @@ const MakeNameClient = ({ user }: { user: User | null }) => {
 
   return (
     <GradientContainer type="green-circle" className="flex flex-col items-center justify-between">
-      <div className="flex-1 p-[10%] w-full h-full grid place-items-center">
-        <Cake className="w-[100%] aspect-square" />
+      <div className="grid h-full w-full flex-1 place-items-center p-[10%]">
+        <Cake className="aspect-square w-[100%]" />
       </div>
       <CustomPopup
         title={'Welcome!'}

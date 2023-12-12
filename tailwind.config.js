@@ -25,7 +25,8 @@ module.exports = {
           800: '#333333',
           900: '#111111',
         },
-        error: '#F93B3B',
+        error: '#f93b3b',
+        yellow: '#fae64d',
       },
       fontFamily: {
         apple: ['-apple-system', 'sans-serif'],
@@ -51,7 +52,13 @@ module.exports = {
         'grid-pattern': "url('/images/bg.png')",
         404: "url('/images/404.png')",
       },
-      backgroundColor: {},
+      boxShadow: {
+        card: '2px 3px 0px 0px #000',
+      },
+      dropShadow: {
+        black_light: '1px 1px 0px #000',
+        black: '2px 3px 0px #000',
+      },
       gridTemplateColumns: {
         3: 'repeat(3,1fr)',
       },
@@ -64,10 +71,20 @@ module.exports = {
           '0%': { transform: 'translateY(0px)' },
           '100%': { transform: 'translateY(100px)' },
         },
+        'cursor-bounce': {
+          '0%, 100%': {
+            transform: 'translateY(0)',
+            animationTimingFunction: 'cubic-bezier(0.8, 0, 0.3, 1)',
+          },
+          '50%': {
+            transform: 'translateY(20%)',
+          },
+        },
       },
       animation: {
         'slide-up': 'slide-up 1s ease-in-out',
         'slide-down': 'slide-down 1s ease-in-out',
+        'cursor-bounce': 'cursor-bounce 1s ease-out infinite',
       },
     },
   },

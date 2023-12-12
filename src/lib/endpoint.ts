@@ -5,15 +5,12 @@ export async function createCake(
   {
     arg,
   }: {
-    arg: {
-      type: 'CUSTOM' | 'THEME';
-      cake: CustomCake | ThemeCake;
-      userId: string;
-      letter: Letter;
-    };
-  }
+    arg: CreateCakeReq;
+  },
 ) {
-  return await axios.post(url, arg);
+  return await axios.post(url, arg, {
+    headers: { 'Content-Type': 'application/json' }, // FIXME: remove this?
+  });
 }
 
 export async function updateRollingCakeName(name: string) {

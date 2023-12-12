@@ -1,37 +1,27 @@
 import { atom } from 'jotai';
-import { STEP_CUSTOM_INIT } from './constant';
+import { atomWithStorage, createJSONStorage } from 'jotai/utils';
+import { CUSTOM_STEP_STORE } from './constant';
 
 /** Common */
 export const popupAtom = atom<Popup | null>(null);
 export const popupStore = atom<Popup | null, [Popup | null], void>(
   (get) => get(popupAtom),
-  (_get, set, action) => set(popupAtom, action)
+  (_get, set, action) => set(popupAtom, action),
 );
 
 export const focusInputAtom = atom<FocusInput | null>(null);
 export const focusInputStore = atom<FocusInput | null, [FocusInput | null], void>(
   (get) => get(focusInputAtom),
-  (_get, set, action) => set(focusInputAtom, action)
+  (_get, set, action) => set(focusInputAtom, action),
 );
 
 export const snackBarAtom = atom<Snackbar | null>(null);
 
 /** Step */
-// TODO: type more detail
-export const stepAtom = atom<Map<string, string | Record<string, unknown>>>(
-  new Map(Object.entries(STEP_CUSTOM_INIT))
-);
-
-export const stepStore = atom<
-  Map<string, string | Record<string, unknown>>,
-  [Map<string, string | Record<string, unknown>>],
-  void
->(
-  (get) => get(stepAtom),
-  (_get, set, action) => set(stepAtom, action)
-);
-
 export const stepValidAtom = atom(false);
+
+const storage = createJSONStorage<CakeStep>(() => sessionStorage);
+export const makeAtom = atomWithStorage<CakeStep>('rolling-cake:make', CUSTOM_STEP_STORE, storage);
 
 /** Client Storage */
 type LocalKey = 'rolling-cake:userId' | 'rolling-cake:isMake';
@@ -40,6 +30,10 @@ export const setLocalStorage = (key: LocalKey, value: Record<string, unknown> | 
   localStorage.setItem(key, JSON.stringify(value));
 };
 
-export const getLocalStorage = <T>(key: LocalKey): T => {
-  return JSON.parse(localStorage.getItem(key) ?? '{}') as T;
+export const getLocalStorage = <T>(key: LocalKey): T | null => {
+  if (typeof window === 'undefined') {
+    return null;
+  }
+
+  return localStorage.getItem(key) ? (JSON.parse(localStorage.getItem(key) ?? '{}') as T) : null;
 };

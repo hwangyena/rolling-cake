@@ -18,6 +18,7 @@ type FocusInput = {
   maxLength?: number;
   label?: string;
   defaultValue?: string;
+  autoSize?: boolean;
   onConfirm?: (value: string) => Promise<void>;
 };
 
@@ -28,11 +29,4 @@ type Snackbar = {
 type Filter = {
   label: string;
   value: string;
-};
-
-/* Make page */
-type Step = {
-  title: string;
-  nextPath: string | null;
-  select?: (keyof typeof SELECT_ITEM)[];
 };
