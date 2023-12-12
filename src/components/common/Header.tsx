@@ -1,10 +1,18 @@
-import { PropsWithChildren, memo } from 'react';
 import styles from '@/styles/component.module.css';
+import { CSSProperties, PropsWithChildren, memo } from 'react';
 
-const Header = ({ children, className }: PropsWithChildren<{ className?: string }>) => {
+type Props = {
+  className?: string;
+  shadowColor?: string;
+};
+
+const Header = ({ children, className, shadowColor }: PropsWithChildren<Props>) => {
   return (
     <div className={`relative ${className}`}>
-      <span className={styles.shadow} data-content={children}>
+      <span
+        className={styles.shadow}
+        style={{ '--shadow': shadowColor ?? '#000' } as CSSProperties}
+        data-content={children}>
         {children}
       </span>
       <h1 className={styles.header} data-content={children}>
