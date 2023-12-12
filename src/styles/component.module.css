@@ -283,12 +283,13 @@
   color: white;
 }
 
-.focus-input-content > section:first-child > input {
+.focus-input-content > section:first-child > textarea {
   background: transparent;
   border-bottom: 1px solid #fff;
   width: 100%;
   text-align: center;
   padding-bottom: 14px;
+  /* height: auto; */
 }
 
 .focus-input-content > section:last-child {

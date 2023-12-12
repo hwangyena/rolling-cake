@@ -8,6 +8,7 @@ import StepTheme from '@/components/make/StepTheme';
 import Wrapper from '@/components/make/Wrapper';
 import { useEntireStep } from '@/hooks/make';
 import { getLocalStorage } from '@/lib/store';
+import { notFound } from 'next/navigation';
 import { useMemo } from 'react';
 
 export default function Page() {
@@ -16,8 +17,7 @@ export default function Page() {
   const targetUserId = useMemo(() => getLocalStorage<string>('rolling-cake:userId'), []);
 
   if (!wrapperInfo || !targetUserId) {
-    // TODO: error page
-    return null;
+    return notFound();
   }
 
   return (

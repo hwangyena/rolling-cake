@@ -26,7 +26,7 @@ export default function HaveCakeClient({ cakes, user, isOwn }: Props) {
 
   const isMakeCake = useMemo(() => {
     const make = getLocalStorage<Record<string, boolean>>('rolling-cake:isMake');
-    return !make[user.id] && !isOwn;
+    return make ? !make[user.id] && !isOwn : false;
   }, [isOwn, user.id]);
 
   const handleCakeClicked = (cakeId: string) => {
@@ -51,11 +51,11 @@ export default function HaveCakeClient({ cakes, user, isOwn }: Props) {
               key={i}
               onClick={() => handleCakeClicked(cake.id)}>
               {cake.cakeImageUrl ? (
-                <div className="relative aspect-[2/3] w-[80%]">
-                  <Image src={cake.cakeImageUrl} alt="" fill />
+                <div className="relative h-[90px] w-[80%]">
+                  <Image src={cake.cakeImageUrl} alt="" fill className="object-cover" />
                 </div>
               ) : (
-                <Cake className="aspect-[2/3] w-[80%]" /> // TODO: theme cake
+                <Cake className="h-[90px] w-[80%]" theme={(cake.themeCake as ThemeCake).theme} /> // TODO: check
               )}
               <div className="mt-1 flex gap-1">
                 {cake.isPrivate && <Lock />}

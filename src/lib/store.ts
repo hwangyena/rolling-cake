@@ -30,6 +30,10 @@ export const setLocalStorage = (key: LocalKey, value: Record<string, unknown> | 
   localStorage.setItem(key, JSON.stringify(value));
 };
 
-export const getLocalStorage = <T>(key: LocalKey): T => {
-  return JSON.parse(localStorage.getItem(key) ?? '{}') as T;
+export const getLocalStorage = <T>(key: LocalKey): T | null => {
+  if (typeof window === 'undefined') {
+    return null;
+  }
+
+  return localStorage.getItem(key) ? (JSON.parse(localStorage.getItem(key) ?? '{}') as T) : null;
 };

@@ -1,6 +1,5 @@
 'use client';
 
-import Cake from '@/components/cake/Cake';
 import Button from '@/components/common/Button';
 import Header from '@/components/common/Header';
 import Tag from '@/components/common/Tag';
@@ -8,6 +7,7 @@ import { useSaveUserId } from '@/hooks/cake';
 import { snackBarAtom } from '@/lib/store';
 import { User } from '@prisma/client';
 import { useSetAtom } from 'jotai';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
 
@@ -33,16 +33,13 @@ export default function EmptyCakeClient({ user, isOwn }: { user: User; isOwn: bo
     <>
       <section className="mb-[20px] flex flex-col items-center gap-3">
         <Header>{`${user.rollingCakeName}의 롤링케이크`}</Header>
-        <Tag>
-          {isOwn
-            ? '링크를 공유하고 케이크를 모아보세요!'
-            : '정성가득한 편지와 케이크를 선물하세요!'}
-        </Tag>
+        <Tag>{isOwn ? '0개의 케이크와 편지 도착!' : '정성가득한 편지와 케이크를 선물하세요!'}</Tag>
       </section>
-      <section
-        className={`green-gradient bottom-0 h-full w-full flex-1 overflow-y-auto bg-white px-[25px] pb-[20px]`}>
-        <div className="relative flex h-full w-full flex-col items-center pt-[10%]">
-          <Cake className="h-[70%] w-[80%]" />
+      <section className="green-gradient bottom-0 h-full w-full flex-1  overflow-y-auto bg-white px-[25px] pb-[20px]">
+        <div className="relative flex h-full w-full flex-col items-center justify-center pb-[10vh]">
+          <div className="relative aspect-square w-[80%]">
+            <Image fill src="/images/empty.png" alt="empty" />
+          </div>
         </div>
       </section>
       <section className={'absolute bottom-0 w-full px-[25px] py-[40px] pb-[5vh]'}>
