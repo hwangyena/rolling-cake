@@ -25,7 +25,6 @@ export const metadata: Metadata = {
     '선물',
   ],
   authors: [{ name: 'Seb' }, { name: 'Josh', url: 'https://nextjs.org' }],
-  colorScheme: 'light',
   creator: 'Hwang yena',
   publisher: 'Hwang yena',
   appleWebApp: {

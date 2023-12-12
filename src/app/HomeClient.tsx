@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import { useCallback, useState } from 'react';
 import type { User } from '@prisma/client';
 import GradientContainer from '@/components/GradientContainer';
+import Header from '@/components/common/Header';
 
 const HomeClient = ({ user }: { user?: User | null }) => {
   const router = useRouter();
@@ -24,12 +25,19 @@ const HomeClient = ({ user }: { user?: User | null }) => {
   }, []);
 
   return (
-    <GradientContainer type="green-pink" className="flex flex-col items-center justify-evenly px-5">
-      <div className="relative h-[20%] w-full">
-        <Image src="/images/logo.png" fill alt="" className="absolute" />
+    <GradientContainer type="green-pink" className="flex flex-col items-center gap-7 px-5">
+      <div className="relative mt-[7vh] h-[20%] w-full">
+        <Image src="/images/logo.png" fill alt="logo" priority />
       </div>
-      <div className="h-[50%] w-[90%] bg-slate-300" />
-      <footer className="w-full text-center">
+      <div className="relative h-[55%] w-[95%]">
+        <Image src="/images/main-cake.png" fill alt="cake" priority />
+      </div>
+      <footer className="absolute bottom-0 w-full p-5 text-center">
+        <div className="mb-10 flex justify-center">
+          <Header className="text-center" shadowColor="#2fdec2">
+            내 롤링케ㅇi크...써줄래?
+          </Header>
+        </div>
         {user ? (
           <Button type="BIG" onClick={onLinkClicked}>
             내 롤링케이크 보러가기

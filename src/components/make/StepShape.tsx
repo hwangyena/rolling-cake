@@ -30,8 +30,11 @@ const StepShape = () => {
                 "after: after:absolute after:left-0 after:top-0 after:z-[100] after:h-full after:w-full after:bg-black after:opacity-20 after:drop-shadow-black after:content-['']":
                   !isActive,
               })}>
-              {/* TODO: Change cake image */}
-              <Cake className="h-[90%] w-full" priority />
+              <Cake
+                className="h-[90%] w-full"
+                priority
+                theme={v.value === 'THEME' ? 'harrypotter' : undefined}
+              />
             </Card>
           )}
         </SwiperSlide>

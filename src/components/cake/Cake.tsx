@@ -7,7 +7,6 @@ type Props = {
   onClick?: () => void;
 };
 
-/** TODO: 3D object */
 const Cake = ({ className, priority, onClick, theme }: Props) => {
   if (theme) {
     return (
