@@ -32,7 +32,7 @@ const Popup = () => {
           <h4 className="whitespace-pre text-h4 font-bold text-gray-800">{title}</h4>
           {content && (
             <p
-              className="pt-[20px] text-b1 text-gray-800"
+              className="whitespace-pre-wrap pt-[20px] text-b1 text-gray-800"
               dangerouslySetInnerHTML={{ __html: content }}
             />
           )}

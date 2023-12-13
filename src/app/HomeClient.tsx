@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import { useCallback, useState } from 'react';
 import type { User } from '@prisma/client';
 import GradientContainer from '@/components/GradientContainer';
-import Header from '@/components/common/Header';
+import WaveTitle from '@/components/style/WaveTitle';
 
 const HomeClient = ({ user }: { user?: User | null }) => {
   const router = useRouter();
@@ -34,9 +34,7 @@ const HomeClient = ({ user }: { user?: User | null }) => {
       </div>
       <footer className="absolute bottom-0 w-full p-5 text-center">
         <div className="mb-10 flex justify-center">
-          <Header className="text-center" shadowColor="#2fdec2">
-            내 롤링케ㅇi크...써줄래?
-          </Header>
+          <WaveTitle />
         </div>
         {user ? (
           <Button type="BIG" onClick={onLinkClicked}>

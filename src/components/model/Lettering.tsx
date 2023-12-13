@@ -1,10 +1,12 @@
 import { getCakeBg } from '@/lib/utils';
 import { Center, Text3D } from '@react-three/drei';
-import { memo, useCallback, useEffect, useState } from 'react';
+import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import * as THREE from 'three';
 
 const LetteringModel = ({ color, font, value, theme }: Lettering & { theme?: CakeTheme }) => {
   const [material, setMaterial] = useState<THREE.MeshStandardMaterial>();
+
+  const letteringValues = useMemo(() => (theme ? [value] : value.split('\n')), [value, theme]);
 
   useEffect(() => {
     const fontColor = new THREE.MeshStandardMaterial({
@@ -25,7 +27,7 @@ const LetteringModel = ({ color, font, value, theme }: Lettering & { theme?: Cak
           case 'soju':
             return { position: [0.35, 1.05, 0.35], scale: 1.8, 'rotation-y': -5.6 };
           case 'princess':
-            return { position: [0, 1.7, 0], scale: 1.4 };
+            return { position: [0, 1.9, 0], scale: 1.4 };
         }
       }
 
@@ -40,13 +42,13 @@ const LetteringModel = ({ color, font, value, theme }: Lettering & { theme?: Cak
 
   return (
     <>
-      {value.split('\n').map((v, i) => (
+      {letteringValues.map((v, i) => (
         <Center
           key={i}
           onCentered={() => {}}
           {...(getFontParams(
             i,
-            value.split('\n').length,
+            letteringValues.length,
           ) as unknown as THREE.Group<THREE.Object3DEventMap>)}>
           <Text3D
             rotation-x={-1.6}

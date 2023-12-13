@@ -107,7 +107,7 @@ export const useBlock = () => {
     if (isShape) {
       dispatch({
         title: '케이크 만들기를 그만하시겠어요?',
-        content: '페이지에서 나가면 그동안의 작업은 저장되지 않아요. 정말 그만하시겠어요?',
+        content: '페이지에서 나가면 그동안의 작업은 저장되지 않아요.\n정말 그만하시겠어요?',
         onConfirm() {
           router.back();
           dispatchMakeAtom(CUSTOM_STEP_STORE);

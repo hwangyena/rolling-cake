@@ -20,11 +20,11 @@ const ThemeCake = ({ cake, step, isRotate }: Props) => {
   const renderTheme = () => {
     switch (cake.theme) {
       case 'harrypotter':
-        return <HarryPotter isRotate={isRotate} />;
+        return <HarryPotter />;
       case 'princess':
-        return <Princess showTop={step === 'lettering'} isRotate={isRotate} />;
+        return <Princess showTop={step === 'lettering'} />;
       case 'soju':
-        return <Soju isRotate={isRotate} />;
+        return <Soju />;
     }
   };
 
@@ -37,6 +37,12 @@ const ThemeCake = ({ cake, step, isRotate }: Props) => {
     }
   }, [step]);
 
+  useFrame(() => {
+    if (cakeRef.current && isRotate) {
+      cakeRef.current.rotation.y += 0.005;
+    }
+  });
+
   return (
     <>
       <CameraControls
@@ -45,38 +51,31 @@ const ThemeCake = ({ cake, step, isRotate }: Props) => {
       />
       <Environment preset="warehouse" />
 
-      <group ref={cakeRef} scale={0.75}>
-        {renderTheme()}
-      </group>
+      <group ref={cakeRef}>
+        <group scale={0.75}>{renderTheme()}</group>
 
-      <LetteringModel
-        theme={cake.theme}
-        color="green"
-        font={
-          cake.theme === 'harrypotter'
-            ? 'font5'
-            : cake.theme === 'soju'
-            ? 'font4'
-            : cake.lettering.font
-        }
-        value={cake.lettering.value.toUpperCase()}
-      />
+        <LetteringModel
+          theme={cake.theme}
+          color="green"
+          font={
+            cake.theme === 'harrypotter'
+              ? 'font5'
+              : cake.theme === 'soju'
+              ? 'font4'
+              : cake.lettering.font
+          }
+          value={cake.lettering.value.toUpperCase()}
+        />
+      </group>
     </>
   );
 };
 
-const HarryPotter = ({ isRotate }: { isRotate?: boolean }) => {
+const HarryPotter = () => {
   const { nodes, materials } = useGLTF(`/models/theme/harrypotter.glb`) as GLTFRes;
-  const cakeRef = useRef<THREE.Group>(null);
-
-  useFrame(() => {
-    if (cakeRef.current && isRotate) {
-      cakeRef.current.rotation.y += 0.005;
-    }
-  });
 
   return (
-    <group ref={cakeRef} position={[0, 1.6, -0.4]} scale={17.8} rotation-y={-0.2}>
+    <group position={[0, 1.6, -0.4]} scale={17.8} rotation-y={-0.2}>
       <mesh
         castShadow
         receiveShadow
@@ -99,19 +98,11 @@ const HarryPotter = ({ isRotate }: { isRotate?: boolean }) => {
   );
 };
 
-const Soju = ({ isRotate }: { isRotate?: boolean }) => {
+const Soju = () => {
   const { nodes, materials } = useGLTF(`/models/theme/soju.glb`) as GLTFRes;
 
-  const cakeRef = useRef<THREE.Group>(null);
-
-  useFrame(() => {
-    if (cakeRef.current && isRotate) {
-      cakeRef.current.rotation.y += 0.005;
-    }
-  });
-
   return (
-    <group ref={cakeRef} rotation={[0, Math.PI, 0]}>
+    <group rotation={[0, Math.PI, 0]}>
       <group scale={[-3.092, -0.425, -3.092]}>
         <mesh
           castShadow
@@ -166,22 +157,14 @@ const Soju = ({ isRotate }: { isRotate?: boolean }) => {
   );
 };
 
-const Princess = ({ showTop, isRotate }: { showTop: boolean; isRotate?: boolean }) => {
+const Princess = ({ showTop }: { showTop: boolean }) => {
   const { nodes, materials } = useGLTF(`/models/theme/princess.glb`) as GLTFRes;
-  const cakeRef = useRef<THREE.Group>(null);
-
-  useFrame(() => {
-    if (cakeRef.current && isRotate) {
-      cakeRef.current.rotation.y += 0.005;
-    }
-  });
 
   return (
     <group
-      ref={cakeRef}
       scale={0.9}
       position={showTop ? [0, -0.3, 0] : undefined}
-      rotation={showTop ? [0, -Math.PI / 2, 0] : [-0.4, Math.PI / 2, 0]}>
+      rotation={showTop ? [0, -Math.PI / 2, 0] : [0, Math.PI / 2, 0]}>
       <group scale={[-3.579, -0.492, -3.579]}>
         <mesh
           castShadow
