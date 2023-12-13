@@ -12,6 +12,7 @@ import Card from '@/components/common/Card';
 import Header from '@/components/common/Header';
 import CustomCake from '@/components/model/CustomCake';
 import styles from '@/styles/component.module.css';
+import ThemeCake from '@/components/model/ThemeCake';
 
 type Props = CakeType & {
   user: User;
@@ -25,6 +26,7 @@ export default function LetterClient({
   currentUser,
   isPrivate,
   customCake,
+  themeCake,
 }: Props) {
   const dispatch = useSetAtom(popupAtom);
   const router = useRouter();
@@ -78,8 +80,8 @@ export default function LetterClient({
                 position: new THREE.Vector3(0, 3, 8.5),
               }}
               style={{ zIndex: 10 }}>
-              {/* FIXME: after theme cake */}
               {customCake && <CustomCake isRotate cake={customCake as CustomCake} />}
+              {themeCake && <ThemeCake isRotate cake={themeCake as ThemeCake} />}
             </Canvas>
           </LetterCard>
           <LetterCard
