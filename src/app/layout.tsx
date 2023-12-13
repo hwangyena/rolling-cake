@@ -8,8 +8,7 @@ import '../styles/global.css';
 export const metadata: Metadata = {
   title: '롤링케이크',
   description: '내 롤링케이크.. 써줄래?',
-  generator: 'Next.js',
-  applicationName: 'Next.js',
+  applicationName: 'Rolling cake',
   referrer: 'origin-when-cross-origin',
   keywords: [
     'rollincake',
@@ -24,7 +23,6 @@ export const metadata: Metadata = {
     '크리스마스',
     '선물',
   ],
-  authors: [{ name: 'Seb' }, { name: 'Josh', url: 'https://nextjs.org' }],
   creator: 'Hwang yena',
   publisher: 'Hwang yena',
   appleWebApp: {
@@ -33,15 +31,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: '롤링케이크',
     description: '내 롤링케이크...써줄래?',
-    url: `${process.env.AWS_S3_URL}/thumbnail.png`,
+    url: `https://${process.env.AWS_S3_URL}/thumbnail.png`,
     siteName: '롤링케이크',
-    images: [
-      {
-        url: `${process.env.AWS_S3_URL}/thumbnail.png`,
-        width: 800,
-        height: 600,
-      },
-    ],
+    images: `https://${process.env.AWS_S3_URL}/thumbnail.png`,
     type: 'website',
   },
 };

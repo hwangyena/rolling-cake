@@ -11,10 +11,11 @@ import Confetti from '@/components/style/Confetti';
 import { useErrorPopup } from '@/hooks/common';
 import { useStepStore } from '@/hooks/make';
 import { createCake } from '@/lib/endpoint';
-import { getLocalStorage, setLocalStorage } from '@/lib/store';
+import { getLocalStorage, popupAtom, setLocalStorage } from '@/lib/store';
 import { Canvas } from '@react-three/fiber';
+import { useSetAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
-import { useCallback, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import useSWRMutation from 'swr/mutation';
 import * as THREE from 'three';
 
@@ -24,9 +25,38 @@ export default function Page() {
   const { store, onResetMakeAtom } = useStepStore();
   const { trigger, data, isMutating } = useSWRMutation('/api/make', createCake);
   const { showError } = useErrorPopup(() => router.replace('/make?step=shape'));
+  const dispatchPopup = useSetAtom(popupAtom);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const targetUser = useMemo(() => getLocalStorage<string>('rolling-cake:userId'), []);
+
+  useEffect(() => {
+    const isMake = getLocalStorage<Record<string, boolean>>('rolling-cake:isMake');
+    const userId = getLocalStorage<string>('rolling-cake:userId');
+
+    if (isMutating || data) {
+      return;
+    }
+
+    if (!userId) {
+      dispatchPopup({
+        title: '앗, 오류가 생겼어요.',
+        content: '일시적인 오류일 수 있어요.\n잠시 후 다시 시도해주세요.',
+        hideCancel: true,
+        onConfirm: () => router.push('/'),
+      });
+      return;
+    }
+
+    if (isMake && isMake[userId]) {
+      dispatchPopup({
+        title: '앗, 오류가 생겼어요.',
+        content: '이미 만들어준 케이크 같아요.\n케이크는 한 번만 전달해 줄 수 있어요.',
+        hideCancel: true,
+        onConfirm: () => router.push(`/cake/${userId}`),
+      });
+    }
+  }, [dispatchPopup, store, router, isMutating, data]);
 
   const onCreate = useCallback(async () => {
     const { shape, letter, ...cake } = store;
@@ -89,7 +119,7 @@ export default function Page() {
           {store.shape === 'theme' && <ThemeCake isRotate={!!data} cake={store as ThemeCake} />}
         </Canvas>
       </div>
-      <section className="mb-3 flex w-full flex-col items-center gap-3 px-5">
+      <section className="mb-3 flex min-h-[120px] w-full flex-col items-center justify-end gap-3 px-5">
         {data ? (
           <>
             <Button type="BIG" style={{ zIndex: 10 }} onClick={onListClicked}>
