@@ -292,7 +292,8 @@
   color: white;
 }
 
-.focus-input-content > section:first-child > textarea {
+.focus-input-content > section:first-child > textarea,
+.focus-input-content > section:first-child > input {
   background: transparent;
   border-bottom: 1px solid #fff;
   width: 100%;
