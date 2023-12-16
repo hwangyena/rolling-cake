@@ -107,7 +107,6 @@ export default function Page() {
       <div className="relative w-full flex-1">
         <Canvas
           shadows
-          gl={{ preserveDrawingBuffer: true }}
           ref={canvasRef}
           camera={{
             fov: 55,
@@ -118,9 +117,11 @@ export default function Page() {
           style={{ zIndex: 10 }}>
           <Suspense>
             {store.shape === 'custom' && (
-              <CustomCake isRotate={!!data} cake={store as CustomCake} />
+              <CustomCake fixPosition isRotate={!!data} cake={store as CustomCake} />
             )}
-            {store.shape === 'theme' && <ThemeCake isRotate={!!data} cake={store as ThemeCake} />}
+            {store.shape === 'theme' && (
+              <ThemeCake fixPosition isRotate={!!data} cake={store as ThemeCake} />
+            )}
           </Suspense>
         </Canvas>
         <LoadingCanvas />
