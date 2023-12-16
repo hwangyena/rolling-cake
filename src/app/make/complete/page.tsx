@@ -8,6 +8,7 @@ import Navigation from '@/components/common/Navigation';
 import CustomCake from '@/components/model/CustomCake';
 import ThemeCake from '@/components/model/ThemeCake';
 import Confetti from '@/components/style/Confetti';
+import LoadingCanvas from '@/components/style/LoadingCanvas';
 import { useErrorPopup } from '@/hooks/common';
 import { useStepStore } from '@/hooks/make';
 import { createCake } from '@/lib/endpoint';
@@ -15,7 +16,7 @@ import { getLocalStorage, popupAtom, setLocalStorage } from '@/lib/store';
 import { Canvas } from '@react-three/fiber';
 import { useSetAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
-import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { Suspense, useCallback, useEffect, useMemo, useRef } from 'react';
 import useSWRMutation from 'swr/mutation';
 import * as THREE from 'three';
 
@@ -103,10 +104,9 @@ export default function Page() {
     <GradientContainer type="pink-green" className="items-center justify-center overflow-hidden">
       <Navigation show={['<']} className={data ? 'invisible' : ''} />
       <Header>{data ? '케이크를 선물했어요!' : '롤링케이크 완성!'}</Header>
-      <div className="w-full flex-1">
+      <div className="relative w-full flex-1">
         <Canvas
           shadows
-          gl={{ preserveDrawingBuffer: true }}
           ref={canvasRef}
           camera={{
             fov: 55,
@@ -115,9 +115,16 @@ export default function Page() {
             position: new THREE.Vector3(0, 3, 9),
           }}
           style={{ zIndex: 10 }}>
-          {store.shape === 'custom' && <CustomCake isRotate={!!data} cake={store as CustomCake} />}
-          {store.shape === 'theme' && <ThemeCake isRotate={!!data} cake={store as ThemeCake} />}
+          <Suspense>
+            {store.shape === 'custom' && (
+              <CustomCake fixPosition isRotate={!!data} cake={store as CustomCake} />
+            )}
+            {store.shape === 'theme' && (
+              <ThemeCake fixPosition isRotate={!!data} cake={store as ThemeCake} />
+            )}
+          </Suspense>
         </Canvas>
+        <LoadingCanvas />
       </div>
       <section className="mb-3 flex min-h-[120px] w-full flex-col items-center justify-end gap-3 px-5">
         {data ? (

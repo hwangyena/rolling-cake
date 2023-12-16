@@ -1,6 +1,6 @@
 import { getCakeBg } from '@/lib/utils';
 import { Center, Text3D } from '@react-three/drei';
-import { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import { Suspense, memo, useCallback, useEffect, useMemo, useState } from 'react';
 import * as THREE from 'three';
 
 const LetteringModel = ({ color, font, value, theme }: Lettering & { theme?: CakeTheme }) => {
@@ -41,7 +41,7 @@ const LetteringModel = ({ color, font, value, theme }: Lettering & { theme?: Cak
   );
 
   return (
-    <>
+    <Suspense>
       {letteringValues.map((v, i) => (
         <Center
           key={i}
@@ -66,7 +66,7 @@ const LetteringModel = ({ color, font, value, theme }: Lettering & { theme?: Cak
           </Text3D>
         </Center>
       ))}
-    </>
+    </Suspense>
   );
 };
 
