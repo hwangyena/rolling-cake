@@ -11,9 +11,10 @@ type Props = {
   cake: ThemeCake;
   step?: keyof ThemeCake;
   isRotate?: boolean;
+  fixPosition?: boolean;
 };
 
-const ThemeCake = ({ cake, step, isRotate }: Props) => {
+function ThemeCake({ cake, step, isRotate, fixPosition }: Props) {
   const cameraControlsRef = useRef<CameraControls | null>(null);
   const cakeRef = useRef<THREE.Group>(null);
 
@@ -45,10 +46,14 @@ const ThemeCake = ({ cake, step, isRotate }: Props) => {
 
   return (
     <>
-      <CameraControls
-        ref={cameraControlsRef}
-        polarAngle={step === 'lettering' ? -60 * DEG2RAD : 40 * DEG2RAD}
-      />
+      {!fixPosition && (
+        <CameraControls
+          ref={cameraControlsRef}
+          polarAngle={step === 'lettering' ? -60 * DEG2RAD : 40 * DEG2RAD}
+          minPolarAngle={0}
+          maxPolarAngle={Math.PI * 0.5}
+        />
+      )}
       <Environment preset="warehouse" />
 
       <group ref={cakeRef}>
@@ -69,7 +74,7 @@ const ThemeCake = ({ cake, step, isRotate }: Props) => {
       </group>
     </>
   );
-};
+}
 
 const HarryPotter = () => {
   const { nodes, materials } = useGLTF(`/models/theme/harrypotter.glb`) as GLTFRes;

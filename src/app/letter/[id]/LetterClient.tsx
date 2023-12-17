@@ -1,18 +1,19 @@
 'use client';
 
-import * as THREE from 'three';
-import { Canvas } from '@react-three/fiber';
-import { Cake as CakeType, User } from '@prisma/client';
-import { useSetAtom } from 'jotai';
-import { useRouter } from 'next/navigation';
-import { PropsWithChildren, useCallback, useMemo, useState } from 'react';
-import { popupAtom } from '@/lib/store';
-import { cn } from '@/lib/utils';
 import Card from '@/components/common/Card';
 import Header from '@/components/common/Header';
 import CustomCake from '@/components/model/CustomCake';
-import styles from '@/styles/component.module.css';
 import ThemeCake from '@/components/model/ThemeCake';
+import LoadingCanvas from '@/components/style/LoadingCanvas';
+import { popupAtom } from '@/lib/store';
+import { cn } from '@/lib/utils';
+import styles from '@/styles/component.module.css';
+import { Cake as CakeType, User } from '@prisma/client';
+import { Canvas } from '@react-three/fiber';
+import { useSetAtom } from 'jotai';
+import { useRouter } from 'next/navigation';
+import { PropsWithChildren, Suspense, useCallback, useMemo, useState } from 'react';
+import * as THREE from 'three';
 
 type Props = CakeType & {
   user: User;
@@ -71,18 +72,23 @@ export default function LetterClient({
             name={user.rollingCakeName}
             onToggleCake={onToggleCake}
             className={styles.front}>
-            <Canvas
-              shadows
-              camera={{
-                fov: 48,
-                near: 0.1,
-                far: 100,
-                position: new THREE.Vector3(0, 3, 8.5),
-              }}
-              style={{ zIndex: 10 }}>
-              {customCake && <CustomCake isRotate cake={customCake as CustomCake} />}
-              {themeCake && <ThemeCake isRotate cake={themeCake as ThemeCake} />}
-            </Canvas>
+            <div className="relative h-full w-full">
+              <Canvas
+                shadows
+                camera={{
+                  fov: 48,
+                  near: 0.1,
+                  far: 100,
+                  position: new THREE.Vector3(0, 3, 8.5),
+                }}
+                style={{ zIndex: 10 }}>
+                <Suspense fallback={null}>
+                  {customCake && <CustomCake isRotate cake={customCake as CustomCake} />}
+                  {themeCake && <ThemeCake isRotate cake={themeCake as ThemeCake} />}
+                </Suspense>
+              </Canvas>
+              <LoadingCanvas />
+            </div>
           </LetterCard>
           <LetterCard
             label="케이크 보기"

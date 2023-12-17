@@ -7,6 +7,8 @@ import CustomCake from '../model/CustomCake';
 import ItemSelect from './ItemSelect';
 import LetteringArea from './LetteringArea';
 import ThemeCake from '../model/ThemeCake';
+import { Suspense } from 'react';
+import LoadingCanvas from '../style/LoadingCanvas';
 
 const StepCommon = ({ itemSelect }: { itemSelect?: (keyof typeof SELECT_ITEM)[] }) => {
   const { isTheme } = useEntireStep();
@@ -14,7 +16,7 @@ const StepCommon = ({ itemSelect }: { itemSelect?: (keyof typeof SELECT_ITEM)[] 
 
   return (
     <article className="flex h-full flex-col">
-      <section className="relative grid flex-1 place-items-center">
+      <section className="relative grid w-full flex-1 place-items-center">
         <Canvas
           shadows
           camera={{
@@ -23,13 +25,15 @@ const StepCommon = ({ itemSelect }: { itemSelect?: (keyof typeof SELECT_ITEM)[] 
             far: 100,
             position: new THREE.Vector3(0, 3, 9),
           }}>
-          {isTheme ? (
-            <ThemeCake cake={store as ThemeCake} step={step} />
-          ) : (
-            <CustomCake hasStand cake={store as CustomCake} step={step} />
-          )}
+          <Suspense>
+            {isTheme ? (
+              <ThemeCake cake={store as ThemeCake} step={step} />
+            ) : (
+              <CustomCake hasStand cake={store as CustomCake} step={step} />
+            )}
+          </Suspense>
         </Canvas>
-
+        <LoadingCanvas />
         {step === 'lettering' && <LetteringArea />}
       </section>
       <ItemSelect data={itemSelect ?? []} />

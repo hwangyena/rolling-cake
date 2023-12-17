@@ -1,14 +1,17 @@
 import { useDebounce } from '@/hooks/common';
 import { stepValidAtom } from '@/lib/store';
 import { useSetAtom } from 'jotai';
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 import Lock from '../style/Lock';
 import ShadowCard from '../style/ShadowCard';
 import { useStepStore } from '@/hooks/make';
 
 const StepLetter = () => {
-  const { store, onStoreUpdate } = useStepStore();
+  const {
+    store: { letter },
+    onStoreUpdate,
+  } = useStepStore();
   const dispatchValid = useSetAtom(stepValidAtom);
 
   const [name, setName] = useState('');
@@ -18,34 +21,51 @@ const StepLetter = () => {
   const debounceName = useDebounce(name);
   const debounceContent = useDebounce(content);
 
-  useEffect(() => {
-    if (store.letter.name !== debounceName) {
-      onStoreUpdate({ name: debounceName });
-    }
-  }, [debounceName, onStoreUpdate, store.letter.name]);
+  const syncStore = useRef(false);
+  const checkChangeName = useRef(false);
+  const checkChangeContent = useRef(false);
 
-  useEffect(() => {
-    if (store.letter.content !== debounceContent) {
-      onStoreUpdate({ content: debounceContent });
-    }
-  }, [debounceContent, onStoreUpdate, store.letter.content]);
-
-  useEffect(() => {
-    if (name.length > 0 || content.length > 0) {
+  // update state by store
+  useLayoutEffect(() => {
+    if (!letter.name && !letter.content && letter.isPrivate) {
       return;
     }
 
-    const { name: storeName, content: storeContent, isPrivate: storeLock } = store.letter;
+    if (syncStore.current) {
+      return;
+    }
 
-    setName(storeName);
-    setContent(storeContent);
-    setLock(storeLock);
+    const { content, isPrivate, name } = letter;
 
-    return () => {
-      dispatchValid(false);
-    };
-  }, [content, dispatchValid, name, store]);
+    name && setName(name);
+    content && setContent(content);
+    setLock(isPrivate);
 
+    syncStore.current = true;
+  }, [letter]);
+
+  // update store
+  useEffect(() => {
+    if (!checkChangeName.current) {
+      return;
+    }
+
+    if (letter.name !== debounceName) {
+      onStoreUpdate({ name: debounceName });
+    }
+  }, [debounceName, onStoreUpdate, name, letter.name]);
+
+  useEffect(() => {
+    if (!checkChangeContent.current) {
+      return;
+    }
+
+    if (letter.content !== debounceContent) {
+      onStoreUpdate({ content: debounceContent });
+    }
+  }, [debounceContent, onStoreUpdate, letter.content]);
+
+  // next button disabled
   useEffect(() => {
     if (!name || !content) {
       dispatchValid(true);
@@ -53,7 +73,7 @@ const StepLetter = () => {
     }
 
     dispatchValid(false);
-  }, [content, dispatchValid, name]);
+  }, [name, content, dispatchValid]);
 
   const handleToggleLock = () => {
     setLock((p) => !p);
@@ -68,7 +88,10 @@ const StepLetter = () => {
             type="text"
             placeholder="당신의 이름을 알려주세요"
             value={name}
-            onChange={(e) => setName(e.target.value.slice(0, 5))}
+            onChange={(e) => {
+              checkChangeName.current = true;
+              setName(e.target.value.slice(0, 5));
+            }}
             className={`w-full rounded-none border-b border-gray-500 pb-5 text-b1 text-gray-700`}
           />
           <span className={'absolute right-0 pb-5 text-cap font-bold text-gray-500'}>
@@ -81,7 +104,10 @@ const StepLetter = () => {
             maxLength={200}
             placeholder="편지 내용을 작성해볼까?"
             value={content}
-            onChange={(e) => setContent(e.target.value)}
+            onChange={(e) => {
+              checkChangeContent.current = true;
+              setContent(e.target.value);
+            }}
           />
         </section>
         <section className="flex justify-between">

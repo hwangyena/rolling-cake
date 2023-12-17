@@ -10,17 +10,15 @@ import Item from './items/Item';
 
 const { DEG2RAD } = THREE.MathUtils;
 
-const CustomCake = ({
-  cake,
-  step,
-  isRotate,
-  hasStand,
-}: {
+type Props = {
   cake: CustomCake;
   step?: keyof CustomCake;
   isRotate?: boolean;
   hasStand?: boolean;
-}) => {
+  fixPosition?: boolean;
+};
+
+const CustomCake = ({ cake, step, isRotate, hasStand, fixPosition }: Props) => {
   const cameraControlsRef = useRef<CameraControls | null>(null);
   const cakeRef = useRef<THREE.Group>(null);
 
@@ -50,7 +48,9 @@ const CustomCake = ({
 
   return (
     <>
-      <CameraControls ref={cameraControlsRef} />
+      {!fixPosition && (
+        <CameraControls ref={cameraControlsRef} minPolarAngle={0} maxPolarAngle={Math.PI * 0.5} />
+      )}
       <Environment preset="dawn" />
 
       <group scale={hasStand ? 1 : 1.3} ref={cakeRef}>
