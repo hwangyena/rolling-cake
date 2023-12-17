@@ -31,7 +31,7 @@ const StepShape = () => {
                   !isActive,
               })}>
               <Cake
-                className="h-[90%] w-full"
+                className="h-full w-full"
                 priority
                 theme={v.value === 'THEME' ? 'harrypotter' : undefined}
               />
