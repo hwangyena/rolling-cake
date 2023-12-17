@@ -1,5 +1,5 @@
 import { CAKE_SHAPE } from '@/lib/constant';
-import SwiperWrapper from './SwiperWrapper';
+import SwiperCard from './SwiperCard';
 import { SwiperClass, SwiperSlide } from 'swiper/react';
 import Card from '../common/Card';
 import { cn } from '@/lib/utils';
@@ -20,14 +20,14 @@ const StepShape = () => {
   );
 
   return (
-    <SwiperWrapper initialSlide={isTheme ? 1 : 0} onSlideChanged={onSlideChanged}>
+    <SwiperCard initialSlide={isTheme ? 1 : 0} onSlideChanged={onSlideChanged}>
       {CAKE_SHAPE.map((v) => (
         <SwiperSlide key={v.value}>
           {({ isActive }) => (
             <Card
               content={v.label}
               className={cn({
-                "after: after:absolute after:left-0 after:top-0 after:z-[100] after:h-full after:w-full after:bg-black after:opacity-20 after:drop-shadow-black after:content-['']":
+                "after:absolute after:left-0 after:top-0 after:z-[100] after:h-full after:w-full after:rounded-lg after:bg-black after:opacity-20 after:drop-shadow-black after:content-['']":
                   !isActive,
               })}>
               <Cake
@@ -39,7 +39,7 @@ const StepShape = () => {
           )}
         </SwiperSlide>
       ))}
-    </SwiperWrapper>
+    </SwiperCard>
   );
 };
 
