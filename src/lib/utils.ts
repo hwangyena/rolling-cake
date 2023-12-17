@@ -88,7 +88,7 @@ export const getCakeBg = (color: Color, vivid = true, theme?: CakeTheme) => {
 
   const themeColor: Record<CakeTheme, string> = {
     harrypotter: '#1f9b4f',
-    princess: '#ff91dc',
+    princess: '#e65ae6',
     soju: '#2e2e34',
   };
 

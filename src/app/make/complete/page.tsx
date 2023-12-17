@@ -108,6 +108,7 @@ export default function Page() {
         <Canvas
           shadows
           ref={canvasRef}
+          gl={{ preserveDrawingBuffer: true }}
           camera={{
             fov: 55,
             near: 0.1,

@@ -23,11 +23,11 @@ const LetteringModel = ({ color, font, value, theme }: Lettering & { theme?: Cak
       if (theme) {
         switch (theme) {
           case 'harrypotter':
-            return { position: [0, 1.4, 1.05], scale: 1.3 };
+            return { position: [-0.1, 0.3, 0.7], scale: 1.6 };
           case 'soju':
-            return { position: [0.35, 1.05, 0.35], scale: 1.8, 'rotation-y': -5.6 };
+            return { position: [0.35, 1.05, 0.35], scale: 1.86, 'rotation-y': 0.8 };
           case 'princess':
-            return { position: [0, 1.9, 0], scale: 1.4 };
+            return { position: [-0.1, 0.8, -0.25], scale: 1.3 };
         }
       }
 

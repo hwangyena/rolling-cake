@@ -40,6 +40,12 @@ const CustomCake = ({ cake, step, isRotate, hasStand, fixPosition }: Props) => {
     }
   }, [step]);
 
+  useEffect(() => {
+    if (fixPosition) {
+      cameraControlsRef.current?.dispose();
+    }
+  }, [fixPosition]);
+
   useFrame(() => {
     if (cakeRef.current && isRotate) {
       cakeRef.current.rotation.y += 0.005;
@@ -48,15 +54,13 @@ const CustomCake = ({ cake, step, isRotate, hasStand, fixPosition }: Props) => {
 
   return (
     <>
-      {!fixPosition && (
-        <CameraControls
-          ref={cameraControlsRef}
-          minPolarAngle={0}
-          maxPolarAngle={Math.PI * 0.5}
-          minDistance={Math.PI * 1.7}
-          maxDistance={10}
-        />
-      )}
+      <CameraControls
+        ref={cameraControlsRef}
+        minPolarAngle={0}
+        maxPolarAngle={Math.PI * 0.5}
+        minDistance={Math.PI * 1.7}
+        maxDistance={10}
+      />
       <Environment preset="dawn" />
 
       <group scale={hasStand ? 1 : 1.3} ref={cakeRef}>
