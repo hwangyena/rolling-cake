@@ -74,14 +74,20 @@ export default function HaveCakeClient({ cakes, user, isOwn }: Props) {
           ))}
         </div>
       </section>
-      {isMakeCake && (
+      {/* TODO: remove this!! */}
+      {/* {isMakeCake && (
         <section
           className={'white-gradient absolute bottom-0 w-full px-[25px] pb-[20px] pt-[45px]'}>
           <Button type="BIG" onClick={onButtonClicked}>
             롤링케이크 만들어주기
           </Button>
         </section>
-      )}
+      )} */}
+      <section className={'white-gradient absolute bottom-0 w-full px-[25px] pb-[20px] pt-[45px]'}>
+        <Button type="BIG" onClick={onButtonClicked}>
+          롤링케이크 만들어주기
+        </Button>
+      </section>
     </div>
   );
 }
