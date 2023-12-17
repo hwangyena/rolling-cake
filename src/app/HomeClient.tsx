@@ -26,10 +26,10 @@ const HomeClient = ({ user }: { user?: User | null }) => {
 
   return (
     <GradientContainer type="green-pink" className="flex flex-col items-center gap-7 px-5">
-      <div className="relative mt-[7vh] h-[20%] w-full">
+      <div className="relative mt-[7vh] h-[23%] w-full">
         <Image src="/images/logo.png" fill alt="logo" priority />
       </div>
-      <div className="relative h-[55%] w-[95%]">
+      <div className="relative h-[50%] w-[95%]">
         <Image src="/images/main-cake.png" fill alt="cake" priority />
       </div>
       <footer className="absolute bottom-0 w-full p-5 text-center">

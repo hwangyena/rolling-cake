@@ -5,7 +5,7 @@ import { PropsWithChildren, useCallback } from 'react';
 import GradientContainer from '../GradientContainer';
 import CircleButton from '../common/CircleButton';
 import Header from '../common/Header';
-import { useBlock } from '@/hooks/make';
+import { useBlock, useEntireStep } from '@/hooks/make';
 import { useAtom } from 'jotai';
 import { stepValidAtom } from '@/lib/store';
 
@@ -18,6 +18,8 @@ const Wrapper = ({ order, orderLength, title, children, next }: PropsWithChildre
   const router = useRouter();
 
   const [disabled] = useAtom(stepValidAtom);
+
+  const { step } = useEntireStep();
   const { onBackClicked } = useBlock();
 
   const onNextClicked = useCallback(() => {
@@ -50,7 +52,7 @@ const Wrapper = ({ order, orderLength, title, children, next }: PropsWithChildre
 
         <footer className="mb-5 flex w-full justify-between p-3">
           <CircleButton type="<" onClick={onBackClicked} />
-          <CircleButton type=">" onClick={onNextClicked} disabled={disabled} />
+          <CircleButton type=">" onClick={onNextClicked} disabled={disabled && step === 'letter'} />
         </footer>
       </main>
     </GradientContainer>
