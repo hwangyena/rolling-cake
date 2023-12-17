@@ -49,7 +49,13 @@ const CustomCake = ({ cake, step, isRotate, hasStand, fixPosition }: Props) => {
   return (
     <>
       {!fixPosition && (
-        <CameraControls ref={cameraControlsRef} minPolarAngle={0} maxPolarAngle={Math.PI * 0.5} />
+        <CameraControls
+          ref={cameraControlsRef}
+          minPolarAngle={0}
+          maxPolarAngle={Math.PI * 0.5}
+          minDistance={Math.PI * 1.7}
+          maxDistance={10}
+        />
       )}
       <Environment preset="dawn" />
 

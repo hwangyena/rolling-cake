@@ -20,7 +20,7 @@ const StepCommon = ({ itemSelect }: { itemSelect?: (keyof typeof SELECT_ITEM)[] 
         <Canvas
           shadows
           camera={{
-            fov: window.innerWidth > 480 ? 50 : 45,
+            fov: window.innerWidth > 480 ? 43 : 40,
             near: 0.1,
             far: 100,
             position: new THREE.Vector3(0, 3, 9),
