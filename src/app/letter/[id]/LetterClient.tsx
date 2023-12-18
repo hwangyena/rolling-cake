@@ -95,7 +95,7 @@ export default function LetterClient({
             name={user.rollingCakeName}
             onToggleCake={onToggleCake}
             className={styles.back}>
-            <p className="h-full overflow-auto break-keep p-3 text-center font-neo text-effect_b">
+            <p className="h-full w-full overflow-auto whitespace-pre-line break-keep p-3 text-center font-neo text-effect_b">
               {content}
             </p>
           </LetterCard>

@@ -64,7 +64,7 @@ export const cn = (...names: unknown[]): string => {
 export const getBaseUrl = () => {
   return process.env.NODE_ENV === 'development'
     ? `http://localhost:${process.env.PORT ?? 3000}/api`
-    : 'https://rolling-cake.vercel.app/api';
+    : 'https://rolling-cake.vercel.app/api'; // FIXME: change this by env
 };
 
 export const getCakeBg = (color: Color, vivid = true, theme?: CakeTheme) => {
@@ -88,7 +88,7 @@ export const getCakeBg = (color: Color, vivid = true, theme?: CakeTheme) => {
 
   const themeColor: Record<CakeTheme, string> = {
     harrypotter: '#1f9b4f',
-    princess: '#ff91dc',
+    princess: '#e65ae6',
     soju: '#2e2e34',
   };
 
@@ -101,7 +101,6 @@ export const getCakeBg = (color: Color, vivid = true, theme?: CakeTheme) => {
 
 export const getCirclePosition = (r: number, count = 30) => {
   const coordinates = [];
-  // const r = 62;
 
   for (let i = 0; i < count; i++) {
     const angle = (2 * Math.PI * i) / count;

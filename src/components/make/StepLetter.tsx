@@ -110,7 +110,7 @@ const StepLetter = () => {
             }}
           />
         </section>
-        <section className="flex justify-between">
+        <section className="mt-3 flex justify-between">
           <button
             className="flex items-center justify-center gap-2 text-b3 text-gray-600"
             onClick={handleToggleLock}>

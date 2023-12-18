@@ -20,7 +20,7 @@ export const SELECT_ITEM: Record<Item, { label: string; data: string[] }> = {
       'red-topper',
     ],
   },
-  font: { label: '글씨체', data: ['font1', 'font2', 'font3', 'font4', 'font5'] },
+  font: { label: '글씨체', data: ['font1', 'font2', 'font3', 'font4', 'font5', 'font6'] },
 };
 
 export const CAKE_SHAPE: Filter[] = [

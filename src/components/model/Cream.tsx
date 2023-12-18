@@ -5,23 +5,23 @@ import { useMemo } from 'react';
 import { getCakeBg } from '@/lib/utils';
 import { MeshProps } from '@react-three/fiber';
 
-type Props = { cream: CakeCream; color: Color } & MeshProps;
+type Props = { cream: CakeCream; color: Color; optionalColor?: 'princess' } & MeshProps;
 
-const Cream = ({ cream, color, ...meshProps }: Props) => {
+const Cream = ({ cream, color, optionalColor, ...meshProps }: Props) => {
   const { nodes, materials } = useGLTF(`/models/cream-${cream}.glb`) as GLTFRes;
 
   const creamProps: MeshProps = useMemo(
     () => ({
       geometry: nodes.cream.geometry,
       material: new THREE.MeshStandardMaterial({
-        color: getCakeBg(color),
+        color: optionalColor ? '#ffe6ff' : getCakeBg(color),
         roughness: 0.5,
         side: 2,
       }),
       rotation: nodes.cream.rotation,
       scale: cream === 'heart' ? [3.69, 5.84, 4.55] : nodes.cream.scale,
     }),
-    [color, nodes, cream],
+    [color, nodes, cream, optionalColor],
   );
 
   if (cream === 'chocolate') {
