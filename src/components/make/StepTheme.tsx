@@ -30,7 +30,6 @@ const StepTheme = () => {
       onSlideChanged={onSlideChanged}>
       {CAKE_THEME.map((theme) => (
         <SwiperSlide key={theme.value}>
-          {/* TODO: Change theme 3d */}
           {({ isActive }) => (
             <Card
               content={theme.label}
@@ -38,7 +37,7 @@ const StepTheme = () => {
                 "after:absolute after:left-0 after:top-0 after:z-[100] after:h-full after:w-full after:rounded-lg after:bg-black after:opacity-20 after:drop-shadow-black after:content-['']":
                   !isActive,
               })}>
-              <Cake className="h-[90%] w-full" priority theme={theme.value as CakeTheme} />
+              <Cake className="h-full w-full" priority theme={theme.value as CakeTheme} />
             </Card>
           )}
         </SwiperSlide>

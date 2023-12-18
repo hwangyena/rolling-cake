@@ -242,6 +242,24 @@
   transition: width 150ms ease 100ms;
 }
 
+@media (min-width: 800px) {
+  .check::before {
+    top: 32px;
+    left: 25px;
+  }
+  .step-box-selected ~ .check::before {
+    width: 14px;
+  }
+
+  .check::after {
+    top: 41px;
+    left: 33px;
+  }
+  .step-box-selected ~ .check::after {
+    width: 23px;
+  }
+}
+
 /* x svg */
 .x {
   display: flex;

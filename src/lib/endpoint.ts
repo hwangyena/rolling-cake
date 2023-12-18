@@ -9,7 +9,7 @@ export async function createCake(
   },
 ) {
   return await axios.post(url, arg, {
-    headers: { 'Content-Type': 'application/json' }, // FIXME: remove this?
+    headers: { 'Content-Type': 'application/json' },
   });
 }
 
