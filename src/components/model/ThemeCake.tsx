@@ -4,6 +4,7 @@ import { CameraControls, Environment, useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { useEffect, useMemo, useRef } from 'react';
 import LetteringModel from './Lettering';
+import SideCream from './SideCream';
 
 const { DEG2RAD } = THREE.MathUtils;
 
@@ -72,8 +73,8 @@ function ThemeCake({ cake, step, isRotate, fixPosition }: Props) {
         minDistance={Math.PI * 1.7}
         maxDistance={10}
       />
+      <ambientLight intensity={0.7} />
       <Environment preset="warehouse" />
-
       <group ref={cakeRef}>
         <group scale={0.75}>{renderTheme()}</group>
 
@@ -189,210 +190,6 @@ const Princess = ({ showTop }: { showTop: boolean }) => {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.Cube001_1.geometry}
-          material={materials['Material.069']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_2.geometry}
-          material={materials.SVGMat}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_3.geometry}
-          material={materials['Material.028']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_4.geometry}
-          material={materials['Material.078']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_5.geometry}
-          material={materials['Material.089']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_6.geometry}
-          material={materials['Material.096']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_7.geometry}
-          material={materials['Material.103']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_8.geometry}
-          material={materials['Material.110']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_9.geometry}
-          material={materials['Material.117']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_10.geometry}
-          material={materials['Material.124']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_11.geometry}
-          material={materials['Material.131']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_12.geometry}
-          material={materials['Material.138']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_13.geometry}
-          material={materials['Material.145']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_14.geometry}
-          material={materials['Material.152']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_15.geometry}
-          material={materials['Material.159']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_16.geometry}
-          material={materials['Material.173']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_17.geometry}
-          material={materials['Material.180']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_18.geometry}
-          material={materials['Material.187']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_19.geometry}
-          material={materials['Material.194']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_20.geometry}
-          material={materials['Material.201']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_21.geometry}
-          material={materials['Material.208']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_22.geometry}
-          material={materials['Material.215']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_23.geometry}
-          material={materials['Material.222']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_24.geometry}
-          material={materials['Material.229']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_25.geometry}
-          material={materials['Material.236']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_26.geometry}
-          material={materials['Material.243']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_27.geometry}
-          material={materials['Material.250']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_28.geometry}
-          material={materials['Material.257']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_29.geometry}
-          material={materials['Material.264']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_30.geometry}
-          material={materials['Material.271']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_31.geometry}
-          material={materials['Material.278']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_32.geometry}
-          material={materials['Material.285']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_33.geometry}
-          material={materials['Material.292']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_34.geometry}
-          material={materials['Material.299']}
-        />
-        <mesh
-          castShadow
-          receiveShadow
           geometry={nodes.Cube001_35.geometry}
           material={materials['Material.009']}
         />
@@ -409,6 +206,15 @@ const Princess = ({ showTop }: { showTop: boolean }) => {
           material={materials['Material.008']}
         />
       </group>
+      <SideCream
+        color="ivory"
+        cream="basic"
+        optional={{
+          count: 28,
+          radius: 41,
+          yPos: -28,
+        }}
+      />
     </group>
   );
 };
