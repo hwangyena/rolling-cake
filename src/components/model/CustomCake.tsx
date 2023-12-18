@@ -63,7 +63,7 @@ const CustomCake = ({ cake, step, isRotate, hasStand, fixPosition }: Props) => {
       />
       <Environment preset="dawn" />
 
-      <group scale={hasStand ? 1 : 1.3} ref={cakeRef}>
+      <group scale={hasStand ? 1 : 1.4} ref={cakeRef}>
         <Center>
           <CakeModel cakeColor={cake.sheet.color} hasStand={hasStand} />
         </Center>

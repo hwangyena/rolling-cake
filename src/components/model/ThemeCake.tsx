@@ -50,6 +50,10 @@ function ThemeCake({ cake, step, isRotate, fixPosition }: Props) {
     if (step !== 'lettering') {
       cameraControlsRef.current?.zoom(0.3);
     }
+
+    if (!step) {
+      cameraControlsRef.current?.truck(0, 0.3);
+    }
   }, [step, fixPosition]);
 
   useFrame(() => {
@@ -94,7 +98,7 @@ const HarryPotter = () => {
   const { nodes, materials } = useGLTF(`/models/theme/harrypotter.glb`) as GLTFRes;
 
   return (
-    <group position={[0, 0, -0.7]} scale={1.3} rotation-y={2.2}>
+    <group position={[0, 0, 0]} scale={1.1} rotation-y={2.2}>
       <group scale={23.03}>
         <mesh
           castShadow
@@ -176,7 +180,6 @@ const Princess = ({ showTop }: { showTop: boolean }) => {
 
   return (
     <group
-      scale={1.1}
       position={showTop ? [-0.2, 0, -0.3] : undefined}
       rotation={showTop ? [0, Math.PI / 2, 0] : [0, -Math.PI / 2, 0]}>
       <group
