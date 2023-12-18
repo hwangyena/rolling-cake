@@ -64,7 +64,7 @@ export default function HaveCakeClient({ cakes, user, isOwn }: Props) {
                   <Image src={cake.cakeImageUrl} alt="" fill className="object-cover" />
                 </div>
               ) : (
-                <Cake className="h-[90px] w-[80%]" theme={(cake.themeCake as ThemeCake).theme} /> // TODO: check
+                <Cake className="h-[90px] w-[80%]" theme={(cake.themeCake as ThemeCake).theme} />
               )}
               <div className="mt-1 flex gap-1">
                 {cake.isPrivate && <Lock />}
@@ -74,20 +74,14 @@ export default function HaveCakeClient({ cakes, user, isOwn }: Props) {
           ))}
         </div>
       </section>
-      {/* TODO: remove this!! */}
-      {/* {isMakeCake && (
+      {isMakeCake && (
         <section
           className={'white-gradient absolute bottom-0 w-full px-[25px] pb-[20px] pt-[45px]'}>
           <Button type="BIG" onClick={onButtonClicked}>
             롤링케이크 만들어주기
           </Button>
         </section>
-      )} */}
-      <section className={'white-gradient absolute bottom-0 w-full px-[25px] pb-[20px] pt-[45px]'}>
-        <Button type="BIG" onClick={onButtonClicked}>
-          롤링케이크 만들어주기
-        </Button>
-      </section>
+      )}
     </div>
   );
 }

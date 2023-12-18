@@ -11,7 +11,29 @@ const yPosition: Record<CakeCream, number> = {
   none: 0,
 };
 
-const SideCream = (props: { cream: CakeCream; color: Color }) => {
+type Props = {
+  cream: CakeCream;
+  color: Color;
+  optional?: {
+    radius: number;
+    count: number;
+    yPos: number;
+  };
+};
+
+const SideCream = ({ optional, ...props }: Props) => {
+  if (optional) {
+    const { radius, count, yPos } = optional;
+
+    return (
+      <group position={[0, 0.6, 0]} scale={0.067}>
+        {getCirclePosition(radius, count).map(([x, z], i) => (
+          <Cream key={i} position={[x, yPos, z]} optionalColor="princess" {...props} />
+        ))}
+      </group>
+    );
+  }
+
   return (
     <group position={[0, 0.6, 0]} scale={0.03}>
       {getCirclePosition(64, 34).map(([x, z], i) => (
