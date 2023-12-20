@@ -24,7 +24,7 @@ const Card = ({ children, button, hasDesign, content, className }: PropsWithChil
       <article
         className={cn(
           hasDesign ? 'w-[80%]' : 'w-full',
-          'z-10 grid h-[40vh] min-h-[60%] place-items-center rounded-xl border-2 border-black bg-white',
+          'relative z-10 grid h-[40vh] min-h-[60%] place-items-center rounded-xl border-2 border-black bg-white',
         )}>
         {children}
       </article>
