@@ -7,7 +7,7 @@ import EmptyCakeClient from './EmptyCakeClient';
 import HaveCakeClient from './HaveCakeClient';
 
 export default async function CakePage({ params }: { params: { id: string } }) {
-  const cakes = await fetch(`${process.env.BASE_URL}/api/cake/${params.id}`, {
+  const cakes = await fetch(`${process.env.NEXTAUTH_URL}/api/cake/${params.id}`, {
     method: 'GET',
     cache: 'no-store',
   }).then((res) => res.json());
