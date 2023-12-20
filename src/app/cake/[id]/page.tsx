@@ -1,14 +1,13 @@
 import getCurrentUser from '@/actions/getCurrentUser';
 import getUser from '@/actions/getUser';
 import ClientOnly from '@/components/ClientOnly';
-import { getBaseUrl } from '@/lib/utils';
+import Navigation from '@/components/common/Navigation';
+import { notFound } from 'next/navigation';
 import EmptyCakeClient from './EmptyCakeClient';
 import HaveCakeClient from './HaveCakeClient';
-import { notFound } from 'next/navigation';
-import Navigation from '@/components/common/Navigation';
 
 export default async function CakePage({ params }: { params: { id: string } }) {
-  const cakes = await fetch(`${getBaseUrl()}/cake/${params.id}`, {
+  const cakes = await fetch(`${process.env.BASE_URL}/api/cake/${params.id}`, {
     method: 'GET',
     cache: 'no-store',
   }).then((res) => res.json());

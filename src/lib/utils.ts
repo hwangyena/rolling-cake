@@ -61,12 +61,6 @@ export const cn = (...names: unknown[]): string => {
   return built.trim();
 };
 
-export const getBaseUrl = () => {
-  return process.env.NODE_ENV === 'development'
-    ? `http://localhost:${process.env.PORT ?? 3000}/api`
-    : 'https://rolling-cake.vercel.app/api'; // FIXME: change this by env
-};
-
 export const getCakeBg = (color: Color, vivid = true, theme?: CakeTheme) => {
   const vividColor: Record<Color, string> = {
     ivory: '#f9f5bd',
