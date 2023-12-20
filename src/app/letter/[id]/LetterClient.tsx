@@ -72,23 +72,21 @@ export default function LetterClient({
             name={user.rollingCakeName}
             onToggleCake={onToggleCake}
             className={styles.front}>
-            <div className="relative h-full w-full">
-              <Canvas
-                shadows
-                camera={{
-                  fov: 48,
-                  near: 0.1,
-                  far: 100,
-                  position: new THREE.Vector3(0, 3, 8.5),
-                }}
-                style={{ zIndex: 10 }}>
-                <Suspense fallback={null}>
-                  {customCake && <CustomCake isRotate cake={customCake as CustomCake} />}
-                  {themeCake && <ThemeCake isRotate cake={themeCake as ThemeCake} />}
-                </Suspense>
-              </Canvas>
-              <LoadingCanvas />
-            </div>
+            <Canvas
+              shadows
+              camera={{
+                fov: 50,
+                near: 0.1,
+                far: 100,
+                position: new THREE.Vector3(0, 3, 8.5),
+              }}
+              style={{ zIndex: 10 }}>
+              <Suspense fallback={null}>
+                {customCake && <CustomCake isRotate cake={customCake as CustomCake} />}
+                {themeCake && <ThemeCake isRotate cake={themeCake as ThemeCake} />}
+              </Suspense>
+            </Canvas>
+            <LoadingCanvas />
           </LetterCard>
           <LetterCard
             label="케이크 보기"
