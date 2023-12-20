@@ -76,6 +76,7 @@ function ThemeCake({ cake, step, isRotate, fixPosition }: Props) {
         <LetteringModel
           theme={cake.theme}
           color="green"
+          isMaking={!!step}
           font={
             cake.theme === 'harrypotter'
               ? 'font5'
@@ -94,7 +95,7 @@ const HarryPotter = () => {
   const { nodes, materials } = useGLTF(`/models/theme/harrypotter.glb`) as GLTFRes;
 
   return (
-    <group position={[0, 0, 0]} scale={1.1} rotation-y={2.2}>
+    <group scale={1.1} rotation-y={2.2}>
       <group scale={23.03}>
         <mesh
           castShadow
