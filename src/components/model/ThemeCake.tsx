@@ -43,19 +43,13 @@ function ThemeCake({ cake, step, isRotate, fixPosition }: Props) {
   }, [cake.theme, step]);
 
   useEffect(() => {
-    if (fixPosition) {
-      cameraControlsRef.current?.dispose();
-    }
-
-    // complete page
-    if (step !== 'lettering') {
-      cameraControlsRef.current?.zoom(0.3);
-    }
-
+    // letter page
     if (!step) {
       cameraControlsRef.current?.truck(0, 0.3);
     }
-  }, [step, fixPosition]);
+
+    cameraControlsRef.current?.update(0);
+  }, [step]);
 
   useFrame(() => {
     if (cakeRef.current && isRotate) {
@@ -66,6 +60,7 @@ function ThemeCake({ cake, step, isRotate, fixPosition }: Props) {
   return (
     <>
       <CameraControls
+        enabled={!fixPosition}
         ref={cameraControlsRef}
         polarAngle={getPolarAngle}
         minPolarAngle={0}
@@ -76,7 +71,7 @@ function ThemeCake({ cake, step, isRotate, fixPosition }: Props) {
       <ambientLight intensity={0.7} />
       <Environment preset="warehouse" />
       <group ref={cakeRef}>
-        <group scale={0.75}>{renderTheme()}</group>
+        <group scale={step !== 'lettering' ? 0.92 : 0.75}>{renderTheme()}</group>
 
         <LetteringModel
           theme={cake.theme}
