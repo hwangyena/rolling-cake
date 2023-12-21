@@ -3,7 +3,13 @@ import { Center, Text3D } from '@react-three/drei';
 import { Suspense, memo, useCallback, useEffect, useMemo, useState } from 'react';
 import * as THREE from 'three';
 
-const LetteringModel = ({ color, font, value, theme }: Lettering & { theme?: CakeTheme }) => {
+const LetteringModel = ({
+  color,
+  font,
+  value,
+  theme,
+  isMaking,
+}: Lettering & { theme?: CakeTheme; isMaking?: boolean }) => {
   const [material, setMaterial] = useState<THREE.MeshStandardMaterial>();
 
   const letteringValues = useMemo(() => (theme ? [value] : value.split('\n')), [value, theme]);
@@ -23,11 +29,17 @@ const LetteringModel = ({ color, font, value, theme }: Lettering & { theme?: Cak
       if (theme) {
         switch (theme) {
           case 'harrypotter':
-            return { position: [-0.1, 0.3, 0.93], scale: 1.4 };
+            return isMaking
+              ? { position: [-0.1, 0.3, 0.93], scale: 1.4 }
+              : { position: [-0.1, 0.35, 0.93], scale: 1.4 };
           case 'soju':
-            return { position: [0.35, 1.05, 0.35], scale: 1.86, 'rotation-y': 0.8 };
+            return isMaking
+              ? { position: [0.35, 1.05, 0.35], scale: 1.86, 'rotation-y': 0.8 }
+              : { position: [0.35, 1.3, 0.35], scale: 1.86, 'rotation-y': 0.8 };
           case 'princess':
-            return { position: [-0.1, 0.8, -0.25], scale: 1.3 };
+            return isMaking
+              ? { position: [-0.1, 0.8, -0.25], scale: 1.3 }
+              : { position: [-0.1, 0.9, -0.25], scale: 1.3 };
         }
       }
 
