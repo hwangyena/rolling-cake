@@ -82,6 +82,10 @@ mark {
   cursor: pointer;
 }
 
+.justify-end {
+  justify-content: end;
+}
+
 /* gradient */
 .green-gradient {
   background: linear-gradient(180deg, #fff 77.2%, #b5ffd7 100%);
