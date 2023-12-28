@@ -22,7 +22,10 @@ export default async function CakePage({ params }: { params: { id: string } }) {
   if (cakes?.length === 0) {
     return (
       <ClientOnly>
-        <Navigation show={loginUser?.id === params.id ? ['home', '<', 'upload'] : ['home', '<']} />
+        <Navigation
+          show={loginUser?.id === params.id ? ['home', 'upload'] : ['home']}
+          className="justify-end"
+        />
         <EmptyCakeClient user={user} isOwn={loginUser?.id === params.id} />
       </ClientOnly>
     );
@@ -30,7 +33,10 @@ export default async function CakePage({ params }: { params: { id: string } }) {
 
   return (
     <ClientOnly>
-      <Navigation show={loginUser?.id === params.id ? ['home', '<', 'upload'] : ['home', '<']} />
+      <Navigation
+        show={loginUser?.id === params.id ? ['home', 'upload'] : ['home']}
+        className="justify-end"
+      />
       <HaveCakeClient user={user} cakes={cakes} isOwn={loginUser?.id === params.id} />
     </ClientOnly>
   );
