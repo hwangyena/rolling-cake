@@ -1,3 +1,5 @@
+import { Stats } from '@react-three/drei';
+
 import { CameraControls, Center, Environment } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { memo, useEffect, useRef } from 'react';
@@ -7,6 +9,11 @@ import LetteringModel from './Lettering';
 import SideCream from './SideCream';
 import TopCream from './TopCream';
 import Item from './items/Item';
+
+// r150
+THREE.ColorManagement.enabled = true;
+// r139-r149
+// THREE.ColorManagement.legacyMode = false;
 
 const { DEG2RAD } = THREE.MathUtils;
 
@@ -42,12 +49,13 @@ const CustomCake = ({ cake, step, isRotate, hasStand, fixPosition }: Props) => {
 
   useFrame(() => {
     if (cakeRef.current && isRotate) {
-      cakeRef.current.rotation.y += 0.005;
+      cakeRef.current.rotation.y += 0.002;
     }
   });
 
   return (
     <>
+      <Stats />
       <CameraControls
         ref={cameraControlsRef}
         enabled={!fixPosition}
