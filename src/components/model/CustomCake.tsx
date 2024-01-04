@@ -74,9 +74,9 @@ const CustomCake = ({ cake, step, isRotate, hasStand, fixPosition }: Props) => {
         <group position={[0, hasStand ? 0 : -1.25, 0]}>
           {cake.cream_top.cream !== 'none' && <TopCream {...cake.cream_top} />}
           {cake.cream_side.cream !== 'none' && <SideCream {...cake.cream_side} />}
-          {cake.more.item.map((item) => (
-            <Item key={item} item={item} hasTopCream={cake.cream_top.cream !== 'none'} />
-          ))}
+          {/* {cake.more.item.map((item) => (
+            ))} */}
+          <Item items={cake.more.item} hasTopCream={cake.cream_top.cream !== 'none'} />
           {cake.lettering.value && <LetteringModel {...cake.lettering} />}
         </group>
       </group>

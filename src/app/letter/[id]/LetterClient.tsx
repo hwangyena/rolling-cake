@@ -80,6 +80,7 @@ export default function LetterClient({
                 far: 100,
                 position: new THREE.Vector3(0, 3, 8.5),
               }}
+              // frameloop="demand"
               style={{ zIndex: 10 }}>
               <Suspense fallback={null}>
                 {customCake && <CustomCake isRotate cake={customCake as CustomCake} />}
