@@ -1,6 +1,7 @@
 import { getCirclePosition } from '@/lib/utils';
 import { memo } from 'react';
 import Cream from './Cream';
+import { Instances } from '@react-three/drei';
 
 const yPosition: Record<CakeCream, number> = {
   basic: 2.0,
@@ -27,18 +28,22 @@ const SideCream = ({ optional, ...props }: Props) => {
 
     return (
       <group position={[0, 0.6, 0]} scale={0.067}>
-        {getCirclePosition(radius, count).map(([x, z], i) => (
-          <Cream key={i} position={[x, yPos, z]} optionalColor="princess" {...props} />
-        ))}
+        <Instances>
+          {getCirclePosition(radius, count).map(([x, z], i) => (
+            <Cream key={i} position={[x, yPos, z]} optionalColor="princess" {...props} />
+          ))}
+        </Instances>
       </group>
     );
   }
 
   return (
     <group position={[0, 0.6, 0]} scale={0.03}>
-      {getCirclePosition(64, 34).map(([x, z], i) => (
-        <Cream key={i} position={[x, yPosition[props.cream], z]} {...props} />
-      ))}
+      <Instances>
+        {getCirclePosition(64, 34).map(([x, z], i) => (
+          <Cream key={i} position={[x, yPosition[props.cream], z]} {...props} />
+        ))}
+      </Instances>
     </group>
   );
 };
