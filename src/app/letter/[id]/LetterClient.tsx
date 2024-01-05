@@ -2,10 +2,8 @@
 
 import Card from '@/components/common/Card';
 import Header from '@/components/common/Header';
-import Model from '@/components/model/Model';
 import { popupAtom } from '@/lib/store';
 import { cn } from '@/lib/utils';
-import styles from '@/styles/component.module.css';
 import { Cake as CakeType, User } from '@prisma/client';
 import { useSetAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
@@ -16,15 +14,7 @@ type Props = CakeType & {
   currentUser: User | null;
 };
 
-export default function LetterClient({
-  content,
-  name,
-  user,
-  currentUser,
-  isPrivate,
-  customCake,
-  themeCake,
-}: Props) {
+export default function LetterClient({ content, name, user, currentUser, isPrivate }: Props) {
   const dispatch = useSetAtom(popupAtom);
   const router = useRouter();
   const [isCake, setIsCake] = useState(true);
@@ -67,9 +57,14 @@ export default function LetterClient({
         <Header>편지를 확인해보r!</Header>
       </section>
       <section className="grid flex-1 place-items-center px-[8%] py-[10%]">
-        <div className={cn(styles.flip, { 'rotate-y-180': !isCake })}>
+        <div
+          className={cn('transform-style-3d h-full w-full duration-500', {
+            'rotate-y-180': !isCake,
+          })}>
           {/* front */}
-          <Card className={styles.front} {...cardProps}>
+          <Card
+            className="backface-hidden absolute left-0 top-0 z-[2] h-full w-full"
+            {...cardProps}>
             {/* <Model
               cake={customCake ? (customCake as CustomCake) : (themeCake as ThemeCake)}
               show={customCake ? 'custom' : 'theme'}
@@ -78,7 +73,9 @@ export default function LetterClient({
           </Card>
 
           {/* back */}
-          <Card className={styles.back} {...cardProps}>
+          <Card
+            className="backface-hidden rotate-y-180 absolute left-0 top-0 h-full w-full"
+            {...cardProps}>
             <p className="h-full w-full overflow-auto whitespace-pre-line break-keep p-3 text-center font-neo text-effect_b">
               {content}
             </p>

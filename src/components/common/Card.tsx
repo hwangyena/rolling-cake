@@ -18,9 +18,9 @@ const Card = ({ children, button, hasDesign, content, className }: PropsWithChil
   return (
     <ShadowCard
       className={cn(
-        'relative flex h-[90%] w-[90%] flex-col items-center justify-around',
+        'flex h-[90%] w-[90%] flex-col items-center justify-around',
+        hasDesign ? 'pd-[5%] pt-[10%]' : 'h-full w-full p-3',
         className,
-        hasDesign ? 'pd-[5%] relative pt-[10%]' : 'h-full w-full p-3',
       )}>
       <article
         className={cn(
@@ -78,7 +78,6 @@ const CardDesign = () => {
         className="absolute right-2 top-[-5px] h-16 w-20"
         priority
       />
-      <img src="/images/sparkle4.png" alt="" className="absolute right-2 top-[-5px] h-16 w-20" />
       <div className="absolute left-[30%] top-5 h-1 w-1 rounded-full bg-black" />
       <div className="absolute bottom-[16%] left-[8%] h-[8px] w-[8px] rounded-full bg-black" />
       <div className="absolute bottom-[12%] left-[11%] h-[17px] w-[17px] rounded-full bg-black" />
