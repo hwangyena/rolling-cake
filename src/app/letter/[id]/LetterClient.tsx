@@ -70,11 +70,11 @@ export default function LetterClient({
         <div className={cn(styles.flip, { 'rotate-y-180': !isCake })}>
           {/* front */}
           <Card className={styles.front} {...cardProps}>
-            <Model
+            {/* <Model
               cake={customCake ? (customCake as CustomCake) : (themeCake as ThemeCake)}
               show={customCake ? 'custom' : 'theme'}
               isRotate
-            />
+            /> */}
           </Card>
 
           {/* back */}
