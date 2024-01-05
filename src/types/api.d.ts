@@ -42,8 +42,8 @@ type ThemeCake = {
   letter: Letter;
 };
 
-type CakeStep = CustomCake | ThemeCake;
-type CakeStepKey = keyof CustomCake | keyof ThemeCake;
+type Cake = CustomCake | ThemeCake;
+type CakeKey = keyof CustomCake | keyof ThemeCake;
 type ExcludeLetter = Omit<CustomCake, 'shape' | 'letter'> | Omit<ThemeCake, 'shape' | 'letter'>;
 
 /* Make page */
@@ -51,7 +51,7 @@ type Item = 'cream' | 'color' | 'item' | 'font';
 
 type StepDisplay = {
   title: string;
-  next: (CakeStepKey | 'complete') | null;
+  next: (CakeKey | 'complete') | null;
   select?: Item[];
 };
 

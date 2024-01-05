@@ -20,8 +20,8 @@ export const snackBarAtom = atom<Snackbar | null>(null);
 /** Step */
 export const stepValidAtom = atom(false);
 
-const storage = createJSONStorage<CakeStep>(() => sessionStorage);
-export const makeAtom = atomWithStorage<CakeStep>('rolling-cake:make', CUSTOM_STEP_STORE, storage);
+const storage = createJSONStorage<Cake>(() => sessionStorage);
+export const makeAtom = atomWithStorage<Cake>('rolling-cake:make', CUSTOM_STEP_STORE, storage);
 
 /** Client Storage */
 type LocalKey = 'rolling-cake:userId' | 'rolling-cake:isMake';

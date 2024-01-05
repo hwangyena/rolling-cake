@@ -120,8 +120,8 @@ export const DataURIToBlob = (dataURI: string) => {
   return new Blob([ia], { type: mimeString });
 };
 
-export const isDisabledFont = (store: CakeStep, tab: Item, item: string): boolean => {
-  const isThemeCake = (store: CakeStep): store is ThemeCake => !!(store as ThemeCake).theme;
+export const isDisabledFont = (store: Cake, tab: Item, item: string): boolean => {
+  const isThemeCake = (store: Cake): store is ThemeCake => !!(store as ThemeCake).theme;
 
   const harrypotterFont = 'font5';
   const sojuFont = 'font4';
