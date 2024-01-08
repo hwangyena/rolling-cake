@@ -1,7 +1,7 @@
 import { useGLTF } from '@react-three/drei';
 
 const GingerbreadModel = () => {
-  const { nodes, materials } = useGLTF('/models/items/gingerbread.glb') as GLTFRes;
+  const { nodes, materials } = useGLTF('/models/items/gingerbread-draco.glb') as GLTFRes;
 
   return (
     <group
@@ -39,7 +39,5 @@ const GingerbreadModel = () => {
     </group>
   );
 };
-
-useGLTF.preload('/models/items/gingerbread.glb');
 
 export default GingerbreadModel;

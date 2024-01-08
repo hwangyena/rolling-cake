@@ -1,7 +1,7 @@
 import { useGLTF } from '@react-three/drei';
 
 const RedTopperModel = () => {
-  const { nodes, materials } = useGLTF('/models/items/red-topper.glb') as GLTFRes;
+  const { nodes, materials } = useGLTF('/models/items/red-topper-draco.glb') as GLTFRes;
 
   return (
     <group
@@ -29,7 +29,5 @@ const RedTopperModel = () => {
     </group>
   );
 };
-
-useGLTF.preload('/models/items/red-topper.glb');
 
 export default RedTopperModel;

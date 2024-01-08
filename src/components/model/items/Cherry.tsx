@@ -13,7 +13,7 @@ const cherryPosition = [
 ];
 
 const CherryModel = ({ hasTopCream }: { hasTopCream: boolean }) => {
-  const { nodes, materials } = useGLTF('/models/items/cherry.glb') as GLTFRes;
+  const { nodes, materials } = useGLTF('/models/items/cherry-draco.glb') as GLTFRes;
 
   const yPosition = useMemo(() => (hasTopCream ? 2.2 : 1.9), [hasTopCream]);
 
@@ -37,7 +37,5 @@ const CherryModel = ({ hasTopCream }: { hasTopCream: boolean }) => {
     </>
   );
 };
-
-useGLTF.preload('/models/items/cherry.glb');
 
 export default CherryModel;

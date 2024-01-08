@@ -34,7 +34,7 @@ const StepTheme = () => {
             <Card
               content={theme.label}
               className={cn({
-                "after:absolute after:left-0 after:top-0 after:z-[100] after:h-full after:w-full after:rounded-lg after:bg-black after:opacity-20 after:drop-shadow-black after:content-['']":
+                "relative after:absolute after:left-0 after:top-0 after:z-[100] after:h-full after:w-full after:rounded-lg after:bg-black after:opacity-20 after:drop-shadow-black after:content-['']":
                   !isActive,
               })}>
               <Cake className="h-full w-full" priority theme={theme.value as CakeTheme} />
