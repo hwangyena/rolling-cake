@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { memo } from 'react';
+import Button from './Button';
 
 const icon = {
   '<': 'arrow.svg',
@@ -16,7 +17,7 @@ type Props = {
 
 const CircleButton = ({ type, disabled, onClick }: Props) => {
   return (
-    <button
+    <Button
       id={type}
       className="relative grid h-[34px] w-[34px] place-items-center rounded-full border border-black bg-white drop-shadow-black_light hover:bg-gray-200 disabled:opacity-40"
       disabled={disabled}
@@ -29,7 +30,7 @@ const CircleButton = ({ type, disabled, onClick }: Props) => {
         priority
         className={type === '>' ? 'rotate-180' : ''}
       />
-    </button>
+    </Button>
   );
 };
 

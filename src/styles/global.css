@@ -107,6 +107,7 @@
 }
 
 @layer components {
+  /* HEADER */
   .header-shadow {
     --shadow: #000;
 
@@ -128,6 +129,58 @@
   .header::after {
     @apply absolute left-0 top-0 font-neo text-effect_t text-black;
     content: attr(data-content);
+  }
+
+  /* BUTTON */
+  .big-button {
+    @apply shadow-button flex shrink-0 items-center justify-center gap-4 rounded-lg border-2 border-black bg-pink-200 p-4 text-btn font-bold text-white;
+    width: inherit;
+  }
+
+  .big-button:hover {
+    @apply bg-pink-300;
+  }
+
+  .big-button:disabled {
+    @apply cursor-auto bg-gray-500 opacity-60;
+  }
+
+  .small-button {
+    @apply flex h-10 shrink-0 items-center justify-center gap-2 rounded-[40px] border border-black px-[31px] py-[10px] text-gray-800;
+  }
+
+  .small-button:disabled {
+    @apply bg-gray-100 opacity-60;
+    background: linear-gradient(180deg, #f1f1f1 23.44%, #bbb 100%);
+  }
+
+  .white {
+    @apply bg-white text-gray-700;
+  }
+
+  .white:hover {
+    @apply bg-gray-200;
+  }
+
+  .red {
+    background: linear-gradient(180deg, #fff5f5 23.44%, #ff8d97 100%);
+  }
+  .red:hover {
+    background: linear-gradient(180deg, #ffe0e0 23.44%, #f67470 100%);
+  }
+
+  .green {
+    background: linear-gradient(180deg, #f3fff9 20.95%, #82ffce 100%);
+  }
+  .green:hover {
+    background: linear-gradient(180deg, #dafff6 20.95%, #16e0af 100%);
+  }
+
+  .gray {
+    background: linear-gradient(180deg, #fff 23.55%, #b7b7b7 100%);
+  }
+  .gray:disabled {
+    background: linear-gradient(180deg, #fff 23.55%, #dedede 100%);
   }
 }
 

@@ -30,9 +30,9 @@ export default function Page() {
         />
       </label>
 
-      <Button type="SMALL" color="gray" onClick={handleCakeRemove}>
+      <Button.SmallButton color="gray" onClick={handleCakeRemove}>
         전체 cake 삭제하기
-      </Button>
+      </Button.SmallButton>
     </div>
   );
 }

@@ -37,9 +37,7 @@ const HomeClient = ({ user }: { user?: User | null }) => {
           <WaveTitle />
         </div>
         {user ? (
-          <Button type="BIG" onClick={onLinkClicked}>
-            내 롤링케이크 보러가기
-          </Button>
+          <Button.BigButton onClick={onLinkClicked}>내 롤링케이크 보러가기</Button.BigButton>
         ) : (
           <LoginButton />
         )}

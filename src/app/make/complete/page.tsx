@@ -119,18 +119,18 @@ export default function Page() {
       <section className="mb-3 flex min-h-[120px] w-full flex-col items-center justify-end gap-3 px-5">
         {data ? (
           <>
-            <Button type="BIG" style={{ zIndex: 10 }} onClick={onListClicked}>
+            <Button.BigButton style={{ zIndex: 10 }} onClick={onListClicked}>
               케이크 진열대로 이동하기
-            </Button>
-            <Button type="BIG" color="white" style={{ zIndex: 10 }} onClick={onLoginClicked}>
+            </Button.BigButton>
+            <Button.BigButton color="white" style={{ zIndex: 10 }} onClick={onLoginClicked}>
               나도 케이크 링크 만들러가기
-            </Button>
+            </Button.BigButton>
           </>
         ) : (
           <>
-            <Button type="BIG" style={{ zIndex: 10 }} onClick={onCreate}>
+            <Button.BigButton style={{ zIndex: 10 }} onClick={onCreate}>
               내 케이크 선물하기
-            </Button>
+            </Button.BigButton>
             <span className="text-cap text-gray-800">선물한 케이크는 수정이 불가해요.</span>
           </>
         )}

@@ -47,18 +47,17 @@ const FocusInput = () => {
           </span>
         </section>
         <section>
-          <Button type="SMALL" color="gray" onClick={() => dispatch(null)}>
+          <Button.SmallButton color="gray" onClick={() => dispatch(null)}>
             취소
-          </Button>
-          <Button
-            type="SMALL"
+          </Button.SmallButton>
+          <Button.SmallButton
             color="green"
             onClick={() => {
               value?.onConfirm && value.onConfirm(text);
               dispatch(null);
             }}>
             확인
-          </Button>
+          </Button.SmallButton>
         </section>
       </div>
 

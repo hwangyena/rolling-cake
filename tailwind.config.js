@@ -54,6 +54,7 @@ module.exports = {
       },
       boxShadow: {
         card: '2px 3px 0px 0px #000',
+        button: '1px 1px 0px 0px #000',
       },
       dropShadow: {
         black_light: '1px 1px 0px #000',

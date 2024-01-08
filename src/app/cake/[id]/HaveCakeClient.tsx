@@ -83,9 +83,7 @@ export default function HaveCakeClient({ cakes, user, isOwn }: Props) {
       {isMakeCake && (
         <section
           className={'white-gradient absolute bottom-0 z-30 w-full px-[25px] pb-[20px] pt-[45px]'}>
-          <Button type="BIG" onClick={onButtonClicked}>
-            롤링케이크 만들어주기
-          </Button>
+          <Button.BigButton onClick={onButtonClicked}>롤링케이크 만들어주기</Button.BigButton>
         </section>
       )}
     </div>

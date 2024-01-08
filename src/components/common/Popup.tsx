@@ -39,13 +39,13 @@ const Popup = () => {
         </section>
         <section className={hideCancel ? 'flex justify-center' : 'flex justify-evenly'}>
           {!hideCancel && (
-            <Button type="SMALL" color="gray" onClick={onCancelClicked}>
+            <Button.SmallButton color="gray" onClick={onCancelClicked}>
               취소
-            </Button>
+            </Button.SmallButton>
           )}
-          <Button type="SMALL" color="green" onClick={onConfirmClicked}>
+          <Button.SmallButton color="green" onClick={onConfirmClicked}>
             확인
-          </Button>
+          </Button.SmallButton>
         </section>
         {bottomNode}
       </div>
