@@ -1,7 +1,7 @@
 import { useGLTF } from '@react-three/drei';
 
 const CherryTreeModel = () => {
-  const { nodes, materials } = useGLTF('/models/items/cherry-tree.glb') as GLTFRes;
+  const { nodes, materials } = useGLTF('/models/items/cherry-tree-draco.glb') as GLTFRes;
 
   return (
     <group
@@ -41,7 +41,5 @@ const CherryTreeModel = () => {
     </group>
   );
 };
-
-useGLTF.preload('/models/items/cherry-tree.glb');
 
 export default CherryTreeModel;

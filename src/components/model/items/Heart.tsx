@@ -1,7 +1,7 @@
 import { useGLTF } from '@react-three/drei';
 
 const HeartModel = () => {
-  const { nodes, materials } = useGLTF('/models/items/heart.glb') as GLTFRes;
+  const { nodes, materials } = useGLTF('/models/items/heart-draco.glb') as GLTFRes;
 
   return (
     <group position={[-0.8, 1.8, 1.1]} rotation-y={-0.8} rotation-z={0.4} scale={0.17}>
@@ -24,7 +24,5 @@ const HeartModel = () => {
     </group>
   );
 };
-
-useGLTF.preload('/models/items/heart.glb');
 
 export default HeartModel;

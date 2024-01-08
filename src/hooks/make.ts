@@ -24,7 +24,7 @@ export const useEntireStep = () => {
     }
   }, [pathname, router, searchParams]);
 
-  const step = useMemo(() => searchParams?.get('step') as CakeStepKey, [searchParams]);
+  const step = useMemo(() => searchParams?.get('step') as CakeKey, [searchParams]);
   const isTheme = useMemo(() => (store ? Object.hasOwn(store, 'theme') : false), [store]);
   const entireStepLength = useMemo(() => (store ? Object.keys(store).length - 1 : 0), [store]);
 
@@ -47,7 +47,7 @@ export const useEntireStep = () => {
   return { wrapperInfo, step, isTheme, entireStepLength, onEntireStepChanged };
 };
 
-export const useStepStore = <T extends CakeStep>() => {
+export const useStepStore = <T extends Cake>() => {
   const { step } = useEntireStep();
 
   const [store, dispatch] = useAtom(makeAtom);
@@ -66,7 +66,7 @@ export const useStepStore = <T extends CakeStep>() => {
       let newItem = isObject(prevValue) && isObject(value) ? { ...prevValue, ...value } : value;
       let themeFontItem = {};
 
-      if ((step as CakeStepKey) === 'more') {
+      if ((step as CakeKey) === 'more') {
         const prev = (store as CustomCake).more.item;
         const cur = (value as { item: CakeItem }).item;
 

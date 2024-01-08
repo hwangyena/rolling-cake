@@ -2,7 +2,7 @@ import { useGLTF } from '@react-three/drei';
 import { GroupProps } from '@react-three/fiber';
 
 const RedCandleModel = () => {
-  const { nodes, materials } = useGLTF('/models/items/red-candle.glb') as GLTFRes;
+  const { nodes, materials } = useGLTF('/models/items/red-candle-draco.glb') as GLTFRes;
 
   return (
     <>
@@ -45,7 +45,5 @@ const RedCandle = ({ nodes, materials, ...props }: GroupProps & GLTFRes) => {
     </group>
   );
 };
-
-useGLTF.preload('/models/items/red-candle.glb');
 
 export default RedCandleModel;

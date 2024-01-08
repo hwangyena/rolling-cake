@@ -92,7 +92,7 @@ function ThemeCake({ cake, step, isRotate, fixPosition }: Props) {
 }
 
 const HarryPotter = () => {
-  const { nodes, materials } = useGLTF(`/models/theme/harrypotter.glb`) as GLTFRes;
+  const { nodes, materials } = useGLTF(`/models/theme/harrypotter-draco.glb`) as GLTFRes;
 
   return (
     <group scale={1.1} rotation-y={2.2}>
@@ -115,7 +115,7 @@ const HarryPotter = () => {
 };
 
 const Soju = () => {
-  const { nodes, materials } = useGLTF(`/models/theme/soju.glb`) as GLTFRes;
+  const { nodes, materials } = useGLTF(`/models/theme/soju-draco.glb`) as GLTFRes;
 
   return (
     <group scale={1.22} position={[0, 0, 0]}>
@@ -173,7 +173,7 @@ const Soju = () => {
 };
 
 const Princess = ({ showTop }: { showTop: boolean }) => {
-  const { nodes, materials } = useGLTF(`/models/theme/princess.glb`) as GLTFRes;
+  const { nodes, materials } = useGLTF(`/models/theme/princess-draco.glb`) as GLTFRes;
 
   return (
     <group
@@ -215,8 +215,8 @@ const Princess = ({ showTop }: { showTop: boolean }) => {
   );
 };
 
-useGLTF.preload('/models/theme/harrypotter.glb');
-useGLTF.preload('/models/theme/soju.glb');
-useGLTF.preload('/models/theme/princess.glb');
+useGLTF.preload('/models/theme/harrypotter-draco.glb');
+useGLTF.preload('/models/theme/soju-draco.glb');
+useGLTF.preload('/models/theme/princess-draco.glb');
 
 export default ThemeCake;

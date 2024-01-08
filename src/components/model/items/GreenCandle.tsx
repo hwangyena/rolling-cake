@@ -1,7 +1,7 @@
 import { useGLTF } from '@react-three/drei';
 
 const GreenCandleModel = () => {
-  const { nodes, materials } = useGLTF('/models/items/green-candle.glb') as GLTFRes;
+  const { nodes, materials } = useGLTF('/models/items/green-candle-draco.glb') as GLTFRes;
 
   return (
     <group position={[0, 1.2, 0.2]} rotation-y={-1.3} scale={0.32}>
@@ -25,7 +25,5 @@ const GreenCandleModel = () => {
     </group>
   );
 };
-
-useGLTF.preload('/models/items/green-candle.glb');
 
 export default GreenCandleModel;

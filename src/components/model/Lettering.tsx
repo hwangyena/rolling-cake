@@ -49,7 +49,7 @@ const LetteringModel = ({
 
       return { position: [0, 1.9, 0.7] };
     },
-    [theme],
+    [isMaking, theme],
   );
 
   return (

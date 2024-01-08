@@ -19,6 +19,7 @@
     "autoprefixer": "^10.4.14",
     "axios": "^1.4.0",
     "dotenv": "^16.3.1",
+    "gltf-pipeline": "^4.1.0",
     "jotai": "^2.2.2",
     "leva": "^0.9.35",
     "next": "^14.0.3",
@@ -28,6 +29,7 @@
     "react-canvas-confetti": "^1.4.0",
     "react-dom": "18.2.0",
     "react-textarea-autosize": "^8.5.3",
+    "sharp": "^0.33.1",
     "swiper": "^10.2.0",
     "swr": "^2.2.2",
     "uuid": "^9.0.1"

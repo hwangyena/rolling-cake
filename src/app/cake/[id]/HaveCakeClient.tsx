@@ -61,7 +61,13 @@ export default function HaveCakeClient({ cakes, user, isOwn }: Props) {
               onClick={() => handleCakeClicked(cake.id)}>
               {cake.cakeImageUrl ? (
                 <div className="relative h-[90px] w-[80%]">
-                  <Image src={cake.cakeImageUrl} alt="" fill className="object-cover" />
+                  <Image
+                    fill
+                    src={cake.cakeImageUrl}
+                    className="object-cover"
+                    sizes="80%"
+                    alt="cake"
+                  />
                 </div>
               ) : (
                 <Cake className="h-[90px] w-[80%]" theme={(cake.themeCake as ThemeCake).theme} />
@@ -76,7 +82,7 @@ export default function HaveCakeClient({ cakes, user, isOwn }: Props) {
       </section>
       {isMakeCake && (
         <section
-          className={'white-gradient absolute bottom-0 w-full px-[25px] pb-[20px] pt-[45px]'}>
+          className={'white-gradient absolute bottom-0 z-30 w-full px-[25px] pb-[20px] pt-[45px]'}>
           <Button type="BIG" onClick={onButtonClicked}>
             롤링케이크 만들어주기
           </Button>

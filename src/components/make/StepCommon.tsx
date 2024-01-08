@@ -2,13 +2,9 @@ import * as THREE from 'three';
 
 import { useEntireStep, useStepStore } from '@/hooks/make';
 import { SELECT_ITEM } from '@/lib/constant';
-import { Canvas } from '@react-three/fiber';
-import CustomCake from '../model/CustomCake';
+import Model from '../model/Model';
 import ItemSelect from './ItemSelect';
 import LetteringArea from './LetteringArea';
-import ThemeCake from '../model/ThemeCake';
-import { Suspense } from 'react';
-import LoadingCanvas from '../style/LoadingCanvas';
 
 const StepCommon = ({ itemSelect }: { itemSelect?: (keyof typeof SELECT_ITEM)[] }) => {
   const { isTheme } = useEntireStep();
@@ -17,23 +13,20 @@ const StepCommon = ({ itemSelect }: { itemSelect?: (keyof typeof SELECT_ITEM)[] 
   return (
     <article className="flex h-full flex-col">
       <section className="relative grid w-full flex-1 place-items-center">
-        <Canvas
-          shadows
-          camera={{
-            fov: window.innerWidth > 480 ? 43 : 40,
-            near: 0.1,
-            far: 100,
-            position: new THREE.Vector3(0, 3, 9),
-          }}>
-          <Suspense>
-            {isTheme ? (
-              <ThemeCake cake={store as ThemeCake} step={step} />
-            ) : (
-              <CustomCake hasStand cake={store as CustomCake} step={step} />
-            )}
-          </Suspense>
-        </Canvas>
-        <LoadingCanvas />
+        <Model
+          isStand
+          cake={store}
+          show={isTheme ? 'theme' : 'custom'}
+          canvasProps={{
+            camera: {
+              fov: window.innerWidth > 480 ? 43 : 40,
+              near: 0.1,
+              far: 100,
+              position: new THREE.Vector3(0, 3, 9),
+            },
+          }}
+        />
+
         {step === 'lettering' && <LetteringArea />}
       </section>
       <ItemSelect data={itemSelect ?? []} />

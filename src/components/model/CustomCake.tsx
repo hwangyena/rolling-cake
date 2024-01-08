@@ -1,12 +1,18 @@
-import { CameraControls, Center, Environment } from '@react-three/drei';
-import { useFrame } from '@react-three/fiber';
-import { memo, useEffect, useRef } from 'react';
+import { Stats } from '@react-three/drei';
+
 import * as THREE from 'three';
+import { useFrame } from '@react-three/fiber';
+import { CameraControls, Center, Environment } from '@react-three/drei';
+import { memo, useEffect, useRef } from 'react';
+import dynamic from 'next/dynamic';
 import CakeModel from './Cake';
-import LetteringModel from './Lettering';
-import SideCream from './SideCream';
-import TopCream from './TopCream';
-import Item from './items/Item';
+
+const TopCream = dynamic(() => import('./TopCream'));
+const SideCream = dynamic(() => import('./SideCream'));
+const Item = dynamic(() => import('./items/Item'));
+const LetteringModel = dynamic(() => import('./Lettering'));
+
+THREE.ColorManagement.enabled = true;
 
 const { DEG2RAD } = THREE.MathUtils;
 
@@ -42,12 +48,13 @@ const CustomCake = ({ cake, step, isRotate, hasStand, fixPosition }: Props) => {
 
   useFrame(() => {
     if (cakeRef.current && isRotate) {
-      cakeRef.current.rotation.y += 0.005;
+      cakeRef.current.rotation.y += 0.002;
     }
   });
 
   return (
     <>
+      <Stats />
       <CameraControls
         ref={cameraControlsRef}
         enabled={!fixPosition}
@@ -66,9 +73,9 @@ const CustomCake = ({ cake, step, isRotate, hasStand, fixPosition }: Props) => {
         <group position={[0, hasStand ? 0 : -1.25, 0]}>
           {cake.cream_top.cream !== 'none' && <TopCream {...cake.cream_top} />}
           {cake.cream_side.cream !== 'none' && <SideCream {...cake.cream_side} />}
-          {cake.more.item.map((item) => (
-            <Item key={item} item={item} hasTopCream={cake.cream_top.cream !== 'none'} />
-          ))}
+          {cake.more.item && (
+            <Item items={cake.more.item} hasTopCream={cake.cream_top.cream !== 'none'} />
+          )}
           {cake.lettering.value && <LetteringModel {...cake.lettering} />}
         </group>
       </group>

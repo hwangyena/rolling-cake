@@ -1,7 +1,7 @@
 import { useGLTF } from '@react-three/drei';
 
 const SunflowerModel = () => {
-  const { nodes, materials } = useGLTF('/models/items/sunflower.glb') as GLTFRes;
+  const { nodes, materials } = useGLTF('/models/items/sunflower-draco.glb') as GLTFRes;
 
   return (
     <group scale={0.22} position={[0, 1.9, 0]} rotation-x={-1.0} rotation-y={-2.7}>
@@ -31,7 +31,5 @@ const SunflowerModel = () => {
     </group>
   );
 };
-
-useGLTF.preload('/models/items/sunflower.glb');
 
 export default SunflowerModel;

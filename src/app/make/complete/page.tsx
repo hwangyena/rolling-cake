@@ -5,20 +5,16 @@ import Button from '@/components/common/Button';
 import Header from '@/components/common/Header';
 import Loading from '@/components/common/Loading';
 import Navigation from '@/components/common/Navigation';
-import CustomCake from '@/components/model/CustomCake';
-import ThemeCake from '@/components/model/ThemeCake';
+import Model from '@/components/model/Model';
 import Confetti from '@/components/style/Confetti';
-import LoadingCanvas from '@/components/style/LoadingCanvas';
 import { useErrorPopup } from '@/hooks/common';
 import { useStepStore } from '@/hooks/make';
 import { createCake } from '@/lib/endpoint';
 import { getLocalStorage, popupAtom, setLocalStorage } from '@/lib/store';
-import { Canvas } from '@react-three/fiber';
 import { useSetAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
-import { Suspense, useCallback, useEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import useSWRMutation from 'swr/mutation';
-import * as THREE from 'three';
 
 export default function Page() {
   const router = useRouter();
@@ -105,27 +101,20 @@ export default function Page() {
       <Navigation show={['<']} className={data ? 'invisible' : ''} />
       <Header>{data ? '케이크를 선물했어요!' : '롤링케이크 완성!'}</Header>
       <div className="relative w-full flex-1">
-        <Canvas
-          shadows
+        <Model
           ref={canvasRef}
-          gl={{ preserveDrawingBuffer: true }}
-          camera={{
-            fov: 55,
-            near: 0.1,
-            far: 100,
-            position: new THREE.Vector3(0, 3, 9),
+          cake={store}
+          show={store.shape}
+          fixPosition
+          isRotate={!!data}
+          canvasProps={{
+            camera: {
+              fov: 55,
+              near: 0.1,
+              far: 100,
+            },
           }}
-          style={{ zIndex: 10 }}>
-          <Suspense>
-            {store.shape === 'custom' && (
-              <CustomCake fixPosition isRotate={!!data} cake={store as CustomCake} />
-            )}
-            {store.shape === 'theme' && (
-              <ThemeCake fixPosition isRotate={!!data} cake={store as ThemeCake} />
-            )}
-          </Suspense>
-        </Canvas>
-        <LoadingCanvas />
+        />
       </div>
       <section className="mb-3 flex min-h-[120px] w-full flex-col items-center justify-end gap-3 px-5">
         {data ? (
