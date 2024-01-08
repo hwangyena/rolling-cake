@@ -36,6 +36,22 @@
     width: 70px;
     height: 70px;
   }
+
+  .check::before {
+    top: 32px;
+    left: 25px;
+  }
+  .step-box-selected ~ .check::before {
+    width: 14px;
+  }
+
+  .check::after {
+    top: 41px;
+    left: 33px;
+  }
+  .step-box-selected ~ .check::after {
+    width: 23px;
+  }
 }
 
 @layer base {
@@ -51,46 +67,6 @@
     padding: 0;
     min-height: 100%;
     font-size: 16px;
-  }
-
-  ul,
-  ol,
-  dl {
-    margin: 0;
-  }
-
-  article,
-  aside,
-  audio,
-  footer,
-  header,
-  nav,
-  section,
-  video {
-    display: block;
-  }
-
-  p {
-    -ms-word-break: break-all;
-    word-break: break-all;
-    word-break: break-word;
-    -moz-hyphens: auto;
-    -webkit-hyphens: auto;
-    -ms-hyphens: auto;
-    hyphens: auto;
-  }
-
-  textarea {
-    resize: vertical;
-  }
-
-  table {
-    border-collapse: collapse;
-  }
-
-  img {
-    border: none;
-    max-width: 100%;
   }
 
   input,
@@ -111,55 +87,31 @@
   .header-shadow {
     --shadow: #000;
 
-    @apply absolute left-[0.18rem] top-[0.17rem] whitespace-nowrap font-neo text-[1.38rem] text-effect_t;
     color: var(--shadow);
     -webkit-text-stroke: 5px var(--shadow);
   }
 
-  .header {
-    @apply whitespace-nowrap font-neo text-effect_t font-normal;
+  .header::before,
+  .header::after {
+    @apply absolute left-0 top-0 font-neo text-effect_t;
+    content: attr(data-content);
   }
 
   .header::before {
-    @apply absolute left-0 top-0 font-neo text-effect_t;
-    content: attr(data-content);
     -webkit-text-stroke: 6px white;
   }
 
-  .header::after {
-    @apply absolute left-0 top-0 font-neo text-effect_t text-black;
-    content: attr(data-content);
-  }
-
   /* BUTTON */
-  .big-button {
-    @apply shadow-button flex shrink-0 items-center justify-center gap-4 rounded-lg border-2 border-black bg-pink-200 p-4 text-btn font-bold text-white;
-    width: inherit;
-  }
-
-  .big-button:hover {
-    @apply bg-pink-300;
-  }
-
-  .big-button:disabled {
-    @apply cursor-auto bg-gray-500 opacity-60;
-  }
-
-  .small-button {
-    @apply flex h-10 shrink-0 items-center justify-center gap-2 rounded-[40px] border border-black px-[31px] py-[10px] text-gray-800;
-  }
-
   .small-button:disabled {
-    @apply bg-gray-100 opacity-60;
+    @apply opacity-60;
     background: linear-gradient(180deg, #f1f1f1 23.44%, #bbb 100%);
   }
 
   .white {
-    @apply bg-white text-gray-700;
+    @apply !bg-white !text-gray-700;
   }
-
   .white:hover {
-    @apply bg-gray-200;
+    @apply !bg-gray-200;
   }
 
   .red {
@@ -181,6 +133,55 @@
   }
   .gray:disabled {
     background: linear-gradient(180deg, #fff 23.55%, #dedede 100%);
+  }
+
+  /* CheckBox */
+  .check-selected::after {
+    @apply animate-bg-opacity absolute left-0 top-0 h-full w-full bg-black opacity-50 content-[""];
+  }
+  .check-disabled::after {
+    @apply absolute left-0 top-0 h-full w-full bg-[#fffdfd] opacity-[87%] content-[""];
+  }
+  .check::before {
+    @apply absolute left-[22px] top-[28px] h-[2px]  w-0 origin-[0%_0%] rotate-45 rounded-sm bg-white;
+    content: '';
+    transition: width 50ms ease 50ms;
+  }
+  .check::after {
+    @apply absolute left-[27px] top-[36px] h-[2px] w-0 origin-[0%_0%] rotate-[305deg] rounded-sm bg-white;
+    content: '';
+    transition: width 50ms ease;
+  }
+  .check-selected ~ .check::before {
+    width: 10px;
+    transition: width 100ms ease;
+  }
+  .check-selected ~ .check::after {
+    width: 17px;
+    transition: width 150ms ease 100ms;
+  }
+
+  /* Check X */
+  .check-x {
+    @apply flex h-full w-full items-center justify-center;
+  }
+
+  .check-x::before,
+  .check-x::after {
+    @apply absolute h-[2px] w-[40%] rounded-2xl bg-black;
+    content: '';
+  }
+
+  .check-x::before {
+    transform: rotate(45deg);
+  }
+  .check-x::after {
+    transform: rotate(-45deg);
+  }
+
+  /* Focus Input */
+  .focus-input {
+    @apply w-full border-b border-b-white bg-transparent pb-4 text-center font-neo text-effect_t;
   }
 }
 
@@ -221,11 +222,7 @@
   }
 
   .gray-gradient {
-    border-radius: 20px;
-    border: 1px solid #000;
     background: linear-gradient(180deg, #fff 46.99%, #b7b7b7 100%);
-    box-shadow: 1px 1px 0px 0px #000;
-    color: #ff54ed;
   }
 
   .green-pink-gradient {

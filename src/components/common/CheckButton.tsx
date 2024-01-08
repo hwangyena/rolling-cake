@@ -1,7 +1,6 @@
-import { getCakeBg } from '@/lib/utils';
-import styles from '@/styles/component.module.css';
 import Image from 'next/image';
 import { CSSProperties, PropsWithChildren, memo } from 'react';
+import { cn, getCakeBg } from '@/lib/utils';
 
 type Props = {
   type: 'cream' | 'color' | 'item' | 'font';
@@ -45,19 +44,21 @@ const Item = ({
   return (
     <div className={`relative h-full w-full ${disabled ? '' : 'cursor-pointer'}`}>
       <div
-        className={`relative h-full w-full ${selected ? styles['step-box-selected'] : ''} ${
-          disabled ? styles['step-box-disabled'] : ''
-        }`}
+        className={cn(
+          'relative h-full w-full',
+          { 'check-selected': selected },
+          { 'check-disabled': disabled },
+        )}
         style={style}>
         {children}
       </div>
-      {!disabled && <span className={styles.check} />}
+      {!disabled && <span className="check" />}
     </div>
   );
 };
 
 const None = () => {
-  return <div className={styles.x} />;
+  return <div className="check-x" />;
 };
 
 export default memo(CheckButton);

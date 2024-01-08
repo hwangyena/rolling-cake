@@ -48,11 +48,19 @@ type Props = NativeButtonProps & {
 };
 
 const SmallButton = ({ color, ...props }: PropsWithChildren<Props>) => {
-  return <Button className={`small-button ${color}`} {...props}></Button>;
+  return (
+    <Button
+      className={`small-button flex h-10 shrink-0 items-center justify-center gap-2 rounded-[40px] border border-black px-[31px] py-[10px] text-gray-800 ${color}`}
+      {...props}></Button>
+  );
 };
 
 const BigButton = ({ color, ...props }: PropsWithChildren<Props>) => {
-  return <Button className={`big-button ${color}`} {...props}></Button>;
+  return (
+    <Button
+      className={`shadow-button flex w-full shrink-0 items-center justify-center gap-4 rounded-lg border-2 border-black bg-pink-200 p-4 text-btn font-bold text-white hover:bg-pink-300 disabled:cursor-auto disabled:bg-gray-500 disabled:opacity-60 ${color}`}
+      {...props}></Button>
+  );
 };
 
 Button.SmallButton = memo(SmallButton);

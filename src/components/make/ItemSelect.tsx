@@ -5,7 +5,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { SELECT_ITEM } from '@/lib/constant';
 import { isDisabledFont, isObject } from '@/lib/utils';
-import styles from '@/styles/component.module.css';
 import { useStepStore } from '@/hooks/make';
 import CheckButton from '../common/CheckButton';
 
@@ -94,7 +93,7 @@ const ItemSelect = ({ data, noLabel }: Props) => {
         {SELECT_ITEM[tab].data.map((item, index) => (
           <SwiperSlide
             key={item}
-            className={styles.selectbox}
+            className="h-[50px] w-[50px] shrink-0 rounded-sm border-[1.3px] border-black bg-white shadow-card"
             onClick={() => !isDisabledFont(store, tab, item) && handleItemClicked(item)}>
             <CheckButton
               item={item}
