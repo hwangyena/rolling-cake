@@ -31,7 +31,7 @@ const Card = ({ children, button, hasDesign, content, className }: PropsWithChil
       </article>
 
       <article className="z-10 flex flex-col items-center gap-2">
-        <h3 className={`text-t1 font-bold text-gray-700 ${button ? '' : 'mb-4'}`}>{content}</h3>
+        <h1 className={`text-t1 font-bold text-gray-700 ${button ? '' : 'mb-4'}`}>{content}</h1>
         {button && (
           <Button type="SMALL" color="red" onClick={button.onButtonClicked}>
             {button.label}

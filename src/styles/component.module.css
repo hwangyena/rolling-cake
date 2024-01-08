@@ -124,47 +124,6 @@
   line-height: normal;
 }
 
-/* Header */
-.header {
-  @apply font-neo text-effect_t;
-  font-size: 1.38rem;
-  font-weight: 400;
-  white-space: nowrap;
-}
-
-.header::before {
-  @apply absolute left-0 top-0 font-neo text-effect_t;
-  font-size: 1.38rem;
-  content: attr(data-content);
-  line-height: 140%;
-  -webkit-text-stroke: 6px white;
-}
-
-.header::after {
-  @apply absolute left-0 top-0 font-neo text-effect_t;
-  color: black;
-  content: attr(data-content);
-}
-
-.shadow {
-  --shadow: #000;
-
-  @apply absolute left-0 top-0 font-neo text-effect_t;
-  left: 0.18rem;
-  top: 0.17rem;
-  color: var(--shadow);
-  /* color: black; */
-  font-size: 1.38rem;
-  -webkit-text-stroke: 5px var(--shadow);
-  /* -webkit-text-stroke: 5px #000; */
-  white-space: nowrap;
-}
-
-.shadow .blue {
-  color: #2fdec2;
-  -webkit-text-stroke: 5px #2fdec2;
-}
-
 /* Step Select */
 .selectbox {
   width: 50px;
