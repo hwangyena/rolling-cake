@@ -45,38 +45,35 @@ const Card = ({ children, button, hasDesign, content, className }: PropsWithChil
 
 const CardDesign = () => {
   return (
-    <article className="absolute left-0 top-0 z-0 h-full w-full">
+    <article className="absolute left-0 top-0 z-0 h-full w-full overflow-hidden rounded-xl">
       <Image
-        src="/images/sparkle1.png"
+        src="/images/sparkle1.jpg"
         alt="sparkle"
         width={48}
         height={48}
         className="absolute bottom-[27%] left-3 h-12 w-12"
-        priority
       />
       <Image
-        src="/images/sparkle2.png"
+        src="/images/sparkle2.jpg"
         alt="sparkle"
         width={48}
         height={48}
         className="absolute bottom-[28%] right-1 h-12 w-12"
-        priority
       />
       <Image
-        src="/images/sparkle3.png"
+        src="/images/sparkle3.jpg"
         alt="sparkle"
+        priority
         width={80}
         height={80}
         className="absolute bottom-[-5px] right-[-10px] h-20 w-20"
-        priority
       />
       <Image
-        src="/images/sparkle4.png"
+        src="/images/sparkle4.jpg"
         alt="sparkle4"
         width={80}
         height={64}
         className="absolute right-2 top-[-5px] h-16 w-20"
-        priority
       />
       <div className="absolute left-[30%] top-5 h-1 w-1 rounded-full bg-black" />
       <div className="absolute bottom-[16%] left-[8%] h-[8px] w-[8px] rounded-full bg-black" />

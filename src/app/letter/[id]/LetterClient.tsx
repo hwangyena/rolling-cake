@@ -1,13 +1,13 @@
 'use client';
 
+import { ComponentProps, useCallback, useMemo, useState } from 'react';
+import { useSetAtom } from 'jotai';
+import { Cake as CakeType, User } from '@prisma/client';
+import { useRouter } from 'next/navigation';
 import Card from '@/components/common/Card';
 import Header from '@/components/common/Header';
 import { popupAtom } from '@/lib/store';
 import { cn } from '@/lib/utils';
-import { Cake as CakeType, User } from '@prisma/client';
-import { useSetAtom } from 'jotai';
-import { useRouter } from 'next/navigation';
-import { ComponentProps, useCallback, useMemo, useState } from 'react';
 
 type Props = CakeType & {
   user: User;
@@ -15,12 +15,13 @@ type Props = CakeType & {
 };
 
 export default function LetterClient({ content, name, user, currentUser, isPrivate }: Props) {
-  const dispatch = useSetAtom(popupAtom);
   const router = useRouter();
   const [isCake, setIsCake] = useState(true);
 
+  const dispatch = useSetAtom(popupAtom);
+
   const onToggleCake = useCallback(() => {
-    const isCakeOwner = user.name === currentUser?.name;
+    const isCakeOwner = currentUser && user.id === currentUser.id;
 
     if (isPrivate && !isCakeOwner) {
       dispatch({
@@ -39,15 +40,18 @@ export default function LetterClient({ content, name, user, currentUser, isPriva
     }
 
     setIsCake((p) => !p);
-  }, [currentUser?.name, dispatch, isPrivate, router, user.name]);
+  }, [currentUser, dispatch, isPrivate, router, user]);
 
   const cardProps: ComponentProps<typeof Card> = useMemo(
     () => ({
       hasDesign: true,
       content: `Dear. ${user.rollingCakeName}`,
-      button: { label: isCake ? '편지 읽어보기' : '케이크 보기', onButtonClicked: onToggleCake },
+      button: {
+        label: isCake ? '편지 읽어보기' : '케이크 보기',
+        onButtonClicked: onToggleCake,
+      },
     }),
-    [isCake, onToggleCake, user],
+    [isCake, user, onToggleCake],
   );
 
   return (
