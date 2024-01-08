@@ -30,4 +30,6 @@ const RedTopperModel = () => {
   );
 };
 
+useGLTF.preload('/models/items/red-topper-draco.glb');
+
 export default RedTopperModel;

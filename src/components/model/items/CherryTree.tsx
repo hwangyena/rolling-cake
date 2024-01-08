@@ -42,4 +42,6 @@ const CherryTreeModel = () => {
   );
 };
 
+useGLTF.preload('/models/items/cherry-tree-draco.glb');
+
 export default CherryTreeModel;

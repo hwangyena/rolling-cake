@@ -51,9 +51,9 @@ function ThemeCake({ cake, step, isRotate, fixPosition }: Props) {
     cameraControlsRef.current?.update(0);
   }, [step]);
 
-  useFrame(() => {
+  useFrame((state, delta) => {
     if (cakeRef.current && isRotate) {
-      cakeRef.current.rotation.y += 0.005;
+      cakeRef.current.rotation.y += delta * 0.3;
     }
   });
 

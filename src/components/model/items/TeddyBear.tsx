@@ -21,4 +21,6 @@ const TeddyBearModel = () => {
   );
 };
 
+useGLTF.preload('/models/items/teddy-bear-draco.glb');
+
 export default TeddyBearModel;

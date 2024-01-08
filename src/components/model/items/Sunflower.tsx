@@ -32,4 +32,6 @@ const SunflowerModel = () => {
   );
 };
 
+useGLTF.preload('/models/items/sunflower-draco.glb');
+
 export default SunflowerModel;

@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, memo } from 'react';
 import {
   CherryModel,
   CherryTreeModel,
@@ -14,10 +14,6 @@ import {
 } from './index';
 
 const Item = ({ items, hasTopCream }: { items: CakeItem[]; hasTopCream: boolean }) => {
-  // const [bear] = useGLTF(['/models/items/teddy-bear.glb']) as GLTFRes[];
-
-  // const meshes = useMemo(() => ({ Bear: bear.nodes.Cone }), [bear]);
-
   const render = (item: CakeItem) => {
     switch (item) {
       case 'teddy-bear':
@@ -48,4 +44,4 @@ const Item = ({ items, hasTopCream }: { items: CakeItem[]; hasTopCream: boolean 
   return items.map((item) => <Fragment key={item}>{render(item)}</Fragment>);
 };
 
-export default Item;
+export default memo(Item);

@@ -46,4 +46,6 @@ const RedCandle = ({ nodes, materials, ...props }: GroupProps & GLTFRes) => {
   );
 };
 
+useGLTF.preload('/models/items/red-candle-draco.glb');
+
 export default RedCandleModel;

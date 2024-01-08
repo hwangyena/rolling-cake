@@ -1,10 +1,8 @@
-import { Stats } from '@react-three/drei';
-
-import * as THREE from 'three';
-import { useFrame } from '@react-three/fiber';
 import { CameraControls, Center, Environment } from '@react-three/drei';
-import { memo, useEffect, useRef } from 'react';
+import { useFrame } from '@react-three/fiber';
 import dynamic from 'next/dynamic';
+import { memo, useEffect, useRef } from 'react';
+import * as THREE from 'three';
 import CakeModel from './Cake';
 
 const TopCream = dynamic(() => import('./TopCream'));
@@ -46,15 +44,14 @@ const CustomCake = ({ cake, step, isRotate, hasStand, fixPosition }: Props) => {
     }
   }, [step]);
 
-  useFrame(() => {
+  useFrame((state, delta) => {
     if (cakeRef.current && isRotate) {
-      cakeRef.current.rotation.y += 0.002;
+      cakeRef.current.rotation.y += delta * 0.3;
     }
   });
 
   return (
     <>
-      <Stats />
       <CameraControls
         ref={cameraControlsRef}
         enabled={!fixPosition}

@@ -39,4 +39,6 @@ const GreenTopperModel = () => {
   );
 };
 
+useGLTF.preload('/models/items/green-topper-draco.glb');
+
 export default GreenTopperModel;

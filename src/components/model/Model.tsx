@@ -5,8 +5,8 @@ import { Suspense, forwardRef, memo } from 'react';
 import LoadingCanvas from '../style/LoadingCanvas';
 import dynamic from 'next/dynamic';
 
-const CustomCake = dynamic(() => import('./CustomCake'), { ssr: false });
-const ThemeCake = dynamic(() => import('./ThemeCake'), { ssr: false });
+const CustomCake = dynamic(() => import('./CustomCake'));
+const ThemeCake = dynamic(() => import('./ThemeCake'));
 
 type Props = {
   show: 'custom' | 'theme';
@@ -35,7 +35,7 @@ const Model = forwardRef<HTMLCanvasElement, Props>(function Model(
         frameloop={isRotate ? undefined : 'demand'}
         style={{ zIndex: 10 }}
         {...canvasProps}>
-        <Suspense fallback={null}>
+        <Suspense fallback>
           {show === 'custom' && (
             <CustomCake
               isRotate={isRotate}

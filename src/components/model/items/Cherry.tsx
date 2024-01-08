@@ -38,4 +38,6 @@ const CherryModel = ({ hasTopCream }: { hasTopCream: boolean }) => {
   );
 };
 
+useGLTF.preload('/models/items/cherry-draco.glb');
+
 export default CherryModel;

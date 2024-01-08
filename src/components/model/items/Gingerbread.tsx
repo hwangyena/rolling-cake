@@ -40,4 +40,6 @@ const GingerbreadModel = () => {
   );
 };
 
+useGLTF.preload('/models/items/gingerbread-draco.glb');
+
 export default GingerbreadModel;

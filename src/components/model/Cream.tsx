@@ -74,4 +74,10 @@ const CreamInstance = () => {
   );
 };
 
+useGLTF.preload('/models/cream-basic-draco.glb');
+useGLTF.preload('/models/cream-chocolate-draco.glb');
+useGLTF.preload('/models/cream-crown-draco.glb');
+useGLTF.preload('/models/cream-heart-draco.glb');
+useGLTF.preload('/models/cream-screw-draco.glb');
+
 export default Cream;

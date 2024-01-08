@@ -25,4 +25,6 @@ const HeartModel = () => {
   );
 };
 
+useGLTF.preload('/models/items/heart-draco.glb');
+
 export default HeartModel;

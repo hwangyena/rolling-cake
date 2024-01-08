@@ -1,6 +1,6 @@
 import { getCakeBg } from '@/lib/utils';
 import { useGLTF } from '@react-three/drei';
-import { useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
 
 const CakeModel = ({ cakeColor, hasStand }: { cakeColor: Color; hasStand?: boolean }) => {
@@ -19,6 +19,14 @@ const CakeModel = ({ cakeColor, hasStand }: { cakeColor: Color; hasStand?: boole
     setMaterial(color);
   }, [cakeColor]);
 
+  const standMaterial = useMemo(
+    () =>
+      new THREE.MeshStandardMaterial({
+        color: '#c7c7c7',
+      }),
+    [],
+  );
+
   return (
     <group scale={0.9}>
       <mesh
@@ -31,11 +39,7 @@ const CakeModel = ({ cakeColor, hasStand }: { cakeColor: Color; hasStand?: boole
       {hasStand && (
         <mesh
           geometry={nodes.stand.geometry}
-          material={
-            new THREE.MeshStandardMaterial({
-              color: '#c7c7c7',
-            })
-          }
+          material={standMaterial}
           rotation={[Math.PI / 2, 0, 0]}
           scale={0.269}
         />
@@ -46,4 +50,4 @@ const CakeModel = ({ cakeColor, hasStand }: { cakeColor: Color; hasStand?: boole
 
 useGLTF.preload('/models/cake-draco.glb');
 
-export default CakeModel;
+export default memo(CakeModel);

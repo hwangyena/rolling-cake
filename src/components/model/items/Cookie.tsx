@@ -28,4 +28,6 @@ const CookieModel = () => {
   );
 };
 
+useGLTF.preload('/models/items/cookie-draco.glb');
+
 export default CookieModel;

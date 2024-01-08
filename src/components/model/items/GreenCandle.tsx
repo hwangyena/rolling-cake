@@ -26,4 +26,6 @@ const GreenCandleModel = () => {
   );
 };
 
+useGLTF.preload('/models/items/green-candle-draco.glb');
+
 export default GreenCandleModel;
