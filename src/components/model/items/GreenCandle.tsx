@@ -1,10 +1,10 @@
 import { useGLTF } from '@react-three/drei';
 
-const GreenCandleModel = () => {
+const GreenCandleModel = ({ visible }: { visible: boolean }) => {
   const { nodes, materials } = useGLTF('/models/items/green-candle-draco.glb') as GLTFRes;
 
   return (
-    <group position={[0, 1.2, 0.2]} rotation-y={-1.3} scale={0.32}>
+    <group visible={visible} position={[0, 1.2, 0.2]} rotation-y={-1.3} scale={0.32}>
       <group
         position={[0, 5, 0]}
         rotation={[-0.038, -0.009, -0.003]}

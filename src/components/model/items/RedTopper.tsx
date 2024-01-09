@@ -1,10 +1,11 @@
 import { useGLTF } from '@react-three/drei';
 
-const RedTopperModel = () => {
+const RedTopperModel = ({ visible }: { visible: boolean }) => {
   const { nodes, materials } = useGLTF('/models/items/red-topper-draco.glb') as GLTFRes;
 
   return (
     <group
+      visible={visible}
       position={[-1.1, 2.2, -0.4]}
       rotation-x={-0.1}
       rotation-y={-0.8}
