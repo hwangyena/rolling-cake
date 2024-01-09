@@ -1,7 +1,7 @@
 import { useGLTF } from '@react-three/drei';
 import { GroupProps } from '@react-three/fiber';
 
-const RedCandleModel = () => {
+const RedCandleModel = ({ visible }: { visible: boolean }) => {
   const { nodes, materials } = useGLTF('/models/items/red-candle-draco.glb') as GLTFRes;
 
   return (
@@ -12,9 +12,16 @@ const RedCandleModel = () => {
         rotation-y={0.1}
         rotation-z={0.2}
         scale={0.2}
+        visible={visible}
         {...{ nodes, materials }}
       />
-      <RedCandle position={[0.4, 1.8, 0]} rotation-y={-1.1} scale={0.2} {...{ nodes, materials }} />
+      <RedCandle
+        visible={visible}
+        position={[0.4, 1.8, 0]}
+        rotation-y={-1.1}
+        scale={0.2}
+        {...{ nodes, materials }}
+      />
     </>
   );
 };
@@ -45,5 +52,7 @@ const RedCandle = ({ nodes, materials, ...props }: GroupProps & GLTFRes) => {
     </group>
   );
 };
+
+useGLTF.preload('/models/items/red-candle-draco.glb');
 
 export default RedCandleModel;

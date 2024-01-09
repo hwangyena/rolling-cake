@@ -1,5 +1,3 @@
-import styles from '@/styles/component.module.css';
-
 import Image from 'next/image';
 import { PropsWithChildren, memo, useEffect } from 'react';
 import ShadowCard from '../style/ShadowCard';
@@ -25,7 +23,10 @@ const CustomPopup = ({ content, title, hasIcon, onConfirm }: CustomPopup) => {
     <Wrapper type={title}>
       <article className="items-top flex h-[24px] w-full justify-between rounded-t-lg bg-pink-200 px-[6px] pt-[2px] font-neo text-effect_b">
         <span className="text-white">{title}</span>
-        <button className={`black-shadow ${styles['minus-button']}`} onClick={onConfirm} />
+        <button
+          className={`black-shadow relative flex aspect-square h-[80%] items-center justify-center rounded-md bg-white before:h-[60%] before:w-[2px] before:rotate-90 before:bg-black before:content-[""]`}
+          onClick={onConfirm}
+        />
       </article>
       <article className="flex gap-3 px-3 py-5 text-b2">
         {hasIcon && (

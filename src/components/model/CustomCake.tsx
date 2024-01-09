@@ -1,15 +1,13 @@
-import { Stats } from '@react-three/drei';
-
-import * as THREE from 'three';
-import { useFrame } from '@react-three/fiber';
 import { CameraControls, Center, Environment } from '@react-three/drei';
-import { memo, useEffect, useRef } from 'react';
+import { useFrame } from '@react-three/fiber';
 import dynamic from 'next/dynamic';
+import { memo, useEffect, useRef } from 'react';
+import * as THREE from 'three';
 import CakeModel from './Cake';
 
 const TopCream = dynamic(() => import('./TopCream'));
 const SideCream = dynamic(() => import('./SideCream'));
-const Item = dynamic(() => import('./items/Item'));
+const Items = dynamic(() => import('./items/Items'));
 const LetteringModel = dynamic(() => import('./Lettering'));
 
 THREE.ColorManagement.enabled = true;
@@ -46,15 +44,14 @@ const CustomCake = ({ cake, step, isRotate, hasStand, fixPosition }: Props) => {
     }
   }, [step]);
 
-  useFrame(() => {
+  useFrame((_, delta) => {
     if (cakeRef.current && isRotate) {
-      cakeRef.current.rotation.y += 0.002;
+      cakeRef.current.rotation.y += delta * 0.3;
     }
   });
 
   return (
     <>
-      <Stats />
       <CameraControls
         ref={cameraControlsRef}
         enabled={!fixPosition}
@@ -71,12 +68,10 @@ const CustomCake = ({ cake, step, isRotate, hasStand, fixPosition }: Props) => {
         </Center>
 
         <group position={[0, hasStand ? 0 : -1.25, 0]}>
-          {cake.cream_top.cream !== 'none' && <TopCream {...cake.cream_top} />}
-          {cake.cream_side.cream !== 'none' && <SideCream {...cake.cream_side} />}
-          {cake.more.item && (
-            <Item items={cake.more.item} hasTopCream={cake.cream_top.cream !== 'none'} />
-          )}
-          {cake.lettering.value && <LetteringModel {...cake.lettering} />}
+          <TopCream visible={cake.cream_top.cream !== 'none'} {...cake.cream_top} />
+          <SideCream visible={cake.cream_side.cream !== 'none'} {...cake.cream_side} />
+          <Items items={cake.more.item} hasTopCream={cake.cream_top.cream !== 'none'} />
+          <LetteringModel visible={!!cake.lettering.value} {...cake.lettering} />
         </group>
       </group>
     </>

@@ -6,9 +6,8 @@ import getCurrentUser from '@/actions/getCurrentUser';
 import { notFound } from 'next/navigation';
 
 export default async function CakeDetail({ params }: { params: { id: string } }) {
-  const cake = await getCake(params.id);
+  const [cake, currentUser] = await Promise.all([getCake(params.id), getCurrentUser()]);
   const user = await getUser(cake ? cake.userId : '');
-  const currentUser = await getCurrentUser();
 
   if (!cake || !user) {
     return notFound();

@@ -1,10 +1,9 @@
 'use client';
 
-import { focusInputAtom } from '@/lib/store';
-import styles from '@/styles/component.module.css';
 import { useAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
+import { focusInputAtom } from '@/lib/store';
 import Button from './Button';
 
 const FocusInput = () => {
@@ -19,15 +18,15 @@ const FocusInput = () => {
   }, [value]);
 
   return (
-    <div className={styles['focus-input']}>
-      <div className={styles['focus-input-content']}>
-        <section>
+    <div className="absolute left-0 top-0 h-full w-full">
+      <div className="relative z-50 mt-[30%]">
+        <section className="flex flex-col items-center gap-4 px-[5%] text-white">
           <h4 className="text-b2 text-white">{value?.label}</h4>
           {value?.autoSize ? (
             <TextareaAutosize
               rows={1}
               value={text}
-              className="overflow-hidden font-neo text-effect_t"
+              className="focus-input overflow-hidden"
               onChange={(e) => {
                 setText(e.target.value.slice(0, value?.maxLength));
               }}
@@ -36,7 +35,7 @@ const FocusInput = () => {
             <input
               type="text"
               value={text}
-              className="font-neo text-effect_t"
+              className="focus-input"
               onChange={(e) => {
                 setText(e.target.value.slice(0, value?.maxLength));
               }}
@@ -46,19 +45,18 @@ const FocusInput = () => {
             {text.length}/{value?.maxLength}
           </span>
         </section>
-        <section>
-          <Button type="SMALL" color="gray" onClick={() => dispatch(null)}>
+        <section className="mt-12 flex items-center justify-center gap-5">
+          <Button.SmallButton color="gray" onClick={() => dispatch(null)}>
             취소
-          </Button>
-          <Button
-            type="SMALL"
+          </Button.SmallButton>
+          <Button.SmallButton
             color="green"
             onClick={() => {
               value?.onConfirm && value.onConfirm(text);
               dispatch(null);
             }}>
             확인
-          </Button>
+          </Button.SmallButton>
         </section>
       </div>
 

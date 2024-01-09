@@ -15,6 +15,7 @@ const yPosition: Record<CakeCream, number> = {
 type Props = {
   cream: CakeCream;
   color: Color;
+  visible: boolean;
   optional?: {
     radius: number;
     count: number;
@@ -22,12 +23,12 @@ type Props = {
   };
 };
 
-const SideCream = ({ optional, ...props }: Props) => {
+const SideCream = ({ optional, visible, ...props }: Props) => {
   if (optional) {
     const { radius, count, yPos } = optional;
 
     return (
-      <group position={[0, 0.6, 0]} scale={0.067}>
+      <group position={[0, 0.6, 0]} scale={0.067} visible={visible}>
         <Instances>
           {getCirclePosition(radius, count).map(([x, z], i) => (
             <Cream key={i} position={[x, yPos, z]} optionalColor="princess" {...props} />

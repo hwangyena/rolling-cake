@@ -1,10 +1,11 @@
 import { useGLTF } from '@react-three/drei';
 
-const CookieModel = () => {
+const CookieModel = ({ visible }: { visible: boolean }) => {
   const { nodes, materials } = useGLTF('/models/items/cookie-draco.glb') as GLTFRes;
 
   return (
     <group
+      visible={visible}
       position={[-1.3, 2.1, 0.4]}
       rotation-x={5.9}
       rotation-y={5.0}
@@ -27,5 +28,7 @@ const CookieModel = () => {
     </group>
   );
 };
+
+useGLTF.preload('/models/items/cookie-draco.glb');
 
 export default CookieModel;

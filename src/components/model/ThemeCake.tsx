@@ -51,9 +51,9 @@ function ThemeCake({ cake, step, isRotate, fixPosition }: Props) {
     cameraControlsRef.current?.update(0);
   }, [step]);
 
-  useFrame(() => {
+  useFrame((state, delta) => {
     if (cakeRef.current && isRotate) {
-      cakeRef.current.rotation.y += 0.005;
+      cakeRef.current.rotation.y += delta * 0.3;
     }
   });
 
@@ -74,6 +74,7 @@ function ThemeCake({ cake, step, isRotate, fixPosition }: Props) {
         <group scale={step !== 'lettering' ? 0.92 : 0.75}>{renderTheme()}</group>
 
         <LetteringModel
+          visible={true}
           theme={cake.theme}
           color="green"
           isMaking={!!step}
@@ -203,6 +204,7 @@ const Princess = ({ showTop }: { showTop: boolean }) => {
         />
       </group>
       <SideCream
+        visible
         color="ivory"
         cream="basic"
         optional={{
@@ -214,9 +216,5 @@ const Princess = ({ showTop }: { showTop: boolean }) => {
     </group>
   );
 };
-
-useGLTF.preload('/models/theme/harrypotter-draco.glb');
-useGLTF.preload('/models/theme/soju-draco.glb');
-useGLTF.preload('/models/theme/princess-draco.glb');
 
 export default ThemeCake;

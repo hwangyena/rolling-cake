@@ -1,10 +1,15 @@
 import { useGLTF } from '@react-three/drei';
 
-const SunflowerModel = () => {
+const SunflowerModel = ({ visible }: { visible: boolean }) => {
   const { nodes, materials } = useGLTF('/models/items/sunflower-draco.glb') as GLTFRes;
 
   return (
-    <group scale={0.22} position={[0, 1.9, 0]} rotation-x={-1.0} rotation-y={-2.7}>
+    <group
+      visible={visible}
+      scale={0.22}
+      position={[0, 1.9, 0]}
+      rotation-x={-1.0}
+      rotation-y={-2.7}>
       <group
         position={[0.162, 0.041, -0.096]}
         rotation={[2.327, -0.346, -2.821]}
@@ -31,5 +36,7 @@ const SunflowerModel = () => {
     </group>
   );
 };
+
+useGLTF.preload('/models/items/sunflower-draco.glb');
 
 export default SunflowerModel;

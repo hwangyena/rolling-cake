@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/**/*.{js,ts,jsx,tsx}'],
+  enabled: true,
+  content: ['./src/**/*.{ts,tsx}'],
   theme: {
     extend: {
       colors: {
@@ -13,6 +14,7 @@ module.exports = {
           100: '#ff78f1',
           200: '#ff8d97',
           300: '#f67470',
+          400: '#ff54ed',
         },
         gray: {
           100: '#f5f5f5',
@@ -52,8 +54,11 @@ module.exports = {
         'grid-pattern': "url('/images/bg.png')",
         404: "url('/images/404.png')",
       },
+      backgroundColor: {},
       boxShadow: {
         card: '2px 3px 0px 0px #000',
+        button: '1px 1px 0px 0px #000',
+        popup: '0px 4px 15px 0px rgba(0, 0, 0, 0.25)',
       },
       dropShadow: {
         black_light: '1px 1px 0px #000',
@@ -80,6 +85,9 @@ module.exports = {
             transform: 'translateY(20%)',
           },
         },
+        'bg-opacity': {
+          '0%': { opacity: 0 },
+        },
         waviy: {
           '0%, 40%, 100%': {
             transform: 'translateY(0)',
@@ -93,6 +101,7 @@ module.exports = {
         'slide-up': 'slide-up 1s ease-in-out',
         'slide-down': 'slide-down 1s ease-in-out',
         'cursor-bounce': 'cursor-bounce 1s ease-out infinite',
+        'bg-opacity': 'bg-opacity 0.3s ease',
         waviy: 'waviy 2s infinite',
       },
     },

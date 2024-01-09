@@ -1,7 +1,6 @@
 'use client';
 
 import { popupStore } from '@/lib/store';
-import styles from '@/styles/component.module.css';
 import { useAtom } from 'jotai';
 import { useCallback } from 'react';
 import Button from './Button';
@@ -26,8 +25,8 @@ const Popup = () => {
   }
 
   return (
-    <div className={styles.popup}>
-      <div className={styles['popup-content']}>
+    <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center">
+      <div className="shadow-popup z-[100] flex w-[80%] flex-col justify-around rounded-md bg-white p-[10%] text-center">
         <section className="mb-8">
           <h4 className="whitespace-pre text-h4 font-bold text-gray-800">{title}</h4>
           {content && (
@@ -39,13 +38,13 @@ const Popup = () => {
         </section>
         <section className={hideCancel ? 'flex justify-center' : 'flex justify-evenly'}>
           {!hideCancel && (
-            <Button type="SMALL" color="gray" onClick={onCancelClicked}>
+            <Button.SmallButton color="gray" onClick={onCancelClicked}>
               취소
-            </Button>
+            </Button.SmallButton>
           )}
-          <Button type="SMALL" color="green" onClick={onConfirmClicked}>
+          <Button.SmallButton color="green" onClick={onConfirmClicked}>
             확인
-          </Button>
+          </Button.SmallButton>
         </section>
         {bottomNode}
       </div>

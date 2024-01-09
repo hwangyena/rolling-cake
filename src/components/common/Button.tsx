@@ -1,20 +1,23 @@
 'use client';
 
-import { CSSProperties, MouseEvent, PropsWithChildren, memo, useRef } from 'react';
-import styles from '@/styles/component.module.css';
+import {
+  ButtonHTMLAttributes,
+  DetailedHTMLProps,
+  MouseEvent,
+  PropsWithChildren,
+  memo,
+  useRef,
+} from 'react';
 
-type Props = {
-  type: 'BIG' | 'SMALL';
-  color?: 'red' | 'green' | 'gray' | 'white';
-  disabled?: boolean;
-  style?: CSSProperties;
-  onClick?: (e: MouseEvent) => void;
-};
+type NativeButtonProps = DetailedHTMLProps<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+>;
 
-const Button = ({ children, onClick, disabled, type, color, style }: PropsWithChildren<Props>) => {
+const Button = ({ children, onClick, ...props }: NativeButtonProps) => {
   const lock = useRef(false);
 
-  const handleClick = (e: MouseEvent) => {
+  const handleClick = (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
     e.preventDefault();
     e.stopPropagation();
 
@@ -34,16 +37,34 @@ const Button = ({ children, onClick, disabled, type, color, style }: PropsWithCh
   };
 
   return (
-    <button
-      className={`${type === 'BIG' ? styles['big-button'] : styles['small-button']} ${
-        color ? styles[color] : ''
-      }`}
-      style={style}
-      onClick={handleClick}
-      disabled={disabled}>
+    <button onClick={handleClick} {...props}>
       {children}
     </button>
   );
 };
 
-export default memo(Button);
+type Props = NativeButtonProps & {
+  color?: 'red' | 'green' | 'gray' | 'white';
+};
+
+const SmallButton = ({ color, ...props }: PropsWithChildren<Props>) => {
+  return (
+    <Button
+      className={`small-button flex h-10 shrink-0 items-center justify-center gap-2 rounded-[40px] border border-black px-[31px] py-[10px] text-gray-800 ${color}`}
+      {...props}></Button>
+  );
+};
+
+const BigButton = ({ color, ...props }: PropsWithChildren<Props>) => {
+  return (
+    <Button
+      className={`shadow-button flex w-full shrink-0 items-center justify-center gap-4 rounded-lg border-2 border-black bg-pink-200 p-4 text-btn font-bold text-white hover:bg-pink-300 disabled:cursor-auto disabled:bg-gray-500 disabled:opacity-60 ${color}`}
+      {...props}></Button>
+  );
+};
+
+Button.SmallButton = memo(SmallButton);
+Button.BigButton = memo(BigButton);
+// const ButtonMemo = memo(Button);
+
+export default Button;

@@ -3,7 +3,7 @@ import { PropsWithChildren } from 'react';
 
 import ClientOnly from '@/components/ClientOnly';
 import Store from '@/components/Store';
-import '../styles/global.css';
+import '../global.css';
 
 export const metadata: Metadata = {
   title: '롤링케이크',

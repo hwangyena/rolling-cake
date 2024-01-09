@@ -1,10 +1,11 @@
 import { useGLTF } from '@react-three/drei';
+import { GroupProps } from '@react-three/fiber';
 
-const TeddyBearModel = () => {
+const TeddyBearModel = (props: GroupProps) => {
   const { nodes, materials } = useGLTF('/models/items/teddy-bear-draco.glb') as GLTFRes;
 
   return (
-    <group position={[0.4, 1.9, -0.9]} rotation-y={4.5} rotation-z={3.3} scale={-0.15}>
+    <group position={[0.4, 1.9, -0.9]} rotation-y={4.5} rotation-z={3.3} scale={-0.15} {...props}>
       <group
         position={[0.884, 6.904, -3.145]}
         rotation={[0, 0, -0.107]}
@@ -20,5 +21,7 @@ const TeddyBearModel = () => {
     </group>
   );
 };
+
+useGLTF.preload('/models/items/teddy-bear-draco.glb');
 
 export default TeddyBearModel;
