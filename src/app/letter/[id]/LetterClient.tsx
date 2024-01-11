@@ -1,29 +1,20 @@
 'use client';
 
-import { ComponentProps, useCallback, useMemo, useState } from 'react';
-import { useSetAtom } from 'jotai';
-import { Cake as CakeType, User } from '@prisma/client';
-import { useRouter } from 'next/navigation';
 import Card from '@/components/common/Card';
 import Header from '@/components/common/Header';
 import { popupAtom } from '@/lib/store';
 import { cn } from '@/lib/utils';
-import Model from '@/components/model/Model';
+import { Cake as CakeType, User } from '@prisma/client';
+import { useSetAtom } from 'jotai';
+import { useRouter } from 'next/navigation';
+import { ComponentProps, useCallback, useMemo, useState } from 'react';
 
 type Props = CakeType & {
   user: User;
   currentUser: User | null;
 };
 
-export default function LetterClient({
-  content,
-  name,
-  user,
-  currentUser,
-  isPrivate,
-  customCake,
-  themeCake,
-}: Props) {
+export default function LetterClient({ content, name, user, currentUser, isPrivate }: Props) {
   const router = useRouter();
   const [isCake, setIsCake] = useState(true);
 
@@ -78,11 +69,11 @@ export default function LetterClient({
           <Card
             className="backface-hidden absolute left-0 top-0 z-[2] h-full w-full"
             {...cardProps}>
-            <Model
+            {/* <Model
               cake={customCake ? (customCake as CustomCake) : (themeCake as ThemeCake)}
               show={customCake ? 'custom' : 'theme'}
               isRotate
-            />
+            /> */}
           </Card>
 
           {/* back */}
