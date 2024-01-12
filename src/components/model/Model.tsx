@@ -11,6 +11,7 @@ const ThemeCake = dynamic(() => import('./ThemeCake'));
 type Props = {
   show: 'custom' | 'theme';
   cake: Cake;
+  step?: keyof CustomCake;
   isRotate?: boolean;
   isStand?: boolean;
   fixPosition?: boolean;
@@ -18,7 +19,7 @@ type Props = {
 };
 
 const Model = forwardRef<HTMLCanvasElement, Props>(function Model(
-  { cake, show, isRotate, isStand, fixPosition, canvasProps },
+  { cake, show, step, isRotate, isStand, fixPosition = false, canvasProps },
   ref,
 ) {
   return (
@@ -32,12 +33,13 @@ const Model = forwardRef<HTMLCanvasElement, Props>(function Model(
           far: 100,
           position: new THREE.Vector3(0, 3, 9),
         }}
-        frameloop={isRotate ? undefined : 'demand'}
+        // frameloop={isRotate ? undefined : 'demand'}
         style={{ zIndex: 10 }}
         {...canvasProps}>
         <Suspense fallback={null}>
           {show === 'custom' && (
             <CustomCake
+              step={step}
               isRotate={isRotate}
               hasStand={isStand}
               fixPosition={fixPosition}

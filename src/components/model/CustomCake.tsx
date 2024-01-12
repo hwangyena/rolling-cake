@@ -31,17 +31,17 @@ const CustomCake = ({ cake, step, isRotate, hasStand, fixPosition }: Props) => {
       return;
     }
 
-    switch (step) {
-      case 'cream_top':
-      case 'lettering':
-        cameraControlsRef.current.rotateTo(0, -120 * DEG2RAD, true);
-        break;
-      case 'more':
-        cameraControlsRef.current.rotateTo(0, 20 * DEG2RAD, true);
-        break;
-      default:
-        cameraControlsRef.current?.reset(true);
-    }
+    // switch (step) {
+    //   case 'cream_top':
+    //   case 'lettering':
+    //     cameraControlsRef.current.rotateTo(0, -120 * DEG2RAD, true);
+    //     break;
+    //   case 'more':
+    //     cameraControlsRef.current.rotateTo(0, 20 * DEG2RAD, true);
+    //     break;
+    //   default:
+    //     cameraControlsRef.current?.reset(true);
+    // }
   }, [step]);
 
   useFrame((_, delta) => {
@@ -54,11 +54,14 @@ const CustomCake = ({ cake, step, isRotate, hasStand, fixPosition }: Props) => {
     <>
       <CameraControls
         ref={cameraControlsRef}
-        enabled={!fixPosition}
+        // enabled={false}
+        dollyDragInverted={false}
+        // enabled={!fixPosition}
         minPolarAngle={0}
         maxPolarAngle={Math.PI * 0.5}
         minDistance={Math.PI * 1.7}
         maxDistance={10}
+        polarAngle={-120 * DEG2RAD}
       />
       <Environment preset="dawn" />
 

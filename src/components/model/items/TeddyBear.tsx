@@ -1,10 +1,41 @@
 import { useGLTF } from '@react-three/drei';
+import { useThree } from '@react-three/fiber';
+import { useGesture } from '@use-gesture/react';
+import { useRef, useState } from 'react';
 
 const TeddyBearModel = () => {
   const { nodes, materials } = useGLTF('/models/items/teddy-bear.glb') as GLTFRes;
+  const { raycaster } = useThree();
+  const [position, setPosition] = useState({ x: 0.4, z: -0.9 });
+  const itemRef = useRef(null);
+
+  const bind = useGesture({
+    onDrag: () => {
+      const intersects = raycaster.intersectObjects([itemRef]);
+      if (intersects.length > 0) {
+        const intersection = intersects[0];
+        console.log(intersection.point.x);
+        setPosition({
+          x: intersection.point.x,
+          // y: intersection.point.y,
+          z: intersection.point.z,
+        });
+      }
+      // setControlsDisabled(true);
+    },
+    onDragEnd: () => {
+      // setControlsDisabled(false);
+    },
+  });
 
   return (
-    <group position={[0.4, 1.9, -0.9]} rotation-y={4.5} rotation-z={3.3} scale={-0.15}>
+    <group
+      position={[position.x, 1.9, position.z]}
+      rotation-y={4.5}
+      rotation-z={3.3}
+      scale={-0.15}
+      ref={itemRef}
+      {...bind}>
       <group name="Scene">
         <group
           position={[0.884, 6.904, -3.145]}
