@@ -24,6 +24,10 @@ type Props = {
 };
 
 const SideCream = ({ optional, visible, ...props }: Props) => {
+  if (props.cream === 'none') {
+    return null;
+  }
+
   if (optional) {
     const { radius, count, yPos } = optional;
 

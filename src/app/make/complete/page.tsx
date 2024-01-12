@@ -1,5 +1,7 @@
 'use client';
 
+import * as THREE from 'three';
+
 import GradientContainer from '@/components/GradientContainer';
 import Button from '@/components/common/Button';
 import Header from '@/components/common/Header';
@@ -109,9 +111,10 @@ export default function Page() {
           isRotate={!!data}
           canvasProps={{
             camera: {
-              fov: 55,
+              fov: 45,
               near: 0.1,
               far: 100,
+              position: new THREE.Vector3(0, 3, 9),
             },
           }}
         />

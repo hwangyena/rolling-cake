@@ -70,7 +70,9 @@ const CustomCake = ({ cake, step, isRotate, hasStand, fixPosition }: Props) => {
         <group position={[0, hasStand ? 0 : -1.25, 0]}>
           <TopCream visible={cake.cream_top.cream !== 'none'} {...cake.cream_top} />
           <SideCream visible={cake.cream_side.cream !== 'none'} {...cake.cream_side} />
-          <Items items={cake.more.item} hasTopCream={cake.cream_top.cream !== 'none'} />
+          {cake.more.item.length > 0 && (
+            <Items items={cake.more.item} hasTopCream={cake.cream_top.cream !== 'none'} />
+          )}
           <LetteringModel visible={!!cake.lettering.value} {...cake.lettering} />
         </group>
       </group>
