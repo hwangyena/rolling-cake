@@ -1,11 +1,10 @@
 import { useGLTF } from '@react-three/drei';
 
-const CherryTreeModel = ({ visible }: { visible: boolean }) => {
-  const { nodes, materials } = useGLTF('/models/items/cherry-tree-draco.glb') as GLTFRes;
+const CherryTreeModel = () => {
+  const { nodes, materials } = useGLTF('/models/items/cherry-tree.glb') as GLTFRes;
 
   return (
     <group
-      visible={visible}
       position={[0.7, 2.2, -0.6]}
       rotation-x={-0.5}
       rotation-y={-0.3}
@@ -43,6 +42,6 @@ const CherryTreeModel = ({ visible }: { visible: boolean }) => {
   );
 };
 
-useGLTF.preload('/models/items/cherry-tree-draco.glb');
+useGLTF.preload('/models/items/cherry-tree.glb');
 
 export default CherryTreeModel;

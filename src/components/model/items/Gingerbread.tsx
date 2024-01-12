@@ -1,11 +1,10 @@
 import { useGLTF } from '@react-three/drei';
 
-const GingerbreadModel = ({ visible }: { visible: boolean }) => {
-  const { nodes, materials } = useGLTF('/models/items/gingerbread-draco.glb') as GLTFRes;
+const GingerbreadModel = () => {
+  const { nodes, materials } = useGLTF('/models/items/gingerbread.glb') as GLTFRes;
 
   return (
     <group
-      visible={visible}
       position={[-0.1, 2.5, -1.1]}
       rotation-x={-0.2}
       rotation-y={4.5}
@@ -41,6 +40,6 @@ const GingerbreadModel = ({ visible }: { visible: boolean }) => {
   );
 };
 
-useGLTF.preload('/models/items/gingerbread-draco.glb');
+useGLTF.preload('/models/items/gingerbread.glb');
 
 export default GingerbreadModel;

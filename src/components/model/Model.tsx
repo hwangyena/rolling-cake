@@ -4,8 +4,9 @@ import { Canvas, CanvasProps } from '@react-three/fiber';
 import { Suspense, forwardRef, memo } from 'react';
 import LoadingCanvas from '../style/LoadingCanvas';
 import dynamic from 'next/dynamic';
+import CustomCake from './CustomCake';
 
-const CustomCake = dynamic(() => import('./CustomCake'));
+// const CustomCake = dynamic(() => import('./CustomCake'));
 const ThemeCake = dynamic(() => import('./ThemeCake'));
 
 type Props = {
@@ -35,7 +36,7 @@ const Model = forwardRef<HTMLCanvasElement, Props>(function Model(
         frameloop={isRotate ? undefined : 'demand'}
         style={{ zIndex: 10 }}
         {...canvasProps}>
-        <Suspense fallback>
+        <Suspense fallback={null}>
           {show === 'custom' && (
             <CustomCake
               isRotate={isRotate}

@@ -21,6 +21,10 @@ const TopCream = ({
   color: Color;
   visible: boolean;
 }) => {
+  if (cream === 'none') {
+    return null;
+  }
+
   return (
     <group scale={0.045} position={[0, 0.6, 0]} visible={visible}>
       <Instances limit={8} range={8}>
