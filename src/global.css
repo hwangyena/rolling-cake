@@ -13,6 +13,8 @@
   html,
   body {
     font-size: 20px;
+    width: 100dvw;
+    height: 100dvh;
   }
 }
 
@@ -62,10 +64,9 @@
   html,
   body {
     width: 100%;
-    height: 100%;
+    height: 100dvh;
     margin: 0;
     padding: 0;
-    min-height: 100%;
     font-size: 16px;
   }
 
@@ -137,7 +138,7 @@
 
   /* CheckBox */
   .check-selected::after {
-    @apply animate-bg-opacity absolute left-0 top-0 h-full w-full bg-black opacity-50 content-[""];
+    @apply absolute left-0 top-0 h-full w-full animate-bg-opacity bg-black opacity-50 content-[""];
   }
   .check-disabled::after {
     @apply absolute left-0 top-0 h-full w-full bg-[#fffdfd] opacity-[87%] content-[""];
@@ -185,7 +186,6 @@
   }
 }
 
-/* tailwind */
 @layer utilities {
   .rotate-y-180 {
     transform: rotateY(180deg);
@@ -205,6 +205,10 @@
 
   .justify-end {
     justify-content: end;
+  }
+
+  .h-full-screen {
+    height: 100dvh;
   }
 
   /* gradient */
