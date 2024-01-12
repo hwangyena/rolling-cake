@@ -16,7 +16,7 @@ const StepLetter = () => {
 
   const [name, setName] = useState('');
   const [content, setContent] = useState('');
-  const [lock, setLock] = useState(true);
+  const [lock, setLock] = useState(false);
 
   const debounceName = useDebounce(name);
   const debounceContent = useDebounce(content);

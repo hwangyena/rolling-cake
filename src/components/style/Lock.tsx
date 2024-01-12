@@ -21,7 +21,7 @@ const Lock = ({ unlock = false, small, onClick }: Props) => {
         className={cn(
           'z-10 flex aspect-square w-[15px] items-center justify-center rounded-[3px] bg-gray-600 transition-all',
           { 'bg-green-dark': unlock },
-          { 'w-[11px] lg:w-[14px]': small },
+          { 'w-[10.5px] lg:w-[14px]': small },
         )}
       />
     </div>
