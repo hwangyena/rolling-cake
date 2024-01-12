@@ -101,7 +101,6 @@ const StepLetter = () => {
         <section className="relative mt-5 h-[80%]">
           <textarea
             className={'h-full w-full resize-none text-b2 text-gray-700'}
-            maxLength={200}
             placeholder="편지 내용을 작성해볼까?"
             value={content}
             onChange={(e) => {
@@ -117,7 +116,6 @@ const StepLetter = () => {
             비밀 롤링케이크
             <Lock unlock={!lock} />
           </button>
-          <span className="text-cap font-bold text-gray-500">{content.length} / 200</span>
         </section>
       </ShadowCard>
     </article>
