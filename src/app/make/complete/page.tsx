@@ -1,7 +1,5 @@
 'use client';
 
-import * as THREE from 'three';
-
 import GradientContainer from '@/components/GradientContainer';
 import Button from '@/components/common/Button';
 import Header from '@/components/common/Header';
@@ -12,7 +10,7 @@ import Confetti from '@/components/style/Confetti';
 import { useErrorPopup } from '@/hooks/common';
 import { useStepStore } from '@/hooks/make';
 import { createCake } from '@/lib/endpoint';
-import { getLocalStorage, popupAtom, setLocalStorage } from '@/lib/store';
+import { getLocalStorage, popupAtom } from '@/lib/store';
 import { useSetAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
@@ -30,7 +28,6 @@ export default function Page() {
   const targetUser = useMemo(() => getLocalStorage<string>('rolling-cake:userId'), []);
 
   useEffect(() => {
-    const isMake = getLocalStorage<Record<string, boolean>>('rolling-cake:isMake');
     const userId = getLocalStorage<string>('rolling-cake:userId');
 
     if (isMutating || data) {
@@ -45,15 +42,6 @@ export default function Page() {
         onConfirm: () => router.push('/'),
       });
       return;
-    }
-
-    if (isMake && isMake[userId]) {
-      dispatchPopup({
-        title: '앗, 오류가 생겼어요.',
-        content: '이미 만들어준 케이크 같아요.\n케이크는 한 번만 전달해 줄 수 있어요.',
-        hideCancel: true,
-        onConfirm: () => router.push(`/cake/${userId}`),
-      });
     }
   }, [dispatchPopup, store, router, isMutating, data]);
 
@@ -86,7 +74,6 @@ export default function Page() {
       return;
     }
 
-    setLocalStorage('rolling-cake:isMake', { [targetUser]: true });
     onResetMakeAtom();
 
     router.push(`/cake/${targetUser}`);
@@ -103,21 +90,7 @@ export default function Page() {
       <Navigation show={['<']} className={data ? 'invisible' : ''} />
       <Header>{data ? '케이크를 선물했어요!' : '롤링케이크 완성!'}</Header>
       <div className="relative w-full flex-1">
-        <Model
-          ref={canvasRef}
-          cake={store}
-          show={store.shape}
-          fixPosition
-          isRotate={!!data}
-          canvasProps={{
-            camera: {
-              fov: 45,
-              near: 0.1,
-              far: 100,
-              position: new THREE.Vector3(0, 3, 9),
-            },
-          }}
-        />
+        <Model ref={canvasRef} cake={store} show={store.shape} fixPosition isRotate={!!data} />
       </div>
       <section className="mb-3 flex min-h-[120px] w-full flex-col items-center justify-end gap-3 px-5">
         {data ? (
