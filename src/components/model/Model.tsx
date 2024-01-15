@@ -4,6 +4,7 @@ import { Canvas, CanvasProps } from '@react-three/fiber';
 import { Suspense, forwardRef, memo } from 'react';
 import LoadingCanvas from '../style/LoadingCanvas';
 import dynamic from 'next/dynamic';
+import DragTest from './DragTest';
 
 const CustomCake = dynamic(() => import('./CustomCake'));
 const ThemeCake = dynamic(() => import('./ThemeCake'));
@@ -22,16 +23,19 @@ const Model = forwardRef<HTMLCanvasElement, Props>(function Model(
   { cake, show, step, isRotate, isStand, fixPosition = false, canvasProps },
   ref,
 ) {
+  return <DragTest />;
+
   return (
     <>
       <Canvas
         ref={ref}
         shadows
         camera={{
-          fov: window.innerWidth > 480 ? 50 : 40,
+          // fov: window.innerWidth > 480 ? 50 : 40,
+          fov: 50,
           near: 0.1,
           far: 100,
-          position: new THREE.Vector3(0, 3, 9),
+          // position: new THREE.Vector3(0, 3, 9),
         }}
         // frameloop={isRotate ? undefined : 'demand'}
         style={{ zIndex: 10 }}

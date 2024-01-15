@@ -1,9 +1,11 @@
 import { CameraControls, Center, Environment } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import dynamic from 'next/dynamic';
-import { memo, useEffect, useRef } from 'react';
+import { memo, useEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
 import CakeModel from './Cake';
+import { TeddyBearModel } from './items';
+import DragTest from './DragTest';
 
 const TopCream = dynamic(() => import('./TopCream'));
 const SideCream = dynamic(() => import('./SideCream'));
@@ -26,49 +28,65 @@ const CustomCake = ({ cake, step, isRotate, hasStand, fixPosition }: Props) => {
   const cameraControlsRef = useRef<CameraControls | null>(null);
   const cakeRef = useRef<THREE.Group>(null);
 
-  useEffect(() => {
-    if (!step || !cameraControlsRef.current) {
-      return;
-    }
+  const [draggable, setDraggable] = useState(false);
 
-    // switch (step) {
-    //   case 'cream_top':
-    //   case 'lettering':
-    //     cameraControlsRef.current.rotateTo(0, -120 * DEG2RAD, true);
-    //     break;
-    //   case 'more':
-    //     cameraControlsRef.current.rotateTo(0, 20 * DEG2RAD, true);
-    //     break;
-    //   default:
-    //     cameraControlsRef.current?.reset(true);
-    // }
-  }, [step]);
+  // useEffect(() => {
+  //   if (!step || !cameraControlsRef.current) {
+  //     return;
+  //   }
 
-  useFrame((_, delta) => {
-    if (cakeRef.current && isRotate) {
-      cakeRef.current.rotation.y += delta * 0.3;
-    }
-  });
+  //   switch (step) {
+  //     case 'cream_top':
+  //     case 'lettering':
+  //     case 'more':
+  //       cameraControlsRef.current.rotateTo(0, -120 * DEG2RAD, true);
+  //       break;
+  //     // case 'more':
+  //     // cameraControlsRef.current.rotateTo(0, 20 * DEG2RAD, true);
+  //     // break;
+  //     default:
+  //       cameraControlsRef.current?.reset(true);
+  //   }
+
+  //   if (step === 'more') {
+  //     const timer = setTimeout(() => {
+  //       if (cameraControlsRef.current) {
+  //         // cameraControlsRef.current.enabled = false;
+  //         setDraggable(true);
+  //       }
+  //     }, 500);
+
+  //     return () => clearTimeout(timer);
+  //   }
+
+  //   setDraggable(false);
+  // }, [step]);
+
+  // useFrame((_, delta) => {
+  //   if (cakeRef.current && isRotate) {
+  //     cakeRef.current.rotation.y += delta * 0.3;
+  //   }
+  // });
 
   return (
     <>
-      <CameraControls
+      {/* <CameraControls
         ref={cameraControlsRef}
-        // enabled={false}
-        dollyDragInverted={false}
-        // enabled={!fixPosition}
+        // enabled={!fixPosition && !draggable}
+        enabled={!draggable}
         minPolarAngle={0}
         maxPolarAngle={Math.PI * 0.5}
         minDistance={Math.PI * 1.7}
         maxDistance={10}
-        polarAngle={-120 * DEG2RAD}
-      />
+      /> */}
       <Environment preset="dawn" />
-
+      {/* <TeddyBearModel setDraggable={setDraggable} /> */}
+      {/* 
       <group scale={hasStand ? 1 : 1.4} ref={cakeRef}>
-        <Center>
+      <Center>
           <CakeModel cakeColor={cake.sheet.color} hasStand={hasStand} />
-        </Center>
+        </Center> */}
+      {/* 
 
         <group position={[0, hasStand ? 0 : -1.25, 0]}>
           <TopCream visible={cake.cream_top.cream !== 'none'} {...cake.cream_top} />
@@ -77,8 +95,9 @@ const CustomCake = ({ cake, step, isRotate, hasStand, fixPosition }: Props) => {
             <Items items={cake.more.item} hasTopCream={cake.cream_top.cream !== 'none'} />
           )}
           <LetteringModel visible={!!cake.lettering.value} {...cake.lettering} />
-        </group>
+        </group> 
       </group>
+        */}
     </>
   );
 };
