@@ -11,7 +11,12 @@ const StepCommon = ({ itemSelect }: { itemSelect?: (keyof typeof SELECT_ITEM)[] 
   return (
     <article className="flex h-full flex-col">
       <section className="relative grid w-full flex-1 place-items-center">
-        <Model isStand cake={store} show={isTheme ? 'theme' : 'custom'} />
+        <Model
+          isStand
+          cake={store}
+          show={isTheme ? 'theme' : 'custom'}
+          step={step as keyof CustomCake}
+        />
 
         {step === 'lettering' && <LetteringArea />}
       </section>
