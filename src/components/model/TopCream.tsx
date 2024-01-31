@@ -1,6 +1,7 @@
 import { getCirclePosition } from '@/lib/utils';
 import { Instances } from '@react-three/drei';
 import { memo } from 'react';
+
 import Cream from './Cream';
 
 const topYPosition: Record<CakeCream, number> = {

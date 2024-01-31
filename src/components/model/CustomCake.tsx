@@ -3,6 +3,7 @@ import { useFrame } from '@react-three/fiber';
 import dynamic from 'next/dynamic';
 import { memo, useEffect, useRef } from 'react';
 import * as THREE from 'three';
+
 import CakeModel from './Cake';
 
 const TopCream = dynamic(() => import('./TopCream'));

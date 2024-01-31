@@ -1,17 +1,19 @@
 'use client';
 
 import GradientContainer from '@/components/GradientContainer';
+import Cake from '@/components/cake/Cake';
 import CustomPopup from '@/components/common/CustomPopup';
 import { focusInputAtom } from '@/lib/store';
+import { useUpdateUserName } from '@/service/client/user';
+import { User } from '@prisma/client';
 import { useSetAtom } from 'jotai';
-import { useCallback } from 'react';
-import type { User } from '@prisma/client';
-import Cake from '@/components/cake/Cake';
-import { updateRollingCakeName } from '@/lib/endpoint';
 import { useRouter } from 'next/navigation';
+import { useCallback } from 'react';
 
 const MakeNameClient = ({ user }: { user: User | null }) => {
   const router = useRouter();
+
+  const { trigger } = useUpdateUserName();
   const dispatch = useSetAtom(focusInputAtom);
 
   const onConfirmPopup = useCallback(() => {
@@ -24,15 +26,15 @@ const MakeNameClient = ({ user }: { user: User | null }) => {
       maxLength: 5,
       defaultValue: user.name ?? '',
       onConfirm: async (name: string) => {
-        const res = await updateRollingCakeName(name);
+        const res = await trigger({ name });
 
         if (res) {
-          router.push(`/cake/${res.data.id}`);
+          router.push(`/cake/${res.id}`);
           router.refresh();
         }
       },
     });
-  }, [dispatch, router, user]);
+  }, [dispatch, router, trigger, user]);
 
   return (
     <GradientContainer type="green-circle" className="flex flex-col items-center justify-between">

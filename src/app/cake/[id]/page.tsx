@@ -1,8 +1,8 @@
-import getCurrentUser from '@/actions/getCurrentUser';
-import getUser from '@/actions/getUser';
 import ClientOnly from '@/components/ClientOnly';
 import Navigation from '@/components/common/Navigation';
+import { getCurrentUser, getUser } from '@/service/server/user';
 import { notFound } from 'next/navigation';
+
 import EmptyCakeClient from './EmptyCakeClient';
 import HaveCakeClient from './HaveCakeClient';
 

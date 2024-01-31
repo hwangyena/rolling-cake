@@ -1,8 +1,7 @@
-import * as THREE from 'three';
-
 import { getCakeBg } from '@/lib/utils';
 import { useGLTF } from '@react-three/drei';
 import { MeshProps } from '@react-three/fiber';
+import * as THREE from 'three';
 
 type Props = { cream: CakeCream; color: Color; optionalColor?: 'princess' } & MeshProps;
 

@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { memo } from 'react';
+
 import Button from './Button';
 
 const icon = {
