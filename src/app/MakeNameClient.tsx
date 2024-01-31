@@ -5,10 +5,10 @@ import CustomPopup from '@/components/common/CustomPopup';
 import { focusInputAtom } from '@/lib/store';
 import { useSetAtom } from 'jotai';
 import { useCallback } from 'react';
-import type { User } from '@prisma/client';
 import Cake from '@/components/cake/Cake';
 import { useRouter } from 'next/navigation';
-import { useUpdateUserName } from '@/service/user';
+import { useUpdateUserName } from '@/service/client/user';
+import { User } from '@prisma/client';
 
 const MakeNameClient = ({ user }: { user: User | null }) => {
   const router = useRouter();

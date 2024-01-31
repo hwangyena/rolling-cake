@@ -1,5 +1,5 @@
 import prisma from '@/lib/prismadb';
-import { getCurrentUser } from '@/service/user';
+import { getCurrentUser } from '@/service/server/user';
 import { NextResponse } from 'next/server';
 
 export async function PUT(request: Request) {

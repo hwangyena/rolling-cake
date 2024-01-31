@@ -3,7 +3,7 @@ import Navigation from '@/components/common/Navigation';
 import { notFound } from 'next/navigation';
 import EmptyCakeClient from './EmptyCakeClient';
 import HaveCakeClient from './HaveCakeClient';
-import { getCurrentUser, getUser } from '@/service/user';
+import { getCurrentUser, getUser } from '@/service/server/user';
 
 export default async function CakePage({ params }: { params: { id: string } }) {
   const cakes = await fetch(`${process.env.NEXTAUTH_URL}/api/cake/${params.id}`, {

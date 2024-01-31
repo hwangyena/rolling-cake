@@ -10,7 +10,7 @@ import Confetti from '@/components/style/Confetti';
 import { useErrorPopup } from '@/lib/hooks/common';
 import { useStepStore } from '@/lib/hooks/make';
 import { getLocalStorage, popupAtom } from '@/lib/store';
-import { useCreateCake } from '@/service/cake';
+import { useCreateCake } from '@/service/client/cake';
 import { useSetAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useRef } from 'react';

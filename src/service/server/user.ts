@@ -2,9 +2,7 @@ import prisma from '@/lib/prismadb';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import { User } from '@prisma/client';
 import { Session, getServerSession } from 'next-auth';
-import useSWRMutation from 'swr/mutation';
 
-/** GET */
 export async function getUser(userId: string) {
   try {
     const user = await prisma.user.findUnique({
@@ -47,17 +45,4 @@ export async function getCurrentUser() {
   } catch (e) {
     return null;
   }
-}
-
-/** OTHER */
-export function useUpdateUserName() {
-  return useSWRMutation(
-    '/api/user',
-    async function fetcher(url: string, { arg }: { arg: { name: string } }) {
-      return await fetch(url, {
-        method: 'PUT',
-        body: JSON.stringify(arg),
-      }).then((res) => res.json() as Promise<User>);
-    },
-  );
 }
