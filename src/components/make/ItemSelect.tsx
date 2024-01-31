@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { SELECT_ITEM } from '@/lib/constant';
 import { isDisabledFont, isObject } from '@/lib/utils';
-import { useStepStore } from '@/hooks/make';
+import { useStepStore } from '@/lib/hooks/make';
 import CheckButton from '../common/CheckButton';
 
 import 'swiper/css';

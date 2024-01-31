@@ -5,7 +5,7 @@ import { PropsWithChildren, useCallback } from 'react';
 import GradientContainer from '../GradientContainer';
 import CircleButton from '../common/CircleButton';
 import Header from '../common/Header';
-import { useBlock, useEntireStep } from '@/hooks/make';
+import { useBlock, useEntireStep } from '@/lib/hooks/make';
 import { useAtom } from 'jotai';
 import { stepValidAtom } from '@/lib/store';
 

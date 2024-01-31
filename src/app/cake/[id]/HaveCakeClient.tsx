@@ -5,7 +5,7 @@ import Button from '@/components/common/Button';
 import Header from '@/components/common/Header';
 import Tag from '@/components/common/Tag';
 import Lock from '@/components/style/Lock';
-import { useSaveUserId } from '@/hooks/cake';
+import { useSaveUserId } from '@/lib/hooks/cake';
 import { cn } from '@/lib/utils';
 import type { Cake as CakeType, User } from '@prisma/client';
 import Image from 'next/image';

@@ -1,4 +1,4 @@
-import { useEntireStep, useStepStore } from '@/hooks/make';
+import { useEntireStep, useStepStore } from '@/lib/hooks/make';
 import { SELECT_ITEM } from '@/lib/constant';
 import Model from '../model/Model';
 import ItemSelect from './ItemSelect';

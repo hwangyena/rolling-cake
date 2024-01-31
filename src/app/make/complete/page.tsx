@@ -7,20 +7,20 @@ import Loading from '@/components/common/Loading';
 import Navigation from '@/components/common/Navigation';
 import Model from '@/components/model/Model';
 import Confetti from '@/components/style/Confetti';
-import { useErrorPopup } from '@/hooks/common';
-import { useStepStore } from '@/hooks/make';
-import { createCake } from '@/lib/endpoint';
+import { useErrorPopup } from '@/lib/hooks/common';
+import { useStepStore } from '@/lib/hooks/make';
 import { getLocalStorage, popupAtom } from '@/lib/store';
+import { useCreateCake } from '@/service/cake';
 import { useSetAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
-import useSWRMutation from 'swr/mutation';
 
 export default function Page() {
   const router = useRouter();
 
   const { store, onResetMakeAtom } = useStepStore();
-  const { trigger, data, isMutating } = useSWRMutation('/api/make', createCake);
+  const { trigger, data, isMutating } = useCreateCake();
+
   const { showError } = useErrorPopup(() => router.replace('/make?step=shape'));
   const dispatchPopup = useSetAtom(popupAtom);
 

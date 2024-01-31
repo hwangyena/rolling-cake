@@ -4,7 +4,7 @@ import { SwiperClass, SwiperSlide } from 'swiper/react';
 import Card from '../common/Card';
 import { cn } from '@/lib/utils';
 import Cake from '../cake/Cake';
-import { useEntireStep } from '@/hooks/make';
+import { useEntireStep } from '@/lib/hooks/make';
 import { useCallback } from 'react';
 
 const StepShape = () => {

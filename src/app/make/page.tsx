@@ -6,7 +6,7 @@ import StepLetter from '@/components/make/StepLetter';
 import StepShape from '@/components/make/StepShape';
 import StepTheme from '@/components/make/StepTheme';
 import Wrapper from '@/components/make/Wrapper';
-import { useEntireStep } from '@/hooks/make';
+import { useEntireStep } from '@/lib/hooks/make';
 import { getLocalStorage } from '@/lib/store';
 import { notFound } from 'next/navigation';
 import { useMemo } from 'react';
