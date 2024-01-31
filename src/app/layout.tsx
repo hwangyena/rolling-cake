@@ -1,8 +1,8 @@
+import ClientOnly from '@/components/ClientOnly';
+import Store from '@/components/Store';
 import { Metadata } from 'next';
 import { PropsWithChildren } from 'react';
 
-import ClientOnly from '@/components/ClientOnly';
-import Store from '@/components/Store';
 import '../global.css';
 
 export const metadata: Metadata = {

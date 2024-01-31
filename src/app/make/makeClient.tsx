@@ -1,15 +1,17 @@
 'use client';
 
-import Step from '@/components/common/Step';
-import StepCommon from '@/components/make/StepCommon';
-import StepLetter from '@/components/make/StepLetter';
-import StepShape from '@/components/make/StepShape';
-import StepTheme from '@/components/make/StepTheme';
-import Wrapper from '@/components/make/Wrapper';
-import { useEntireStep } from '@/lib/hooks/make';
-import { getLocalStorage } from '@/lib/store';
 import { notFound } from 'next/navigation';
 import { useMemo } from 'react';
+
+import Step from '@components/common/Step';
+import StepCommon from '@components/make/StepCommon';
+import StepLetter from '@components/make/StepLetter';
+import StepShape from '@components/make/StepShape';
+import StepTheme from '@components/make/StepTheme';
+import Wrapper from '@components/make/Wrapper';
+
+import { useEntireStep } from '@lib/hooks/make';
+import { getLocalStorage } from '@lib/store';
 
 export default function MakeClient() {
   const { wrapperInfo, step, entireStepLength } = useEntireStep();

@@ -1,13 +1,14 @@
 'use client';
 
+import { useBlock, useEntireStep } from '@/lib/hooks/make';
+import { stepValidAtom } from '@/lib/store';
+import { useAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
 import { PropsWithChildren, useCallback } from 'react';
+
 import GradientContainer from '../GradientContainer';
 import CircleButton from '../common/CircleButton';
 import Header from '../common/Header';
-import { useBlock, useEntireStep } from '@/lib/hooks/make';
-import { useAtom } from 'jotai';
-import { stepValidAtom } from '@/lib/store';
 
 type Props = StepDisplay & {
   order?: number;

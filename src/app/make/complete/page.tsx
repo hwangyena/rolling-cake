@@ -1,6 +1,7 @@
-import { Suspense } from 'react';
 import ClientOnly from '@/components/ClientOnly';
-import CompleteClient from './completeClient';
+import { Suspense } from 'react';
+
+import CompleteClient from './CompleteClient';
 
 export default function Page() {
   return (

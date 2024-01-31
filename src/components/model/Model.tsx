@@ -1,9 +1,9 @@
+import { Canvas, CanvasProps } from '@react-three/fiber';
+import dynamic from 'next/dynamic';
+import { Suspense, forwardRef, memo } from 'react';
 import * as THREE from 'three';
 
-import { Canvas, CanvasProps } from '@react-three/fiber';
-import { Suspense, forwardRef, memo } from 'react';
 import LoadingCanvas from '../style/LoadingCanvas';
-import dynamic from 'next/dynamic';
 
 const CustomCake = dynamic(() => import('./CustomCake'));
 const ThemeCake = dynamic(() => import('./ThemeCake'));

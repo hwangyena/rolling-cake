@@ -1,8 +1,7 @@
+import prisma from '@/lib/prismadb';
+import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import NextAuth, { AuthOptions } from 'next-auth';
 import KakaoProvider from 'next-auth/providers/kakao';
-import { PrismaAdapter } from '@next-auth/prisma-adapter';
-
-import prisma from '@/lib/prismadb';
 
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),

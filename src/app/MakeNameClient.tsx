@@ -1,14 +1,14 @@
 'use client';
 
 import GradientContainer from '@/components/GradientContainer';
+import Cake from '@/components/cake/Cake';
 import CustomPopup from '@/components/common/CustomPopup';
 import { focusInputAtom } from '@/lib/store';
-import { useSetAtom } from 'jotai';
-import { useCallback } from 'react';
-import Cake from '@/components/cake/Cake';
-import { useRouter } from 'next/navigation';
 import { useUpdateUserName } from '@/service/client/user';
 import { User } from '@prisma/client';
+import { useSetAtom } from 'jotai';
+import { useRouter } from 'next/navigation';
+import { useCallback } from 'react';
 
 const MakeNameClient = ({ user }: { user: User | null }) => {
   const router = useRouter();

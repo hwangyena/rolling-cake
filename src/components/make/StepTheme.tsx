@@ -1,13 +1,13 @@
 'use client';
 
-import { SwiperClass, SwiperSlide } from 'swiper/react';
-import Cake from '../cake/Cake';
-import Card from '../common/Card';
-
-import { useStepStore } from '@/lib/hooks/make';
 import { CAKE_THEME } from '@/lib/constant';
+import { useStepStore } from '@/lib/hooks/make';
 import { cn } from '@/lib/utils';
 import { useCallback } from 'react';
+import { SwiperClass, SwiperSlide } from 'swiper/react';
+
+import Cake from '../cake/Cake';
+import Card from '../common/Card';
 import SwiperCard from './SwiperCard';
 
 import 'swiper/css';

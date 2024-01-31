@@ -1,8 +1,9 @@
 import Button from '@/components/common/Button';
 import { cn } from '@/lib/utils';
-import { PropsWithChildren, memo } from 'react';
-import ShadowCard from '../style/ShadowCard';
 import Image from 'next/image';
+import { PropsWithChildren, memo } from 'react';
+
+import ShadowCard from '../style/ShadowCard';
 
 type Props = {
   content: string;

@@ -1,19 +1,22 @@
 'use client';
 
-import GradientContainer from '@/components/GradientContainer';
-import Button from '@/components/common/Button';
-import Header from '@/components/common/Header';
-import Loading from '@/components/common/Loading';
-import Navigation from '@/components/common/Navigation';
-import Model from '@/components/model/Model';
-import Confetti from '@/components/style/Confetti';
-import { useErrorPopup } from '@/lib/hooks/common';
-import { useStepStore } from '@/lib/hooks/make';
-import { getLocalStorage, popupAtom } from '@/lib/store';
-import { useCreateCake } from '@/service/client/cake';
 import { useSetAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
+
+import { useCreateCake } from '@service/client/cake';
+
+import GradientContainer from '@components/GradientContainer';
+import Button from '@components/common/Button';
+import Header from '@components/common/Header';
+import Loading from '@components/common/Loading';
+import Navigation from '@components/common/Navigation';
+import Model from '@components/model/Model';
+import Confetti from '@components/style/Confetti';
+
+import { useErrorPopup } from '@lib/hooks/common';
+import { useStepStore } from '@lib/hooks/make';
+import { getLocalStorage, popupAtom } from '@lib/store';
 
 export default function CompleteClient() {
   const router = useRouter();

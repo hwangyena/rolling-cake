@@ -1,15 +1,14 @@
 'use client';
 
+import GradientContainer from '@/components/GradientContainer';
 import LoginButton from '@/components/LoginButton';
 import Button from '@/components/common/Button';
 import CustomPopup from '@/components/common/CustomPopup';
-
+import WaveTitle from '@/components/style/WaveTitle';
+import type { User } from '@prisma/client';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useCallback, useState } from 'react';
-import type { User } from '@prisma/client';
-import GradientContainer from '@/components/GradientContainer';
-import WaveTitle from '@/components/style/WaveTitle';
 
 const HomeClient = ({ user }: { user?: User | null }) => {
   const router = useRouter();
