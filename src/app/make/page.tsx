@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
+import MakeClient from './makeClient';
 
-import MakeClient from './MakeClient';
 
 export default function Page() {
   return (
