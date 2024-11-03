@@ -1,9 +1,9 @@
 import ClientOnly from '@/components/ClientOnly';
-import LetterClient from './LetterClient';
-import getCake from '@/actions/getCake';
-import getUser from '@/actions/getUser';
-import getCurrentUser from '@/actions/getCurrentUser';
+import { getCake } from '@/service/server/cake';
+import { getCurrentUser, getUser } from '@/service/server/user';
 import { notFound } from 'next/navigation';
+
+import LetterClient from './LetterClient';
 
 export default async function CakeDetail({ params }: { params: { id: string } }) {
   const [cake, currentUser] = await Promise.all([getCake(params.id), getCurrentUser()]);

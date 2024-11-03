@@ -1,6 +1,6 @@
+import { cn, getCakeBg } from '@/lib/utils';
 import Image from 'next/image';
 import { CSSProperties, PropsWithChildren, memo } from 'react';
-import { cn, getCakeBg } from '@/lib/utils';
 
 type Props = {
   type: 'cream' | 'color' | 'item' | 'font';

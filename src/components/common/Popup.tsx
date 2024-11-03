@@ -3,6 +3,7 @@
 import { popupStore } from '@/lib/store';
 import { useAtom } from 'jotai';
 import { useCallback } from 'react';
+
 import Button from './Button';
 
 const Popup = () => {
@@ -26,7 +27,7 @@ const Popup = () => {
 
   return (
     <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center">
-      <div className="shadow-popup z-[100] flex w-[80%] flex-col justify-around rounded-md bg-white p-[10%] text-center">
+      <div className="z-[100] flex w-[80%] flex-col justify-around rounded-md bg-white p-[10%] text-center shadow-popup">
         <section className="mb-8">
           <h4 className="whitespace-pre text-h4 font-bold text-gray-800">{title}</h4>
           {content && (

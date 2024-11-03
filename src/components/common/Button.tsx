@@ -58,7 +58,7 @@ const SmallButton = ({ color, ...props }: PropsWithChildren<Props>) => {
 const BigButton = ({ color, ...props }: PropsWithChildren<Props>) => {
   return (
     <Button
-      className={`shadow-button flex w-full shrink-0 items-center justify-center gap-4 rounded-lg border-2 border-black bg-pink-200 p-4 text-btn font-bold text-white hover:bg-pink-300 disabled:cursor-auto disabled:bg-gray-500 disabled:opacity-60 ${color}`}
+      className={`flex w-full shrink-0 items-center justify-center gap-4 rounded-lg border-2 border-black bg-pink-200 p-4 text-btn font-bold text-white shadow-button hover:bg-pink-300 disabled:cursor-auto disabled:bg-gray-500 disabled:opacity-60 ${color}`}
       {...props}></Button>
   );
 };

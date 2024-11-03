@@ -1,0 +1,25 @@
+{
+  "singleQuote": true,
+  "printWidth": 100,
+  "arrowParens": "always",
+  "bracketSameLine": true,
+  "bracketSpacing": true,
+  "embeddedLanguageFormatting": "auto",
+  "jsxSingleQuote": false,
+  "proseWrap": "preserve",
+  "tabWidth": 2,
+
+  "importOrder": [
+    "^[./]",
+    "^@app/(.*)$",
+    "^@service/(.*)$",
+    "^@components/(.*)$",
+    "^@lib/(.*)$",
+    ".css$"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+
+  "tailwindConfig": "./tailwind.config.js",
+  "plugins": ["prettier-plugin-tailwindcss", "@trivago/prettier-plugin-sort-imports"]
+}

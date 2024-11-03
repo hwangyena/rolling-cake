@@ -1,4 +1,4 @@
-import { useStepStore } from '@/hooks/make';
+import { useStepStore } from '@/lib/hooks/make';
 import { focusInputAtom } from '@/lib/store';
 import { useSetAtom } from 'jotai';
 import Image from 'next/image';

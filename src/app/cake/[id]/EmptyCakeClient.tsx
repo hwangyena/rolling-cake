@@ -3,7 +3,7 @@
 import Button from '@/components/common/Button';
 import Header from '@/components/common/Header';
 import Tag from '@/components/common/Tag';
-import { useSaveUserId } from '@/hooks/cake';
+import { useSaveUserId } from '@/lib/hooks/cake';
 import { snackBarAtom } from '@/lib/store';
 import { User } from '@prisma/client';
 import { useSetAtom } from 'jotai';

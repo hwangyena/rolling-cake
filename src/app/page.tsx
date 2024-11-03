@@ -1,7 +1,8 @@
-import getCurrentUser from '@/actions/getCurrentUser';
 import ClientOnly from '@/components/ClientOnly';
-import MakeNameClient from './MakeNameClient';
+import { getCurrentUser } from '@/service/server/user';
+
 import HomeClient from './HomeClient';
+import MakeNameClient from './MakeNameClient';
 
 export default async function Home() {
   const user = await getCurrentUser();

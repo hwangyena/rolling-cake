@@ -1,11 +1,12 @@
 import { CAKE_SHAPE } from '@/lib/constant';
-import SwiperCard from './SwiperCard';
-import { SwiperClass, SwiperSlide } from 'swiper/react';
-import Card from '../common/Card';
+import { useEntireStep } from '@/lib/hooks/make';
 import { cn } from '@/lib/utils';
-import Cake from '../cake/Cake';
-import { useEntireStep } from '@/hooks/make';
 import { useCallback } from 'react';
+import { SwiperClass, SwiperSlide } from 'swiper/react';
+
+import Cake from '../cake/Cake';
+import Card from '../common/Card';
+import SwiperCard from './SwiperCard';
 
 const StepShape = () => {
   const { isTheme, onEntireStepChanged } = useEntireStep();

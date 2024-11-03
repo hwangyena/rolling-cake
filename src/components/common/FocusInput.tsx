@@ -1,9 +1,10 @@
 'use client';
 
+import { focusInputAtom } from '@/lib/store';
 import { useAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
-import { focusInputAtom } from '@/lib/store';
+
 import Button from './Button';
 
 const FocusInput = () => {

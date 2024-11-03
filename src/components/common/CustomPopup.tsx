@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { PropsWithChildren, memo, useEffect } from 'react';
+
 import ShadowCard from '../style/ShadowCard';
 
 const CustomPopup = ({ content, title, hasIcon, onConfirm }: CustomPopup) => {
