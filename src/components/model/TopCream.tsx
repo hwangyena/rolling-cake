@@ -1,6 +1,7 @@
 import { getCirclePosition } from '@/lib/utils';
 import { Instances } from '@react-three/drei';
 import { memo } from 'react';
+
 import Cream from './Cream';
 
 const topYPosition: Record<CakeCream, number> = {
@@ -12,9 +13,21 @@ const topYPosition: Record<CakeCream, number> = {
   none: 0,
 };
 
-const TopCream = ({ color, cream }: { cream: CakeCream; color: Color }) => {
+const TopCream = ({
+  color,
+  cream,
+  visible,
+}: {
+  cream: CakeCream;
+  color: Color;
+  visible: boolean;
+}) => {
+  if (cream === 'none') {
+    return null;
+  }
+
   return (
-    <group scale={0.045} position={[0, 0.6, 0]}>
+    <group scale={0.045} position={[0, 0.6, 0]} visible={visible}>
       <Instances limit={8} range={8}>
         {getCirclePosition(33, 8).map(([x, z], i) => (
           <Cream key={i} position={[x, topYPosition[cream], z]} color={color} cream={cream} />

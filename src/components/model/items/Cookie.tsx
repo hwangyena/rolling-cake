@@ -1,7 +1,7 @@
 import { useGLTF } from '@react-three/drei';
 
 const CookieModel = () => {
-  const { nodes, materials } = useGLTF('/models/items/cookie-draco.glb') as GLTFRes;
+  const { nodes, materials } = useGLTF('/models/items/cookie.glb') as GLTFRes;
 
   return (
     <group
@@ -27,5 +27,7 @@ const CookieModel = () => {
     </group>
   );
 };
+
+useGLTF.preload('/models/items/cookie.glb');
 
 export default CookieModel;

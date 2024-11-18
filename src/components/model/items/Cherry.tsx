@@ -13,12 +13,12 @@ const cherryPosition = [
 ];
 
 const CherryModel = ({ hasTopCream }: { hasTopCream: boolean }) => {
-  const { nodes, materials } = useGLTF('/models/items/cherry-draco.glb') as GLTFRes;
+  const { nodes, materials } = useGLTF('/models/items/cherry.glb') as GLTFRes;
 
   const yPosition = useMemo(() => (hasTopCream ? 2.2 : 1.9), [hasTopCream]);
 
   return (
-    <>
+    <group>
       {cherryPosition.map(([x, z], i) => (
         <group key={i} position={[x, yPosition, z]} scale={0.13}>
           <group name="Scene">
@@ -34,8 +34,10 @@ const CherryModel = ({ hasTopCream }: { hasTopCream: boolean }) => {
           </group>
         </group>
       ))}
-    </>
+    </group>
   );
 };
+
+useGLTF.preload('/models/items/cherry.glb');
 
 export default CherryModel;

@@ -99,12 +99,12 @@ export const CUSTOM_STEP_STORE: CustomCake = {
   cream_side: { color: 'ivory', cream: 'none' },
   more: { item: [] },
   lettering: { color: 'ivory', font: 'font1', value: '' },
-  letter: { name: '', content: '', isPrivate: true },
+  letter: { name: '', content: '', isPrivate: false },
 };
 
 export const THEME_STEP_STORE: ThemeCake = {
   shape: 'theme',
   theme: 'harrypotter',
   lettering: { color: 'ivory', font: 'font5', value: '' },
-  letter: { name: '', content: '', isPrivate: true },
+  letter: { name: '', content: '', isPrivate: false },
 };

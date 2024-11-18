@@ -9,7 +9,8 @@ const LetteringModel = ({
   value,
   theme,
   isMaking,
-}: Lettering & { theme?: CakeTheme; isMaking?: boolean }) => {
+  visible,
+}: Lettering & { theme?: CakeTheme; isMaking?: boolean; visible: boolean }) => {
   const [material, setMaterial] = useState<THREE.MeshStandardMaterial>();
 
   const letteringValues = useMemo(() => (theme ? [value] : value.split('\n')), [value, theme]);
@@ -63,6 +64,7 @@ const LetteringModel = ({
             letteringValues.length,
           ) as unknown as THREE.Group<THREE.Object3DEventMap>)}>
           <Text3D
+            visible={visible}
             rotation-x={-1.6}
             material={material}
             font={`/fonts/${font}.json`}

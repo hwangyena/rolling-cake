@@ -1,8 +1,8 @@
-import * as THREE from 'three';
-
 import { CameraControls, Environment, useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { useEffect, useMemo, useRef } from 'react';
+import * as THREE from 'three';
+
 import LetteringModel from './Lettering';
 import SideCream from './SideCream';
 
@@ -51,9 +51,9 @@ function ThemeCake({ cake, step, isRotate, fixPosition }: Props) {
     cameraControlsRef.current?.update(0);
   }, [step]);
 
-  useFrame(() => {
+  useFrame((state, delta) => {
     if (cakeRef.current && isRotate) {
-      cakeRef.current.rotation.y += 0.005;
+      cakeRef.current.rotation.y += delta * 0.3;
     }
   });
 
@@ -74,6 +74,7 @@ function ThemeCake({ cake, step, isRotate, fixPosition }: Props) {
         <group scale={step !== 'lettering' ? 0.92 : 0.75}>{renderTheme()}</group>
 
         <LetteringModel
+          visible={true}
           theme={cake.theme}
           color="green"
           isMaking={!!step}
@@ -81,8 +82,8 @@ function ThemeCake({ cake, step, isRotate, fixPosition }: Props) {
             cake.theme === 'harrypotter'
               ? 'font5'
               : cake.theme === 'soju'
-              ? 'font4'
-              : cake.lettering.font
+                ? 'font4'
+                : cake.lettering.font
           }
           value={cake.lettering.value.toUpperCase()}
         />
@@ -92,7 +93,7 @@ function ThemeCake({ cake, step, isRotate, fixPosition }: Props) {
 }
 
 const HarryPotter = () => {
-  const { nodes, materials } = useGLTF(`/models/theme/harrypotter-draco.glb`) as GLTFRes;
+  const { nodes, materials } = useGLTF(`/models/theme/harrypotter.glb`) as GLTFRes;
 
   return (
     <group scale={1.1} rotation-y={2.2}>
@@ -115,7 +116,7 @@ const HarryPotter = () => {
 };
 
 const Soju = () => {
-  const { nodes, materials } = useGLTF(`/models/theme/soju-draco.glb`) as GLTFRes;
+  const { nodes, materials } = useGLTF(`/models/theme/soju.glb`) as GLTFRes;
 
   return (
     <group scale={1.22} position={[0, 0, 0]}>
@@ -173,7 +174,7 @@ const Soju = () => {
 };
 
 const Princess = ({ showTop }: { showTop: boolean }) => {
-  const { nodes, materials } = useGLTF(`/models/theme/princess-draco.glb`) as GLTFRes;
+  const { nodes, materials } = useGLTF(`/models/theme/princess.glb`) as GLTFRes;
 
   return (
     <group
@@ -203,6 +204,7 @@ const Princess = ({ showTop }: { showTop: boolean }) => {
         />
       </group>
       <SideCream
+        visible
         color="ivory"
         cream="basic"
         optional={{
@@ -215,8 +217,8 @@ const Princess = ({ showTop }: { showTop: boolean }) => {
   );
 };
 
-useGLTF.preload('/models/theme/harrypotter-draco.glb');
-useGLTF.preload('/models/theme/soju-draco.glb');
-useGLTF.preload('/models/theme/princess-draco.glb');
+useGLTF.preload('/models/theme/harrypotter.glb');
+useGLTF.preload('/models/theme/soju.glb');
+useGLTF.preload('/models/theme/princess.glb');
 
 export default ThemeCake;

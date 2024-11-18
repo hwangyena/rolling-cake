@@ -1,13 +1,12 @@
-import * as THREE from 'three';
-
 import { getCakeBg } from '@/lib/utils';
 import { useGLTF } from '@react-three/drei';
 import { MeshProps } from '@react-three/fiber';
+import * as THREE from 'three';
 
 type Props = { cream: CakeCream; color: Color; optionalColor?: 'princess' } & MeshProps;
 
 const Cream = ({ cream, color, optionalColor, ...meshProps }: Props) => {
-  const { nodes, materials } = useGLTF(`/models/cream-${cream}-draco.glb`) as GLTFRes;
+  const { nodes, materials } = useGLTF(`/models/cream-${cream}.glb`) as GLTFRes;
 
   if (cream === 'chocolate') {
     return (
@@ -73,5 +72,11 @@ const CreamInstance = () => {
     </>
   );
 };
+
+useGLTF.preload('/models/cream-basic.glb');
+useGLTF.preload('/models/cream-chocolate.glb');
+useGLTF.preload('/models/cream-crown.glb');
+useGLTF.preload('/models/cream-heart.glb');
+useGLTF.preload('/models/cream-screw.glb');
 
 export default Cream;

@@ -1,7 +1,6 @@
-import * as THREE from 'three';
-
-import { useEntireStep, useStepStore } from '@/hooks/make';
 import { SELECT_ITEM } from '@/lib/constant';
+import { useEntireStep, useStepStore } from '@/lib/hooks/make';
+
 import Model from '../model/Model';
 import ItemSelect from './ItemSelect';
 import LetteringArea from './LetteringArea';
@@ -13,19 +12,7 @@ const StepCommon = ({ itemSelect }: { itemSelect?: (keyof typeof SELECT_ITEM)[] 
   return (
     <article className="flex h-full flex-col">
       <section className="relative grid w-full flex-1 place-items-center">
-        <Model
-          isStand
-          cake={store}
-          show={isTheme ? 'theme' : 'custom'}
-          canvasProps={{
-            camera: {
-              fov: window.innerWidth > 480 ? 43 : 40,
-              near: 0.1,
-              far: 100,
-              position: new THREE.Vector3(0, 3, 9),
-            },
-          }}
-        />
+        <Model isStand cake={store} show={isTheme ? 'theme' : 'custom'} />
 
         {step === 'lettering' && <LetteringArea />}
       </section>

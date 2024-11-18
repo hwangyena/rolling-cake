@@ -2,8 +2,9 @@
 
 import { focusInputStore, popupStore, snackBarAtom } from '@/lib/store';
 import { useAtom } from 'jotai';
-import Popup from './common/Popup';
+
 import FocusInput from './common/FocusInput';
+import Popup from './common/Popup';
 import Snackbar from './common/Snackbar';
 
 export default function Store() {

@@ -1,5 +1,6 @@
 import { atom } from 'jotai';
 import { atomWithStorage, createJSONStorage } from 'jotai/utils';
+
 import { CUSTOM_STEP_STORE } from './constant';
 
 /** Common */
@@ -24,7 +25,7 @@ const storage = createJSONStorage<Cake>(() => sessionStorage);
 export const makeAtom = atomWithStorage<Cake>('rolling-cake:make', CUSTOM_STEP_STORE, storage);
 
 /** Client Storage */
-type LocalKey = 'rolling-cake:userId' | 'rolling-cake:isMake';
+type LocalKey = 'rolling-cake:userId';
 
 export const setLocalStorage = (key: LocalKey, value: Record<string, unknown> | string) => {
   localStorage.setItem(key, JSON.stringify(value));

@@ -24,7 +24,7 @@ type CakeItem =
   | 'teddy-bear';
 
 type Lettering = { color: Color; font: CakeFont; value: string };
-type Letter = { name: string; content: string; isPrivate: true };
+type Letter = { name: string; content: string; isPrivate: boolean };
 
 type CustomCake = {
   shape: 'custom';

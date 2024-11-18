@@ -9,31 +9,37 @@ const GradientContainer = ({
   className?: string;
 }>) => {
   if (type === 'green-circle') {
-    return <div className={`green-circle-gradient h-full w-full ${className}`}>{children}</div>;
+    return (
+      <div className={`green-circle-gradient h-full-screen w-full ${className}`}>{children}</div>
+    );
   }
 
   if (type === 'pink-green') {
     return (
-      <div className={`pink-green-gradient flex h-full w-full flex-col ${className}`}>
+      <div className={`pink-green-gradient h-full-screen flex w-full flex-col ${className}`}>
         {children}
       </div>
     );
   }
 
   if (type === 'green-pink') {
-    return <div className={`green-pink-gradient h-full w-full ${className}`}>{children}</div>;
+    return (
+      <div className={`green-pink-gradient h-full-screen w-full ${className}`}>{children}</div>
+    );
   }
 
   if (type === 'grid') {
     return (
-      <div className={`h-full w-full bg-grid-pattern bg-contain ${className}`}>{children}</div>
+      <div className={`h-full-screen w-full bg-grid-pattern bg-contain ${className}`}>
+        {children}
+      </div>
     );
   }
 
   if (type === 'grid-with-gradient') {
     return (
       <div
-        className={`pink-green-gradient-with-grid flex h-full w-full flex-col bg-contain ${className}`}>
+        className={`pink-green-gradient-with-grid h-full-screen flex w-full flex-col bg-contain ${className}`}>
         {children}
       </div>
     );

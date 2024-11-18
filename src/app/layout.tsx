@@ -1,9 +1,10 @@
+import ClientOnly from '@/components/ClientOnly';
+import Store from '@/components/Store';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Metadata } from 'next';
 import { PropsWithChildren } from 'react';
 
-import ClientOnly from '@/components/ClientOnly';
-import Store from '@/components/Store';
-import '../styles/global.css';
+import '../global.css';
 
 export const metadata: Metadata = {
   title: '롤링케이크',
@@ -41,9 +42,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
-      <body className="relative mx-auto my-0 h-full max-w-[480px]">
+      <body className="relative mx-auto my-0 max-w-[480px]">
         {children}
 
+        <SpeedInsights />
         <ClientOnly>
           <Store />
         </ClientOnly>

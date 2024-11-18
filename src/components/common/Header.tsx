@@ -1,4 +1,3 @@
-import styles from '@/styles/component.module.css';
 import { CSSProperties, PropsWithChildren, memo } from 'react';
 
 type Props = {
@@ -9,14 +8,16 @@ type Props = {
 
 const Header = ({ children, className, shadowColor, style }: PropsWithChildren<Props>) => {
   return (
-    <div className={`relative ${className ?? ''}`} style={style}>
+    <div className={`font-display-block relative ${className ?? ''}`} style={style}>
       <span
-        className={styles.shadow}
+        className={`header-shadow absolute left-[0.18rem] top-[0.17rem] whitespace-nowrap font-neo text-[1.38rem] text-effect_t`}
         style={{ '--shadow': shadowColor || '#000' } as CSSProperties}
         data-content={children}>
         {children}
       </span>
-      <h1 className={styles.header} data-content={children}>
+      <h1
+        className={`header whitespace-nowrap font-neo text-effect_t font-normal`}
+        data-content={children}>
         {children}
       </h1>
     </div>

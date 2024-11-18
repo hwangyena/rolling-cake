@@ -3,7 +3,7 @@
 import Button from '@/components/common/Button';
 import Header from '@/components/common/Header';
 import Tag from '@/components/common/Tag';
-import { useSaveUserId } from '@/hooks/cake';
+import { useSaveUserId } from '@/lib/hooks/cake';
 import { snackBarAtom } from '@/lib/store';
 import { User } from '@prisma/client';
 import { useSetAtom } from 'jotai';
@@ -43,9 +43,9 @@ export default function EmptyCakeClient({ user, isOwn }: { user: User; isOwn: bo
         </div>
       </section>
       <section className={'absolute bottom-0 w-full px-[25px] py-[40px] pb-[5vh]'}>
-        <Button type="BIG" onClick={onButtonClicked}>
+        <Button.BigButton onClick={onButtonClicked}>
           {isOwn ? '케이크 링크 공유하기' : '롤링케이크 만들어주기'}
-        </Button>
+        </Button.BigButton>
       </section>
     </>
   );

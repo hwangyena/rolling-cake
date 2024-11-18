@@ -1,9 +1,9 @@
-import { Swiper, SwiperClass } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
-
 import { PropsWithChildren, memo } from 'react';
-import 'swiper/css';
 import 'swiper/css/navigation';
+import { Navigation } from 'swiper/modules';
+import { Swiper, SwiperClass } from 'swiper/react';
+
+import 'swiper/css';
 
 type Props = {
   initialSlide?: number;

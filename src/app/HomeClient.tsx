@@ -1,15 +1,14 @@
 'use client';
 
+import GradientContainer from '@/components/GradientContainer';
 import LoginButton from '@/components/LoginButton';
 import Button from '@/components/common/Button';
 import CustomPopup from '@/components/common/CustomPopup';
-
+import WaveTitle from '@/components/style/WaveTitle';
+import type { User } from '@prisma/client';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useCallback, useState } from 'react';
-import type { User } from '@prisma/client';
-import GradientContainer from '@/components/GradientContainer';
-import WaveTitle from '@/components/style/WaveTitle';
 
 const HomeClient = ({ user }: { user?: User | null }) => {
   const router = useRouter();
@@ -25,7 +24,9 @@ const HomeClient = ({ user }: { user?: User | null }) => {
   }, []);
 
   return (
-    <GradientContainer type="green-pink" className="flex flex-col items-center gap-7 px-5">
+    <GradientContainer
+      type="green-pink"
+      className="full-screen flex flex-col items-center gap-7 px-5">
       <div className="relative mt-[7vh] h-[23%] w-full">
         <Image src="/images/logo.png" fill alt="logo" priority />
       </div>
@@ -37,9 +38,7 @@ const HomeClient = ({ user }: { user?: User | null }) => {
           <WaveTitle />
         </div>
         {user ? (
-          <Button type="BIG" onClick={onLinkClicked}>
-            내 롤링케이크 보러가기
-          </Button>
+          <Button.BigButton onClick={onLinkClicked}>내 롤링케이크 보러가기</Button.BigButton>
         ) : (
           <LoginButton />
         )}
