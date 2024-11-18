@@ -1,5 +1,6 @@
 import ClientOnly from '@/components/ClientOnly';
 import Store from '@/components/Store';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Metadata } from 'next';
 import { PropsWithChildren } from 'react';
 
@@ -44,6 +45,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
       <body className="relative mx-auto my-0 max-w-[480px]">
         {children}
 
+        <SpeedInsights />
         <ClientOnly>
           <Store />
         </ClientOnly>

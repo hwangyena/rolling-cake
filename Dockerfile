@@ -1,13 +1,13 @@
 FROM node:18-alpine
 
 COPY package.json .
-COPY yarn.lock .
+COPY pnpm-lock.yaml .
 
 RUN yarn
 
 COPY . .
 RUN npx prisma generate
-RUN yarn build
+RUN pnpm build
 
 EXPOSE 3000
-CMD yarn start
+CMD pnpm start
