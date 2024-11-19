@@ -37,7 +37,7 @@ const MakeNameClient = ({ user }: { user: User | null }) => {
   }, [dispatch, router, trigger, user]);
 
   return (
-    <GradientContainer type="green-circle" className="flex flex-col items-center justify-between">
+    <GradientContainer type="greenCircle" className="flex flex-col items-center justify-between">
       <div className="grid h-full w-full flex-1 place-items-center p-[10%]">
         <Cake className="aspect-square w-[100%]" />
       </div>

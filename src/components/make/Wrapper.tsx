@@ -37,7 +37,7 @@ const Wrapper = ({ order, orderLength, title, children, next }: PropsWithChildre
   }
 
   return (
-    <GradientContainer type="green-circle">
+    <GradientContainer type="greenCircle">
       <main className="relative flex h-full w-full flex-col">
         <header className="flex flex-col items-center justify-center gap-8 pt-[40px]">
           <mark

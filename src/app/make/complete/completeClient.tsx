@@ -89,7 +89,7 @@ export default function CompleteClient() {
   }, [onResetMakeAtom, router]);
 
   return (
-    <GradientContainer type="pink-green" className="items-center justify-center overflow-hidden">
+    <GradientContainer type="pinkGreen" className="items-center justify-center overflow-hidden">
       <Navigation show={['<']} className={data ? 'invisible' : ''} />
       <Header>{data ? '케이크를 선물했어요!' : '롤링케이크 완성!'}</Header>
       <div className="relative w-full flex-1">

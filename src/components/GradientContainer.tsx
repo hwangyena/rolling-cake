@@ -1,51 +1,24 @@
-import { PropsWithChildren, memo } from 'react';
+import { PropsWithChildren } from 'react';
+
+const typeClass = {
+  greenCircle: 'green-circle-gradient h-full-screen w-full',
+  pinkGreen: 'pink-green-gradient h-full-screen flex w-full flex-col',
+  greenPink: 'green-pink-gradient h-full-screen w-full',
+  grid: 'h-full-screen w-full bg-grid-pattern bg-contain',
+  gridWithGradient: 'pink-green-gradient-with-grid h-full-screen flex w-full flex-col bg-contain',
+};
 
 const GradientContainer = ({
   type,
   children,
   className = '',
 }: PropsWithChildren<{
-  type: 'green-circle' | 'pink-green' | 'green-pink' | 'grid' | 'grid-with-gradient';
+  type: keyof typeof typeClass;
   className?: string;
 }>) => {
-  if (type === 'green-circle') {
-    return (
-      <div className={`green-circle-gradient h-full-screen w-full ${className}`}>{children}</div>
-    );
-  }
+  const cn = `${typeClass[type]} ${className}`.trim();
 
-  if (type === 'pink-green') {
-    return (
-      <div className={`pink-green-gradient h-full-screen flex w-full flex-col ${className}`}>
-        {children}
-      </div>
-    );
-  }
-
-  if (type === 'green-pink') {
-    return (
-      <div className={`green-pink-gradient h-full-screen w-full ${className}`}>{children}</div>
-    );
-  }
-
-  if (type === 'grid') {
-    return (
-      <div className={`h-full-screen w-full bg-grid-pattern bg-contain ${className}`}>
-        {children}
-      </div>
-    );
-  }
-
-  if (type === 'grid-with-gradient') {
-    return (
-      <div
-        className={`pink-green-gradient-with-grid h-full-screen flex w-full flex-col bg-contain ${className}`}>
-        {children}
-      </div>
-    );
-  }
-
-  return <div>{children}</div>;
+  return <div className={cn}>{children}</div>;
 };
 
-export default memo(GradientContainer);
+export default GradientContainer;
