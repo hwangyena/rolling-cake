@@ -6,6 +6,8 @@ import * as THREE from 'three';
 
 import CakeModel from './Cake';
 
+import { useEntireStep } from '@lib/hooks/make';
+
 const TopCream = dynamic(() => import('./TopCream'));
 const SideCream = dynamic(() => import('./SideCream'));
 const Items = dynamic(() => import('./items/Items'));
@@ -17,21 +19,21 @@ const { DEG2RAD } = THREE.MathUtils;
 
 type Props = {
   cake: CustomCake;
-  step?: keyof CustomCake;
   isRotate?: boolean;
-  hasStand?: boolean;
+  isStand?: boolean;
   fixPosition?: boolean;
 };
 
-const CustomCake = ({ cake, step, isRotate, hasStand, fixPosition }: Props) => {
+const CustomCake = ({ cake, isRotate, isStand, fixPosition }: Props) => {
   const cameraControlsRef = useRef<CameraControls | null>(null);
   const cakeRef = useRef<THREE.Group>(null);
+
+  const { step } = useEntireStep();
 
   useEffect(() => {
     if (!step || !cameraControlsRef.current) {
       return;
     }
-
     switch (step) {
       case 'cream_top':
       case 'lettering':
@@ -41,7 +43,7 @@ const CustomCake = ({ cake, step, isRotate, hasStand, fixPosition }: Props) => {
         cameraControlsRef.current.rotateTo(0, 20 * DEG2RAD, true);
         break;
       default:
-        cameraControlsRef.current?.reset(true);
+        cameraControlsRef.current.reset(true);
     }
   }, [step]);
 
@@ -63,12 +65,12 @@ const CustomCake = ({ cake, step, isRotate, hasStand, fixPosition }: Props) => {
       />
       <Environment preset="dawn" />
 
-      <group scale={hasStand ? 1 : 1.4} ref={cakeRef}>
+      <group scale={isStand ? 1 : 1.4} ref={cakeRef}>
         <Center>
-          <CakeModel cakeColor={cake.sheet.color} hasStand={hasStand} />
+          <CakeModel cakeColor={cake.sheet.color} hasStand={isStand} />
         </Center>
 
-        <group position={[0, hasStand ? 0 : -1.25, 0]}>
+        <group position={[0, isStand ? 0 : -1.25, 0]}>
           <TopCream visible={cake.cream_top.cream !== 'none'} {...cake.cream_top} />
           <SideCream visible={cake.cream_side.cream !== 'none'} {...cake.cream_side} />
           {cake.more.item.length > 0 && (

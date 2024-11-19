@@ -1,6 +1,6 @@
 import { Canvas, CanvasProps } from '@react-three/fiber';
 import dynamic from 'next/dynamic';
-import { Suspense, forwardRef, memo } from 'react';
+import { forwardRef, memo } from 'react';
 import * as THREE from 'three';
 
 import LoadingCanvas from '../style/LoadingCanvas';
@@ -35,20 +35,15 @@ const Model = forwardRef<HTMLCanvasElement, Props>(function Model(
         frameloop={isRotate ? undefined : 'demand'}
         style={{ zIndex: 10 }}
         {...canvasProps}>
-        <Suspense fallback={null}>
-          {show === 'custom' && (
-            <CustomCake
-              isRotate={isRotate}
-              hasStand={isStand}
-              fixPosition={fixPosition}
-              cake={cake as CustomCake}
-            />
-          )}
-          {show === 'theme' && (
-            <ThemeCake isRotate={isRotate} fixPosition={fixPosition} cake={cake as ThemeCake} />
-          )}
-        </Suspense>
+        {/* TODO: Suspense가 필요할지? */}
+        {show === 'custom' && (
+          <CustomCake cake={cake as CustomCake} {...{ isRotate, isStand, fixPosition }} />
+        )}
+        {show === 'theme' && (
+          <ThemeCake isRotate={isRotate} fixPosition={fixPosition} cake={cake as ThemeCake} />
+        )}
       </Canvas>
+
       <LoadingCanvas />
     </>
   );

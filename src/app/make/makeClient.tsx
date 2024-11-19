@@ -13,6 +13,7 @@ import Wrapper from '@components/make/Wrapper';
 import { useEntireStep } from '@lib/hooks/make';
 import { getLocalStorage } from '@lib/store';
 
+// TODO: layout 컴포넌트로 뺄 수 없는지?
 export default function MakeClient() {
   const { wrapperInfo, step, entireStepLength } = useEntireStep();
 
