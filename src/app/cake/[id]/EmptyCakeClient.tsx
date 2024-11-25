@@ -25,7 +25,7 @@ export default function EmptyCakeClient({ user, isOwn }: { user: User; isOwn: bo
       });
       return;
     } else {
-      router.push('/make?step=shape');
+      router.push('/make?step=sheet');
     }
   }, [dispatch, isOwn, router]);
 

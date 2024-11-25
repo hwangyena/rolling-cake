@@ -1,13 +1,15 @@
-import ClientOnly from '@/components/ClientOnly';
 import { Suspense } from 'react';
 
-import CompleteClient from './completeClient';
+import MakeCompleteClient from './MakeCompleteClient';
+
+import ClientOnly from '@components/ClientOnly';
 
 export default function Page() {
   return (
     <ClientOnly>
+      {/* TODO: Loading 추가 */}
       <Suspense>
-        <CompleteClient />
+        <MakeCompleteClient />
       </Suspense>
     </ClientOnly>
   );

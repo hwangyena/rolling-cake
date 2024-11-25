@@ -25,7 +25,7 @@ const HomeClient = ({ user }: { user?: User | null }) => {
 
   return (
     <GradientContainer
-      type="green-pink"
+      type="greenPink"
       className="full-screen flex flex-col items-center gap-7 px-5">
       <div className="relative mt-[7vh] h-[23%] w-full">
         <Image src="/images/logo.png" fill alt="logo" priority />
