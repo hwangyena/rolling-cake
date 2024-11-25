@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 
-import CompleteClient from './CompleteClient';
+import MakeCompleteClient from './MakeCompleteClient';
 
 import ClientOnly from '@components/ClientOnly';
 
@@ -9,7 +9,7 @@ export default function Page() {
     <ClientOnly>
       {/* TODO: Loading 추가 */}
       <Suspense>
-        <CompleteClient />
+        <MakeCompleteClient />
       </Suspense>
     </ClientOnly>
   );

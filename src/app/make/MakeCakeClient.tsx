@@ -10,7 +10,7 @@ import StepLetter from '@components/make/StepLetter';
 import { useStep } from '@lib/hooks/make';
 import { userIdAtom } from '@lib/store';
 
-export default function MakeClient() {
+export default function MakeCakeClient() {
   const { step } = useStep();
   const [userId] = useAtom(userIdAtom);
 

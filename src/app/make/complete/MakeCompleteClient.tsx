@@ -17,7 +17,7 @@ import { useErrorPopup } from '@lib/hooks/common';
 import { useStepStore } from '@lib/hooks/make';
 import { popupAtom, userIdAtom } from '@lib/store';
 
-export default function CompleteClient() {
+export default function MakeCompleteClient() {
   const router = useRouter();
 
   const [userId] = useAtom(userIdAtom);
