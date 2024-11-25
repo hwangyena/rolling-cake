@@ -1,8 +1,8 @@
 'use client';
 
-import { useSetAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
-import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 import { useCreateCake } from '@service/client/cake';
 
@@ -16,11 +16,12 @@ import Confetti from '@components/style/Confetti';
 
 import { useErrorPopup } from '@lib/hooks/common';
 import { useStepStore } from '@lib/hooks/make';
-import { getLocalStorage, popupAtom } from '@lib/store';
+import { popupAtom, userIdAtom } from '@lib/store';
 
 export default function CompleteClient() {
   const router = useRouter();
 
+  const [userId] = useAtom(userIdAtom);
   const { store, onResetMakeAtom } = useStepStore();
   const { trigger, data, isMutating } = useCreateCake();
 
@@ -28,11 +29,8 @@ export default function CompleteClient() {
   const dispatchPopup = useSetAtom(popupAtom);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const targetUser = useMemo(() => getLocalStorage<string>('rolling-cake:userId'), []);
 
   useEffect(() => {
-    const userId = getLocalStorage<string>('rolling-cake:userId');
-
     if (isMutating || data) {
       return;
     }
@@ -46,7 +44,7 @@ export default function CompleteClient() {
       });
       return;
     }
-  }, [dispatchPopup, store, router, isMutating, data]);
+  }, [dispatchPopup, store, router, isMutating, data, userId]);
 
   const onCreate = useCallback(async () => {
     const { shape, letter, ...cake } = store;
@@ -54,7 +52,7 @@ export default function CompleteClient() {
 
     const base64 = canvasRef.current?.toDataURL('image/png') ?? '';
 
-    if (!type || !letter.name || !letter.content || !cake || !targetUser) {
+    if (!type || !letter.name || !letter.content || !cake || !userId) {
       showError();
       return;
     }
@@ -64,24 +62,24 @@ export default function CompleteClient() {
       cake,
       cakeImageBase64: base64,
       letter,
-      userId: targetUser,
+      userId,
     });
 
     if (res.status !== 200) {
       showError();
     }
-  }, [showError, store, targetUser, trigger]);
+  }, [showError, store, userId, trigger]);
 
   const onListClicked = useCallback(() => {
-    if (!targetUser) {
+    if (!userId) {
       return;
     }
 
     onResetMakeAtom();
 
-    router.push(`/cake/${targetUser}`);
+    router.push(`/cake/${userId}`);
     router.refresh();
-  }, [router, targetUser, onResetMakeAtom]);
+  }, [router, userId, onResetMakeAtom]);
 
   const onLoginClicked = useCallback(() => {
     onResetMakeAtom();

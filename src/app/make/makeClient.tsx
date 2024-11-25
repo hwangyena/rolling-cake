@@ -1,7 +1,7 @@
 'use client';
 
+import { useAtom } from 'jotai';
 import { notFound } from 'next/navigation';
-import { useMemo } from 'react';
 
 import Step from '@components/common/Step';
 import StepCommon from '@components/make/StepCommon';
@@ -11,15 +11,14 @@ import StepTheme from '@components/make/StepTheme';
 import Wrapper from '@components/make/Wrapper';
 
 import { useEntireStep } from '@lib/hooks/make';
-import { getLocalStorage } from '@lib/store';
+import { userIdAtom } from '@lib/store';
 
 // TODO: layout 컴포넌트로 뺄 수 없는지?
 export default function MakeClient() {
   const { wrapperInfo, step, entireStepLength } = useEntireStep();
+  const [userId] = useAtom(userIdAtom);
 
-  const targetUserId = useMemo(() => getLocalStorage<string>('rolling-cake:userId'), []);
-
-  if (!wrapperInfo || !targetUserId) {
+  if (!wrapperInfo || !userId) {
     return notFound();
   }
 
