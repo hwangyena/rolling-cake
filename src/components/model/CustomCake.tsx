@@ -6,7 +6,7 @@ import * as THREE from 'three';
 
 import CakeModel from './Cake';
 
-import { useEntireStep } from '@lib/hooks/make';
+import { useStep } from '@lib/hooks/make';
 
 const TopCream = dynamic(() => import('./TopCream'));
 const SideCream = dynamic(() => import('./SideCream'));
@@ -28,7 +28,7 @@ const CustomCake = ({ cake, isRotate, isStand, fixPosition }: Props) => {
   const cameraControlsRef = useRef<CameraControls | null>(null);
   const cakeRef = useRef<THREE.Group>(null);
 
-  const { step } = useEntireStep();
+  const { step } = useStep();
 
   useEffect(() => {
     if (!step || !cameraControlsRef.current) {

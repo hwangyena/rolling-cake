@@ -9,7 +9,7 @@ const CustomCake = dynamic(() => import('./CustomCake'));
 const ThemeCake = dynamic(() => import('./ThemeCake'));
 
 type Props = {
-  show: 'custom' | 'theme';
+  show?: 'custom' | 'theme'; // TODO: theme 삭제
   cake: Cake;
   isRotate?: boolean;
   isStand?: boolean;
@@ -18,7 +18,7 @@ type Props = {
 };
 
 const Model = forwardRef<HTMLCanvasElement, Props>(function Model(
-  { cake, show, isRotate, isStand, fixPosition, canvasProps },
+  { cake, show = 'custom', isRotate, isStand, fixPosition, canvasProps },
   ref,
 ) {
   return (
@@ -35,7 +35,6 @@ const Model = forwardRef<HTMLCanvasElement, Props>(function Model(
         frameloop={isRotate ? undefined : 'demand'}
         style={{ zIndex: 10 }}
         {...canvasProps}>
-        {/* TODO: Suspense가 필요할지? */}
         {show === 'custom' && (
           <CustomCake cake={cake as CustomCake} {...{ isRotate, isStand, fixPosition }} />
         )}

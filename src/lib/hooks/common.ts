@@ -28,7 +28,6 @@ export const useErrorPopup = (callback?: () => void) => {
       content: '일시적인 오류일 수 있어요. 잠시 후 다시 시도해주세요.',
       onConfirm: () => {
         callback && callback();
-        // router.replace('/make?step=shape');
         popupDispatch(null);
       },
     });

@@ -1,7 +1,7 @@
 import { SELECT_ITEM } from '@/lib/constant';
-import { useStepStore } from '@/lib/hooks/make';
+import { useStep, useStepStore } from '@/lib/hooks/make';
 import { isDisabledFont, isObject } from '@/lib/utils';
-import { memo, useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useMemo, useRef, useState } from 'react';
 import { Swiper as SwiperType } from 'swiper';
 import 'swiper/css/free-mode';
 import { FreeMode } from 'swiper/modules';
@@ -12,21 +12,22 @@ import CheckButton from '../common/CheckButton';
 import 'swiper/css';
 
 type Props = {
-  data: Item[];
   noLabel?: boolean;
 };
 
-const ItemSelect = ({ data, noLabel }: Props) => {
+const ItemSelect = ({ noLabel }: Props) => {
+  const { stepData } = useStep();
   const { step, store, onStoreUpdate } = useStepStore();
 
-  const [tab, setTab] = useState(data[0]);
+  const [tab, setTab] = useState((stepData!.select ?? [])[0]);
   const [selected, setSelected] = useState<number[]>([]);
 
   const swiperRef = useRef<SwiperType | null>(null);
+  const selectData = useMemo(() => stepData!.select ?? [], [stepData]);
 
   useEffect(() => {
-    return setTab(data[0]);
-  }, [data]);
+    return setTab(selectData[0]);
+  }, [selectData]);
 
   useEffect(() => {
     if (swiperRef.current) {
@@ -69,7 +70,7 @@ const ItemSelect = ({ data, noLabel }: Props) => {
     <section className="mb-3">
       {noLabel ? null : (
         <div className="mb-[16px] flex gap-3 px-[20px]">
-          {data.map((tabItem) => (
+          {selectData.map((tabItem) => (
             <span
               key={tabItem}
               className={`cursor-pointer text-t1 font-bold ${
