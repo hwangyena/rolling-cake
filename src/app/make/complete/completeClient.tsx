@@ -6,7 +6,6 @@ import { useCallback, useEffect, useRef } from 'react';
 
 import { useCreateCake } from '@service/client/cake';
 
-import GradientContainer from '@components/GradientContainer';
 import Button from '@components/common/Button';
 import Header from '@components/common/Header';
 import Loading from '@components/common/Loading';
@@ -87,7 +86,7 @@ export default function CompleteClient() {
   }, [onResetMakeAtom, router]);
 
   return (
-    <GradientContainer type="pinkGreen" className="items-center justify-center overflow-hidden">
+    <>
       <Navigation show={['<']} className={data ? 'invisible' : ''} />
       <Header>{data ? '케이크를 선물했어요!' : '롤링케이크 완성!'}</Header>
       <div className="relative w-full flex-1">
@@ -115,6 +114,6 @@ export default function CompleteClient() {
 
       {data && <Confetti />}
       {isMutating && <Loading />}
-    </GradientContainer>
+    </>
   );
 }

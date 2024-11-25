@@ -9,9 +9,11 @@ export default function Page() {
   return (
     <ClientOnly>
       <LayoutHeader />
+
       <Suspense>
         <MakeClient />
       </Suspense>
+
       <LayoutFooter />
     </ClientOnly>
   );
