@@ -93,7 +93,7 @@ export default function MakeCompleteClient() {
         <Model ref={canvasRef} cake={store} show={store.shape} fixPosition isRotate={!!data} />
       </div>
       <section className="mb-3 flex min-h-[120px] w-full flex-col items-center justify-end gap-3 px-5">
-        {false ? (
+        {data ? (
           <>
             <Button.BigButton style={{ zIndex: 10 }} onClick={onListClicked}>
               케이크 진열대로 이동하기
