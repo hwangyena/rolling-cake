@@ -2,7 +2,7 @@ import { CUSTOM_STEP, CUSTOM_STEP_STORE } from '@/lib/constant';
 import { makeAtom, popupAtom } from '@/lib/store';
 import { isObject } from '@/lib/utils';
 import { useAtom, useSetAtom } from 'jotai';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { notFound, usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { startTransition, useCallback, useLayoutEffect, useMemo } from 'react';
 
 export const useStep = () => {
@@ -17,15 +17,18 @@ export const useStep = () => {
   const stepData = useMemo(() => (step ? CUSTOM_STEP[step] : null), [step]);
   const order = useMemo(() => Object.keys(CUSTOM_STEP).findIndex((key) => key === step), [step]);
 
+  // make 페이지에서 step을 찾을 수 없을때
   useLayoutEffect(() => {
     const params = searchParams?.get('step');
 
-    if (pathname === '/make/complete') {
+    if (!pathname?.includes('/make') || pathname === '/make/complete') {
       return;
     }
 
-    if (!params) {
-      router.replace('/make?step=sheet');
+    const steps = Object.keys(CUSTOM_STEP);
+
+    if (!params || !steps.includes(params)) {
+      notFound();
     }
   }, [pathname, router, searchParams]);
 
