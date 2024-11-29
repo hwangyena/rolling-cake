@@ -15,16 +15,16 @@ import Confetti from '@components/style/Confetti';
 
 import { useErrorPopup } from '@lib/hooks/common';
 import { useStepStore } from '@lib/hooks/make';
-import { popupAtom, userIdAtom } from '@lib/store';
+import { popupAtom, userIdStore } from '@lib/store';
 
 export default function MakeCompleteClient() {
   const router = useRouter();
 
-  const [userId] = useAtom(userIdAtom);
+  const [userId] = useAtom(userIdStore);
   const { store, onResetMakeAtom } = useStepStore();
   const { trigger, data, isMutating } = useCreateCake();
 
-  const { showError } = useErrorPopup(() => router.replace('/make?step=shape'));
+  const { showError } = useErrorPopup(() => router.replace('/make?step=sheet'));
   const dispatchPopup = useSetAtom(popupAtom);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -49,12 +49,12 @@ export default function MakeCompleteClient() {
     const { shape, letter, ...cake } = store;
     const type = shape.toUpperCase() as 'CUSTOM' | 'THEME';
 
-    const base64 = canvasRef.current?.toDataURL('image/png') ?? '';
-
-    if (!type || !letter.name || !letter.content || !cake || !userId) {
+    if (!type || !letter.name || !letter.content || !cake || !userId || !canvasRef.current) {
       showError();
       return;
     }
+
+    const base64 = canvasRef.current.toDataURL('image/png');
 
     const res = await trigger({
       type,

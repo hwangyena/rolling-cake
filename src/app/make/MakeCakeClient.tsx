@@ -8,11 +8,11 @@ import StepCommon from '@components/make/StepCommon';
 import StepLetter from '@components/make/StepLetter';
 
 import { useStep } from '@lib/hooks/make';
-import { userIdAtom } from '@lib/store';
+import { userIdStore } from '@lib/store';
 
 export default function MakeCakeClient() {
   const { step } = useStep();
-  const [userId] = useAtom(userIdAtom);
+  const [userId] = useAtom(userIdStore);
 
   if (!userId || !step) {
     return notFound();
