@@ -26,7 +26,7 @@ export const makeAtom = atomWithStorage<Cake>('rolling-cake:make', CUSTOM_STEP_S
 
 /** UserId */
 const LOCAL_USER_ID = 'rolling-cake:userId';
-export const userIdAtom = atom(localStorage.getItem(LOCAL_USER_ID));
+const userIdAtom = atom(localStorage.getItem(LOCAL_USER_ID));
 export const userIdStore = atom<string | null, [string | null], void>(
   (get) => get(userIdAtom),
   (_get, set, newId) => {

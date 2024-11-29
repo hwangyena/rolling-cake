@@ -15,12 +15,12 @@ import Confetti from '@components/style/Confetti';
 
 import { useErrorPopup } from '@lib/hooks/common';
 import { useStepStore } from '@lib/hooks/make';
-import { popupAtom, userIdAtom } from '@lib/store';
+import { popupAtom, userIdStore } from '@lib/store';
 
 export default function MakeCompleteClient() {
   const router = useRouter();
 
-  const [userId] = useAtom(userIdAtom);
+  const [userId] = useAtom(userIdStore);
   const { store, onResetMakeAtom } = useStepStore();
   const { trigger, data, isMutating } = useCreateCake();
 
@@ -93,7 +93,7 @@ export default function MakeCompleteClient() {
         <Model ref={canvasRef} cake={store} show={store.shape} fixPosition isRotate={!!data} />
       </div>
       <section className="mb-3 flex min-h-[120px] w-full flex-col items-center justify-end gap-3 px-5">
-        {data ? (
+        {false ? (
           <>
             <Button.BigButton style={{ zIndex: 10 }} onClick={onListClicked}>
               케이크 진열대로 이동하기
