@@ -1,0 +1,14 @@
+name: Production Deployment
+run-name: Production Deployment
+on:
+  push:
+    branches:
+      - prd
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag rolling-cake
