@@ -1,7 +1,5 @@
 'use client';
 
-import GradientContainer from '@/components/GradientContainer';
-import Cake from '@/components/cake/Cake';
 import CustomPopup from '@/components/common/CustomPopup';
 import { focusInputAtom } from '@/lib/store';
 import { useUpdateUserName } from '@/service/client/user';
@@ -10,7 +8,7 @@ import { useSetAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
 
-const MakeNameClient = ({ user }: { user: User | null }) => {
+const WelcomeClient = ({ user }: { user: User | null }) => {
   const router = useRouter();
 
   const { trigger } = useUpdateUserName();
@@ -28,6 +26,7 @@ const MakeNameClient = ({ user }: { user: User | null }) => {
       onConfirm: async (name: string) => {
         const res = await trigger({ name });
 
+        // TODO: 페이지 넘어가는 속도가 느린데 개션?
         if (res) {
           router.push(`/cake/${res.id}`);
           router.refresh();
@@ -37,17 +36,12 @@ const MakeNameClient = ({ user }: { user: User | null }) => {
   }, [dispatch, router, trigger, user]);
 
   return (
-    <GradientContainer type="greenCircle" className="flex flex-col items-center justify-between">
-      <div className="grid h-full w-full flex-1 place-items-center p-[10%]">
-        <Cake className="aspect-square w-[100%]" />
-      </div>
-      <CustomPopup
-        title={'Welcome!'}
-        content={`환영해요! 친구들에게 축하 받을 수 있도록<br/>롤링케이크 이름을 지어볼까요?`}
-        onConfirm={onConfirmPopup}
-      />
-    </GradientContainer>
+    <CustomPopup
+      title={'Welcome!'}
+      content={`환영해요! 친구들에게 축하 받을 수 있도록<br>롤링케이크 이름을 지어볼까요?`}
+      onConfirm={onConfirmPopup}
+    />
   );
 };
 
-export default MakeNameClient;
+export default WelcomeClient;
