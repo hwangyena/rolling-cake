@@ -21,8 +21,12 @@ export const snackBarAtom = atom<Snackbar | null>(null);
 /** Step */
 export const stepValidAtom = atom(false);
 
-const storage = createJSONStorage<Cake>(() => sessionStorage);
-export const makeAtom = atomWithStorage<Cake>('rolling-cake:make', CUSTOM_STEP_STORE, storage);
+const storage = createJSONStorage<CustomCake>(() => sessionStorage);
+export const makeAtom = atomWithStorage<CustomCake>(
+  'rolling-cake:make',
+  CUSTOM_STEP_STORE,
+  storage,
+);
 
 /** UserId */
 const LOCAL_USER_ID = 'rolling-cake:userId';
