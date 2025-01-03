@@ -35,6 +35,7 @@ type CustomCake = {
   lettering: Lettering;
   letter: Letter;
 };
+// lagacy _ 추가될 수 있으므로 남겨놓음
 type ThemeCake = {
   shape: 'theme';
   theme: CakeTheme;
@@ -42,9 +43,9 @@ type ThemeCake = {
   letter: Letter;
 };
 
-type Cake = CustomCake | ThemeCake;
-type CakeKey = keyof CustomCake | keyof ThemeCake;
-type ExcludeLetter = Omit<CustomCake, 'shape' | 'letter'> | Omit<ThemeCake, 'shape' | 'letter'>;
+type Cake = CustomCake;
+type CakeKey = keyof CustomCake;
+type ExcludeLetter = Omit<CustomCake, 'shape' | 'letter'>;
 
 /* Make page */
 type Item = 'cream' | 'color' | 'item' | 'font';

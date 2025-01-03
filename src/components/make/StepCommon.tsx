@@ -1,4 +1,4 @@
-import { useStepStore } from '@/lib/hooks/make';
+import { useStep } from '@/lib/hooks/make';
 
 import ItemSelect from './ItemSelect';
 import LetteringArea from './LetteringArea';
@@ -6,7 +6,7 @@ import LetteringArea from './LetteringArea';
 import Model from '@components/model/Model';
 
 const StepCommon = () => {
-  const { step, store } = useStepStore();
+  const { step, store } = useStep();
 
   return (
     <article className="flex h-full flex-col">

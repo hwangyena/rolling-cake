@@ -14,14 +14,14 @@ import Model from '@components/model/Model';
 import Confetti from '@components/style/Confetti';
 
 import { useErrorPopup } from '@lib/hooks/common';
-import { useStepStore } from '@lib/hooks/make';
+import { useStep } from '@lib/hooks/make';
 import { popupAtom, userIdStore } from '@lib/store';
 
 export default function MakeCompleteClient() {
   const router = useRouter();
 
   const [userId] = useAtom(userIdStore);
-  const { store, onResetMakeAtom } = useStepStore();
+  const { store, onResetCake } = useStep();
   const { trigger, data, isMutating } = useCreateCake();
 
   const { showError } = useErrorPopup(() => router.replace('/make?step=sheet'));
@@ -74,16 +74,16 @@ export default function MakeCompleteClient() {
       return;
     }
 
-    onResetMakeAtom();
+    onResetCake();
 
     router.push(`/cake/${userId}`);
     router.refresh();
-  }, [router, userId, onResetMakeAtom]);
+  }, [router, userId, onResetCake]);
 
   const onLoginClicked = useCallback(() => {
-    onResetMakeAtom();
+    onResetCake();
     router.push('/');
-  }, [onResetMakeAtom, router]);
+  }, [onResetCake, router]);
 
   return (
     <>

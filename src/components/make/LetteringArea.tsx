@@ -1,4 +1,4 @@
-import { useStepStore } from '@/lib/hooks/make';
+import { useStep } from '@/lib/hooks/make';
 import { focusInputAtom } from '@/lib/store';
 import { useSetAtom } from 'jotai';
 import Image from 'next/image';
@@ -6,7 +6,7 @@ import Image from 'next/image';
 const LetteringArea = () => {
   const dispatch = useSetAtom(focusInputAtom);
 
-  const { store, onStoreUpdate } = useStepStore<CustomCake>();
+  const { store, onStoreUpdate } = useStep();
 
   const handleCakeClicked = () => {
     dispatch({

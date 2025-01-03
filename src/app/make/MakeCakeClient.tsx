@@ -25,7 +25,7 @@ export default function MakeCakeClient() {
       </Step>
 
       {/* Custom Cake */}
-      <Step show={['sheet', 'cream_top', 'cream_side', 'more', 'lettering'].includes(step)}>
+      <Step show={step !== 'letter'}>
         <StepCommon />
       </Step>
     </>

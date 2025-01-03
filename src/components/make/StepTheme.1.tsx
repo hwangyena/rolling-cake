@@ -10,12 +10,9 @@ import Cake from '../cake/Cake';
 import Card from '../common/Card';
 import SwiperCard from './SwiperCard';
 
-import 'swiper/css';
-
 //lagacy _ DO NOT USE THIS CODE
-
-const StepTheme = () => {
-  const { onStoreUpdate } = useStep();
+export const StepTheme = () => {
+  const { store, onStoreUpdate } = useStep();
 
   const onSlideChanged = useCallback(
     (slide: SwiperClass) => {
@@ -28,7 +25,7 @@ const StepTheme = () => {
 
   return (
     <SwiperCard
-      // initialSlide={CAKE_THEME.findIndex((v) => v.value === store.theme)}
+      initialSlide={CAKE_THEME.findIndex((v) => v.value === store.theme)}
       onSlideChanged={onSlideChanged}>
       {CAKE_THEME.map((theme) => (
         <SwiperSlide key={theme.value}>
@@ -47,5 +44,3 @@ const StepTheme = () => {
     </SwiperCard>
   );
 };
-
-export default StepTheme;
