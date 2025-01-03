@@ -39,18 +39,10 @@
     height: 70px;
   }
 
-  .check::before {
-    top: 32px;
-    left: 25px;
-  }
   .step-box-selected ~ .check::before {
     width: 14px;
   }
 
-  .check::after {
-    top: 41px;
-    left: 33px;
-  }
   .step-box-selected ~ .check::after {
     width: 23px;
   }
@@ -143,14 +135,24 @@
   .check-disabled::after {
     @apply absolute left-0 top-0 h-full w-full bg-[#fffdfd] opacity-[87%] content-[""];
   }
+  .check {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    display: grid;
+    place-items: center;
+  }
   .check::before {
-    @apply absolute left-[22px] top-[28px] h-[2px]  w-0 origin-[0%_0%] rotate-45 rounded-sm bg-white;
+    @apply absolute left-[50%] h-[2px] w-0 origin-[0%_0%] rotate-45 rounded-sm  bg-white;
     content: '';
+    transform: translateX(-50%) rotate(45deg);
     transition: width 50ms ease 50ms;
   }
   .check::after {
-    @apply absolute left-[27px] top-[36px] h-[2px] w-0 origin-[0%_0%] rotate-[305deg] rounded-sm bg-white;
+    @apply absolute left-[50%] h-[2px] w-0 origin-[0%_0%] rounded-sm  bg-white;
     content: '';
+    transform: translateY(calc(100% + 5px)) rotate(310deg); /* check before width만큼 translateY */
     transition: width 50ms ease;
   }
   .check-selected ~ .check::before {
