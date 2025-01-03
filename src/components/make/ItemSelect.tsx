@@ -1,5 +1,5 @@
 import { SELECT_ITEM } from '@/lib/constant';
-import { useStep, useStepStore } from '@/lib/hooks/make';
+import { useStep } from '@/lib/hooks/make';
 import { isDisabledFont, isObject } from '@/lib/utils';
 import { memo, useEffect, useMemo, useRef, useState } from 'react';
 import { Swiper as SwiperType } from 'swiper';
@@ -16,8 +16,7 @@ type Props = {
 };
 
 const ItemSelect = ({ noLabel }: Props) => {
-  const { stepData } = useStep();
-  const { step, store, onStoreUpdate } = useStepStore();
+  const { step, stepData, store, onStoreUpdate } = useStep();
 
   const [tab, setTab] = useState((stepData!.select ?? [])[0]);
   const [selected, setSelected] = useState<number[]>([]);
@@ -36,9 +35,9 @@ const ItemSelect = ({ noLabel }: Props) => {
   }, [tab]);
 
   useEffect(() => {
-    const storedValue = store[step];
+    const storedValue = step ? store[step] : null;
 
-    if (!isObject(storedValue)) {
+    if (!storedValue || !isObject(storedValue)) {
       return;
     }
 

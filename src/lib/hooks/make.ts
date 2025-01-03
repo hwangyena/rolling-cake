@@ -10,6 +10,8 @@ export const useStep = () => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
 
+  const [store, dispatch] = useAtom(makeAtom);
+
   const step = useMemo(
     () => (searchParams ? (searchParams.get('step') as keyof CustomCake) : null),
     [searchParams],
@@ -32,20 +34,7 @@ export const useStep = () => {
     }
   }, [pathname, router, searchParams]);
 
-  return {
-    step,
-    stepData,
-    order,
-  };
-};
-
-// FIXME: 위 hook이랑 합치기
-export const useStepStore = <T extends Cake>() => {
-  const { step } = useStep();
-
-  const [store, dispatch] = useAtom(makeAtom);
-
-  const onResetMakeAtom = useCallback(() => {
+  const onResetCake = useCallback(() => {
     dispatch(CUSTOM_STEP_STORE);
   }, [dispatch]);
 
@@ -70,7 +59,14 @@ export const useStepStore = <T extends Cake>() => {
     [dispatch, step, store],
   );
 
-  return { store: store as T, step: step as keyof T, onResetMakeAtom, onStoreUpdate };
+  return {
+    step,
+    stepData,
+    order,
+    store,
+    onResetCake,
+    onStoreUpdate,
+  };
 };
 
 export const useBlock = () => {

@@ -52,7 +52,7 @@ const Item = ({
         style={style}>
         {children}
       </div>
-      {!disabled && <span className="check" />}
+      {!disabled && <div className="check" />}
     </div>
   );
 };

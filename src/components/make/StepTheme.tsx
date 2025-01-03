@@ -1,7 +1,7 @@
 'use client';
 
 import { CAKE_THEME } from '@/lib/constant';
-import { useStepStore } from '@/lib/hooks/make';
+import { useStep } from '@/lib/hooks/make';
 import { cn } from '@/lib/utils';
 import { useCallback } from 'react';
 import { SwiperClass, SwiperSlide } from 'swiper/react';
@@ -12,8 +12,10 @@ import SwiperCard from './SwiperCard';
 
 import 'swiper/css';
 
+//lagacy _ DO NOT USE THIS CODE
+
 const StepTheme = () => {
-  const { store, onStoreUpdate } = useStepStore<ThemeCake>();
+  const { onStoreUpdate } = useStep();
 
   const onSlideChanged = useCallback(
     (slide: SwiperClass) => {
@@ -26,7 +28,7 @@ const StepTheme = () => {
 
   return (
     <SwiperCard
-      initialSlide={CAKE_THEME.findIndex((v) => v.value === store.theme)}
+      // initialSlide={CAKE_THEME.findIndex((v) => v.value === store.theme)}
       onSlideChanged={onSlideChanged}>
       {CAKE_THEME.map((theme) => (
         <SwiperSlide key={theme.value}>
