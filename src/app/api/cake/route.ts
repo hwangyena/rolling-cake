@@ -3,6 +3,7 @@ import { DataURIToBlob } from '@/lib/utils';
 import { S3Client } from '@aws-sdk/client-s3';
 import { createPresignedPost } from '@aws-sdk/s3-presigned-post';
 import { NextResponse } from 'next/server';
+import { v4 as uuidv4 } from 'uuid';
 
 const contentType = 'image/png';
 
@@ -11,8 +12,7 @@ export async function POST(request: Request) {
   const { type, cake, userId, letter, cakeImageBase64 } = body as CreateCakeReq;
 
   if (!type || !letter || !cake || !userId || !prisma) {
-    NextResponse.error();
-    return;
+    return NextResponse.error();
   }
 
   try {
@@ -82,11 +82,9 @@ export async function POST(request: Request) {
 
     return NextResponse.json(cakeRes);
   } catch (error) {
+    console.error(error);
     return Response.json({ error });
   }
-}
-function uuidv4() {
-  throw new Error('Function not implemented.');
 }
 
 export async function DELETE(request: Request) {

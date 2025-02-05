@@ -1,11 +1,20 @@
 import { Suspense } from 'react';
 
-import MakeClient from './makeClient';
+import MakeCakeClient from './MakeCakeClient';
+
+import ClientOnly from '@components/ClientOnly';
+import { LayoutFooter, LayoutHeader } from '@components/make/Layout';
 
 export default function Page() {
   return (
-    <Suspense>
-      <MakeClient />
-    </Suspense>
+    <ClientOnly>
+      <LayoutHeader />
+
+      <Suspense>
+        <MakeCakeClient />
+      </Suspense>
+
+      <LayoutFooter />
+    </ClientOnly>
   );
 }

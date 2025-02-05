@@ -1,15 +1,14 @@
-import { useStepStore } from '@/lib/hooks/make';
+import { useStep } from '@/lib/hooks/make';
 import { focusInputAtom } from '@/lib/store';
 import { useSetAtom } from 'jotai';
 import Image from 'next/image';
-import { useCallback } from 'react';
 
 const LetteringArea = () => {
   const dispatch = useSetAtom(focusInputAtom);
 
-  const { store, onStoreUpdate } = useStepStore<CustomCake>();
+  const { store, onStoreUpdate } = useStep();
 
-  const handleCakeClicked = useCallback(() => {
+  const handleCakeClicked = () => {
     dispatch({
       label: '레터링 문구를 작성해줘!',
       maxLength: 10,
@@ -19,7 +18,7 @@ const LetteringArea = () => {
         onStoreUpdate({ value });
       },
     });
-  }, [dispatch, onStoreUpdate, store.lettering]);
+  };
 
   return (
     <div

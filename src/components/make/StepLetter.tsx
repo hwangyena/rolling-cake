@@ -1,5 +1,5 @@
 import { useDebounce } from '@/lib/hooks/common';
-import { useStepStore } from '@/lib/hooks/make';
+import { useStep } from '@/lib/hooks/make';
 import { stepValidAtom } from '@/lib/store';
 import { useSetAtom } from 'jotai';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
@@ -11,7 +11,7 @@ const StepLetter = () => {
   const {
     store: { letter },
     onStoreUpdate,
-  } = useStepStore();
+  } = useStep();
   const dispatchValid = useSetAtom(stepValidAtom);
 
   const [name, setName] = useState('');

@@ -4,7 +4,7 @@ import { PropsWithChildren, Suspense } from 'react';
 
 export default function Layout({ children }: PropsWithChildren) {
   return (
-    <GradientContainer type="grid-with-gradient">
+    <GradientContainer type="gridWithGradient">
       <Suspense fallback={<Loading />}>{children}</Suspense>
     </GradientContainer>
   );

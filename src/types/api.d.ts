@@ -35,6 +35,7 @@ type CustomCake = {
   lettering: Lettering;
   letter: Letter;
 };
+// lagacy _ 추가될 수 있으므로 남겨놓음
 type ThemeCake = {
   shape: 'theme';
   theme: CakeTheme;

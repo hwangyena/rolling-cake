@@ -1,6 +1,6 @@
 import { Canvas, CanvasProps } from '@react-three/fiber';
 import dynamic from 'next/dynamic';
-import { Suspense, forwardRef, memo } from 'react';
+import { forwardRef, memo } from 'react';
 import * as THREE from 'three';
 
 import LoadingCanvas from '../style/LoadingCanvas';
@@ -9,7 +9,7 @@ const CustomCake = dynamic(() => import('./CustomCake'));
 const ThemeCake = dynamic(() => import('./ThemeCake'));
 
 type Props = {
-  show: 'custom' | 'theme';
+  show?: 'custom' | 'theme'; // TODO: theme 삭제
   cake: Cake;
   isRotate?: boolean;
   isStand?: boolean;
@@ -18,7 +18,7 @@ type Props = {
 };
 
 const Model = forwardRef<HTMLCanvasElement, Props>(function Model(
-  { cake, show, isRotate, isStand, fixPosition, canvasProps },
+  { cake, show = 'custom', isRotate, isStand, fixPosition, canvasProps },
   ref,
 ) {
   return (
@@ -33,22 +33,17 @@ const Model = forwardRef<HTMLCanvasElement, Props>(function Model(
           position: new THREE.Vector3(0, 3, 9),
         }}
         frameloop={isRotate ? undefined : 'demand'}
+        gl={{ preserveDrawingBuffer: true }}
         style={{ zIndex: 10 }}
         {...canvasProps}>
-        <Suspense fallback={null}>
-          {show === 'custom' && (
-            <CustomCake
-              isRotate={isRotate}
-              hasStand={isStand}
-              fixPosition={fixPosition}
-              cake={cake as CustomCake}
-            />
-          )}
-          {show === 'theme' && (
-            <ThemeCake isRotate={isRotate} fixPosition={fixPosition} cake={cake as ThemeCake} />
-          )}
-        </Suspense>
+        {show === 'custom' && (
+          <CustomCake cake={cake as CustomCake} {...{ isRotate, isStand, fixPosition }} />
+        )}
+        {show === 'theme' && (
+          <ThemeCake isRotate={isRotate} fixPosition={fixPosition} cake={cake as ThemeCake} />
+        )}
       </Canvas>
+
       <LoadingCanvas />
     </>
   );

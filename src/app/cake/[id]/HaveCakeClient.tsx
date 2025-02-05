@@ -28,7 +28,7 @@ export default function HaveCakeClient({ cakes, user, isOwn }: Props) {
   };
 
   const onButtonClicked = useCallback(() => {
-    router.push('/make?step=shape');
+    router.push('/make?step=sheet');
   }, [router]);
 
   return (

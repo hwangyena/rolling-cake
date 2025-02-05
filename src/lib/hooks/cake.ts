@@ -1,18 +1,19 @@
-import { getLocalStorage, setLocalStorage } from '@/lib/store';
+import { useAtom } from 'jotai';
 import { useParams } from 'next/navigation';
 import { useEffect } from 'react';
 
+import { userIdStore } from '@lib/store';
+
 export const useSaveUserId = () => {
   const params = useParams();
+  const [userId, dispatch] = useAtom(userIdStore);
 
   useEffect(() => {
-    const savedUserId = getLocalStorage<string>('rolling-cake:userId');
     const currentUserId = (params as { id: string }).id;
 
-    if (savedUserId && savedUserId === currentUserId) {
+    if (userId === currentUserId) {
       return;
     }
-
-    setLocalStorage('rolling-cake:userId', currentUserId);
-  }, [params]);
+    dispatch(currentUserId);
+  }, [dispatch, params, userId]);
 };

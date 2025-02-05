@@ -1,5 +1,6 @@
 import ClientOnly from '@/components/ClientOnly';
 import Store from '@/components/Store';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Metadata } from 'next';
 import { PropsWithChildren } from 'react';
@@ -41,7 +42,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
-    <html lang="en">
+    <html lang="ko">
       <body className="relative mx-auto my-0 max-w-[480px]">
         {children}
 
@@ -50,6 +51,8 @@ export default function RootLayout({ children }: PropsWithChildren) {
           <Store />
         </ClientOnly>
       </body>
+
+      <GoogleAnalytics gaId="G-ERYF8E3XGX" />
     </html>
   );
 }
