@@ -1,7 +1,14 @@
 'use client';
 
 import CircleButton from '@/components/common/CircleButton';
+import { Metadata } from 'next';
 import { useRouter } from 'next/navigation';
+
+export const metadata: Metadata = {
+  title: '앗, 페이지를 찾을 수 없어요',
+  description:
+    '찾는 페이지의 주소가 잘못 되었거나 주소가 삭제 되었을 수 있어요. 페이지의 주소를 다시 한 번 확인해주세요.',
+};
 
 export default function NotFound() {
   const router = useRouter();

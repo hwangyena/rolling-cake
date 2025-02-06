@@ -5,13 +5,10 @@ import { notFound } from 'next/navigation';
 
 import EmptyCakeClient from './EmptyCakeClient';
 import HaveCakeClient from './HaveCakeClient';
+import { getCakes } from './_lib';
 
 export default async function CakePage({ params }: { params: { id: string } }) {
-  const cakes = await fetch(`${process.env.NEXTAUTH_URL}/api/cake/${params.id}`, {
-    method: 'GET',
-    cache: 'no-store',
-  }).then((res) => res.json());
-
+  const cakes = await getCakes(params.id);
   const user = await getUser(params.id);
   const loginUser = await getCurrentUser();
 
