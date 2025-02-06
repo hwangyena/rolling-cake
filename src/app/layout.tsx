@@ -1,7 +1,6 @@
 import ClientOnly from '@/components/ClientOnly';
 import Store from '@/components/Store';
 import { GoogleAnalytics } from '@next/third-parties/google';
-import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Metadata } from 'next';
 import { PropsWithChildren } from 'react';
@@ -54,7 +53,6 @@ export default function RootLayout({ children }: PropsWithChildren) {
       </body>
 
       <GoogleAnalytics gaId="G-ERYF8E3XGX" />
-      <Analytics />
     </html>
   );
 }

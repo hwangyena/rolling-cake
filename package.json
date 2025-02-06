@@ -16,7 +16,6 @@
     "@eslint/eslintrc": "^3.0.0",
     "@eslint/js": "^8.56.0",
     "@next-auth/prisma-adapter": "^1.0.7",
-    "@next/third-parties": "^15.1.6",
     "@prisma/client": "5.9.0",
     "@vercel/analytics": "^1.4.1",
     "@vercel/speed-insights": "^1.1.0",
