@@ -12,6 +12,7 @@ export async function getCake(cakeId: string) {
 
     return cake;
   } catch (error) {
+    //FIXME: error handling
     return null;
   }
 }

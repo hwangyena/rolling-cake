@@ -1,8 +1,6 @@
 import ClientOnly from '@/components/ClientOnly';
 import Store from '@/components/Store';
 import { GoogleAnalytics } from '@next/third-parties/google';
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Metadata } from 'next';
 import { PropsWithChildren } from 'react';
 
@@ -14,30 +12,51 @@ export const metadata: Metadata = {
   applicationName: 'Rolling cake',
   referrer: 'origin-when-cross-origin',
   keywords: [
-    'rollincake',
+    'rollingcake',
     'rolling',
     'cake',
     'paper',
+    'rollingpaper',
     '롤링케이크',
     '롤링',
     '케이크',
     '페이퍼',
-    '롤리페이퍼',
-    '크리스마스',
-    '선물',
+    '롤링페이퍼',
   ],
-  creator: 'Hwang yena',
-  publisher: 'Hwang yena',
+  creator: 'yena',
+  publisher: 'yena',
   appleWebApp: {
     title: '롤링케이크',
+    statusBarStyle: 'black-translucent',
   },
   openGraph: {
     title: '롤링케이크',
     description: '내 롤링케이크...써줄래?',
-    url: `https://${process.env.AWS_S3_URL}/thumbnail.png`,
+    url: `https://${process.env.NEXTAUTH_URL}`,
     siteName: '롤링케이크',
-    images: `https://${process.env.AWS_S3_URL}/thumbnail.png`,
+    images: [
+      {
+        url: `https://${process.env.AWS_S3_URL}/thumbnail.png`,
+        width: 1200,
+        height: 630,
+        alt: '롤링케이크 thumbnail',
+      },
+    ],
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '롤링케이크',
+    description: '내 롤링케이크... 써줄래?',
+    images: `https://${process.env.AWS_S3_URL}/thumbnail.png`,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  // themeColor: '#FFB6C1', // 브랜드 색상에 맞게 조정
+  alternates: {
+    canonical: process.env.NEXTAUTH_URL,
   },
 };
 
@@ -47,14 +66,12 @@ export default function RootLayout({ children }: PropsWithChildren) {
       <body className="relative mx-auto my-0 max-w-[480px]">
         {children}
 
-        <SpeedInsights />
         <ClientOnly>
           <Store />
         </ClientOnly>
       </body>
 
       <GoogleAnalytics gaId="G-ERYF8E3XGX" />
-      <Analytics />
     </html>
   );
 }
