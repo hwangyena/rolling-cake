@@ -3,6 +3,8 @@ import { getCake } from '@/service/server/cake';
 import { getCurrentUser, getUser } from '@/service/server/user';
 import { notFound } from 'next/navigation';
 
+import 'server-only';
+
 import LetterClient from './LetterClient';
 
 export default async function CakeDetail({ params }: { params: { id: string } }) {

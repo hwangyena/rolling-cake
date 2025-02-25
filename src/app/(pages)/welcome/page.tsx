@@ -2,11 +2,13 @@ import GradientContainer from '@/components/GradientContainer';
 import Cake from '@/components/cake/Cake';
 import { Metadata } from 'next';
 
-import WelcomeClient from './WelcomeClient';
+import 'server-only';
 
 import { getCurrentUser } from '@service/server/user';
 
 import ClientOnly from '@components/ClientOnly';
+
+import { WelcomePopup } from './_components';
 
 export const metadata: Metadata = {
   title: 'Welcome!',
@@ -22,8 +24,9 @@ export default async function Welcome() {
         <Cake className="aspect-square w-[100%]" />
       </div>
 
+      {/* FIXME: jotai 걷어내기 */}
       <ClientOnly>
-        <WelcomeClient user={user} />
+        <WelcomePopup user={user!} />
       </ClientOnly>
     </GradientContainer>
   );

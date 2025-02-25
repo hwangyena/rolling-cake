@@ -3,14 +3,18 @@ import Navigation from '@/components/common/Navigation';
 import { getCurrentUser, getUser } from '@/service/server/user';
 import { notFound } from 'next/navigation';
 
+import 'server-only';
+
 import EmptyCakeClient from './EmptyCakeClient';
 import HaveCakeClient from './HaveCakeClient';
 import { getCakes } from './_lib';
 
 export default async function CakePage({ params }: { params: { id: string } }) {
-  const cakes = await getCakes(params.id);
-  const user = await getUser(params.id);
-  const loginUser = await getCurrentUser();
+  const [cakes, user, loginUser] = await Promise.all([
+    getCakes(params.id),
+    getUser(params.id),
+    getCurrentUser(),
+  ]);
 
   if (!user) {
     return notFound();

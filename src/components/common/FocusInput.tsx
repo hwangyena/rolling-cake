@@ -5,7 +5,7 @@ import { useAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 
-import Button from './Button';
+import { SmallButton } from './Button';
 
 const FocusInput = () => {
   const [value, dispatch] = useAtom(focusInputAtom);
@@ -47,17 +47,17 @@ const FocusInput = () => {
           </span>
         </section>
         <section className="mt-12 flex items-center justify-center gap-5">
-          <Button.SmallButton color="gray" onClick={() => dispatch(null)}>
+          <SmallButton color="gray" onClick={() => dispatch(null)}>
             취소
-          </Button.SmallButton>
-          <Button.SmallButton
+          </SmallButton>
+          <SmallButton
             color="green"
             onClick={() => {
               value?.onConfirm && value.onConfirm(text);
               dispatch(null);
             }}>
             확인
-          </Button.SmallButton>
+          </SmallButton>
         </section>
       </div>
 

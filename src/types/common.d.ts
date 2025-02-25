@@ -30,3 +30,5 @@ type Filter = {
   label: string;
   value: string;
 };
+
+type Nullable<T> = T | undefined | null;

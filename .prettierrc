@@ -10,12 +10,13 @@
   "tabWidth": 2,
 
   "importOrder": [
-    "^[./]",
+    "^server-only$",
     "^@app/(.*)$",
     "^@service/(.*)$",
     "^@components/(.*)$",
     "^@lib/(.*)$",
-    ".css$"
+    ".css$",
+    "^[./]"
   ],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,
