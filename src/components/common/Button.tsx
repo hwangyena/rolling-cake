@@ -17,7 +17,6 @@ const Button = ({ children, onClick, ...props }: NativeButtonProps) => {
   const lock = useRef(false);
 
   const handleClick = (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
-    e.preventDefault();
     e.stopPropagation();
 
     if (lock.current) {

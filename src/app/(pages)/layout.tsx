@@ -4,7 +4,7 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 import { Metadata } from 'next';
 import { PropsWithChildren } from 'react';
 
-import '../global.css';
+import '../../global.css';
 
 export const metadata: Metadata = {
   title: '롤링케이크',
