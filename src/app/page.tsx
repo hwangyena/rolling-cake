@@ -4,6 +4,8 @@ import { getCurrentUser } from '@/service/server/user';
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
 
+import 'server-only';
+
 import HomeClient from './HomeClient';
 
 export default async function Home() {
@@ -19,6 +21,7 @@ export default async function Home() {
       type="greenPink"
       className="full-screen flex flex-col items-center gap-7 px-5">
       <div className="relative mt-[7vh] h-[23%] w-full">
+        {/* FIXME: width, height 추가 */}
         <Image src="/images/logo.png" fill alt="logo" priority />
       </div>
       <div className="relative h-[50%] w-[95%]">
@@ -30,7 +33,7 @@ export default async function Home() {
         </ClientOnly>
 
         <p className="mt-3 font-neo text-b3 text-gray-700">
-          Copyright 2024. Team Planet. all rights reserved.
+          Copyright 2025. Team Planet. all rights reserved.
         </p>
       </footer>
     </GradientContainer>

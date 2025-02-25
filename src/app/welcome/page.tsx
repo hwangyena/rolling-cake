@@ -2,11 +2,13 @@ import GradientContainer from '@/components/GradientContainer';
 import Cake from '@/components/cake/Cake';
 import { Metadata } from 'next';
 
-import WelcomeClient from './WelcomeClient';
+import 'server-only';
 
 import { getCurrentUser } from '@service/server/user';
 
 import ClientOnly from '@components/ClientOnly';
+
+import WelcomeClient from './WelcomeClient';
 
 export const metadata: Metadata = {
   title: 'Welcome!',
