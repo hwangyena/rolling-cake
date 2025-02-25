@@ -1,4 +1,3 @@
-import ClientOnly from '@/components/ClientOnly';
 import GradientContainer from '@/components/GradientContainer';
 import { getCurrentUser } from '@/service/server/user';
 import Image from 'next/image';
@@ -6,7 +5,9 @@ import { redirect } from 'next/navigation';
 
 import 'server-only';
 
-import HomeClient from './HomeClient';
+import WaveTitle from '@components/style/WaveTitle';
+
+import { AlertPopup, BottomButton } from './_components';
 
 export default async function Home() {
   const user = await getCurrentUser();
@@ -28,9 +29,12 @@ export default async function Home() {
         <Image src="/images/main-cake.png" fill alt="cake" priority />
       </div>
       <footer className="absolute bottom-0 w-full p-5 text-center">
-        <ClientOnly>
-          <HomeClient user={user} />
-        </ClientOnly>
+        <div className="mb-10 flex justify-center">
+          <WaveTitle />
+        </div>
+
+        <BottomButton user={user} />
+        <AlertPopup user={user} />
 
         <p className="mt-3 font-neo text-b3 text-gray-700">
           Copyright 2025. Team Planet. all rights reserved.
