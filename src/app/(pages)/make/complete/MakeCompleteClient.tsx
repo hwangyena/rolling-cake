@@ -1,6 +1,6 @@
 'use client';
 
-import { useAtom, useSetAtom } from 'jotai';
+import { useAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useRef } from 'react';
 
@@ -15,17 +15,18 @@ import Confetti from '@components/style/Confetti';
 
 import { useErrorPopup } from '@lib/hooks/common';
 import { useStep } from '@lib/hooks/make';
-import { popupAtom, userIdStore } from '@lib/store';
+import { usePopup } from '@lib/provider/PopupProvider';
+import { userIdStore } from '@lib/store';
 
 export default function MakeCompleteClient() {
   const router = useRouter();
-
+  const popup = usePopup();
   const [userId] = useAtom(userIdStore);
+
   const { store, onResetCake } = useStep();
   const { trigger, data, isMutating } = useCreateCake();
 
   const { showError } = useErrorPopup(() => router.replace('/make?step=sheet'));
-  const dispatchPopup = useSetAtom(popupAtom);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -35,7 +36,7 @@ export default function MakeCompleteClient() {
     }
 
     if (!userId) {
-      dispatchPopup({
+      popup.show({
         title: '앗, 오류가 생겼어요.',
         content: '일시적인 오류일 수 있어요.\n잠시 후 다시 시도해주세요.',
         hideCancel: true,
@@ -43,7 +44,7 @@ export default function MakeCompleteClient() {
       });
       return;
     }
-  }, [dispatchPopup, store, router, isMutating, data, userId]);
+  }, [popup, store, router, isMutating, data, userId]);
 
   const onCreate = useCallback(async () => {
     const { shape, letter, ...cake } = store;

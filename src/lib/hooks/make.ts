@@ -1,9 +1,11 @@
 import { CUSTOM_STEP, CUSTOM_STEP_STORE } from '@/lib/constant';
-import { makeAtom, popupAtom } from '@/lib/store';
+import { makeAtom } from '@/lib/store';
 import { isObject } from '@/lib/utils';
 import { useAtom, useSetAtom } from 'jotai';
 import { notFound, usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { startTransition, useCallback, useLayoutEffect, useMemo } from 'react';
+
+import { usePopup } from '@lib/provider/PopupProvider';
 
 export const useStep = () => {
   const router = useRouter();
@@ -72,28 +74,27 @@ export const useStep = () => {
 export const useBlock = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const popup = usePopup();
 
-  const dispatch = useSetAtom(popupAtom);
   const dispatchMakeAtom = useSetAtom(makeAtom);
 
   const isFirst = useMemo(() => searchParams?.get('step') === 'sheet', [searchParams]);
 
   const onBackClicked = useCallback(() => {
     if (isFirst) {
-      dispatch({
+      popup.show({
         title: '케이크 만들기를 그만하시겠어요?',
         content: '페이지에서 나가면 그동안의 작업은 저장되지 않아요.\n정말 그만하시겠어요?',
         onConfirm() {
           router.back();
           dispatchMakeAtom(CUSTOM_STEP_STORE);
-          dispatch(null);
         },
       });
       return;
     }
 
     router.back();
-  }, [dispatch, dispatchMakeAtom, isFirst, router]);
+  }, [dispatchMakeAtom, isFirst, popup, router]);
 
   return { onBackClicked };
 };

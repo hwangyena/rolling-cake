@@ -4,6 +4,8 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 import { Metadata } from 'next';
 import { PropsWithChildren } from 'react';
 
+import { PopupProvider } from '@lib/provider/PopupProvider';
+
 import '../../global.css';
 
 export const metadata: Metadata = {
@@ -64,7 +66,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="ko">
       <body className="relative mx-auto my-0 max-w-[480px]">
-        {children}
+        <PopupProvider>{children}</PopupProvider>
 
         <ClientOnly>
           <Store />

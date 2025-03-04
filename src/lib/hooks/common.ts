@@ -1,6 +1,6 @@
-import { popupAtom } from '@/lib/store';
-import { useSetAtom } from 'jotai';
 import { useCallback, useEffect, useRef, useState } from 'react';
+
+import { usePopup } from '@lib/provider/PopupProvider';
 
 type EventType = '';
 
@@ -20,15 +20,15 @@ export const useEvent = (key: EventType, callback?: () => void) => {
 };
 
 export const useErrorPopup = (callback?: () => void) => {
-  const popupDispatch = useSetAtom(popupAtom);
+  const popup = usePopup();
 
   const showError = () => {
-    popupDispatch({
+    popup.show({
       title: '앗, 오류가 생겼어요.',
       content: '일시적인 오류일 수 있어요. 잠시 후 다시 시도해주세요.',
       onConfirm: () => {
         callback && callback();
-        popupDispatch(null);
+        popup.hide();
       },
     });
   };
