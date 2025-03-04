@@ -3,9 +3,6 @@ import { atomWithStorage, createJSONStorage } from 'jotai/utils';
 
 import { CUSTOM_STEP_STORE } from './constant';
 
-/** Common */
-export const snackBarAtom = atom<Snackbar | null>(null);
-
 /** Step */
 export const stepValidAtom = atom(false);
 

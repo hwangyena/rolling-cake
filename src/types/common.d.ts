@@ -5,10 +5,6 @@ type CustomPopup = {
   onConfirm: () => void;
 };
 
-type Snackbar = {
-  text: string;
-};
-
 type Filter = {
   label: string;
   value: string;
