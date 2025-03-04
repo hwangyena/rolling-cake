@@ -4,7 +4,7 @@ import { popupStore } from '@/lib/store';
 import { useAtom } from 'jotai';
 import { useCallback } from 'react';
 
-import Button from './Button';
+import { SmallButton } from './Button';
 
 const Popup = () => {
   const [store, setStore] = useAtom(popupStore);
@@ -39,13 +39,13 @@ const Popup = () => {
         </section>
         <section className={hideCancel ? 'flex justify-center' : 'flex justify-evenly'}>
           {!hideCancel && (
-            <Button.SmallButton color="gray" onClick={onCancelClicked}>
+            <SmallButton color="gray" onClick={onCancelClicked}>
               취소
-            </Button.SmallButton>
+            </SmallButton>
           )}
-          <Button.SmallButton color="green" onClick={onConfirmClicked}>
+          <SmallButton color="green" onClick={onConfirmClicked}>
             확인
-          </Button.SmallButton>
+          </SmallButton>
         </section>
         {bottomNode}
       </div>
