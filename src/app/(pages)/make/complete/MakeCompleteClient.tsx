@@ -6,7 +6,7 @@ import { useCallback, useEffect, useRef } from 'react';
 
 import { useCreateCake } from '@service/client/cake';
 
-import Button from '@components/common/Button';
+import { BigButton } from '@components/common/Button';
 import Header from '@components/common/Header';
 import Loading from '@components/common/Loading';
 import Navigation from '@components/common/Navigation';
@@ -95,18 +95,18 @@ export default function MakeCompleteClient() {
       <section className="mb-3 flex min-h-[120px] w-full flex-col items-center justify-end gap-3 px-5">
         {data ? (
           <>
-            <Button.BigButton style={{ zIndex: 10 }} onClick={onListClicked}>
+            <BigButton style={{ zIndex: 10 }} onClick={onListClicked}>
               케이크 진열대로 이동하기
-            </Button.BigButton>
-            <Button.BigButton color="white" style={{ zIndex: 10 }} onClick={onLoginClicked}>
+            </BigButton>
+            <BigButton color="white" style={{ zIndex: 10 }} onClick={onLoginClicked}>
               나도 케이크 링크 만들러가기
-            </Button.BigButton>
+            </BigButton>
           </>
         ) : (
           <>
-            <Button.BigButton style={{ zIndex: 10 }} onClick={onCreate}>
+            <BigButton style={{ zIndex: 10 }} onClick={onCreate}>
               내 케이크 선물하기
-            </Button.BigButton>
+            </BigButton>
             <span className="text-cap text-gray-800">선물한 케이크는 수정이 불가해요.</span>
           </>
         )}

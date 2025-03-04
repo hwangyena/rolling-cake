@@ -3,6 +3,8 @@ import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import { User } from '@prisma/client';
 import { Session, getServerSession } from 'next-auth';
 
+import 'server-only';
+
 export async function getUser(userId: string) {
   try {
     const user = await prisma.user.findUnique({

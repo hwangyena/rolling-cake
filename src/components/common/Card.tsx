@@ -1,4 +1,4 @@
-import Button from '@/components/common/Button';
+import { SmallButton } from '@/components/common/Button';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { PropsWithChildren, memo } from 'react';
@@ -34,9 +34,9 @@ const Card = ({ children, button, hasDesign, content, className }: PropsWithChil
       <article className="z-10 flex flex-col items-center gap-2">
         <h1 className={`text-t1 font-bold text-gray-700 ${button ? '' : 'mb-4'}`}>{content}</h1>
         {button && (
-          <Button.SmallButton color="red" onClick={button.onButtonClicked}>
+          <SmallButton color="red" onClick={button.onButtonClicked}>
             {button.label}
-          </Button.SmallButton>
+          </SmallButton>
         )}
       </article>
       {hasDesign && <CardDesign />}

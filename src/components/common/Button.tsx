@@ -5,7 +5,6 @@ import {
   DetailedHTMLProps,
   MouseEvent,
   PropsWithChildren,
-  memo,
   useRef,
 } from 'react';
 
@@ -18,7 +17,6 @@ const Button = ({ children, onClick, ...props }: NativeButtonProps) => {
   const lock = useRef(false);
 
   const handleClick = (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
-    e.preventDefault();
     e.stopPropagation();
 
     if (lock.current) {
@@ -47,7 +45,7 @@ type Props = NativeButtonProps & {
   color?: 'red' | 'green' | 'gray' | 'white';
 };
 
-const SmallButton = ({ color, ...props }: PropsWithChildren<Props>) => {
+export const SmallButton = ({ color, ...props }: PropsWithChildren<Props>) => {
   return (
     <Button
       className={`small-button flex h-10 shrink-0 items-center justify-center gap-2 rounded-[40px] border border-black px-[31px] py-[10px] text-gray-800 ${color}`}
@@ -55,16 +53,12 @@ const SmallButton = ({ color, ...props }: PropsWithChildren<Props>) => {
   );
 };
 
-const BigButton = ({ color, ...props }: PropsWithChildren<Props>) => {
+export const BigButton = ({ color, ...props }: PropsWithChildren<Props>) => {
   return (
     <Button
       className={`flex w-full shrink-0 items-center justify-center gap-4 rounded-lg border-2 border-black bg-pink-200 p-4 text-btn font-bold text-white shadow-button hover:bg-pink-300 disabled:cursor-auto disabled:bg-gray-500 disabled:opacity-60 ${color}`}
       {...props}></Button>
   );
 };
-
-Button.SmallButton = memo(SmallButton);
-Button.BigButton = memo(BigButton);
-// const ButtonMemo = memo(Button);
 
 export default Button;

@@ -1,5 +1,7 @@
 import prisma from '@/lib/prismadb';
 
+import 'server-only';
+
 export async function getCake(cakeId: string) {
   try {
     const cake = await prisma.cake.findUnique({

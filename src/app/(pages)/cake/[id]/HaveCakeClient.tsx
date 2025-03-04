@@ -1,7 +1,7 @@
 'use client';
 
 import Cake from '@/components/cake/Cake';
-import Button from '@/components/common/Button';
+import { BigButton } from '@/components/common/Button';
 import Header from '@/components/common/Header';
 import Tag from '@/components/common/Tag';
 import Lock from '@/components/style/Lock';
@@ -68,7 +68,7 @@ export default function HaveCakeClient({ cakes, user, isOwn }: Props) {
       {!isOwn && (
         <section
           className={'white-gradient absolute bottom-0 z-30 w-full px-[25px] pb-[20px] pt-[45px]'}>
-          <Button.BigButton onClick={onButtonClicked}>롤링케이크 만들어주기</Button.BigButton>
+          <BigButton onClick={onButtonClicked}>롤링케이크 만들어주기</BigButton>
         </section>
       )}
     </div>
