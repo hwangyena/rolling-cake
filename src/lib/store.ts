@@ -4,12 +4,6 @@ import { atomWithStorage, createJSONStorage } from 'jotai/utils';
 import { CUSTOM_STEP_STORE } from './constant';
 
 /** Common */
-export const focusInputAtom = atom<FocusInput | null>(null);
-export const focusInputStore = atom<FocusInput | null, [FocusInput | null], void>(
-  (get) => get(focusInputAtom),
-  (_get, set, action) => set(focusInputAtom, action),
-);
-
 export const snackBarAtom = atom<Snackbar | null>(null);
 
 /** Step */

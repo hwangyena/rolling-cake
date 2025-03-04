@@ -1,35 +1,41 @@
 'use client';
 
-import { focusInputAtom } from '@/lib/store';
-import { useAtom } from 'jotai';
-import { useEffect, useState } from 'react';
+import { memo, useState } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 
 import { SmallButton } from './Button';
 
-const FocusInput = () => {
-  const [value, dispatch] = useAtom(focusInputAtom);
+export type FocusInput = {
+  label: string;
+  maxLength: number;
+  onConfirm: (value: string) => Promise<void>;
+  onCancel: () => void;
+  defaultValue?: string;
+  autoSize?: boolean;
+};
 
-  const [text, setText] = useState('');
-
-  useEffect(() => {
-    if (value?.defaultValue) {
-      setText(value.defaultValue);
-    }
-  }, [value]);
+const FocusInput = ({
+  label,
+  autoSize,
+  defaultValue,
+  maxLength,
+  onConfirm,
+  onCancel,
+}: FocusInput) => {
+  const [text, setText] = useState(defaultValue ?? '');
 
   return (
     <div className="absolute left-0 top-0 h-full w-full">
       <div className="relative z-50 mt-[30%]">
         <section className="flex flex-col items-center gap-4 px-[5%] text-white">
-          <h4 className="text-b2 text-white">{value?.label}</h4>
-          {value?.autoSize ? (
+          <h4 className="text-b2 text-white">{label}</h4>
+          {autoSize ? (
             <TextareaAutosize
               rows={1}
               value={text}
               className="focus-input overflow-hidden"
               onChange={(e) => {
-                setText(e.target.value.slice(0, value?.maxLength));
+                setText(e.target.value.slice(0, maxLength));
               }}
             />
           ) : (
@@ -38,23 +44,23 @@ const FocusInput = () => {
               value={text}
               className="focus-input"
               onChange={(e) => {
-                setText(e.target.value.slice(0, value?.maxLength));
+                setText(e.target.value.slice(0, maxLength));
               }}
             />
           )}
           <span className="text-b3">
-            {text.length}/{value?.maxLength}
+            {text.length}/{maxLength}
           </span>
         </section>
         <section className="mt-12 flex items-center justify-center gap-5">
-          <SmallButton color="gray" onClick={() => dispatch(null)}>
+          <SmallButton color="gray" onClick={onCancel}>
             취소
           </SmallButton>
           <SmallButton
             color="green"
             onClick={() => {
-              value?.onConfirm && value.onConfirm(text);
-              dispatch(null);
+              onConfirm(text);
+              onCancel();
             }}>
             확인
           </SmallButton>
@@ -66,4 +72,4 @@ const FocusInput = () => {
   );
 };
 
-export default FocusInput;
+export default memo(FocusInput);

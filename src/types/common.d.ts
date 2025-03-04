@@ -5,14 +5,6 @@ type CustomPopup = {
   onConfirm: () => void;
 };
 
-type FocusInput = {
-  maxLength?: number;
-  label?: string;
-  defaultValue?: string;
-  autoSize?: boolean;
-  onConfirm?: (value: string) => Promise<void>;
-};
-
 type Snackbar = {
   text: string;
 };
