@@ -1,8 +1,8 @@
 import { useDebounce } from '@/lib/hooks/common';
 import { useStep } from '@/lib/hooks/make';
-import { stepValidAtom } from '@/lib/store';
-import { useSetAtom } from 'jotai';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+
+import { useStepValidation } from '@app/(pages)/make/_lib';
 
 import Lock from '../style/Lock';
 import ShadowCard from '../style/ShadowCard';
@@ -12,7 +12,7 @@ const StepLetter = () => {
     store: { letter },
     onStoreUpdate,
   } = useStep();
-  const dispatchValid = useSetAtom(stepValidAtom);
+  const validation = useStepValidation();
 
   const [name, setName] = useState('');
   const [content, setContent] = useState('');
@@ -68,12 +68,12 @@ const StepLetter = () => {
   // next button disabled
   useEffect(() => {
     if (!name || !content) {
-      dispatchValid(true);
+      validation.invalidate();
       return;
     }
 
-    dispatchValid(false);
-  }, [name, content, dispatchValid]);
+    validation.validate();
+  }, [name, content, validation]);
 
   const handleToggleLock = () => {
     setLock((p) => !p);

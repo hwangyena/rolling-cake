@@ -1,8 +1,5 @@
 import { atom } from 'jotai';
 
-/** Step */
-export const stepValidAtom = atom(false);
-
 /** UserId */
 const LOCAL_USER_ID = 'rolling-cake:userId';
 const userIdAtom = atom(localStorage.getItem(LOCAL_USER_ID));
