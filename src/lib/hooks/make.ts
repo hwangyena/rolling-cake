@@ -3,20 +3,27 @@ import { isObject } from '@/lib/utils';
 import { notFound, usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { startTransition, useCallback, useLayoutEffect, useMemo } from 'react';
 
-import { useStepStore } from '@app/(pages)/make/_lib';
+import { useStepStore } from '@app/(pages)/make/_provider';
 
 import { usePopup } from '@lib/provider/PopupProvider';
+
+// for letter page
+export const useCurrentStep = () => {
+  const searchParams = useSearchParams();
+  const step = useMemo(
+    () => (searchParams ? (searchParams.get('step') as keyof CustomCake) : null),
+    [searchParams],
+  );
+  return step;
+};
 
 export const useStep = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
+  const step = useCurrentStep();
   const { step: store, dispatch, reset } = useStepStore();
 
-  const step = useMemo(
-    () => (searchParams ? (searchParams.get('step') as keyof CustomCake) : null),
-    [searchParams],
-  ); // 현재 step
   const stepData = useMemo(() => (step ? CUSTOM_STEP[step] : null), [step]); // 현재 step data
   const order = useMemo(() => Object.keys(CUSTOM_STEP).findIndex((key) => key === step), [step]);
 
