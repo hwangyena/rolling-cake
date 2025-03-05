@@ -3,7 +3,7 @@ import { isObject } from '@/lib/utils';
 import { notFound, usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { startTransition, useCallback, useLayoutEffect, useMemo } from 'react';
 
-import { useStepStore } from '@app/(pages)/make/_provider';
+import { useStepStore } from '@app/(pages)/make/[userId]/_provider';
 
 import { usePopup } from '@lib/provider/PopupProvider';
 
@@ -31,7 +31,7 @@ export const useStep = () => {
   useLayoutEffect(() => {
     const params = searchParams?.get('step');
 
-    if (!pathname?.includes('/make') || pathname === '/make/complete') {
+    if (!pathname?.includes('/make') || pathname.includes('complete')) {
       return;
     }
 

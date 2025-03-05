@@ -1,10 +1,10 @@
 'use client';
 
 import { useBlock, useStep } from '@/lib/hooks/make';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { useCallback, useMemo } from 'react';
 
-import { useStepValidation } from '@app/(pages)/make/_provider';
+import { useStepValidation } from '@app/(pages)/make/[userId]/_provider';
 
 import { CUSTOM_STEP } from '@lib/constant';
 
@@ -29,6 +29,7 @@ export const LayoutHeader = () => {
 
 export const LayoutFooter = () => {
   const router = useRouter();
+  const params = useParams<{ userId: string }>();
   const validation = useStepValidation();
   const { onBackClicked } = useBlock();
   const { step, stepData } = useStep();
@@ -39,12 +40,12 @@ export const LayoutFooter = () => {
   );
   const onNextClicked = useCallback(() => {
     if (stepData?.next === 'complete') {
-      router.push(`/make/complete`);
+      router.push(`/make/${params?.userId}/complete`);
       return;
     }
 
-    router.push(`/make?step=${stepData?.next}`);
-  }, [stepData, router]);
+    router.push(`/make/${params?.userId}?step=${stepData?.next}`);
+  }, [stepData?.next, router, params]);
 
   return (
     <footer className="mb-5 flex w-full justify-between p-3">

@@ -1,6 +1,5 @@
 'use client';
 
-import { useAtom } from 'jotai';
 import { notFound } from 'next/navigation';
 
 import Step from '@components/common/Step';
@@ -8,11 +7,9 @@ import StepCommon from '@components/make/StepCommon';
 import StepLetter from '@components/make/StepLetter';
 
 import { useStep } from '@lib/hooks/make';
-import { userIdStore } from '@lib/store';
 
-export default function MakeCakeClient() {
+export default function MakeCakeClient({ userId }: { userId: string }) {
   const { step } = useStep();
-  const [userId] = useAtom(userIdStore);
 
   if (!userId || !step) {
     return notFound();

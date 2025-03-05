@@ -2,7 +2,7 @@ import { useDebounce } from '@/lib/hooks/common';
 import { useStep } from '@/lib/hooks/make';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
-import { useStepValidation } from '@app/(pages)/make/_provider';
+import { useStepValidation } from '@app/(pages)/make/[userId]/_provider';
 
 import Lock from '../style/Lock';
 import ShadowCard from '../style/ShadowCard';
