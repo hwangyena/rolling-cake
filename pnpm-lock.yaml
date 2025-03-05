@@ -31,9 +31,6 @@ dependencies:
   dotenv:
     specifier: ^16.4.1
     version: 16.4.1
-  jotai:
-    specifier: ^2.6.3
-    version: 2.6.3(@types/react@18.2.48)(react@18.3.1)
   leva:
     specifier: ^0.9.35
     version: 0.9.35(@types/react-dom@18.3.5)(@types/react@18.2.48)(react-dom@18.2.0)(react@18.3.1)
@@ -4332,22 +4329,6 @@ packages:
 
   /jose@4.15.9:
     resolution: {integrity: sha512-1vUQX+IdDMVPj4k8kOxgUqlcK518yluMuGZwqlr44FS1ppZB/5GWh4rZG89erpOBOJjU/OBsnCVFfapsRz6nEA==}
-    dev: false
-
-  /jotai@2.6.3(@types/react@18.2.48)(react@18.3.1):
-    resolution: {integrity: sha512-0htSJ2d6426ZdSEYHncJHXY6Lkgde1Hc2HE/ADIRi9d2L3hQL+jLKY1LkWBMeCNyOSlKH8+1u/Gc33Ox0uq21Q==}
-    engines: {node: '>=12.20.0'}
-    peerDependencies:
-      '@types/react': '>=17.0.0'
-      react: '>=17.0.0'
-    peerDependenciesMeta:
-      '@types/react':
-        optional: true
-      react:
-        optional: true
-    dependencies:
-      '@types/react': 18.2.48
-      react: 18.3.1
     dev: false
 
   /js-tokens@4.0.0:

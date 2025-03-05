@@ -24,7 +24,6 @@ export default async function Welcome() {
         <Cake className="aspect-square w-[100%]" />
       </div>
 
-      {/* FIXME: jotai 걷어내기 */}
       <ClientOnly>
         <WelcomePopup user={user!} />
       </ClientOnly>
