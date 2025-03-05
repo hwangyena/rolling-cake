@@ -1,9 +1,9 @@
-import { CUSTOM_STEP, CUSTOM_STEP_STORE } from '@/lib/constant';
-import { makeAtom } from '@/lib/store';
+import { CUSTOM_STEP } from '@/lib/constant';
 import { isObject } from '@/lib/utils';
-import { useAtom, useSetAtom } from 'jotai';
 import { notFound, usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { startTransition, useCallback, useLayoutEffect, useMemo } from 'react';
+
+import { useStepStore } from '@app/(pages)/make/_lib';
 
 import { usePopup } from '@lib/provider/PopupProvider';
 
@@ -11,14 +11,13 @@ export const useStep = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
-
-  const [store, dispatch] = useAtom(makeAtom);
+  const { step: store, dispatch, reset } = useStepStore();
 
   const step = useMemo(
     () => (searchParams ? (searchParams.get('step') as keyof CustomCake) : null),
     [searchParams],
-  );
-  const stepData = useMemo(() => (step ? CUSTOM_STEP[step] : null), [step]);
+  ); // 현재 step
+  const stepData = useMemo(() => (step ? CUSTOM_STEP[step] : null), [step]); // 현재 step data
   const order = useMemo(() => Object.keys(CUSTOM_STEP).findIndex((key) => key === step), [step]);
 
   // make 페이지에서 step을 찾을 수 없을때
@@ -37,8 +36,8 @@ export const useStep = () => {
   }, [pathname, router, searchParams]);
 
   const onResetCake = useCallback(() => {
-    dispatch(CUSTOM_STEP_STORE);
-  }, [dispatch]);
+    reset();
+  }, [reset]);
 
   const onStoreUpdate = useCallback(
     (value: Record<string, unknown> | string) => {
@@ -75,8 +74,7 @@ export const useBlock = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const popup = usePopup();
-
-  const dispatchMakeAtom = useSetAtom(makeAtom);
+  const step = useStepStore();
 
   const isFirst = useMemo(() => searchParams?.get('step') === 'sheet', [searchParams]);
 
@@ -87,14 +85,14 @@ export const useBlock = () => {
         content: '페이지에서 나가면 그동안의 작업은 저장되지 않아요.\n정말 그만하시겠어요?',
         onConfirm() {
           router.back();
-          dispatchMakeAtom(CUSTOM_STEP_STORE);
+          step.reset();
         },
       });
       return;
     }
 
     router.back();
-  }, [dispatchMakeAtom, isFirst, popup, router]);
+  }, [isFirst, popup, router, step]);
 
   return { onBackClicked };
 };

@@ -1,17 +1,7 @@
 import { atom } from 'jotai';
-import { atomWithStorage, createJSONStorage } from 'jotai/utils';
-
-import { CUSTOM_STEP_STORE } from './constant';
 
 /** Step */
 export const stepValidAtom = atom(false);
-
-const storage = createJSONStorage<CustomCake>(() => sessionStorage);
-export const makeAtom = atomWithStorage<CustomCake>(
-  'rolling-cake:make',
-  CUSTOM_STEP_STORE,
-  storage,
-);
 
 /** UserId */
 const LOCAL_USER_ID = 'rolling-cake:userId';
