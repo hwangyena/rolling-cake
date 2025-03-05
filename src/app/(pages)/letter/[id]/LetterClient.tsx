@@ -3,12 +3,12 @@
 import Card from '@/components/common/Card';
 import Header from '@/components/common/Header';
 import Model from '@/components/model/Model';
-import { popupAtom } from '@/lib/store';
 import { cn } from '@/lib/utils';
 import { Cake as CakeType, User } from '@prisma/client';
-import { useSetAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
 import { ComponentProps, useCallback, useMemo, useState } from 'react';
+
+import { usePopup } from '@lib/provider/PopupProvider';
 
 type Props = CakeType & {
   user: User;
@@ -25,22 +25,22 @@ export default function LetterClient({
   themeCake,
 }: Props) {
   const router = useRouter();
-  const [isCake, setIsCake] = useState(true);
+  const popup = usePopup();
 
-  const dispatch = useSetAtom(popupAtom);
+  const [isCake, setIsCake] = useState(true);
 
   const onToggleCake = useCallback(() => {
     const isCakeOwner = currentUser && user.id === currentUser.id;
 
     if (isPrivate && !isCakeOwner) {
-      dispatch({
+      popup.show({
         title: `비밀 케이크는\n받은 사람만 볼 수 있어요`,
         hideCancel: true,
         bottomNode: (
           <p
             onClick={() => {
               router.push('/');
-              dispatch(null);
+              popup.hide();
             }}
             className="mt-5 text-b3 text-gray-800 underline">{`롤링케이크 주인이라면? 로그인 하고 읽기>`}</p>
         ),
@@ -49,7 +49,7 @@ export default function LetterClient({
     }
 
     setIsCake((p) => !p);
-  }, [currentUser, dispatch, isPrivate, router, user]);
+  }, [currentUser, isPrivate, popup, router, user.id]);
 
   const cardProps: ComponentProps<typeof Card> = useMemo(
     () => ({

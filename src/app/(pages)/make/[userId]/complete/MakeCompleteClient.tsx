@@ -1,8 +1,7 @@
 'use client';
 
-import { useAtom, useSetAtom } from 'jotai';
-import { useRouter } from 'next/navigation';
-import { useCallback, useEffect, useRef } from 'react';
+import { useParams, useRouter } from 'next/navigation';
+import { useCallback, useRef } from 'react';
 
 import { useCreateCake } from '@service/client/cake';
 
@@ -15,39 +14,39 @@ import Confetti from '@components/style/Confetti';
 
 import { useErrorPopup } from '@lib/hooks/common';
 import { useStep } from '@lib/hooks/make';
-import { popupAtom, userIdStore } from '@lib/store';
 
 export default function MakeCompleteClient() {
   const router = useRouter();
+  const params = useParams<{ userId: string }>();
 
-  const [userId] = useAtom(userIdStore);
   const { store, onResetCake } = useStep();
   const { trigger, data, isMutating } = useCreateCake();
 
   const { showError } = useErrorPopup(() => router.replace('/make?step=sheet'));
-  const dispatchPopup = useSetAtom(popupAtom);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  useEffect(() => {
-    if (isMutating || data) {
-      return;
-    }
+  // FIXME: 왜 필요한 코드인지?
+  // useEffect(() => {
+  //   if (isMutating || data) {
+  //     return;
+  //   }
 
-    if (!userId) {
-      dispatchPopup({
-        title: '앗, 오류가 생겼어요.',
-        content: '일시적인 오류일 수 있어요.\n잠시 후 다시 시도해주세요.',
-        hideCancel: true,
-        onConfirm: () => router.push('/'),
-      });
-      return;
-    }
-  }, [dispatchPopup, store, router, isMutating, data, userId]);
+  //   if (!userId) {
+  //     popup.show({
+  //       title: '앗, 오류가 생겼어요.',
+  //       content: '일시적인 오류일 수 있어요.\n잠시 후 다시 시도해주세요.',
+  //       hideCancel: true,
+  //       onConfirm: () => router.push('/'),
+  //     });
+  //     return;
+  //   }
+  // }, [popup, store, router, isMutating, data, userId]);
 
   const onCreate = useCallback(async () => {
     const { shape, letter, ...cake } = store;
     const type = shape.toUpperCase() as 'CUSTOM' | 'THEME';
+    const userId = params?.userId;
 
     if (!type || !letter.name || !letter.content || !cake || !userId || !canvasRef.current) {
       showError();
@@ -67,9 +66,10 @@ export default function MakeCompleteClient() {
     if (res.status !== 200) {
       showError();
     }
-  }, [showError, store, userId, trigger]);
+  }, [params, showError, store, trigger]);
 
   const onListClicked = useCallback(() => {
+    const userId = params?.userId;
     if (!userId) {
       return;
     }
@@ -78,7 +78,7 @@ export default function MakeCompleteClient() {
 
     router.push(`/cake/${userId}`);
     router.refresh();
-  }, [router, userId, onResetCake]);
+  }, [router, params, onResetCake]);
 
   const onLoginClicked = useCallback(() => {
     onResetCake();

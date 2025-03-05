@@ -1,15 +1,15 @@
 'use client';
 
 import { useBlock, useStep } from '@/lib/hooks/make';
-import { stepValidAtom } from '@/lib/store';
-import { useAtom } from 'jotai';
-import { useRouter } from 'next/navigation';
-import { useCallback } from 'react';
+import { useParams, useRouter } from 'next/navigation';
+import { useCallback, useMemo } from 'react';
+
+import { useStepValidation } from '@app/(pages)/make/[userId]/_provider';
+
+import { CUSTOM_STEP } from '@lib/constant';
 
 import CircleButton from '../common/CircleButton';
 import Header from '../common/Header';
-
-import { CUSTOM_STEP } from '@lib/constant';
 
 export const LayoutHeader = () => {
   const { order, stepData } = useStep();
@@ -29,25 +29,28 @@ export const LayoutHeader = () => {
 
 export const LayoutFooter = () => {
   const router = useRouter();
-
-  // FIXME: disabled 좀 더 가독성 있게
-  const [disabled] = useAtom(stepValidAtom);
+  const params = useParams<{ userId: string }>();
+  const validation = useStepValidation();
   const { onBackClicked } = useBlock();
   const { step, stepData } = useStep();
 
+  const isNextDisabled = useMemo(
+    () => !validation.isValid && step === 'letter',
+    [step, validation.isValid],
+  );
   const onNextClicked = useCallback(() => {
     if (stepData?.next === 'complete') {
-      router.push(`/make/complete`);
+      router.push(`/make/${params?.userId}/complete`);
       return;
     }
 
-    router.push(`/make?step=${stepData?.next}`);
-  }, [stepData, router]);
+    router.push(`/make/${params?.userId}?step=${stepData?.next}`);
+  }, [stepData?.next, router, params]);
 
   return (
     <footer className="mb-5 flex w-full justify-between p-3">
       <CircleButton type="<" onClick={onBackClicked} />
-      <CircleButton type=">" onClick={onNextClicked} disabled={disabled && step === 'letter'} />
+      <CircleButton type=">" onClick={onNextClicked} disabled={isNextDisabled} />
     </footer>
   );
 };

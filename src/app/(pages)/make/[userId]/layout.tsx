@@ -2,6 +2,8 @@ import { Metadata } from 'next';
 
 import GradientContainer from '@components/GradientContainer';
 
+import { StepProvider, StepValidationProvider } from './_provider';
+
 export const metadata: Metadata = {
   title: '롤링케이크 만들기',
   description: '친구에게 롤링케이크를 선물해주세요',
@@ -9,8 +11,12 @@ export const metadata: Metadata = {
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <GradientContainer type="greenCircle">
-      <main className="relative flex h-full w-full flex-col">{children}</main>
-    </GradientContainer>
+    <StepProvider>
+      <StepValidationProvider>
+        <GradientContainer type="greenCircle">
+          <main className="relative flex h-full w-full flex-col">{children}</main>
+        </GradientContainer>
+      </StepValidationProvider>
+    </StepProvider>
   );
 }

@@ -3,31 +3,26 @@
 import { BigButton } from '@/components/common/Button';
 import Header from '@/components/common/Header';
 import Tag from '@/components/common/Tag';
-import { useSaveUserId } from '@/lib/hooks/cake';
-import { snackBarAtom } from '@/lib/store';
 import { User } from '@prisma/client';
-import { useSetAtom } from 'jotai';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
 
+import { useSnackbar } from '@lib/provider/SnackbarProvider';
+
 export default function EmptyCakeClient({ user, isOwn }: { user: User; isOwn: boolean }) {
   const router = useRouter();
-  const dispatch = useSetAtom(snackBarAtom);
-
-  useSaveUserId();
+  const snackbar = useSnackbar();
 
   const onButtonClicked = useCallback(() => {
     if (isOwn) {
       navigator.clipboard.writeText(window.location.href);
-      dispatch({
-        text: '링크를 복사했어요! SNS에 붙여넣어 공유해봐요',
-      });
+      snackbar.show('링크를 복사했어요! SNS에 붙여넣어 공유해봐요');
       return;
     } else {
-      router.push('/make?step=sheet');
+      router.push(`/${user.id}/make?step=sheet`);
     }
-  }, [dispatch, isOwn, router]);
+  }, [isOwn, router, snackbar, user.id]);
 
   return (
     <>

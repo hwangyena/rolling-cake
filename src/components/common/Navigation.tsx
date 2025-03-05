@@ -1,9 +1,9 @@
 'use client';
 
-import { snackBarAtom } from '@/lib/store';
-import { useSetAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
+
+import { useSnackbar } from '@lib/provider/SnackbarProvider';
 
 import CircleButton from './CircleButton';
 
@@ -14,7 +14,7 @@ type Props = {
 
 const Navigation = ({ show, className }: Props) => {
   const router = useRouter();
-  const dispatch = useSetAtom(snackBarAtom);
+  const snackbar = useSnackbar();
 
   const [hasBack, hasUpload, hasHome] = [
     show?.includes('<') ?? true,
@@ -33,16 +33,12 @@ const Navigation = ({ show, className }: Props) => {
   const onUploadClicked = useCallback(() => {
     if (navigator.clipboard) {
       navigator.clipboard.writeText(window.location.href);
-      dispatch({
-        text: '링크를 복사했어요! SNS에 붙여넣어 공유해봐요',
-      });
+      snackbar.show('링크를 복사했어요! SNS에 붙여넣어 공유해봐요');
     } else {
       // This is only work at dev
-      dispatch({
-        text: '일시적인 에러가 발생했어요.',
-      });
+      snackbar.show('일시적인 에러가 발생했어요.');
     }
-  }, [dispatch]);
+  }, [snackbar]);
 
   return (
     <nav

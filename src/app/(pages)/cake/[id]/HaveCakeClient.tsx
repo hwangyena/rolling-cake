@@ -5,7 +5,6 @@ import { BigButton } from '@/components/common/Button';
 import Header from '@/components/common/Header';
 import Tag from '@/components/common/Tag';
 import Lock from '@/components/style/Lock';
-import { useSaveUserId } from '@/lib/hooks/cake';
 import { cn } from '@/lib/utils';
 import type { Cake as CakeType, User } from '@prisma/client';
 import Image from 'next/image';
@@ -21,15 +20,13 @@ type Props = {
 export default function HaveCakeClient({ cakes, user, isOwn }: Props) {
   const router = useRouter();
 
-  useSaveUserId();
-
   const handleCakeClicked = (cakeId: string) => {
     router.push(`/letter/${cakeId}`);
   };
 
   const onButtonClicked = useCallback(() => {
-    router.push('/make?step=sheet');
-  }, [router]);
+    router.push(`/make/${user.id}?step=sheet`);
+  }, [router, user.id]);
 
   return (
     <div className="relative flex flex-1 flex-col gap-8 overflow-hidden">
