@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 import GradientContainer from '@components/GradientContainer';
 
-import { StepProvider, StepValidationProvider } from './_lib';
+import { StepProvider, StepValidationProvider } from './_provider';
 
 export const metadata: Metadata = {
   title: '롤링케이크 만들기',

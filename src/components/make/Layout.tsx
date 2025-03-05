@@ -4,7 +4,7 @@ import { useBlock, useStep } from '@/lib/hooks/make';
 import { useRouter } from 'next/navigation';
 import { useCallback, useMemo } from 'react';
 
-import { useStepValidation } from '@app/(pages)/make/_lib';
+import { useStepValidation } from '@app/(pages)/make/_provider';
 
 import { CUSTOM_STEP } from '@lib/constant';
 
