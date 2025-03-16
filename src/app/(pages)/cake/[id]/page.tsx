@@ -1,12 +1,11 @@
-import ClientOnly from '@/components/ClientOnly';
 import Navigation from '@/components/common/Navigation';
 import { getCurrentUser, getUser } from '@/service/server/user';
 import { notFound } from 'next/navigation';
+import { match } from 'ts-pattern';
 
 import 'server-only';
 
-import EmptyCakeClient from './EmptyCakeClient';
-import HaveCakeClient from './HaveCakeClient';
+import { EmptyCake, HaveCake } from './_components';
 import { getCakes } from './_lib';
 
 export default async function CakePage({ params }: { params: { id: string } }) {
@@ -15,30 +14,23 @@ export default async function CakePage({ params }: { params: { id: string } }) {
     getUser(params.id),
     getCurrentUser(),
   ]);
+  const isOwn = loginUser?.id === params.id;
 
   if (!user) {
     return notFound();
   }
 
-  if (cakes?.length === 0) {
-    return (
-      <ClientOnly>
-        <Navigation
-          show={loginUser?.id === params.id ? ['home', 'upload'] : ['home']}
-          className="justify-end"
-        />
-        <EmptyCakeClient user={user} isOwn={loginUser?.id === params.id} />
-      </ClientOnly>
-    );
-  }
-
   return (
-    <ClientOnly>
+    <>
       <Navigation
         show={loginUser?.id === params.id ? ['home', 'upload'] : ['home']}
         className="justify-end"
       />
-      <HaveCakeClient user={user} cakes={cakes} isOwn={loginUser?.id === params.id} />
-    </ClientOnly>
+      {match(cakes.length === 0)
+        .with(true, () => <EmptyCake user={user} isOwn={isOwn} />)
+        .otherwise(() => (
+          <HaveCake cakes={cakes} isOwn={isOwn} user={user} />
+        ))}
+    </>
   );
 }
