@@ -1,18 +1,13 @@
 import 'server-only';
 
-import ClientOnly from '@components/ClientOnly';
-import { LayoutFooter, LayoutHeader } from '@components/make/Layout';
-
-import MakeCakeClient from './MakeCakeClient';
+import { CakeStep, NextStep, StepTitle } from './_components';
 
 export default function Page({ params: { userId } }: { params: { userId: string } }) {
   return (
-    <ClientOnly>
-      <LayoutHeader />
-
-      <MakeCakeClient userId={userId} />
-
-      <LayoutFooter />
-    </ClientOnly>
+    <>
+      <StepTitle />
+      <CakeStep userId={userId} />
+      <NextStep />
+    </>
   );
 }

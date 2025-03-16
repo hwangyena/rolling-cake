@@ -21,7 +21,7 @@ const ShareButton = ({ userId, isOwn }: Props) => {
       snackbar.show('링크를 복사했어요! SNS에 붙여넣어 공유해봐요');
       return;
     } else {
-      router.push(`/${userId}/make?step=sheet`);
+      router.push(`/make/${userId}?step=sheet`);
     }
   };
 
