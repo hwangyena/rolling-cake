@@ -4,9 +4,7 @@ import { Metadata } from 'next';
 
 import 'server-only';
 
-import { getCurrentUser } from '@service/server/user';
-
-import ClientOnly from '@components/ClientOnly';
+import { getCurrentUser } from '@service/user';
 
 import { WelcomePopup } from './_components';
 
@@ -24,9 +22,7 @@ export default async function Welcome() {
         <Cake className="aspect-square w-[100%]" />
       </div>
 
-      <ClientOnly>
-        <WelcomePopup user={user!} />
-      </ClientOnly>
+      <WelcomePopup user={user!} />
     </GradientContainer>
   );
 }

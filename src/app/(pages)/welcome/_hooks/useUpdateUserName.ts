@@ -3,7 +3,7 @@
 import { User } from 'next-auth';
 import useSWRMutation from 'swr/mutation';
 
-export function useUpdateUserName() {
+export default function useUpdateUserName() {
   return useSWRMutation(
     '/api/user',
     async function fetcher(url: string, { arg }: { arg: { name: string } }) {

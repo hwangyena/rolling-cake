@@ -1,12 +1,13 @@
 'use client';
 
 import CustomPopup from '@/components/common/CustomPopup';
-import { useUpdateUserName } from '@/service/client/user';
 import { User } from '@prisma/client';
 import { useRouter } from 'next/navigation';
 import { useCallback, useState } from 'react';
 
 import FocusInput from '@components/common/FocusInput';
+
+import { useUpdateUserName } from '../_hooks';
 
 const WelcomePopup = ({ user }: { user: User }) => {
   const router = useRouter();

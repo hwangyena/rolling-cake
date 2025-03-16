@@ -3,7 +3,7 @@ import Navigation from '@/components/common/Navigation';
 import { Metadata, ResolvingMetadata } from 'next';
 import { PropsWithChildren } from 'react';
 
-import { getCake } from '@service/server/cake';
+import { getCake } from './_service';
 
 type Props = {
   params: Promise<{ id: string }>;

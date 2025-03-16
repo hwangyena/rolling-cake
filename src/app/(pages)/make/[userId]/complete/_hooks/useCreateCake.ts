@@ -1,9 +1,6 @@
-'use client';
-
 import useSWRMutation from 'swr/mutation';
 
-/** OTHER */
-export function useCreateCake() {
+export default function useCreateCake() {
   return useSWRMutation(
     '/api/cake',
     async function fetcher(url: string, { arg }: { arg: CreateCakeReq }) {
