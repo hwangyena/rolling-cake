@@ -1,9 +1,10 @@
 import Navigation from '@/components/common/Navigation';
-import { getCurrentUser, getUser } from '@/service/server/user';
 import { notFound } from 'next/navigation';
 import { match } from 'ts-pattern';
 
 import 'server-only';
+
+import { getCurrentUser, getUser } from '@service/user';
 
 import { EmptyCake, HaveCake } from './_components';
 import { getCakes } from './_lib';

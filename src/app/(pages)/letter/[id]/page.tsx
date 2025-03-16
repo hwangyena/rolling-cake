@@ -1,12 +1,13 @@
-import { getCake } from '@/service/server/cake';
-import { getCurrentUser, getUser } from '@/service/server/user';
 import { notFound } from 'next/navigation';
 
 import 'server-only';
 
+import { getCurrentUser, getUser } from '@service/user';
+
 import Header from '@components/common/Header';
 
 import CakeCard from './_components/CakeCard';
+import { getCake } from './_service';
 
 export default async function CakeDetail({ params }: { params: { id: string } }) {
   const [cake, currentUser] = await Promise.all([getCake(params.id), getCurrentUser()]);

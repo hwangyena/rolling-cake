@@ -3,9 +3,9 @@ import Loading from '@/components/common/Loading';
 import { Metadata, ResolvingMetadata } from 'next';
 import { PropsWithChildren, Suspense } from 'react';
 
-import { getCakes } from './_lib';
+import { getUser } from '@service/user';
 
-import { getUser } from '@service/server/user';
+import { getCakes } from './_lib';
 
 type Props = {
   params: Promise<{ id: string }>;

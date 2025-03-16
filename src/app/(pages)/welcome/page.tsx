@@ -4,7 +4,7 @@ import { Metadata } from 'next';
 
 import 'server-only';
 
-import { getCurrentUser } from '@service/server/user';
+import { getCurrentUser } from '@service/user';
 
 import { WelcomePopup } from './_components';
 

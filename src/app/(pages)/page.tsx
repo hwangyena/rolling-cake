@@ -1,9 +1,10 @@
 import GradientContainer from '@/components/GradientContainer';
-import { getCurrentUser } from '@/service/server/user';
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
 
 import 'server-only';
+
+import { getCurrentUser } from '@service/user';
 
 import WaveTitle from '@components/style/WaveTitle';
 
