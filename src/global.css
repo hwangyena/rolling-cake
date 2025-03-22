@@ -8,15 +8,85 @@
   src: url('/fonts/neodgm.woff2') format('woff2');
 }
 
+:root {
+  /* Primary Colors */
+  --color-primary-blue-10: #041c6b;
+  --color-primary-blue-20: #062981;
+  --color-primary-blue-30: #0a3ba0;
+  --color-primary-blue-40: #0f4fbf;
+  --color-primary-blue-50: #1567df;
+  --color-primary-blue-60: #4b93eb;
+  --color-primary-blue-70: #70b1f5;
+  --color-primary-blue-80: #a0d0fb;
+  --color-primary-blue-90: #cfe9fd;
+
+  --color-primary-green-10: #18797a;
+  --color-primary-green-20: #299389;
+  --color-primary-green-30: #41b7a0;
+  --color-primary-green-40: #5fdbb6;
+  --color-primary-green-50: #82ffce;
+  --color-primary-green-60: #a1ffd0;
+  --color-primary-green-70: #b3ffd2;
+  --color-primary-green-80: #cdffdc;
+  --color-primary-green-90: #ef66eb;
+
+  /* Secondary Colors */
+  --color-secondary-pink-10: #720279;
+  --color-secondary-pink-20: #93038e;
+  --color-secondary-pink-30: #b6069f;
+  --color-secondary-pink-40: #da08a9;
+  --color-secondary-pink-50: #fe0cae;
+  --color-secondary-pink-60: #fe48b0;
+  --color-secondary-pink-70: #fe6db1;
+  --color-secondary-pink-80: #fe9dc2;
+  --color-secondary-pink-90: #fecedb;
+
+  --color-secondary-yellow-10: #785913;
+  --color-secondary-yellow-20: #927120;
+  --color-secondary-yellow-30: #b59232;
+  --color-secondary-yellow-40: #d8b649;
+  --color-secondary-yellow-50: #fcdb65;
+  --color-secondary-yellow-60: #fde68b;
+  --color-secondary-yellow-70: #feeea2;
+  --color-secondary-yellow-80: #fef5c1;
+  --color-secondary-yellow-90: #fefae0;
+
+  --color-secondary-mint-10: #01395e;
+  --color-secondary-mint-20: #024e72;
+  --color-secondary-mint-30: #046d8d;
+  --color-secondary-mint-40: #0590a9;
+  --color-secondary-mint-50: #08b8c5;
+  --color-secondary-mint-60: #3ddcd9;
+  --color-secondary-mint-70: #64ede0;
+  --color-secondary-mint-80: #99f9e8;
+  --color-secondary-mint-90: #cbfcef;
+
+  /* Grayscale */
+  --color-grayscale-gray1: #f5f5f5;
+  --color-grayscale-gray2: #f0f0f0;
+  --color-grayscale-gray3: #e0e0e0;
+  --color-grayscale-gray4: #dddddd;
+  --color-grayscale-gray5: #bbbbbb;
+  --color-grayscale-gray6: #888888;
+  --color-grayscale-gray7: #444444;
+  --color-grayscale-gray8: #333333;
+  --color-grayscale-gray9: #111111;
+
+  /* Background Colors */
+  --color-bg-white: #ffffff;
+  --color-bg-black: #000000;
+  --color-bg-error: #f93b3b;
+}
+
 /* mobile */
-@media only screen and (min-width: 768px) {
+/* @media only screen and (min-width: 768px) {
   html,
   body {
     font-size: 20px;
     width: 100dvw;
     height: 100dvh;
   }
-}
+} */
 
 @media (max-width: 800px) {
   .step-box:has(.swiper-slide) {
@@ -79,55 +149,12 @@
   /* HEADER */
   .header-shadow {
     --shadow: #000;
-
     color: var(--shadow);
     -webkit-text-stroke: 5px var(--shadow);
   }
-
-  .header::before,
-  .header::after {
-    @apply absolute left-0 top-0 font-neo text-effect_t;
-    content: attr(data-content);
-  }
-
-  .header::before {
+  .header-stroke {
     -webkit-text-stroke: 6px white;
   }
-
-  /* BUTTON */
-  .small-button:disabled {
-    @apply opacity-60;
-    background: linear-gradient(180deg, #f1f1f1 23.44%, #bbb 100%);
-  }
-
-  .white {
-    @apply !bg-white !text-gray-700;
-  }
-  .white:hover {
-    @apply !bg-gray-200;
-  }
-
-  .red {
-    background: linear-gradient(180deg, #fff5f5 23.44%, #ff8d97 100%);
-  }
-  .red:hover {
-    background: linear-gradient(180deg, #ffe0e0 23.44%, #f67470 100%);
-  }
-
-  .green {
-    background: linear-gradient(180deg, #f3fff9 20.95%, #82ffce 100%);
-  }
-  .green:hover {
-    background: linear-gradient(180deg, #dafff6 20.95%, #16e0af 100%);
-  }
-
-  .gray {
-    background: linear-gradient(180deg, #fff 23.55%, #b7b7b7 100%);
-  }
-  .gray:disabled {
-    background: linear-gradient(180deg, #fff 23.55%, #dedede 100%);
-  }
-
   /* CheckBox */
   .check-selected::after {
     @apply absolute left-0 top-0 h-full w-full animate-bg-opacity bg-black opacity-50 content-[""];
@@ -150,7 +177,7 @@
     transition: width 50ms ease 50ms;
   }
   .check::after {
-    @apply absolute left-[50%] h-[2px] w-0 origin-[0%_0%] rounded-sm  bg-white;
+    @apply absolute left-[50%] h-[2px] w-0 origin-[0%_0%] rounded-sm bg-white;
     content: '';
     transform: translateY(calc(100% + 5px)) rotate(310deg); /* check before width만큼 translateY */
     transition: width 50ms ease;
@@ -229,6 +256,16 @@
 
   .gray-gradient {
     background: linear-gradient(180deg, #fff 46.99%, #b7b7b7 100%);
+  }
+
+  .blue-pink-gradient {
+    background: linear-gradient(
+      180deg,
+      var(--color-secondary-pink-90) 0%,
+      var(--color-bg-white) 7.93%,
+      var(--color-bg-white) 76.16%,
+      var(--color-primary-blue-90) 100%
+    );
   }
 
   .green-pink-gradient {
