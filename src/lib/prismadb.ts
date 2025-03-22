@@ -12,6 +12,17 @@ const globalForPrisma = globalThis as unknown as {
 
 const prisma = globalForPrisma.prisma ?? prismaClientSingleton();
 
+async function main() {
+  try {
+    await prisma.$connect();
+  } catch (err) {
+    console.error('❌ DB 연결 실패:', err);
+  } finally {
+    await prisma.$disconnect();
+  }
+}
+main();
+
 export default prisma;
 
 if (process.env.NODE_ENV !== 'production') {
