@@ -8,25 +8,19 @@ import ShadowCard from '../style/ShadowCard';
 type Props = {
   content: string;
   className?: string;
-  hasDesign?: boolean;
   button?: {
     label: string;
     onButtonClicked: () => void;
   };
 };
 
-const Card = ({ children, button, hasDesign, content, className }: PropsWithChildren<Props>) => {
+const Card = ({ children, button, content, className }: PropsWithChildren<Props>) => {
   return (
     <ShadowCard
-      className={cn(
-        'flex h-[90%] w-[90%] flex-col items-center justify-around',
-        hasDesign ? 'pd-[5%] pt-[10%]' : 'h-full w-full p-3',
-        className,
-      )}>
+      className={cn('flex h-[90%] w-[90%] flex-col items-center justify-around p-3', className)}>
       <article
         className={cn(
-          hasDesign ? 'w-[80%]' : 'w-full',
-          'relative z-10 grid h-[40vh] min-h-[60%] place-items-center rounded-xl border-2 border-black bg-white',
+          'relative z-10 grid h-[40vh] min-h-[60%] place-items-center rounded-xl border-2 border-black bg-white w-full',
         )}>
         {children}
       </article>
@@ -39,47 +33,7 @@ const Card = ({ children, button, hasDesign, content, className }: PropsWithChil
           </SmallButton>
         )}
       </article>
-      {hasDesign && <CardDesign />}
     </ShadowCard>
-  );
-};
-
-const CardDesign = () => {
-  return (
-    <article className="absolute left-0 top-0 z-0 h-full w-full overflow-hidden rounded-xl">
-      <Image
-        src="/images/sparkle1.jpg"
-        alt="sparkle"
-        width={48}
-        height={48}
-        className="absolute bottom-[27%] left-3 h-12 w-12"
-      />
-      <Image
-        src="/images/sparkle2.jpg"
-        alt="sparkle"
-        width={48}
-        height={48}
-        className="absolute bottom-[28%] right-1 h-12 w-12"
-      />
-      <Image
-        src="/images/sparkle3.jpg"
-        alt="sparkle"
-        priority
-        width={80}
-        height={80}
-        className="absolute bottom-[-5px] right-[-10px] h-20 w-20"
-      />
-      <Image
-        src="/images/sparkle4.jpg"
-        alt="sparkle4"
-        width={80}
-        height={64}
-        className="absolute right-2 top-[-5px] h-16 w-20"
-      />
-      <div className="absolute left-[30%] top-5 h-1 w-1 rounded-full bg-black" />
-      <div className="absolute bottom-[16%] left-[8%] h-[8px] w-[8px] rounded-full bg-black" />
-      <div className="absolute bottom-[12%] left-[11%] h-[17px] w-[17px] rounded-full bg-black" />
-    </article>
   );
 };
 
