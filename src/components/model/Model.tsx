@@ -1,3 +1,5 @@
+'use client';
+
 import { Canvas, CanvasProps } from '@react-three/fiber';
 import dynamic from 'next/dynamic';
 import { forwardRef, memo } from 'react';

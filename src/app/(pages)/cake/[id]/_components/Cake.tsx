@@ -23,7 +23,7 @@ const Cake = ({ cake }: Props) => {
         <ThemeCake className="h-[90px] w-[80%]" theme={(cake.themeCake as ThemeCake).theme} />
       )}
       <div className="mt-1 flex gap-1">
-        {cake.isPrivate && <Lock small />}
+        {cake.isPrivate && <Lock />}
         <span className="text-b3">{cake.name}</span>
       </div>
     </Link>

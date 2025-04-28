@@ -49,7 +49,6 @@ const CakeCard = ({ content, user, currentUser, isPrivate, customCake, themeCake
 
   const cardProps: ComponentProps<typeof Card> = useMemo(
     () => ({
-      hasDesign: true,
       content: `Dear. ${user.rollingCakeName}`,
       button: {
         label: isCakeFace ? '편지 읽어보기' : '케이크 보기',
@@ -66,7 +65,7 @@ const CakeCard = ({ content, user, currentUser, isPrivate, customCake, themeCake
           'rotate-y-180': !isCakeFace,
         })}>
         {/* front */}
-        <Card className="backface-hidden absolute left-0 top-0 z-[2] h-full w-full" {...cardProps}>
+        <Card className="backface-hidden z-10" {...cardProps}>
           <Model
             cake={customCake ? (customCake as CustomCake) : (themeCake as ThemeCake)}
             show={customCake ? 'custom' : 'theme'}
@@ -75,9 +74,7 @@ const CakeCard = ({ content, user, currentUser, isPrivate, customCake, themeCake
         </Card>
 
         {/* back */}
-        <Card
-          className="backface-hidden rotate-y-180 absolute left-0 top-0 h-full w-full"
-          {...cardProps}>
+        <Card className="backface-hidden rotate-y-180" {...cardProps}>
           <p className="h-full w-full overflow-auto whitespace-pre-line break-keep p-3 text-center font-neo text-effect_b">
             {content}
           </p>

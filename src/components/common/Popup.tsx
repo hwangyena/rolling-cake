@@ -39,7 +39,7 @@ const Popup = () => {
               취소
             </SmallButton>
           )}
-          <SmallButton color="green" onClick={onConfirmClicked}>
+          <SmallButton color="pink" onClick={onConfirmClicked}>
             확인
           </SmallButton>
         </section>

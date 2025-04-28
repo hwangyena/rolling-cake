@@ -41,7 +41,7 @@ export async function generateMetadata(
 
 export default function Layout({ children }: PropsWithChildren) {
   return (
-    <GradientContainer type="grid" className="flex flex-col">
+    <GradientContainer type="pinkBlue" className="flex flex-col">
       <Navigation show={['<']} />
       {children}
     </GradientContainer>
