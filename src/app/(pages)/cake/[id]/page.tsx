@@ -23,10 +23,7 @@ export default async function CakePage({ params }: { params: { id: string } }) {
 
   return (
     <>
-      <Navigation
-        show={loginUser?.id === params.id ? ['home', 'upload'] : ['home']}
-        className="justify-end"
-      />
+      <Navigation show={loginUser?.id === params.id ? ['home', 'upload', '<'] : ['home', '<']} />
       {match(cakes.length === 0)
         .with(true, () => <EmptyCake user={user} isOwn={isOwn} />)
         .otherwise(() => (

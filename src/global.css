@@ -76,6 +76,8 @@
   --color-bg-white: #ffffff;
   --color-bg-black: #000000;
   --color-bg-error: #f93b3b;
+
+  --nav-height: 72px;
 }
 
 /* mobile */
