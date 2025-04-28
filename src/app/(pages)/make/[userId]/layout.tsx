@@ -13,7 +13,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <StepProvider>
       <StepValidationProvider>
-        <GradientContainer type="greenCircle">
+        <GradientContainer type="blueCircle">
           <main className="relative flex h-full w-full flex-col">{children}</main>
         </GradientContainer>
       </StepValidationProvider>

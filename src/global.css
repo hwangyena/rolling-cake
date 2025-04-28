@@ -247,8 +247,8 @@
     background: linear-gradient(180deg, #fff 77.2%, #b5ffd7 100%);
   }
 
-  .green-circle-gradient {
-    background-image: url('/icons/green-circle-gradient.svg');
+  .blue-circle-gradient {
+    background-image: url('/icons/blue-circle-gradient.svg');
     background-size: cover;
   }
 

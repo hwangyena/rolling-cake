@@ -37,6 +37,7 @@ export const CAKE_THEME: Filter[] = [
 // step에서 보여줘야하는 정보
 export const CUSTOM_STEP: Record<keyof CustomCake, StepDisplay> = {
   shape: {
+    // FIXME: remove this
     title: '케이크 모양을 선택해줘',
     next: 'sheet',
   },

@@ -49,7 +49,7 @@ const CreateCake = ({ userId, canvasRef, create }: Props) => {
       <BigButton style={{ zIndex: 10 }} onClick={handleClicked}>
         내 케이크 선물하기
       </BigButton>
-      <span className="text-cap text-gray-800">선물한 케이크는 수정이 불가해요.</span>
+      <span className="text-cap text-grayscale-gray6">선물한 케이크는 수정이 불가해요.</span>
     </>
   );
 };

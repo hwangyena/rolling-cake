@@ -25,10 +25,10 @@ const NextStep = () => {
     router.push(`/make/${params?.userId}?step=${stepData?.next}`);
   }, [stepData?.next, router, params]);
   return (
-    <footer className="mb-5 flex w-full justify-between p-3">
+    <nav className="pt-[38px] px-[20px] flex w-full justify-between absolute">
       <CircleButton type="<" onClick={handleBackClicked} />
       <CircleButton type=">" onClick={handleNextClicked} disabled={isNextDisabled} />
-    </footer>
+    </nav>
   );
 };
 

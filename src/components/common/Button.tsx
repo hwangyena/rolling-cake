@@ -7,7 +7,6 @@ import {
   PropsWithChildren,
   useRef,
 } from 'react';
-import { match } from 'ts-pattern';
 
 import { cn } from '@lib/utils';
 
@@ -68,7 +67,7 @@ type BigButtonProps = NativeButtonProps & {
 };
 export const BigButton = ({ color = 'pink', ...props }: PropsWithChildren<BigButtonProps>) => {
   const pink = 'bg-secondary-pink-70  text-white hover:bg-secondary-pink-50';
-  const white = 'hover:bg-grayscale-gray1';
+  const white = 'bg-white hover:bg-grayscale-gray1';
   return (
     <Button
       className={cn(
