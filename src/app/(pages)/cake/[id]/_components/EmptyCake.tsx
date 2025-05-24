@@ -4,6 +4,7 @@ import React from 'react';
 
 import Header from '@components/common/Header';
 
+import MakeButton from './MakeButton';
 import ShareButton from './ShareButton';
 
 type Props = {
@@ -24,7 +25,7 @@ const EmptyCake = ({ user, isOwn }: Props) => {
       </section>
       <section className={'w-full px-[20px] pb-[50px] flex gap-3 flex-col items-center'}>
         <span className="text-b2 text-gray7">케이크 보관함이 텅 비었네...</span>
-        <ShareButton isOwn={isOwn} userId={user.id} />
+        {isOwn ? <ShareButton /> : <MakeButton userId={user.id} />}
       </section>
     </div>
   );

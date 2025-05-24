@@ -78,7 +78,7 @@ export const BigButton = ({ color = 'pink', ...props }: PropsWithChildren<BigBut
       className={cn(
         { [pink]: color === 'pink' },
         { [white]: color === 'white' },
-        'flex w-full shrink-0 items-center justify-center gap-4 rounded-[50px] border-2 border-black p-4 text-btn1 font-bold shadow-button  disabled:cursor-auto disabled:bg-grayscale-gray5 disabled:opacity-60 ',
+        'flex w-full shrink-0 items-center justify-center gap-4 rounded-[50px] border-2 border-black p-4 text-btn1 font-bold shadow-button  disabled:cursor-auto disabled:bg-grayscale-gray5 disabled:opacity-60 whitespace-nowrap',
       )}
       {...props}></Button>
   );
