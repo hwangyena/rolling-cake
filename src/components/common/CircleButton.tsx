@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { memo } from 'react';
 
 import Button from './Button';
@@ -23,12 +22,11 @@ const CircleButton = ({ type, disabled, onClick }: Props) => {
       className="relative grid h-[34px] w-[34px] place-items-center rounded-full border border-black bg-white drop-shadow-black_light hover:bg-gray-200 disabled:opacity-40"
       disabled={disabled}
       onClick={onClick}>
-      <Image
+      <img
         src={`/icons/${icon[type]}`}
         alt={type}
         width={24}
         height={24}
-        priority
         className={type === '>' ? 'rotate-180' : ''}
       />
     </Button>
