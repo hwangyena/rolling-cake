@@ -7,6 +7,7 @@ import { getCurrentUser, getUser } from '@service/user';
 import Header from '@components/common/Header';
 
 import CakeCard from './_components/CakeCard';
+import CoachMark from './_components/CoachMark';
 import { getCake } from './_service';
 
 export default async function CakeDetail({ params }: { params: { id: string } }) {
@@ -24,6 +25,7 @@ export default async function CakeDetail({ params }: { params: { id: string } })
         <Header>편지를 확인해보r!</Header>
       </section>
       <CakeCard {...cake} user={user} currentUser={currentUser} />
+      <CoachMark />
     </main>
   );
 }

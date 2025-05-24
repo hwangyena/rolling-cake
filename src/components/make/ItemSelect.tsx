@@ -7,9 +7,9 @@ import 'swiper/css/free-mode';
 import { FreeMode } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import CheckButton from '../common/CheckButton';
-
 import 'swiper/css';
+
+import CheckButton from '../common/CheckButton';
 
 type Props = {
   noLabel?: boolean;
@@ -66,7 +66,7 @@ const ItemSelect = ({ noLabel }: Props) => {
   };
 
   return (
-    <section className="mb-3">
+    <section className="pb-[50px]">
       {noLabel ? null : (
         <div className="mb-[16px] flex gap-3 px-[20px]">
           {selectData.map((tabItem) => (

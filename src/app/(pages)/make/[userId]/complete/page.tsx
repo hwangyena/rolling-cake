@@ -30,7 +30,7 @@ export default function Page() {
       <div className="relative w-full flex-1">
         <Model ref={canvasRef} cake={store} show={store.shape} fixPosition isRotate={!!data} />
       </div>
-      <section className="mb-3 flex min-h-[120px] w-full flex-col items-center justify-end gap-3 px-5">
+      <section className="mb-8 flex min-h-[120px] w-full flex-col items-center justify-end gap-3 px-5">
         {data ? (
           <MoveButton userId={userId} />
         ) : (

@@ -27,7 +27,7 @@ const ShareButton = ({ userId, isOwn }: Props) => {
 
   return (
     <BigButton onClick={handleClicked}>
-      {isOwn ? '케이크 링크 공유하기' : '롤링케이크 만들어주기'}
+      {isOwn ? '링크 공유하고 케이크 받기' : '롤링케이크 만들어주기'}
     </BigButton>
   );
 };

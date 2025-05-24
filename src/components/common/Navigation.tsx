@@ -42,7 +42,7 @@ const Navigation = ({ show, className }: Props) => {
 
   return (
     <nav
-      className={`left-0 top-0 z-50 mx-auto mb-5 flex w-full justify-between px-[5%] pt-[7%] ${className}`}>
+      className={`h-[72px] left-0 top-0 mx-auto mb-5 flex w-full justify-between px-[20px] pt-[38px] ${className}`}>
       {hasBack && <CircleButton type="<" onClick={onBackClicked} />}
       <div className="flex items-center justify-center gap-3">
         {hasUpload && <CircleButton type="upload" onClick={onUploadClicked} />}
