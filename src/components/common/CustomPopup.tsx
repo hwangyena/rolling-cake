@@ -2,7 +2,6 @@ import Image from 'next/image';
 import { PropsWithChildren, memo, useEffect } from 'react';
 
 import ShadowCard from '../style/ShadowCard';
-import { SmallButton } from './Button';
 
 const CustomPopup = ({ content, title, hasIcon, onConfirm }: CustomPopup) => {
   // open terms page
