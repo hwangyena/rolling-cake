@@ -155,6 +155,14 @@ export const theme = {
         '0%': { transform: 'translateY(0px)' },
         '100%': { transform: 'translateY(100px)' },
       },
+      'slide-right': {
+        '0%': { transform: 'translateX(0px)' },
+        '100%': { transform: 'translateX(80px)' },
+      },
+      'slide-right-width': {
+        '0%': { width: '20%' },
+        '100%': { width: '100%' },
+      },
       'cursor-bounce': {
         '0%, 100%': {
           transform: 'translateY(0)',
@@ -179,6 +187,8 @@ export const theme = {
     animation: {
       'slide-up': 'slide-up 1s ease-in-out',
       'slide-down': 'slide-down 1s ease-in-out',
+      'slide-right': 'slide-right 1.5s cubic-bezier(0.85, 0, 0.15, 1) infinite',
+      'slide-right-width': 'slide-right-width 1.5s cubic-bezier(0.85, 0, 0.15, 1) infinite',
       'cursor-bounce': 'cursor-bounce 1s ease-out infinite',
       'bg-opacity': 'bg-opacity 0.3s ease',
       waviy: 'waviy 2s infinite',

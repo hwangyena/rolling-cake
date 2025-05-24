@@ -44,9 +44,13 @@ const Button = ({ children, onClick, ...props }: NativeButtonProps) => {
 };
 
 type SmallButtonProps = NativeButtonProps & {
-  color?: 'pink' | 'gray';
+  color: 'pink' | 'gray';
 };
-export const SmallButton = ({ color, ...props }: PropsWithChildren<SmallButtonProps>) => {
+export const SmallButton = ({
+  color,
+  className,
+  ...props
+}: PropsWithChildren<SmallButtonProps>) => {
   const pink =
     'bg-gradient-to-b from-[#FEF6F8] to-secondary-pink-80 hover:from-secondary-pink-90 hover:to-secondary-pink-70';
   const gray =
@@ -57,6 +61,7 @@ export const SmallButton = ({ color, ...props }: PropsWithChildren<SmallButtonPr
         { [pink]: color === 'pink' },
         { [gray]: color === 'gray' },
         'flex h-10 shrink-0 items-center justify-center gap-2 rounded-[40px] border border-black px-[31px] py-[10px] font-bold text-btn1 text-grayscale-gray7',
+        className,
       )}
       {...props}></Button>
   );
