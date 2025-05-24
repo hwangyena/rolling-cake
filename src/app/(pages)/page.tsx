@@ -38,7 +38,7 @@ export default async function Home() {
         <AlertPopup user={user} />
 
         <p className="mt-3 font-neo text-b3 text-gray-700">
-          Copyright 2025. Team Planet. all rights reserved.
+          Copyright 2025. Team DaSiYeah. all rights reserved.
         </p>
       </footer>
     </GradientContainer>
