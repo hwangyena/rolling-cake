@@ -4,9 +4,9 @@ import dynamic from 'next/dynamic';
 import { memo, useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
-import CakeModel from './Cake';
+import { useCurrentStep } from '@lib/hooks/make';
 
-import { useStep } from '@lib/hooks/make';
+import CakeModel from './Cake';
 
 const TopCream = dynamic(() => import('./TopCream'));
 const SideCream = dynamic(() => import('./SideCream'));
@@ -25,10 +25,10 @@ type Props = {
 };
 
 const CustomCake = ({ cake, isRotate, isStand, fixPosition }: Props) => {
+  const step = useCurrentStep();
+
   const cameraControlsRef = useRef<CameraControls | null>(null);
   const cakeRef = useRef<THREE.Group>(null);
-
-  const { step } = useStep();
 
   useEffect(() => {
     if (!step || !cameraControlsRef.current) {

@@ -1,29 +1,37 @@
-import { CUSTOM_STEP, CUSTOM_STEP_STORE } from '@/lib/constant';
-import { makeAtom, popupAtom } from '@/lib/store';
+import { CUSTOM_STEP } from '@/lib/constant';
 import { isObject } from '@/lib/utils';
-import { useAtom, useSetAtom } from 'jotai';
 import { notFound, usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { startTransition, useCallback, useLayoutEffect, useMemo } from 'react';
+
+import { useStepStore } from '@app/(pages)/make/[userId]/_provider';
+
+import { usePopup } from '@lib/provider/PopupProvider';
+
+// for letter page
+export const useCurrentStep = () => {
+  const searchParams = useSearchParams();
+  const step = useMemo(
+    () => (searchParams ? (searchParams.get('step') as keyof CustomCake) : null),
+    [searchParams],
+  );
+  return step;
+};
 
 export const useStep = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
+  const step = useCurrentStep();
+  const { step: store, dispatch, reset } = useStepStore();
 
-  const [store, dispatch] = useAtom(makeAtom);
-
-  const step = useMemo(
-    () => (searchParams ? (searchParams.get('step') as keyof CustomCake) : null),
-    [searchParams],
-  );
-  const stepData = useMemo(() => (step ? CUSTOM_STEP[step] : null), [step]);
+  const stepData = useMemo(() => (step ? CUSTOM_STEP[step] : null), [step]); // 현재 step data
   const order = useMemo(() => Object.keys(CUSTOM_STEP).findIndex((key) => key === step), [step]);
 
   // make 페이지에서 step을 찾을 수 없을때
   useLayoutEffect(() => {
     const params = searchParams?.get('step');
 
-    if (!pathname?.includes('/make') || pathname === '/make/complete') {
+    if (!pathname?.includes('/make') || pathname.includes('complete')) {
       return;
     }
 
@@ -35,8 +43,8 @@ export const useStep = () => {
   }, [pathname, router, searchParams]);
 
   const onResetCake = useCallback(() => {
-    dispatch(CUSTOM_STEP_STORE);
-  }, [dispatch]);
+    reset();
+  }, [reset]);
 
   const onStoreUpdate = useCallback(
     (value: Record<string, unknown> | string) => {
@@ -72,28 +80,26 @@ export const useStep = () => {
 export const useBlock = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-
-  const dispatch = useSetAtom(popupAtom);
-  const dispatchMakeAtom = useSetAtom(makeAtom);
+  const popup = usePopup();
+  const step = useStepStore();
 
   const isFirst = useMemo(() => searchParams?.get('step') === 'sheet', [searchParams]);
 
   const onBackClicked = useCallback(() => {
     if (isFirst) {
-      dispatch({
+      popup.show({
         title: '케이크 만들기를 그만하시겠어요?',
         content: '페이지에서 나가면 그동안의 작업은 저장되지 않아요.\n정말 그만하시겠어요?',
         onConfirm() {
           router.back();
-          dispatchMakeAtom(CUSTOM_STEP_STORE);
-          dispatch(null);
+          step.reset();
         },
       });
       return;
     }
 
     router.back();
-  }, [dispatch, dispatchMakeAtom, isFirst, router]);
+  }, [isFirst, popup, router, step]);
 
   return { onBackClicked };
 };

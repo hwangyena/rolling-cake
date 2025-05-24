@@ -1,12 +1,3 @@
-type Popup = {
-  title: string;
-  content?: string;
-  onConfirm?: () => void;
-  onCancel?: () => void;
-  hideCancel?: boolean;
-  bottomNode?: ReactNode;
-};
-
 type CustomPopup = {
   title: 'Alert' | 'Welcome!';
   content: string;
@@ -14,19 +5,9 @@ type CustomPopup = {
   onConfirm: () => void;
 };
 
-type FocusInput = {
-  maxLength?: number;
-  label?: string;
-  defaultValue?: string;
-  autoSize?: boolean;
-  onConfirm?: (value: string) => Promise<void>;
-};
-
-type Snackbar = {
-  text: string;
-};
-
 type Filter = {
   label: string;
   value: string;
 };
+
+type Nullable<T> = T | undefined | null;

@@ -1,30 +1,29 @@
 'use client';
 
-import { snackBarAtom } from '@/lib/store';
 import { cn } from '@/lib/utils';
-import { useAtom } from 'jotai';
-import { memo, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+
+import { useSnackbar } from '@lib/provider/SnackbarProvider';
 
 const Snackbar = () => {
-  const [value, dispatch] = useAtom(snackBarAtom);
+  const snackbar = useSnackbar();
   const [hide, setHide] = useState(false);
 
   useEffect(() => {
     const hideTimer = setTimeout(() => {
       setHide(true);
     }, 2000);
-
     const timer = setTimeout(() => {
-      dispatch(null);
+      snackbar.show(null);
+      setHide(false);
     }, 3000);
-
     return () => {
       clearTimeout(hideTimer);
       clearTimeout(timer);
     };
-  }, [dispatch]);
+  }, [snackbar]);
 
-  if (!value) {
+  if (!snackbar.value) {
     return null;
   }
 
@@ -36,10 +35,10 @@ const Snackbar = () => {
         { 'animate-slide-down': hide },
       )}>
       <div className="w-[80%] rounded-xl bg-[#323232] p-3 text-center text-b3 text-white opacity-80">
-        {value.text}
+        {snackbar.value}
       </div>
     </div>
   );
 };
 
-export default memo(Snackbar);
+export default Snackbar;

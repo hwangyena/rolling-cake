@@ -1,29 +1,49 @@
-import { cn } from '@/lib/utils';
-import { memo } from 'react';
+import { CSSProperties, memo } from 'react';
 
 type Props = {
   unlock?: boolean;
-  small?: boolean;
+  style?: CSSProperties;
   onClick?: () => void;
 };
 
-const Lock = ({ unlock = false, small, onClick }: Props) => {
+const Lock = ({ unlock = false, style, onClick }: Props) => {
   return (
-    <div className="relative mt-1 flex flex-col items-center justify-center" onClick={onClick}>
-      <div
-        className={cn(
-          'absolute bottom-[90%] h-[10px] w-[12px] rounded-r-[10px] rounded-t-[50px] border-[5px] border-b-0 border-l-[2px] border-r-[2px] border-t-[2px] border-gray-600 transition-all	',
-          { 'origin-left rotate-[-30deg] border-green-dark': unlock },
-          { 'h-[6px] w-[8px] lg:h-[8px] lg:w-[10px]': small },
-        )}
-      />
-      <div
-        className={cn(
-          'z-10 flex aspect-square w-[15px] items-center justify-center rounded-[3px] bg-gray-600 transition-all',
-          { 'bg-green-dark': unlock },
-          { 'w-[10.5px] lg:w-[14px]': small },
-        )}
-      />
+    <div style={style} onClick={onClick}>
+      {unlock ? (
+        <svg
+          width="12"
+          height="18"
+          viewBox="0 0 12 18"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M6 0.75C3.52532 0.75 1.41667 2.6446 1.41667 5.10417V7.00611C0.875695 7.25864 0.5 7.81443 0.5 8.45948V15.6518C0.5 16.5345 1.20355 17.2501 2.07143 17.2501H9.92857C10.7964 17.2501 11.5 16.5345 11.5 15.6518V8.45948C11.5 7.57677 10.7964 6.86119 9.92857 6.86119H3.25V5.10417C3.25 3.76678 4.42459 2.58333 6 2.58333C7.21001 2.58333 8.18358 3.28147 8.57009 4.21129C8.76442 4.67877 9.16041 5.10417 9.66667 5.10417C10.1729 5.10417 10.5939 4.68877 10.4843 4.19453C10.0402 2.19268 8.15946 0.75 6 0.75ZM6.91683 12.4214C7.46472 12.1044 7.83333 11.512 7.83333 10.8334C7.83333 9.82091 7.01252 9.0001 6 9.0001C4.98748 9.0001 4.16667 9.82091 4.16667 10.8334C4.16667 11.5121 4.53542 12.1046 5.0835 12.4216V15.4168H6.91683V12.4214Z"
+            fill="#888888"
+          />
+        </svg>
+      ) : (
+        <svg
+          width="12"
+          height="18"
+          viewBox="0 0 12 18"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M2.07143 6.86108C1.20355 6.86108 0.5 7.57666 0.5 8.45937V15.6517C0.5 16.5344 1.20355 17.25 2.07143 17.25H9.92857C10.7964 17.25 11.5 16.5344 11.5 15.6517V8.45937C11.5 7.57666 10.7964 6.86108 9.92857 6.86108H2.07143ZM7.83333 10.8333C7.83333 11.5119 7.46472 12.1043 6.91683 12.4213V15.4167H5.0835V12.4215C4.53542 12.1045 4.16667 11.512 4.16667 10.8333C4.16667 9.82081 4.98748 9 6 9C7.01252 9 7.83333 9.82081 7.83333 10.8333Z"
+            fill="#0FC89B"
+          />
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M1.4165 5.10417C1.4165 2.6446 3.52516 0.75 5.99984 0.75C8.47452 0.75 10.5832 2.6446 10.5832 5.10417V7.16667H8.74984V5.10417C8.74984 3.76678 7.57525 2.58333 5.99984 2.58333C4.42443 2.58333 3.24984 3.76678 3.24984 5.10417V7.16667H1.4165V5.10417Z"
+            fill="#0FC89B"
+          />
+        </svg>
+      )}
     </div>
   );
 };

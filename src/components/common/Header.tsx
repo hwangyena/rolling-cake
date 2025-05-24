@@ -1,4 +1,6 @@
-import { CSSProperties, PropsWithChildren, memo } from 'react';
+import { CSSProperties, FC, PropsWithChildren, memo } from 'react';
+
+import { cn } from '@lib/utils';
 
 type Props = {
   className?: string;
@@ -6,21 +8,37 @@ type Props = {
   style?: CSSProperties;
 };
 
+const HeaderStroke: FC<PropsWithChildren<{ showStroke?: boolean }>> = ({
+  children,
+  showStroke,
+}) => {
+  return (
+    <h1
+      aria-hidden="true"
+      className={cn(
+        { 'header-stroke': showStroke },
+        'absolute left-0 top-0 font-neo text-effect_t whitespace-nowrap font-neo text-effect_t',
+      )}>
+      {children}
+    </h1>
+  );
+};
+
 const Header = ({ children, className, shadowColor, style }: PropsWithChildren<Props>) => {
   return (
-    <div className={`font-display-block relative ${className ?? ''}`} style={style}>
+    <span className={`font-display-block relative ${className ?? ''}`} style={style}>
       <span
-        className={`header-shadow absolute left-[0.18rem] top-[0.17rem] whitespace-nowrap font-neo text-[1.38rem] text-effect_t`}
+        className={`header-shadow absolute left-[0.16em] top-[0.16em] whitespace-nowrap font-neo text-effect_t`}
         style={{ '--shadow': shadowColor || '#000' } as CSSProperties}
         data-content={children}>
         {children}
       </span>
-      <h1
-        className={`header whitespace-nowrap font-neo text-effect_t font-normal`}
-        data-content={children}>
+      <HeaderStroke showStroke>{children}</HeaderStroke>
+      <h1 className={'whitespace-nowrap font-neo text-effect_t'} data-content={children}>
         {children}
       </h1>
-    </div>
+      <HeaderStroke>{children}</HeaderStroke>
+    </span>
   );
 };
 
