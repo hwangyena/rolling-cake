@@ -22,7 +22,8 @@ export const useStep = () => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const step = useCurrentStep();
-  const { step: store, dispatch, reset } = useStepStore();
+  const { step: stepStore, dispatch, reset } = useStepStore();
+  const store = useMemo(() => stepStore, [stepStore]);
 
   const stepData = useMemo(() => (step ? CUSTOM_STEP[step] : null), [step]); // 현재 step data
   const order = useMemo(() => Object.keys(CUSTOM_STEP).findIndex((key) => key === step), [step]);

@@ -1,9 +1,9 @@
 import { useStep } from '@/lib/hooks/make';
 
+import Model from '@components/model/Model';
+
 import ItemSelect from './ItemSelect';
 import LetteringArea from './LetteringArea';
-
-import Model from '@components/model/Model';
 
 const StepCommon = () => {
   const { step, store } = useStep();
