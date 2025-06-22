@@ -1,5 +1,6 @@
 import { Fragment, memo } from 'react';
 
+import Draggable from '../Draggable';
 import {
   CherryModel,
   CherryTreeModel,
@@ -42,7 +43,9 @@ const Items = ({ items, hasTopCream }: { items: CakeItem[]; hasTopCream: boolean
     }
   };
 
-  return items.map((item) => <Fragment key={item}>{render(item)}</Fragment>);
+  return items.map((item) => (
+    <Fragment key={item}>{<Draggable>{render(item)}</Draggable>}</Fragment>
+  ));
 };
 
 export default memo(Items);

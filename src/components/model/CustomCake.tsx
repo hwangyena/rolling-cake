@@ -2,7 +2,7 @@ import { CameraControls, Center, Environment } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import dynamic from 'next/dynamic';
 import { memo, useEffect, useRef } from 'react';
-import * as THREE from 'three';
+import { ColorManagement, MathUtils } from 'three';
 
 import { useCurrentStep } from '@lib/hooks/make';
 
@@ -13,9 +13,9 @@ const SideCream = dynamic(() => import('./SideCream'));
 const Items = dynamic(() => import('./items/Items'));
 const LetteringModel = dynamic(() => import('./Lettering'));
 
-THREE.ColorManagement.enabled = true;
+ColorManagement.enabled = true;
 
-const { DEG2RAD } = THREE.MathUtils;
+const { DEG2RAD } = MathUtils;
 
 type Props = {
   cake: CustomCake;
@@ -62,6 +62,17 @@ const CustomCake = ({ cake, isRotate, isStand, fixPosition }: Props) => {
         maxPolarAngle={Math.PI * 0.5}
         minDistance={Math.PI * 1.7}
         maxDistance={10}
+        mouseButtons={{
+          left: 0, // 0 = NONE
+          middle: 0,
+          right: 0,
+          wheel: 0,
+        }}
+        touches={{
+          one: 0, // one-finger touch 드래그 막기
+          two: 0, // two-finger pan 막기
+          three: 0, // three-finger 등 기타 터치도 막기
+        }}
       />
       <Environment preset="dawn" />
 
@@ -73,9 +84,10 @@ const CustomCake = ({ cake, isRotate, isStand, fixPosition }: Props) => {
         <group position={[0, isStand ? 0 : -1.25, 0]}>
           <TopCream visible={cake.cream_top.cream !== 'none'} {...cake.cream_top} />
           <SideCream visible={cake.cream_side.cream !== 'none'} {...cake.cream_side} />
-          {cake.more.item.length > 0 && (
+          <Items items={cake.more.item} hasTopCream={cake.cream_top.cream !== 'none'} />
+          {/* {cake.more.item.length > 0 && (
             <Items items={cake.more.item} hasTopCream={cake.cream_top.cream !== 'none'} />
-          )}
+          )} */}
           <LetteringModel visible={!!cake.lettering.value} {...cake.lettering} />
         </group>
       </group>

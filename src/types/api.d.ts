@@ -21,7 +21,8 @@ type CakeItem =
   | 'red-candle'
   | 'red-topper'
   | 'sunflower'
-  | 'teddy-bear';
+  | 'teddy-bear'
+  | 'congradulations-topper';
 
 type Lettering = { color: Color; font: CakeFont; value: string };
 type Letter = { name: string; content: string; isPrivate: boolean };
