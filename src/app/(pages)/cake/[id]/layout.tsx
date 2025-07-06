@@ -44,7 +44,7 @@ export async function generateMetadata(
 export default function Layout({ children }: PropsWithChildren) {
   // FIXME: remove unless suspense
   return (
-    <GradientContainer type="pinkBlue">
+    <GradientContainer type="pink">
       <Suspense fallback={<Loading />}>{children}</Suspense>
     </GradientContainer>
   );
