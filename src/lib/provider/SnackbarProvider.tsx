@@ -6,6 +6,7 @@ import Snackbar from '@components/common/Snackbar';
 
 const SnackbarContext = createContext<{
   value: string | null;
+  className?: string;
   show: (value: string | null) => void;
 } | null>(null);
 
@@ -14,7 +15,6 @@ export function SnackbarProvider({ children }: { children: ReactNode }) {
   const show = useCallback((value: string | null) => {
     setValue(value);
   }, []);
-
   return (
     <SnackbarContext.Provider value={{ value, show }}>
       {children}
