@@ -63,7 +63,7 @@ export const SmallButton = ({
         { [pink]: color === 'pink' },
         { [gray]: color === 'gray' },
         { [blue]: color === 'blue' },
-        'flex h-10 shrink-0 items-center justify-center gap-2 rounded-[40px] border border-black px-[31px] py-[10px] font-bold text-btn1 text-grayscale-gray7',
+        'flex h-10 shrink-0 items-center justify-center gap-2 rounded-[40px] border border-black px-[31px] py-[10px] font-bold text-btn1 text-grayscale-gray7 press',
         className,
       )}
       {...props}></Button>
@@ -83,7 +83,7 @@ export const BigButton = ({ color = 'blue', ...props }: PropsWithChildren<BigBut
         { [pink]: color === 'pink' },
         { [white]: color === 'white' },
         { [blue]: color === 'blue' },
-        'flex w-full shrink-0 items-center justify-center gap-4 rounded-[50px] border-2 border-black p-4 text-btn1 font-bold shadow-button  disabled:cursor-auto disabled:bg-grayscale-gray5 disabled:opacity-60 whitespace-nowrap',
+        'flex w-full shrink-0 items-center justify-center gap-4 rounded-[50px] border-2 border-black p-4 text-btn1 font-bold shadow-button disabled:cursor-auto disabled:bg-grayscale-gray5 disabled:opacity-60 whitespace-nowrap press',
       )}
       {...props}></Button>
   );

@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .press {
+    @apply transition-transform duration-200 active:scale-95;
+  }
+}
+
 @font-face {
   font-family: 'neodgm';
   font-weight: 400;
