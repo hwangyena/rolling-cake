@@ -57,7 +57,7 @@ const FocusInput = ({
             취소
           </SmallButton>
           <SmallButton
-            color="pink"
+            color="blue"
             onClick={() => {
               onConfirm(text);
               onCancel();
