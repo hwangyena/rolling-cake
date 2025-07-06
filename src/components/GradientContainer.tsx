@@ -4,6 +4,7 @@ const typeClass = {
   blueCircle: 'blue-circle-gradient h-full-screen w-full',
   greenPink: 'green-pink-gradient h-full-screen w-full',
   pinkBlue: 'blue-pink-gradient h-full-screen w-full',
+  pink: 'pink-gradient h-full-screen w-full',
 };
 
 const GradientContainer = ({

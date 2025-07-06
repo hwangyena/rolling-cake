@@ -30,7 +30,7 @@ const Card = ({ children, button, content, className }: PropsWithChildren<Props>
       <article className="z-10 flex flex-col items-center gap-5">
         <span className={`text-b1 text-grayscale-gray7 ${button ? '' : 'mb-4'}`}>{content}</span>
         {button && (
-          <SmallButton color="pink" onClick={button.onButtonClicked}>
+          <SmallButton color="blue" onClick={button.onButtonClicked}>
             {button.label}
           </SmallButton>
         )}

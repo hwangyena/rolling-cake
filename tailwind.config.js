@@ -148,12 +148,12 @@ export const theme = {
     },
     keyframes: {
       'slide-up': {
-        '0%': { transform: 'translateY(100px)' },
-        '100%': { transform: 'translateY(0px)' },
+        '0%': { transform: 'translateY(100%)', opacity: 0 },
+        '100%': { transform: 'translateY(0px)', opacity: 1 },
       },
       'slide-down': {
-        '0%': { transform: 'translateY(0px)' },
-        '100%': { transform: 'translateY(100px)' },
+        '0%': { transform: 'translateY(0px)', opacity: 1 },
+        '100%': { transform: 'translateY(100%)', opacity: 0 },
       },
       'slide-right': {
         '0%': { transform: 'translateX(0px)' },

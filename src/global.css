@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .press {
+    @apply transition-transform duration-200 active:scale-95;
+  }
+}
+
 @font-face {
   font-family: 'neodgm';
   font-weight: 400;
@@ -263,10 +269,18 @@
   .blue-pink-gradient {
     background: linear-gradient(
       180deg,
-      var(--color-secondary-pink-90) 0%,
+      var(--color-secondary-pink-80) 0%,
       var(--color-bg-white) 7.93%,
       var(--color-bg-white) 76.16%,
       var(--color-primary-blue-90) 100%
+    );
+  }
+
+  .pink-gradient {
+    background: linear-gradient(
+      180deg,
+      var(--color-secondary-pink-80) 0%,
+      var(--color-bg-white) 7.93%
     );
   }
 

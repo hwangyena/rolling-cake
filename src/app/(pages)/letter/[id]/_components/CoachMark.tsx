@@ -37,7 +37,7 @@ const CoachMark: FC = () => {
           <p className="text-white text-b1">케이크를 클릭해 회전시켜봐!</p>
           <p className="text-white text-b1">다른 각도로 볼 수 있어</p>
         </div>
-        <SmallButton color="pink" className="mt-[30px]" onClick={handleCloseClicked}>
+        <SmallButton color="blue" className="mt-[30px]" onClick={handleCloseClicked}>
           확인 완
         </SmallButton>
       </div>
