@@ -344,18 +344,30 @@
 
 /* animation */
 @keyframes sparkle {
-  0% {
+  0%,
+  100% {
     stroke-dashoffset: var(--sparkle-size);
   }
   50% {
     stroke-dashoffset: 0;
   }
-  100% {
-    stroke-dashoffset: var(--sparkle-size);
-  }
 }
 
 .sparkle-animation {
   --delay: 0s;
-  animation: sparkle 1s ease-out var(--delay) infinite;
+  animation: sparkle 1.5s ease-out var(--delay) infinite;
+}
+
+@keyframes sparkle-grow {
+  0%,
+  100% {
+    transform: scaleY(0);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+.sparkle-animation2 {
+  --delay: 0s;
+  animation: sparkle-grow 1s ease-out var(--delay) infinite;
 }
