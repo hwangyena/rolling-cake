@@ -55,6 +55,9 @@ dependencies:
   react-dom:
     specifier: 18.2.0
     version: 18.2.0(react@18.3.1)
+  react-fast-marquee:
+    specifier: ^1.6.5
+    version: 1.6.5(react-dom@18.2.0)(react@18.3.1)
   react-textarea-autosize:
     specifier: ^8.5.3
     version: 8.5.3(@types/react@18.2.48)(react@18.3.1)
@@ -5129,6 +5132,16 @@ packages:
       file-selector: 0.5.0
       prop-types: 15.8.1
       react: 18.3.1
+    dev: false
+
+  /react-fast-marquee@1.6.5(react-dom@18.2.0)(react@18.3.1):
+    resolution: {integrity: sha512-swDnPqrT2XISAih0o74zQVE2wQJFMvkx+9VZXYYNSLb/CUcAzU9pNj637Ar2+hyRw6b4tP6xh4GQZip2ZCpQpg==}
+    peerDependencies:
+      react: '>= 16.8.0 || ^18.0.0'
+      react-dom: '>= 16.8.0 || ^18.0.0'
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.2.0(react@18.3.1)
     dev: false
 
   /react-is@16.13.1:
