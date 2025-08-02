@@ -12,7 +12,7 @@ const BottomButton = ({ user }: Props) => {
   if (user) {
     return (
       <Link href={`/cake/${user.id}`}>
-        <BigButton>내 롤링케이크 보러가기</BigButton>
+        <BigButton color="pink">내 롤링케이크 보러가기</BigButton>
       </Link>
     );
   }
