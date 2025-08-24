@@ -25,7 +25,7 @@ export default async function Home() {
       <div className="relative aspect-[1/0.6] w-full max-w-[60rem]">
         <Image src="/images/logo.png" fill alt="로고" priority />
       </div>
-      <div className="relative h-[50%] w-[100%]">
+      <div className="absolute h-[50%] w-[100%] bottom-[18%]">
         <MarqueeCake />
       </div>
       <div>

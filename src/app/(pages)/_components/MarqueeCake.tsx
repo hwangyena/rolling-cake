@@ -3,10 +3,10 @@ import Marquee from 'react-fast-marquee';
 
 const MarqueeCake = () => {
   return (
-    <div className="relative flex flex-row items-center justify-center overflow-hidden mx-[-1.25rem]">
+    <div className="relative flex flex-row items-center justify-center overflow-hidden">
       <Marquee autoFill>
         {Array.from({ length: 8 }).map((_, index) => (
-          <div key={index} className="relative w-[100vw] aspect-[1/1.1] mx-[-50px]">
+          <div key={index} className="relative w-[100vw] aspect-[1/1.1] mx-[-50px] max-w-[500px]">
             <Image
               src={`/images/cakes/${index + 1}.png`}
               alt="예시 케이크"
