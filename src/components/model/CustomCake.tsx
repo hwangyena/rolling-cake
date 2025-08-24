@@ -1,4 +1,4 @@
-import { CameraControls, Center, Environment } from '@react-three/drei';
+import { CameraControls, Center, Environment, OrbitControls } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import dynamic from 'next/dynamic';
 import { memo, useEffect, useRef } from 'react';
@@ -75,10 +75,11 @@ const CustomCake = ({ cake, isRotate, isStand, fixPosition }: Props) => {
         }}
       />
       <Environment preset="dawn" />
+      <OrbitControls />
 
       <group scale={isStand ? 1 : 1.4} ref={cakeRef}>
         <Center>
-          <CakeModel cakeColor={cake.sheet.color} hasStand={isStand} />
+          <CakeModel cakeColor={cake.sheet.expandColor} hasStand={isStand} />
         </Center>
 
         <group position={[0, isStand ? 0 : -1.25, 0]}>
