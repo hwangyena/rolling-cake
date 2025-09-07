@@ -27,6 +27,7 @@ export function StepProvider({ children }: { children: ReactNode }) {
   );
   const reset = useCallback(() => {
     setStep(CUSTOM_STEP_STORE);
+    sessionStorage.removeItem(sessionKey);
   }, []);
 
   useEffect(() => {

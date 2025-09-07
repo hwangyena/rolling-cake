@@ -3,18 +3,26 @@ import { useGLTF } from '@react-three/drei';
 import { memo, useEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
 
-const CakeModel = ({ cakeColor, hasStand }: { cakeColor: Color; hasStand?: boolean }) => {
+import { createGradientTexture } from './utils';
+
+const CakeModel = ({ cakeColor, hasStand }: { cakeColor: ExpandColor; hasStand?: boolean }) => {
   const { nodes } = useGLTF('/models/cake.glb') as GLTFRes;
 
   const [material, setMaterial] = useState<THREE.MeshStandardMaterial>();
   const cakeRef = useRef<THREE.Mesh>(null);
 
   useEffect(() => {
-    const color = new THREE.MeshStandardMaterial({
+    // 기본 색상
+    let color = new THREE.MeshStandardMaterial({
       color: getCakeBg(cakeColor),
       roughness: 0.5,
       side: 2,
     });
+
+    // gradient 색상
+    if (cakeColor.includes('gradient')) {
+      color = createGradientTexture(cakeColor);
+    }
 
     setMaterial(color);
   }, [cakeColor]);

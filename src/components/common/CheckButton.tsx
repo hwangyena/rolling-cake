@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { CSSProperties, PropsWithChildren, memo } from 'react';
 
 type Props = {
-  type: 'cream' | 'color' | 'item' | 'font';
+  type: Item;
   item: string;
   selected: boolean;
   disabled?: boolean;
@@ -18,7 +18,7 @@ const CheckButton = ({ type, selected, item, disabled }: Props) => {
     );
   }
 
-  if (type === 'color') {
+  if (type === 'color' || type === 'expandColor') {
     return <Item style={{ background: getCakeBg(item as Color, false) }} selected={selected} />;
   }
 

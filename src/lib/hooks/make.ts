@@ -59,9 +59,11 @@ export const useStep = () => {
       if ((step as CakeKey) === 'more') {
         const prev = (store as CustomCake).more.item;
         const cur = (value as { item: CakeItem }).item;
-
         newItem = { item: prev.includes(cur) ? prev.filter((v) => v !== cur) : [...prev, cur] };
       }
+
+      console.log('step', step);
+      console.log('newItem', newItem);
 
       startTransition(() => dispatch((prev) => ({ ...prev, [step]: newItem })));
     },

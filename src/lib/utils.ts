@@ -61,23 +61,29 @@ export const cn = (...names: unknown[]): string => {
   return built.trim();
 };
 
-export const getCakeBg = (color: Color, vivid = true, theme?: CakeTheme) => {
-  const vividColor: Record<Color, string> = {
+export const getCakeBg = (color: ExpandColor, vivid = true, theme?: CakeTheme) => {
+  const vividColor: Record<ExpandColor, string> = {
     ivory: '#f9f5bd',
     red: '#ff8c99',
     green: '#28622d',
     blue: '#5adeff',
     purple: '#7d6cd5',
     brown: '#7e5233',
+    'gradient-yellow': 'linear-gradient(#fef5c1, #f5f5f5)',
+    'gradient-pinkblue': 'linear-gradient(#fecedb,#ffffff,#cffcfd)',
   };
 
-  const pastelColor: Record<Color, string> = {
+  // lettering에서 사용
+  const pastelColor: Record<ExpandColor, string> = {
     ivory: '#fefce1',
     red: '#f7cac7',
     green: '#cffdcb',
     blue: '#c6f4f8',
     purple: '#e9d5fc',
     brown: '#6d3710',
+    // 아래 데이터는 사용되지 않지만 타입 안정성을 위해 정의
+    'gradient-yellow': 'linear-gradient(#fef5c1, #f5f5f5)',
+    'gradient-pinkblue': 'linear-gradient(#fecedb,#ffffff,#cffcfd)',
   };
 
   const themeColor: Record<CakeTheme, string> = {

@@ -17,10 +17,8 @@ type Props = {
 
 const ItemSelect = ({ noLabel }: Props) => {
   const { step, stepData, store, onStoreUpdate } = useStep();
-
   const [tab, setTab] = useState((stepData!.select ?? [])[0]);
   const [selected, setSelected] = useState<number[]>([]);
-
   const swiperRef = useRef<SwiperType | null>(null);
   const selectData = useMemo(() => stepData!.select ?? [], [stepData]);
 
