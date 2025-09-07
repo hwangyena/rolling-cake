@@ -10,7 +10,7 @@ import CakeModel from './Cake';
 
 const TopCream = dynamic(() => import('./TopCream'));
 const SideCream = dynamic(() => import('./SideCream'));
-const Items = dynamic(() => import('./items/Items'));
+const Items = dynamic(() => import('./Items'));
 const LetteringModel = dynamic(() => import('./Lettering'));
 
 ColorManagement.enabled = true;

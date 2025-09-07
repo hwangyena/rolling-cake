@@ -1,7 +1,7 @@
 import { useGLTF } from '@react-three/drei';
 import { Fragment, memo, useMemo } from 'react';
 
-import Draggable from '../Draggable';
+import Draggable from './Draggable';
 
 const itemLookup: Record<
   CakeItem,
