@@ -7,6 +7,7 @@ type Login = {
 };
 
 type Color = 'ivory' | 'red' | 'green' | 'blue' | 'purple' | 'brown';
+type ExpandColor = Color | 'gradient-yellow' | 'gradient-pinkblue';
 type CakeCream = 'none' | 'basic' | 'screw' | 'chocolate' | 'crown' | 'heart';
 type CakeFont = 'font1' | 'font2' | 'font3' | 'font4' | 'font5';
 type CakeTheme = 'soju' | 'harrypotter' | 'princess';
@@ -29,7 +30,7 @@ type Letter = { name: string; content: string; isPrivate: boolean };
 
 type CustomCake = {
   shape: 'custom';
-  sheet: { color: Color };
+  sheet: { expandColor: ExpandColor };
   cream_top: { cream: CakeCream; color: Color };
   cream_side: { cream: CakeCream; color: Color };
   more: { item: CakeItem[] };
@@ -49,7 +50,7 @@ type CakeKey = keyof CustomCake | keyof ThemeCake;
 type ExcludeLetter = Omit<CustomCake, 'shape' | 'letter'> | Omit<ThemeCake, 'shape' | 'letter'>;
 
 /* Make page */
-type Item = 'cream' | 'color' | 'item' | 'font';
+type Item = 'cream' | 'color' | 'expandColor' | 'item' | 'font';
 
 type StepDisplay = {
   title: string;
