@@ -1,57 +1,68 @@
 import { ThreeEvent, useThree } from '@react-three/fiber';
-import { PropsWithChildren, useCallback, useEffect, useRef, useState } from 'react';
+import { PropsWithChildren, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Group, Plane, Raycaster, Vector2, Vector3, Vector3Tuple } from 'three';
 
 interface Props extends PropsWithChildren {
-  position?: Vector3Tuple;
+  position?: Vector3Tuple; // 초기 위치 [x, y, z]
+  radius?: number; // 이동 가능한 반지름 (기본 1)
   [key: string]: unknown;
 }
 
-const Draggable = ({ position: initialPosition, children, ...props }: Props) => {
+const Draggable = ({
+  position: initialPosition = [0, 0, 0],
+  radius = 1,
+  children,
+  ...props
+}: Props) => {
   const groupRef = useRef<Group>(null);
-  const [position, setPosition] = useState<Vector3Tuple>(initialPosition ?? [0, 0, 0]);
+  const [position, setPosition] = useState<Vector3Tuple>(initialPosition);
   const [isDragging, setIsDragging] = useState(false);
-  const [dragStart, setDragStart] = useState({ x: 0, z: 0 });
+  const [dragStart, setDragStart] = useState<{ x: number; z: number }>({ x: 0, z: 0 });
+  const [hovered, setHovered] = useState(false);
   const { camera, gl } = useThree();
 
-  const screenToWorld = useCallback(
+  // XZ 평면(y=0)에 투영
+  const plane = useMemo(() => new Plane(new Vector3(0, 1, 0), 0), []);
+  const screenToWorldOnXZ = useCallback(
     (screenX: number, screenY: number): Vector3 => {
-      const canvas = gl.domElement;
-      const rect = canvas.getBoundingClientRect();
-
-      const mouse = new Vector2();
-      mouse.x = ((screenX - rect.left) / rect.width) * 2 - 1;
-      mouse.y = -((screenY - rect.top) / rect.height) * 2 + 1;
-
+      const rect = gl.domElement.getBoundingClientRect();
+      const ndc = new Vector2(
+        ((screenX - rect.left) / rect.width) * 2 - 1,
+        -((screenY - rect.top) / rect.height) * 2 + 1,
+      );
       const raycaster = new Raycaster();
-      raycaster.setFromCamera(mouse, camera);
-
-      const plane = new Plane(new Vector3(0, 1, 0), 0);
-      const intersection = new Vector3();
-      raycaster.ray.intersectPlane(plane, intersection);
-
-      return intersection || new Vector3(0, 0, 0);
+      raycaster.setFromCamera(ndc, camera);
+      const hit = new Vector3();
+      raycaster.ray.intersectPlane(plane, hit);
+      return hit;
     },
-    [camera, gl],
+    [camera, gl, plane],
+  );
+
+  // 원형 제약 적용
+  const clampCircle = useCallback(
+    (x: number, z: number) => {
+      const dx = x;
+      const dz = z;
+      const len = Math.hypot(dx, dz);
+      if (len <= radius) {
+        return { x, z };
+      }
+      const s = radius / len;
+      return { x: dx * s, z: dz * s };
+    },
+    [radius],
   );
 
   const handlePointerDown = useCallback(
     (event: ThreeEvent<PointerEvent>) => {
       event.stopPropagation();
       setIsDragging(true);
-
-      const clientX = event.clientX;
-      const clientY = event.clientY;
-
-      const worldPos = screenToWorld(clientX, clientY);
-      setDragStart({
-        x: worldPos.x - position[0],
-        z: worldPos.z - position[2],
-      });
-
+      const w = screenToWorldOnXZ(event.clientX, event.clientY);
+      setDragStart({ x: w.x - position[0], z: w.z - position[2] });
       gl.domElement.style.cursor = 'grabbing';
     },
-    [position, screenToWorld, gl],
+    [gl, position, screenToWorldOnXZ],
   );
 
   const handlePointerMove = useCallback(
@@ -60,25 +71,26 @@ const Draggable = ({ position: initialPosition, children, ...props }: Props) => 
         return;
       }
 
-      let clientX: number, clientY: number;
-
+      let clientX: number | undefined, clientY: number | undefined;
       if ('touches' in event && event.touches.length > 0) {
         clientX = event.touches[0].clientX;
         clientY = event.touches[0].clientY;
       } else if ('clientX' in event) {
         clientX = event.clientX;
         clientY = event.clientY;
-      } else {
+      }
+      if (clientX == null || clientY == null) {
         return;
       }
 
-      const worldPos = screenToWorld(clientX, clientY);
-      const newX = worldPos.x - dragStart.x;
-      const newZ = worldPos.z - dragStart.z;
+      const w = screenToWorldOnXZ(clientX, clientY);
+      const targetX = w.x - dragStart.x;
+      const targetZ = w.z - dragStart.z;
 
-      setPosition([newX, position[1], newZ]);
+      const { x, z } = clampCircle(targetX, targetZ);
+      setPosition([x, position[1], z]); // Y는 고정
     },
-    [isDragging, dragStart, position, screenToWorld],
+    [isDragging, dragStart, position, screenToWorldOnXZ, clampCircle],
   );
 
   const handlePointerUp = useCallback(() => {
@@ -87,25 +99,22 @@ const Draggable = ({ position: initialPosition, children, ...props }: Props) => 
   }, [gl]);
 
   useEffect(() => {
-    if (isDragging) {
-      const handleMove = (e: MouseEvent | TouchEvent) => handlePointerMove(e);
-      const handleUp = () => handlePointerUp();
-
-      document.addEventListener('mousemove', handleMove as EventListener);
-      document.addEventListener('mouseup', handleUp);
-      document.addEventListener('touchmove', handleMove as EventListener);
-      document.addEventListener('touchend', handleUp);
-
-      return () => {
-        document.removeEventListener('mousemove', handleMove as EventListener);
-        document.removeEventListener('mouseup', handleUp);
-        document.removeEventListener('touchmove', handleMove as EventListener);
-        document.removeEventListener('touchend', handleUp);
-      };
+    if (!isDragging) {
+      return;
     }
+    const move = (e: MouseEvent | TouchEvent) => handlePointerMove(e);
+    const up = () => handlePointerUp();
+    document.addEventListener('mousemove', move as EventListener);
+    document.addEventListener('mouseup', up);
+    document.addEventListener('touchmove', move as EventListener, { passive: false });
+    document.addEventListener('touchend', up);
+    return () => {
+      document.removeEventListener('mousemove', move as EventListener);
+      document.removeEventListener('mouseup', up);
+      document.removeEventListener('touchmove', move as EventListener);
+      document.removeEventListener('touchend', up);
+    };
   }, [isDragging, handlePointerMove, handlePointerUp]);
-
-  const [hovered, setHovered] = useState(false);
 
   return (
     <group
