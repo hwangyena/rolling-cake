@@ -1,5 +1,4 @@
 import { CameraControls } from '@react-three/drei';
-import type CameraControlsImpl from 'camera-controls';
 import React, { useEffect, useRef } from 'react';
 import { MathUtils } from 'three';
 
@@ -30,7 +29,7 @@ const TOUCH_DISABLED = Object.freeze({
 type Props = { fixPosition?: boolean };
 
 export default function Camera({ fixPosition }: Props) {
-  const ref = useRef<CameraControlsImpl | null>(null);
+  const ref = useRef<CameraControls>(null);
   const step = useCurrentStep();
   const lock = step === 'more' || !!fixPosition;
 
