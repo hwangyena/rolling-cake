@@ -12,18 +12,22 @@ type CakeCream = 'none' | 'basic' | 'screw' | 'chocolate' | 'crown' | 'heart';
 type CakeFont = 'font1' | 'font2' | 'font3' | 'font4' | 'font5';
 type CakeTheme = 'soju' | 'harrypotter' | 'princess';
 type CakeItem =
-  | 'cherry'
-  | 'cherry-tree'
-  | 'cookie'
-  | 'gingerbread'
-  | 'green-candle'
-  | 'green-topper'
-  | 'heart'
-  | 'red-candle'
-  | 'red-topper'
+  // 'teddybear'
   | 'sunflower'
-  | 'teddy-bear'
-  | 'congradulations-topper';
+  | 'heart-candle'
+  // 'gingerbread'|
+  // 'bears'|
+  // 'strawberry'|
+  | 'heart-chocolate'
+  // 'cherry'|
+  | 'biscuits'
+  | 'stick-chocolate'
+  | 'blueberries'
+  | 'ferreroroshe'
+  | 'blue-candle'
+  | 'topper-congratulations'
+  | 'topper-thankyou'
+  | 'topper-happybirthday';
 
 type Lettering = { color: Color; font: CakeFont; value: string };
 type Letter = { name: string; content: string; isPrivate: boolean };
