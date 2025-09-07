@@ -1,6 +1,8 @@
 import { useGLTF } from '@react-three/drei';
 import { Fragment, memo, useMemo } from 'react';
 
+import { useCurrentStep } from '@lib/hooks/make';
+
 import Draggable from './Draggable';
 
 const itemLookup: Record<
@@ -71,14 +73,15 @@ const Item = ({ item }: { item: CakeItem }) => {
     });
   }, [scene]);
   const { position, scale } = itemLookup[item];
-  return <primitive object={scene} position={position} scale={scale} />;
+  return <primitive object={scene} position={position} scale={scale ?? 0.3} />;
 };
 
 const Items = ({ items }: { items: CakeItem[]; hasTopCream: boolean }) => {
+  const step = useCurrentStep();
   return items.map((item) => (
     <Fragment key={item}>
       {
-        <Draggable>
+        <Draggable disabled={step !== 'more'}>
           <Item item={item} />
         </Draggable>
       }

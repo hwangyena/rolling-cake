@@ -1,12 +1,11 @@
-import { CameraControls, Center, Environment, OrbitControls } from '@react-three/drei';
+import { Center, Environment } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import dynamic from 'next/dynamic';
-import { memo, useEffect, useRef } from 'react';
-import { ColorManagement, MathUtils } from 'three';
-
-import { useCurrentStep } from '@lib/hooks/make';
+import { memo, useRef } from 'react';
+import { ColorManagement } from 'three';
 
 import CakeModel from './Cake';
+import Camera from './Camera';
 
 const TopCream = dynamic(() => import('./TopCream'));
 const SideCream = dynamic(() => import('./SideCream'));
@@ -14,8 +13,6 @@ const Items = dynamic(() => import('./Items'));
 const LetteringModel = dynamic(() => import('./Lettering'));
 
 ColorManagement.enabled = true;
-
-const { DEG2RAD } = MathUtils;
 
 type Props = {
   cake: CustomCake;
@@ -25,27 +22,7 @@ type Props = {
 };
 
 const CustomCake = ({ cake, isRotate, isStand, fixPosition }: Props) => {
-  const step = useCurrentStep();
-
-  const cameraControlsRef = useRef<CameraControls | null>(null);
   const cakeRef = useRef<THREE.Group>(null);
-
-  useEffect(() => {
-    if (!step || !cameraControlsRef.current) {
-      return;
-    }
-    switch (step) {
-      case 'cream_top':
-      case 'lettering':
-        cameraControlsRef.current.rotateTo(0, -120 * DEG2RAD, true);
-        break;
-      case 'more':
-        cameraControlsRef.current.rotateTo(0, 20 * DEG2RAD, true);
-        break;
-      default:
-        cameraControlsRef.current.reset(true);
-    }
-  }, [step]);
 
   useFrame((_, delta) => {
     if (cakeRef.current && isRotate) {
@@ -55,28 +32,8 @@ const CustomCake = ({ cake, isRotate, isStand, fixPosition }: Props) => {
 
   return (
     <>
-      <CameraControls
-        ref={cameraControlsRef}
-        enabled={!fixPosition}
-        minPolarAngle={0}
-        maxPolarAngle={Math.PI * 0.5}
-        minDistance={Math.PI * 1.7}
-        maxDistance={10}
-        mouseButtons={{
-          left: 0, // 0 = NONE
-          middle: 0,
-          right: 0,
-          wheel: 0,
-        }}
-        touches={{
-          one: 0, // one-finger touch 드래그 막기
-          two: 0, // two-finger pan 막기
-          three: 0, // three-finger 등 기타 터치도 막기
-        }}
-      />
+      <Camera fixPosition={fixPosition} />
       <Environment preset="dawn" />
-      <OrbitControls />
-
       <group scale={isStand ? 1 : 1.4} ref={cakeRef}>
         <Center>
           <CakeModel cakeColor={cake.sheet.expandColor} hasStand={isStand} />

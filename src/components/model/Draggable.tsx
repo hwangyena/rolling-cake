@@ -5,12 +5,14 @@ import { Group, Plane, Raycaster, Vector2, Vector3, Vector3Tuple } from 'three';
 interface Props extends PropsWithChildren {
   position?: Vector3Tuple; // 초기 위치 [x, y, z]
   radius?: number; // 이동 가능한 반지름 (기본 1)
+  disabled?: boolean; // 드래그 비활성화 여부
   [key: string]: unknown;
 }
 
 const Draggable = ({
   position: initialPosition = [0, 0, 0],
   radius = 1,
+  disabled = false,
   children,
   ...props
 }: Props) => {
@@ -56,18 +58,21 @@ const Draggable = ({
 
   const handlePointerDown = useCallback(
     (event: ThreeEvent<PointerEvent>) => {
+      if (disabled) {
+        return;
+      } // 비활성화 시 무시
       event.stopPropagation();
       setIsDragging(true);
       const w = screenToWorldOnXZ(event.clientX, event.clientY);
       setDragStart({ x: w.x - position[0], z: w.z - position[2] });
       gl.domElement.style.cursor = 'grabbing';
     },
-    [gl, position, screenToWorldOnXZ],
+    [gl, position, screenToWorldOnXZ, disabled],
   );
 
   const handlePointerMove = useCallback(
     (event: MouseEvent | TouchEvent) => {
-      if (!isDragging) {
+      if (!isDragging || disabled) {
         return;
       }
 
@@ -88,18 +93,21 @@ const Draggable = ({
       const targetZ = w.z - dragStart.z;
 
       const { x, z } = clampCircle(targetX, targetZ);
-      setPosition([x, position[1], z]); // Y는 고정
+      setPosition([x, position[1], z]);
     },
-    [isDragging, dragStart, position, screenToWorldOnXZ, clampCircle],
+    [isDragging, dragStart, position, screenToWorldOnXZ, clampCircle, disabled],
   );
 
   const handlePointerUp = useCallback(() => {
+    if (disabled) {
+      return;
+    }
     setIsDragging(false);
     gl.domElement.style.cursor = 'grab';
-  }, [gl]);
+  }, [gl, disabled]);
 
   useEffect(() => {
-    if (!isDragging) {
+    if (!isDragging || disabled) {
       return;
     }
     const move = (e: MouseEvent | TouchEvent) => handlePointerMove(e);
@@ -114,7 +122,7 @@ const Draggable = ({
       document.removeEventListener('touchmove', move as EventListener);
       document.removeEventListener('touchend', up);
     };
-  }, [isDragging, handlePointerMove, handlePointerUp]);
+  }, [isDragging, handlePointerMove, handlePointerUp, disabled]);
 
   return (
     <group
@@ -122,16 +130,22 @@ const Draggable = ({
       position={position}
       onPointerDown={handlePointerDown}
       onPointerOver={() => {
+        if (disabled) {
+          return;
+        }
         setHovered(true);
         gl.domElement.style.cursor = 'grab';
       }}
       onPointerOut={() => {
+        if (disabled) {
+          return;
+        }
         setHovered(false);
         if (!isDragging) {
           gl.domElement.style.cursor = 'default';
         }
       }}
-      scale={hovered ? 1.05 : 1}
+      scale={disabled ? 1 : hovered ? 1.05 : 1} // 비활성화 시 스케일 변화 없음
       {...props}>
       {children}
     </group>
