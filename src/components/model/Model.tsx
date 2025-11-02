@@ -34,7 +34,7 @@ const Model = forwardRef<HTMLCanvasElement, Props>(function Model(
           far: 100,
           position: new THREE.Vector3(0, 3, 9),
         }}
-        frameloop={isRotate ? undefined : 'demand'}
+        frameloop={'always'}
         gl={{ preserveDrawingBuffer: true }}
         style={{ zIndex: 10 }}
         {...canvasProps}>

@@ -1,5 +1,6 @@
 import { CameraControls } from '@react-three/drei';
-import React, { useEffect, useRef } from 'react';
+import { useFrame } from '@react-three/fiber';
+import { useEffect, useRef } from 'react';
 import { MathUtils } from 'three';
 
 import { useCurrentStep } from '@lib/hooks/make';
@@ -33,13 +34,17 @@ export default function Camera({ fixPosition }: Props) {
   const step = useCurrentStep();
   const lock = step === 'more' || !!fixPosition;
 
+  // CameraControls 업데이트 (frameloop='always'이므로 매 프레임 자동 실행)
+  useFrame((_, delta) => {
+    ref.current?.update(delta);
+  });
+
   useEffect(() => {
     const c = ref.current;
     if (!c || !step) {
       return;
     }
 
-    // 한 프레임 지연 + 진행 중 트랜지션 중단 (경쟁조건 방지)
     const id = requestAnimationFrame(() => {
       switch (step) {
         case 'cream_top':
