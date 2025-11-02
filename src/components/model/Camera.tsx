@@ -44,7 +44,7 @@ export default function Camera({ fixPosition }: Props) {
       switch (step) {
         case 'cream_top':
         case 'lettering':
-          c.rotateTo(0, MathUtils.degToRad(240), true); // -120°
+          c.rotateTo(0, MathUtils.degToRad(-120), true); // -120°
           break;
         case 'more':
           c.rotateTo(0, MathUtils.degToRad(20), true);

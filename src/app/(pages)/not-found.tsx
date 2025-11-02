@@ -36,7 +36,7 @@ export default function NotFound() {
         <BigButton
           color="white"
           className="flex-1"
-          onClick={() => router.push('mailto:center7332@gmail.com')}>
+          onClick={() => router.push('mailto:rollingcake@gmail.com')}>
           이메일 문의하기
         </BigButton>
         <BigButton color="blue" className="flex-1" onClick={() => router.push('/')}>
