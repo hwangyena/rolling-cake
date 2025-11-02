@@ -1,6 +1,6 @@
 import { getCakeBg } from '@/lib/utils';
 import { useGLTF } from '@react-three/drei';
-import { memo, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import * as THREE from 'three';
 
 import { createGradientTexture } from './utils';
@@ -8,24 +8,26 @@ import { createGradientTexture } from './utils';
 const CakeModel = ({ cakeColor, hasStand }: { cakeColor: ExpandColor; hasStand?: boolean }) => {
   const { nodes } = useGLTF('/models/cake.glb') as GLTFRes;
 
-  const [material, setMaterial] = useState<THREE.MeshStandardMaterial>();
-  const cakeRef = useRef<THREE.Mesh>(null);
-
-  useEffect(() => {
-    // 기본 색상
-    let color = new THREE.MeshStandardMaterial({
-      color: getCakeBg(cakeColor),
-      roughness: 0.5,
-      side: 2,
-    });
-
+  // useMemo로 material 생성을 메모이제이션하여 cakeColor가 변경될 때만 재생성
+  const material = useMemo(() => {
     // gradient 색상
     if (cakeColor.includes('gradient')) {
-      color = createGradientTexture(cakeColor);
+      return createGradientTexture(cakeColor);
     }
-
-    setMaterial(color);
+    // 기본 색상
+    return new THREE.MeshStandardMaterial({
+      color: getCakeBg(cakeColor),
+      roughness: 0.5,
+      side: THREE.DoubleSide,
+    });
   }, [cakeColor]);
+
+  // material cleanup: 컴포넌트가 언마운트되거나 cakeColor가 변경될 때 이전 material을 dispose
+  useEffect(() => {
+    return () => {
+      material.dispose();
+    };
+  }, [material]);
 
   const standMaterial = useMemo(
     () =>
@@ -38,7 +40,6 @@ const CakeModel = ({ cakeColor, hasStand }: { cakeColor: ExpandColor; hasStand?:
   return (
     <group scale={0.9}>
       <mesh
-        ref={cakeRef}
         geometry={nodes.Cylinder.geometry}
         material={material}
         position={[0, 2.598, 0]}
@@ -58,4 +59,4 @@ const CakeModel = ({ cakeColor, hasStand }: { cakeColor: ExpandColor; hasStand?:
 
 useGLTF.preload('/models/cake.glb');
 
-export default memo(CakeModel);
+export default CakeModel;
