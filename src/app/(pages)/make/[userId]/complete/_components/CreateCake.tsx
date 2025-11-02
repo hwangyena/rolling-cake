@@ -1,6 +1,5 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { TriggerWithArgs } from 'swr/mutation';
 
 import { BigButton } from '@components/common/Button';
@@ -15,9 +14,7 @@ type Props = {
 };
 
 const CreateCake = ({ userId, canvasRef, create }: Props) => {
-  const router = useRouter();
-  const { showError } = useErrorPopup(() => router.replace('/make?step=sheet'));
-
+  const { showError, resetErrorCount } = useErrorPopup();
   const { store } = useStep();
 
   const handleClicked = async () => {
@@ -39,6 +36,9 @@ const CreateCake = ({ userId, canvasRef, create }: Props) => {
 
     if (res.status !== 200) {
       showError();
+    } else {
+      // 성공 시 에러 카운트 초기화
+      resetErrorCount();
     }
   };
 
