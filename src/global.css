@@ -180,13 +180,13 @@
     place-items: center;
   }
   .check::before {
-    @apply absolute left-[50%] h-[2px] w-0 origin-[0%_0%] rotate-45 rounded-sm  bg-white;
+    @apply absolute left-[45%] h-[2px] w-0 origin-[0%_0%] rotate-45 rounded-sm  bg-white;
     content: '';
     transform: translateX(-50%) rotate(45deg);
     transition: width 50ms ease 50ms;
   }
   .check::after {
-    @apply absolute left-[50%] h-[2px] w-0 origin-[0%_0%] rounded-sm bg-white;
+    @apply absolute left-[45%] h-[2px] w-0 origin-[0%_0%] rounded-sm bg-white;
     content: '';
     transform: translateY(calc(100% + 5px)) rotate(310deg); /* check before width만큼 translateY */
     transition: width 50ms ease;
