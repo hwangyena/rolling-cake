@@ -1,23 +1,35 @@
+const color: Color[] = ['ivory', 'red', 'green', 'blue', 'purple', 'brown'];
+const expandColor: ExpandColor[] = [...color, 'gradient-yellow', 'gradient-pinkblue'];
+
 export const SELECT_ITEM: Record<Item, { label: string; data: string[] }> = {
   cream: { label: '생크림', data: ['none', 'basic', 'screw', 'chocolate', 'crown', 'heart'] },
   color: {
     label: '색상',
-    data: ['ivory', 'red', 'green', 'blue', 'purple', 'brown'],
+    data: color,
+  },
+  expandColor: {
+    label: '색상',
+    data: expandColor,
   },
   item: {
     label: '아이템',
     data: [
-      'cherry',
-      'cherry-tree',
-      'cookie',
-      'teddy-bear',
-      'gingerbread',
+      // 'teddybear',
       'sunflower',
-      'heart',
-      'green-candle',
-      'red-candle',
-      'green-topper',
-      'red-topper',
+      'heart-candle',
+      // 'gingerbread',
+      // 'bears',
+      // 'strawberry',
+      'heart-chocolate',
+      // 'cherry',
+      'biscuits',
+      'stick-chocolate',
+      'blueberries',
+      'ferreroroshe',
+      'blue-candle',
+      'topper-congratulations',
+      'topper-thankyou',
+      'topper-happybirthday',
     ],
   },
   font: { label: '글씨체', data: ['font1', 'font2', 'font3', 'font4', 'font5', 'font6'] },
@@ -44,7 +56,7 @@ export const CUSTOM_STEP: Record<keyof CustomCake, StepDisplay> = {
   sheet: {
     title: '케이크 시트색을 선택해줘!',
     next: 'cream_top',
-    select: ['color'],
+    select: ['expandColor'],
   },
   cream_top: {
     title: '생크림을 올려봐!',
@@ -95,7 +107,7 @@ export const THEME_STEP: Record<keyof ThemeCake, StepDisplay> = {
 // step에서 저장해야하는 정보
 export const CUSTOM_STEP_STORE: CustomCake = {
   shape: 'custom',
-  sheet: { color: 'ivory' },
+  sheet: { expandColor: 'ivory' },
   cream_top: { color: 'ivory', cream: 'none' },
   cream_side: { color: 'ivory', cream: 'none' },
   more: { item: [] },

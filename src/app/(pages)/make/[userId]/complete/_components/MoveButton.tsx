@@ -20,11 +20,9 @@ const MoveButton = ({ userId }: Props) => {
     if (!userId) {
       return;
     }
-
+    onResetCake();
     router.push(`/cake/${userId}`);
     router.refresh();
-
-    onResetCake();
   };
 
   const handleLoginClicked = () => {

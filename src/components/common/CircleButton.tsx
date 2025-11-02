@@ -19,7 +19,7 @@ const CircleButton = ({ type, disabled, onClick }: Props) => {
   return (
     <Button
       id={type}
-      className="relative grid h-[34px] w-[34px] place-items-center rounded-full border border-black bg-white drop-shadow-black_light hover:bg-gray-200 disabled:opacity-40 press"
+      className="relative grid h-[34px] w-[34px] place-items-center rounded-full border border-black bg-white drop-shadow-black_light hover:bg-gray-200 disabled:opacity-40 transition-transform duration-200 active:scale-95 select-none"
       disabled={disabled}
       onClick={onClick}>
       <img

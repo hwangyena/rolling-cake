@@ -29,12 +29,8 @@ const CustomPopup = ({ content, title, hasIcon, onConfirm }: CustomPopup) => {
       </div>
       <div className="px-[10px] py-[20px]">
         <div className="flex gap-3 text-b2 items-center justify-center">
-          {hasIcon && (
-            <div className="relative aspect-square w-[25%]">
-              <Image src={'/images/custom-alert.png'} alt="icon" fill></Image>
-            </div>
-          )}
-          <p dangerouslySetInnerHTML={{ __html: content ?? '' }} />
+          {hasIcon && <Image src={'/images/custom-alert.png'} alt="icon" width={60} height={60} />}
+          <p className="text-sm" dangerouslySetInnerHTML={{ __html: content ?? '' }} />
         </div>
         <button
           className="black-shadow rounded-2xl px-[22px] py-[7px] text-btn2 font-bold mt-[10px]"

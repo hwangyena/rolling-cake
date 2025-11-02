@@ -180,13 +180,13 @@
     place-items: center;
   }
   .check::before {
-    @apply absolute left-[50%] h-[2px] w-0 origin-[0%_0%] rotate-45 rounded-sm  bg-white;
+    @apply absolute left-[45%] h-[2px] w-0 origin-[0%_0%] rotate-45 rounded-sm  bg-white;
     content: '';
     transform: translateX(-50%) rotate(45deg);
     transition: width 50ms ease 50ms;
   }
   .check::after {
-    @apply absolute left-[50%] h-[2px] w-0 origin-[0%_0%] rounded-sm bg-white;
+    @apply absolute left-[45%] h-[2px] w-0 origin-[0%_0%] rounded-sm bg-white;
     content: '';
     transform: translateY(calc(100% + 5px)) rotate(310deg); /* check before width만큼 translateY */
     transition: width 50ms ease;
@@ -304,13 +304,17 @@
     background-image: linear-gradient(180deg, #ffe1e3 0%, #fff 7.41%, #fff 77.2%, #b5ffd7 100%);
   }
 
-  .pink-green-gradient-with-grid {
-    background-image: url('/images/bg.png'),
-      linear-gradient(180deg, #ffe1e3 0%, #fff 7.41%, #fff 77.2%, #b5ffd7 100%);
-  }
-
   .green-line {
     background: linear-gradient(180deg, #bbffda 0%, #fff 25%, #fff 95.83%, #bdffdc 100%);
+  }
+
+  .deep-pink-gradient {
+    background: linear-gradient(
+      var(--color-secondary-pink-80) 0%,
+      var(--color-secondary-pink-90) 14%,
+      #f5fff7 36%,
+      #fff 85%
+    );
   }
 
   .black-shadow {

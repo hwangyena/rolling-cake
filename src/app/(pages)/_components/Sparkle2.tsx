@@ -21,7 +21,7 @@ const Sparkle2 = ({ className, delay = 0 }: Props) => {
         d="M1 10.3164C7.70345 10.3164 9.62759 3.43879 9.75172 0C9.75172 8.10395 15.9172 10.2542 19 10.3164C11.6014 10.3164 9.75172 18.1055 9.75172 22C9.75172 13.548 3.91724 10.6893 1 10.3164Z"
         fill="url(#paint0_linear_1434_10210)"
         stroke="black"
-        stroke-width="0.2"
+        strokeWidth="0.2"
       />
       <defs>
         <linearGradient

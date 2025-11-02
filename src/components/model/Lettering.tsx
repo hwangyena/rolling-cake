@@ -1,6 +1,6 @@
 import { getCakeBg } from '@/lib/utils';
 import { Center, Text3D } from '@react-three/drei';
-import { Suspense, memo, useCallback, useEffect, useMemo, useState } from 'react';
+import { Suspense, memo, useCallback, useEffect, useMemo } from 'react';
 import * as THREE from 'three';
 
 const LetteringModel = ({
@@ -11,19 +11,23 @@ const LetteringModel = ({
   isMaking,
   visible,
 }: Lettering & { theme?: CakeTheme; isMaking?: boolean; visible: boolean }) => {
-  const [material, setMaterial] = useState<THREE.MeshStandardMaterial>();
-
   const letteringValues = useMemo(() => (theme ? [value] : value.split('\n')), [value, theme]);
 
-  useEffect(() => {
-    const fontColor = new THREE.MeshStandardMaterial({
+  // useMemo로 material 생성을 최적화하고 cleanup 추가
+  const material = useMemo(() => {
+    return new THREE.MeshStandardMaterial({
       color: getCakeBg(color, true, theme),
       roughness: 0.5,
-      side: 2,
+      side: THREE.DoubleSide,
     });
-
-    setMaterial(fontColor);
   }, [color, theme]);
+
+  // material cleanup
+  useEffect(() => {
+    return () => {
+      material.dispose();
+    };
+  }, [material]);
 
   const getFontParams = useCallback(
     (index: number, textSplitLength: number) => {

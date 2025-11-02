@@ -73,7 +73,11 @@ export const SmallButton = ({
 type BigButtonProps = NativeButtonProps & {
   color?: 'pink' | 'white' | 'blue';
 };
-export const BigButton = ({ color = 'blue', ...props }: PropsWithChildren<BigButtonProps>) => {
+export const BigButton = ({
+  color = 'blue',
+  className,
+  ...props
+}: PropsWithChildren<BigButtonProps>) => {
   const pink = 'bg-secondary-pink-70  text-white hover:bg-secondary-pink-50';
   const white = 'bg-white hover:bg-grayscale-gray1';
   const blue = 'bg-primary-blue-50 text-white hover:bg-primary-blue-30';
@@ -84,6 +88,7 @@ export const BigButton = ({ color = 'blue', ...props }: PropsWithChildren<BigBut
         { [white]: color === 'white' },
         { [blue]: color === 'blue' },
         'flex w-full shrink-0 items-center justify-center gap-4 rounded-[50px] border-2 border-black p-4 text-btn1 font-bold shadow-button disabled:cursor-auto disabled:bg-grayscale-gray5 disabled:opacity-60 whitespace-nowrap press',
+        className,
       )}
       {...props}></Button>
   );

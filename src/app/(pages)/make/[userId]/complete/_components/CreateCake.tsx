@@ -1,6 +1,5 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { TriggerWithArgs } from 'swr/mutation';
 
 import { BigButton } from '@components/common/Button';
@@ -15,16 +14,12 @@ type Props = {
 };
 
 const CreateCake = ({ userId, canvasRef, create }: Props) => {
-  const router = useRouter();
-  const { showError } = useErrorPopup(() => router.replace('/make?step=sheet'));
-
+  const { showError, resetErrorCount } = useErrorPopup();
   const { store } = useStep();
 
   const handleClicked = async () => {
-    const { shape, letter, ...cake } = store;
-    const type = shape.toUpperCase() as 'CUSTOM' | 'THEME';
-
-    if (!type || !letter.name || !letter.content || !cake || !userId || !canvasRef) {
+    const { letter, ...cake } = store;
+    if (!letter.name || !letter.content || !cake || !userId || !canvasRef) {
       showError();
       return;
     }
@@ -32,7 +27,7 @@ const CreateCake = ({ userId, canvasRef, create }: Props) => {
     const base64 = canvasRef.toDataURL('image/png');
 
     const res = await create({
-      type,
+      type: 'CUSTOM',
       cake,
       cakeImageBase64: base64,
       letter,
@@ -41,6 +36,9 @@ const CreateCake = ({ userId, canvasRef, create }: Props) => {
 
     if (res.status !== 200) {
       showError();
+    } else {
+      // 성공 시 에러 카운트 초기화
+      resetErrorCount();
     }
   };
 
