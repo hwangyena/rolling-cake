@@ -1,6 +1,6 @@
 import { getCakeBg } from '@/lib/utils';
 import { Center, Text3D } from '@react-three/drei';
-import { Suspense, memo, useCallback, useEffect, useMemo, useState } from 'react';
+import { Suspense, memo, useCallback, useEffect, useMemo } from 'react';
 import * as THREE from 'three';
 
 const LetteringModel = ({
